@@ -1,0 +1,80 @@
+{
+  "name": "No Man's Sky Icon Pack",
+  "short_name": "NMS Icons",
+  "description": "Free No Man's Sky themed icon pack \u2014 99 icons, 31 wallpapers, 5 charging animations and NMS Alphabet font",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#080b10",
+  "theme_color": "#00e5ff",
+  "orientation": "portrait",
+  "categories": [
+    "entertainment",
+    "personalization",
+    "games"
+  ],
+  "icons": [
+    {
+      "src": "pwa/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "pwa/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/nms_font_preview.png",
+      "sizes": "1200x700",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "NMS Alphabet Font Preview"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Preview",
+      "url": "/preview.html",
+      "description": "Interactive phone preview"
+    },
+    {
+      "name": "Download",
+      "url": "/index.html",
+      "description": "Download the icon pack"
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+[
+{
+"file": "assets/icons/nms_01_plush_red.png",
+"label": "Plush Red"
+},
+{
+"file": "assets/icons/nms_02_plush_green.png",
+"label": "Plush Green"
+},
+{
+"file": "assets/icons/nms_03_helmet.png",
+"label": "Helmet"
+},
+{
+"file": "assets/icons/nms_04_diamond_dark.png",
+"label": "Diamond Dark"
+},
+{
+"file": "assets/icons/nms_05_diamond_gold.png",
+"label": "Diamond Gold"
+},
+{
+"file": "assets/icons/nms_06_ghost_yellow.png",
+"label": "Ghost Yellow"
+},
+{
+"file": "assets/icons/nms_07_diamond_purple.png",
+"label": "Diamond Purple"
+},
+{
+"file": "assets/icons/nms_08_ship_yellow.png",
+"label": "Ship Yellow"
+},
+{
+"file": "assets/icons/nms_09_yellow_block.png",
+"label": "Yellow Block"
+},
+{
+"file": "assets/icons/nms_10_diamond_green.png",
+"label": "Diamond Green"
+},
+{
+"file": "assets/icons/nms_11_gold_card.png",
+"label": "Gold Card"
+},
+{
+"file": "assets/icons/nms_12_shield_purple.png",
+"label": "Shield Purple"
+},
+{
+"file": "assets/icons/nms_13_shield_gold_s.png",
+"label": "Shield Gold S"
+},
+{
+"file": "assets/icons/nms_14_shield_blue_b.png",
+"label": "Shield Blue B"
+},
+{
+"file": "assets/icons/nms_15_shield_green_c.png",
+"label": "Shield Green C"
+},
+{
+"file": "assets/icons/nms_16_robot_biped.png",
+"label": "Robot Biped"
+},
+{
+"file": "assets/icons/nms_17_robot_quad.png",
+"label": "Robot Quad"
+},
+{
+"file": "assets/icons/nms_18_ship_cone.png",
+"label": "Ship Cone"
+},
+{
+"file": "assets/icons/nms_19_robot_mech.png",
+"label": "Robot Mech"
+},
+{
+"file": "assets/icons/nms_20_drone_eye.png",
+"label": "Drone Eye"
+},
+{
+"file": "assets/icons/nms_21_spider_dark.png",
+"label": "Spider Dark"
+},
+{
+"file": "assets/icons/nms_22_spider_purple.png",
+"label": "Spider Purple"
+},
+{
+"file": "assets/icons/nms_23_spider_pixel.png",
+"label": "Spider Pixel"
+},
+{
+"file": "assets/icons/nms_24_mech_orange.png",
+"label": "Mech Orange"
+},
+{
+"file": "assets/icons/nms_25_drone_purple.png",
+"label": "Drone Purple"
+},
+{
+"file": "assets/icons/nms_26_ship_orange.png",
+"label": "Ship Orange"
+},
+{
+"file": "assets/icons/nms_27_diamond_grey.png",
+"label": "Diamond Grey"
+},
+{
+"file": "assets/icons/nms_28_wing_orange.png",
+"label": "Wing Orange"
+},
+{
+"file": "assets/icons/nms_29_gold_card2.png",
+"label": "Gold Card2"
+},
+{
+"file": "assets/icons/nms_30_alien_head.png",
+"label": "Alien Head"
+},
+{
+"file": "assets/icons/nms_31_lizard_head.png",
+"label": "Lizard Head"
+},
+{
+"file": "assets/icons/nms_32_robot_head.png",
+"label": "Robot Head"
+},
+{
+"file": "assets/icons/nms_33_logo_gold.png",
+"label": "Logo Gold"
+},
+{
+"file": "assets/icons/nms_34_diamond_copper.png",
+"label": "Diamond Copper"
+},
+{
+"file": "assets/icons/nms_35_turret_purple.png",
+"label": "Turret Purple"
+},
+{
+"file": "assets/icons/nms_36_camera_drone.png",
+"label": "Camera Drone"
+},
+{
+"file": "assets/icons/nms_37_robot_badge.png",
+"label": "Robot Badge"
+},
+{
+"file": "assets/icons/nms_38_owl_head.png",
+"label": "Owl Head"
+},
+{
+"file": "assets/icons/nms_39_alien_mask.png",
+"label": "Alien Mask"
+},
+{
+"file": "assets/icons/nms_40_sheep_head.png",
+"label": "Sheep Head"
+},
+{
+"file": "assets/icons/nms_41_skull_purple.png",
+"label": "Skull Purple"
+},
+{
+"file": "assets/icons/nms_42_alien_blue.png",
+"label": "Alien Blue"
+},
+{
+"file": "assets/icons/nms_43_horse_mech.png",
+"label": "Horse Mech"
+},
+{
+"file": "assets/icons/nms_44_frog_head.png",
+"label": "Frog Head"
+},
+{
+"file": "assets/icons/nms_45_bulldog_head.png",
+"label": "Bulldog Head"
+},
+{
+"file": "assets/icons/nms_46_alien_blue2.png",
+"label": "Alien Blue2"
+},
+{
+"file": "assets/icons/nms_47_horse_mech2.png",
+"label": "Horse Mech2"
+},
+{
+"file": "assets/icons/nms_48_brain_alien.png",
+"label": "Brain Alien"
+},
+{
+"file": "assets/icons/nms_49_helmet_teal.png",
+"label": "Helmet Teal"
+},
+{
+"file": "assets/icons/nms_50_spider_mech.png",
+"label": "Spider Mech"
+},
+{
+"file": "assets/icons/nms_51_brain_alien2.png",
+"label": "Brain Alien2"
+},
+{
+"file": "assets/icons/nms_52_tree_head.png",
+"label": "Tree Head"
+},
+{
+"file": "assets/icons/nms_53_lizard_green.png",
+"label": "Lizard Green"
+},
+{
+"file": "assets/icons/nms_54_symbol_gold.png",
+"label": "Symbol Gold"
+},
+{
+"file": "assets/icons/nms_lore_01_atlas_pass.png",
+"label": "Atlas Pass"
+},
+{
+"file": "assets/icons/nms_lore_02_sentinel.png",
+"label": "Sentinel"
+},
+{
+"file": "assets/icons/nms_lore_03_sentinel.png",
+"label": "Sentinel"
+},
+{
+"file": "assets/icons/nms_lore_04_interceptor.png",
+"label": "Interceptor"
+},
+{
+"file": "assets/icons/nms_lore_05_walker.png",
+"label": "Walker"
+},
+{
+"file": "assets/icons/nms_lore_06_quad.png",
+"label": "Quad"
+},
+{
+"file": "assets/icons/nms_lore_07_sentinel_ship.png",
+"label": "Sentinel Ship"
+},
+{
+"file": "assets/icons/nms_lore_08_hardframe.png",
+"label": "Hardframe"
+},
+{
+"file": "assets/icons/nms_lore_09_summoner.png",
+"label": "Summoner"
+},
+{
+"file": "assets/icons/nms_lore_10_flare.png",
+"label": "Flare"
+},
+{
+"file": "assets/icons/nms_lore_11_gek.png",
+"label": "Gek"
+},
+{
+"file": "assets/icons/nms_lore_12_korvax.png",
+"label": "Korvax"
+},
+{
+"file": "assets/icons/nms_lore_13_vy_keen.png",
+"label": "Vy'keen"
+},
+{
+"file": "assets/icons/nms_lore_14_apollo.png",
+"label": "Apollo"
+},
+{
+"file": "assets/icons/nms_lore_15_artemis.png",
+"label": "Artemis"
+},
+{
+"file": "assets/icons/nms_lore_16_nada.png",
+"label": "Nada"
+},
+{
+"file": "assets/icons/nms_lore_17_polo.png",
+"label": "Polo"
+},
+{
+"file": "assets/icons/nms_lore_18_null.png",
+"label": "Null"
+},
+{
+"file": "assets/icons/nms_lore_19_telamon.png",
+"label": "Telamon"
+},
+{
+"file": "assets/icons/nms_lore_20_the_construct.png",
+"label": "The Construct"
+},
+{
+"file": "assets/icons/nms_lore_21_harmonic_seal.png",
+"label": "Harmonic Seal"
+},
+{
+"file": "assets/icons/nms_lore_22_mission_portal.png",
+"label": "Mission Portal"
+}
+]

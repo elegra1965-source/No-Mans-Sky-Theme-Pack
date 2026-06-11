@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ============================================================
+  ANDROID ICON PACK — APP MAPPING FILE
+  ============================================================
+  HOW TO USE THIS FILE:
+  
+  If you are building this as a proper Android icon pack app,
+  include this file in your app's /res/xml/ folder and reference
+  it in your AndroidManifest.xml.
+  
+  Each <item> maps one of your icons to an app's package name
+  and activity. Users who install your icon pack app can then
+  select it in supported launchers (Nova, Niagara, Lawnchair, etc.)
+  and icons will be automatically applied.
+  
+  Replace "com.youriconpack" with your actual app package name.
+  ============================================================
+-->
+
+<resources>
+
+  <!-- ======================================================
+       ICON PACK METADATA
+       ====================================================== -->
+  <iconpack
+    name="Sci-Fi Icon Pack"
+    version="1.0"
+    author="Your Name"
+    package="com.youriconpack.scifi" />
+
+  <!-- ======================================================
+       COMMON APPS — COMMUNICATION
+       ====================================================== -->
+
+  <!-- Phone / Dialer -->
+  <item
+    component="ComponentInfo{com.google.android.dialer/com.google.android.dialer.extensions.GoogleDialtactsActivity}"
+    drawable="icon24_mech_orange" />
+
+  <!-- SMS / Messages -->
+  <item
+    component="ComponentInfo{com.google.android.apps.messaging/com.google.android.apps.messaging.ui.ConversationListActivity}"
+    drawable="icon32_robot_head" />
+
+  <!-- WhatsApp -->
+  <item
+    component="ComponentInfo{com.whatsapp/com.whatsapp.HomeActivity}"
+    drawable="icon36_camera_drone" />
+
+  <!-- Telegram -->
+  <item
+    component="ComponentInfo{org.telegram.messenger/org.telegram.messenger.DefaultIcon}"
+    drawable="icon27_diamond_grey" />
+
+  <!-- Discord -->
+  <item
+    component="ComponentInfo{com.discord/com.discord.app.AppActivity$Main}"
+    drawable="icon76_diamond_blue" />
+
+  <!-- Gmail -->
+  <item
+    component="ComponentInfo{com.google.android.gm/com.google.android.gm.ConversationListActivityGmail}"
+    drawable="icon73_diamond_orange" />
+
+  <!-- Outlook -->
+  <item
+    component="ComponentInfo{com.microsoft.office.outlook/com.microsoft.office.outlook.MainActivity}"
+    drawable="icon74_diamond_purple" />
+
+  <!-- ======================================================
+       SOCIAL MEDIA
+       ====================================================== -->
+
+  <!-- Instagram -->
+  <item
+    component="ComponentInfo{com.instagram.android/com.instagram.android.activity.MainTabActivity}"
+    drawable="icon72_diamond_eye" />
+
+  <!-- Twitter / X -->
+  <item
+    component="ComponentInfo{com.twitter.android/com.twitter.android.StartActivity}"
+    drawable="icon81_diamond_lightning" />
+
+  <!-- TikTok -->
+  <item
+    component="ComponentInfo{com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity}"
+    drawable="icon54_symbol_gold" />
+
+  <!-- YouTube -->
+  <item
+    component="ComponentInfo{com.google.android.youtube/com.google.android.youtube.HomeActivity}"
+    drawable="icon58_badge_ship" />
+
+  <!-- Reddit -->
+  <item
+    component="ComponentInfo{com.reddit.frontpage/com.reddit.frontpage.MainActivity}"
+    drawable="icon75_diamond_green" />
+
+  <!-- ======================================================
+       MUSIC & MEDIA
+       ====================================================== -->
+
+  <!-- Spotify -->
+  <item
+    component="ComponentInfo{com.spotify.music/com.spotify.music.MainActivity}"
+    drawable="icon54_symbol_gold" />
+
+  <!-- YouTube Music -->
+  <item
+    component="ComponentInfo{com.google.android.apps.youtube.music/com.google.android.apps.youtube.music.activities.MusicActivity}"
+    drawable="icon35_turret_purple" />
+
+  <!-- Apple Music -->
+  <item
+    component="ComponentInfo{com.apple.android.music/com.apple.android.music.MainActivity}"
+    drawable="icon78_diamond_pulse" />
+
+  <!-- Podcast Addict -->
+  <item
+    component="ComponentInfo{com.bambuna.podcastaddict/com.bambuna.podcastaddict.LaunchActivity}"
+    drawable="icon70_diamond_box" />
+
+  <!-- VLC Media Player -->
+  <item
+    component="ComponentInfo{org.videolan.vlc/org.videolan.vlc.StartActivity}"
+    drawable="icon57_badge_plane" />
+
+  <!-- ======================================================
+       NAVIGATION & MAPS
+       ====================================================== -->
+
+  <!-- Google Maps -->
+  <item
+    component="ComponentInfo{com.google.android.apps.maps/com.google.android.maps.MapsActivity}"
+    drawable="icon97_glyph_rocket" />
+
+  <!-- Waze -->
+  <item
+    component="ComponentInfo{com.waze/com.waze.FreeMapAppActivity}"
+    drawable="icon26_ship_orange" />
+
+  <!-- ======================================================
+       PRODUCTIVITY
+       ====================================================== -->
+
+  <!-- Google Calendar -->
+  <item
+    component="ComponentInfo{com.google.android.calendar/com.android.calendar.AllInOneActivity}"
+    drawable="icon66_diamond_Ti" />
+
+  <!-- Clock -->
+  <item
+    component="ComponentInfo{com.google.android.deskclock/com.android.deskclock.DeskClock}"
+    drawable="icon88_glyph_moon" />
+
+  <!-- Calculator -->
+  <item
+    component="ComponentInfo{com.google.android.calculator/com.android.calculator2.Calculator}"
+    drawable="icon71_diamond_gear" />
+
+  <!-- Notes / Keep -->
+  <item
+    component="ComponentInfo{com.google.android.keep/com.google.android.keep.activities.BrowseActivity}"
+    drawable="icon82_diamond_warn" />
+
+  <!-- Google Drive -->
+  <item
+    component="ComponentInfo{com.google.android.apps.docs/com.google.android.apps.docs.app.NewMainProxyActivity}"
+    drawable="icon11_gold_card" />
+
+  <!-- Files by Google -->
+  <item
+    component="ComponentInfo{com.google.android.apps.nbu.files/com.google.android.apps.nbu.files.home.HomeActivity}"
+    drawable="icon70_diamond_box" />
+
+  <!-- Microsoft Word -->
+  <item
+    component="ComponentInfo{com.microsoft.office.word/com.microsoft.office.apphost.LaunchActivity}"
+    drawable="icon80_diamond_needle" />
+
+  <!-- Microsoft Excel -->
+  <item
+    component="ComponentInfo{com.microsoft.office.excel/com.microsoft.office.apphost.LaunchActivity}"
+    drawable="icon78_diamond_pulse" />
+
+  <!-- ======================================================
+       CAMERA & PHOTOS
+       ====================================================== -->
+
+  <!-- Google Camera -->
+  <item
+    component="ComponentInfo{com.google.android.GoogleCamera/com.android.camera.CameraLauncher}"
+    drawable="icon36_camera_drone" />
+
+  <!-- Google Photos -->
+  <item
+    component="ComponentInfo{com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity}"
+    drawable="icon55_badge_astronaut" />
+
+  <!-- Snapchat -->
+  <item
+    component="ComponentInfo{com.snapchat.android/com.snap.mushroom.MainActivity}"
+    drawable="icon89_glyph_drop" />
+
+  <!-- ======================================================
+       GAMES & ENTERTAINMENT
+       ====================================================== -->
+
+  <!-- Netflix -->
+  <item
+    component="ComponentInfo{com.netflix.mediaclient/com.netflix.mediaclient.ui.launch.UIWebViewActivity}"
+    drawable="icon60_badge_orbit" />
+
+  <!-- Disney+ -->
+  <item
+    component="ComponentInfo{com.disney.disneyplus/com.bamtechmedia.dominguez.main.MainActivity}"
+    drawable="icon56_badge_creature" />
+
+  <!-- Steam -->
+  <item
+    component="ComponentInfo{com.valvesoftware.android.steam.community/com.valvesoftware.android.steam.community.MainActivity}"
+    drawable="icon19_robot_mech" />
+
+  <!-- ======================================================
+       SYSTEM & SETTINGS
+       ====================================================== -->
+
+  <!-- Settings -->
+  <item
+    component="ComponentInfo{com.android.settings/com.android.settings.Settings}"
+    drawable="icon71_diamond_gear" />
+
+  <!-- Wi-Fi Settings -->
+  <item
+    component="ComponentInfo{com.android.settings/com.android.settings.wifi.WifiSettings}"
+    drawable="icon94_glyph_cube" />
+
+  <!-- Bluetooth -->
+  <item
+    component="ComponentInfo{com.android.settings/com.android.settings.bluetooth.BluetoothSettings}"
+    drawable="icon93_glyph_spiral" />
+
+  <!-- Battery / Power -->
+  <item
+    component="ComponentInfo{com.android.settings/com.android.settings.fuelgauge.PowerUsageSummary}"
+    drawable="icon81_diamond_lightning" />
+
+  <!-- Play Store -->
+  <item
+    component="ComponentInfo{com.android.vending/com.android.vending.AssetBrowserActivity}"
+    drawable="icon29_gold_card2" />
+
+  <!-- Chrome Browser -->
+  <item
+    component="ComponentInfo{com.android.chrome/com.google.android.apps.chrome.Main}"
+    drawable="icon3_helmet" />
+
+  <!-- ======================================================
+       HEALTH & FITNESS
+       ====================================================== -->
+
+  <!-- Google Fit -->
+  <item
+    component="ComponentInfo{com.google.android.apps.fitness/com.google.android.apps.fitness.landing.HomeActivity}"
+    drawable="icon77_diamond_redcross" />
+
+  <!-- Samsung Health -->
+  <item
+    component="ComponentInfo{com.sec.android.app.shealth/com.sec.android.app.shealth.HomeActivity}"
+    drawable="icon78_diamond_pulse" />
+
+  <!-- ======================================================
+       FINANCE & SHOPPING
+       ====================================================== -->
+
+  <!-- Google Pay -->
+  <item
+    component="ComponentInfo{com.google.android.apps.walletnfcrel/com.google.android.apps.wallet.ui.HomeActivity}"
+    drawable="icon11_gold_card" />
+
+  <!-- Amazon Shopping -->
+  <item
+    component="ComponentInfo{com.amazon.mShop.android.shopping/com.amazon.mShop.android.shopping.IntentRouter}"
+    drawable="icon64_diamond_Pt" />
+
+</resources>
