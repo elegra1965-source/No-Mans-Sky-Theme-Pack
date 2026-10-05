@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NMS Theme Pack — Setup Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#f0a500; --cyan:#00e5ff; --cyan-dim:#0096a8;
+    --bg:#070b11; --bg2:#0b1119; --bg3:#0f1620;
+    --panel:rgba(255,255,255,0.035); --border:rgba(0,229,255,0.16); --border-soft:rgba(255,255,255,0.07);
+    --text:#cfe0f0; --text-dim:rgba(207,224,240,0.65); --text-faint:rgba(207,224,240,0.45);
+    --white:#eaf6ff; --radius:14px; --r-sm:8px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:17px;line-height:1.6;padding:32px 18px 60px;}
+  .wrap{max-width:720px;margin:0 auto;}
+  h1{font-family:'Orbitron',monospace;font-size:1.4rem;color:var(--white);margin:0 0 24px;letter-spacing:.3px;}
+  h2{font-family:'Orbitron',monospace;font-size:1rem;color:var(--gold);margin:34px 0 14px;letter-spacing:.5px;padding-top:18px;border-top:1px solid var(--border-soft);}
+  h2:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+  h3{font-family:'Orbitron',monospace;font-size:.82rem;color:var(--cyan);letter-spacing:.5px;margin:20px 0 8px;}
+  p{color:var(--text-dim);margin:0 0 12px;}
+  a{color:var(--cyan);}
+  table{width:100%;border-collapse:collapse;margin:14px 0 20px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--r-sm);overflow:hidden;}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border-soft);font-size:.92rem;}
+  th{font-family:'Orbitron',monospace;font-size:.66rem;letter-spacing:1.5px;color:var(--cyan);text-transform:uppercase;}
+  tr:last-child td{border-bottom:none;}
+  code{background:var(--bg3);border:1px solid var(--border-soft);border-radius:4px;padding:2px 6px;font-size:.88em;color:var(--white);}
+  ol,ul{color:var(--text-dim);padding-left:22px;}
+  li{margin-bottom:8px;}
+  .step{display:flex;gap:14px;padding:14px 16px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius);margin-bottom:10px;}
+  .step-num{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:var(--bg3);border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:.74rem;color:var(--cyan);}
+  .step-content strong{display:block;color:var(--white);margin-bottom:2px;}
+  .step-content p{margin:0;font-size:.92rem;}
+  .note{margin:14px 0;padding:13px 16px;background:rgba(240,165,0,.07);border-left:3px solid var(--gold);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.9rem;color:var(--text-dim);}
+  .note strong{color:var(--gold);}
+  .warn{margin:14px 0;padding:13px 16px;background:rgba(255,80,80,.07);border-left:3px solid #ff5a5a;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.9rem;color:var(--text-dim);}
+  .warn strong{color:#ff8080;}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--border-soft);color:var(--text-faint);font-size:.8rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎮 No Man's Sky Theme Pack — Setup Guide</h1>
+
+  <h2>📦 What's Included</h2>
+  <ul>
+    <li><strong>76 icons</strong> in 7 sizes (16, 32, 48, 64, 128, 256, 512px) — all transparent PNG</li>
+    <li><strong>33 wallpapers</strong> in 6 resolutions (720p, 1080p, 1440p, 4K, mobile)</li>
+    <li>This guide</li>
+  </ul>
+  <div class="note"><strong>Downloading on your phone?</strong> Grab the <strong>Mobile</strong> icon pack
+  (~6MB, sizes up to 256px) and <strong>Mobile</strong> wallpapers (~11.5MB, phone resolutions only)
+  instead of the Complete/Desktop packs — same icons and wallpapers, just without the extra 512px icon
+  size and 4K/1440p/1080p/720p wallpaper sizes you can't use on a phone anyway. The Complete/Desktop packs
+  are on the same Downloads page behind a "Show desktop &amp; complete-size downloads" toggle, for anyone
+  who also wants those sizes (e.g. iPhone Shortcuts and Mac dock icons need the 512px size from the
+  Complete pack).</div>
+
+  <h2>🤖 Android — Free Assignment (Recommended)</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Install a Custom Launcher</strong><p>Download one of these free apps from the Play Store: <strong>Nova Launcher</strong> (most popular), <strong>Niagara Launcher</strong> (minimal), or <strong>Lawnchair</strong> (free, open source).</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Set It as Your Default Launcher</strong><p>Press your phone's <strong>Home</strong> button — Android should ask which app to use as Home; select your new launcher and tap <strong>Always</strong>. Didn't get asked? Go to <strong>Settings → Apps → Default apps → Home app</strong> (wording varies by phone brand) and pick it there manually. You can always switch back the same way.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Apply the Wallpaper</strong><p>Long-press your home screen → <strong>Wallpapers</strong> → <strong>My photos</strong> or <strong>Files</strong> → navigate to the wallpaper file and set it.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Change an App Icon</strong><p>Long-press any app icon → <strong>Edit</strong> (pencil icon, appears in Nova/Niagara) → tap the current icon → <strong>Pick image</strong> or <strong>Custom icon</strong> → browse to the icon PNG → <strong>Done</strong> ✅</p></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-content"><strong>Repeat for Each App</strong><p>Assign any icon to any app — mix and match however you like!</p></div></div>
+
+  <div class="note"><strong>Tip:</strong> Use the 128px or 256px icons for the sharpest results on most Android phones.</div>
+
+  <h2>🍎 iOS (iPhone/iPad)</h2>
+  <p>iOS doesn't allow free icon swapping, but you can fake it using <strong>Shortcuts</strong>:</p>
+
+  <h3>Method — Shortcuts App (Built-in, Free)</h3>
+  <ol>
+    <li>Open the <strong>Shortcuts</strong> app (pre-installed)</li>
+    <li>Tap <strong>+</strong> to create a new shortcut</li>
+    <li>Tap <strong>Add Action</strong> → search for <strong>Open App</strong> → choose your app</li>
+    <li>Tap the <strong>three dots</strong> (⋯) top right → <strong>Add to Home Screen</strong></li>
+    <li>Tap the icon next to the name</li>
+    <li>Choose <strong>Choose Photo</strong> and select your icon PNG</li>
+    <li>Tap <strong>Add</strong> — it appears on your home screen!</li>
+  </ol>
+
+  <div class="warn"><strong>iOS limitation:</strong> tapping the icon briefly shows the Shortcuts app
+  before opening your app. This is an Apple restriction and cannot be avoided without jailbreaking.</div>
+
+  <h3>Apply the Wallpaper on iPhone</h3>
+  <ol>
+    <li>Save the <strong>mobile_iPhone</strong> wallpaper to your Photos</li>
+    <li>Go to <strong>Settings → Wallpaper → Add New Wallpaper</strong></li>
+    <li>Choose the saved photo and set it</li>
+  </ol>
+
+  <h2>💻 Desktop (Windows / Mac / Linux)</h2>
+
+  <h3>Windows</h3>
+  <ol>
+    <li>Right-click any desktop shortcut → <strong>Properties</strong></li>
+    <li>Click <strong>Change Icon</strong></li>
+    <li>Browse to the <code>.ico</code> or <code>.png</code> icon file</li>
+    <li>Click <strong>OK</strong></li>
+  </ol>
+  <div class="note">For <code>.png</code> files, use a free tool like <strong>IconChanger</strong> or <strong>CustomizerGod</strong> on Windows.</div>
+
+  <h3>Mac</h3>
+  <ol>
+    <li>Right-click any app in Finder → <strong>Get Info</strong></li>
+    <li>Click the icon in the top-left of the Info window</li>
+    <li>Drag and drop your PNG icon onto it</li>
+    <li>Done! ✅</li>
+  </ol>
+
+  <h3>Linux</h3>
+  <p>Right-click any app shortcut → <strong>Properties</strong> → <strong>Icon</strong> → browse to PNG.</p>
+
+  <h2>📁 Recommended Icon Sizes by Use</h2>
+  <table>
+    <tr><th>Use Case</th><th>Best Size</th></tr>
+    <tr><td>Android home screen</td><td>128px or 256px</td></tr>
+    <tr><td>iOS Shortcuts</td><td>256px or 512px</td></tr>
+    <tr><td>Windows shortcut</td><td>256px</td></tr>
+    <tr><td>Mac app icon</td><td>512px</td></tr>
+    <tr><td>Taskbar / Dock</td><td>64px or 128px</td></tr>
+    <tr><td>Favicon (website)</td><td>16px or 32px</td></tr>
+  </table>
+
+  <h2>❓ Need Help?</h2>
+  <p>If you're having trouble applying icons, search YouTube for:</p>
+  <ul>
+    <li><em>"Nova Launcher custom icons tutorial"</em></li>
+    <li><em>"iPhone custom icons iOS Shortcuts"</em></li>
+    <li><em>"Mac custom app icons how to"</em></li>
+  </ul>
+  <p>Enjoy your icon pack! 🚀</p>
+
+  <footer>No Man's Sky Theme Pack — fan-made, not affiliated with Hello Games</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* NMS Theme Pack — v2.2 polish layer
+   Brings the pack in line with the Hub / Weather "premium" look.
+   Loaded after the main <style>, so it only overrides — remove the two
+   <link>/<script> lines in index.html to roll back. */
+
+:root{
+  --pz-cy:#22d3ee;
+  --pz-cy-soft:rgba(34,211,238,.55);
+  --pz-amber:#f0a500;
+  --pz-glass:linear-gradient(160deg,rgba(14,32,44,.72),rgba(6,14,22,.82));
+  --pz-edge:rgba(34,211,238,.16);
+  /* HUD corner brackets drawn with gradients (no pseudo-elements needed) */
+  --pz-br:
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) top left/14px 1.5px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) top left/1.5px 14px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) top right/14px 1.5px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) top right/1.5px 14px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) bottom left/14px 1.5px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) bottom left/1.5px 14px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) bottom right/14px 1.5px no-repeat,
+    linear-gradient(var(--pz-cy-soft),var(--pz-cy-soft)) bottom right/1.5px 14px no-repeat;
+}
+
+/* ---------- Glass HUD panels ---------- */
+.feature,
+.trans-box,
+.faq details{
+  background:var(--pz-br),var(--pz-glass) !important;
+  border:1px solid var(--pz-edge) !important;
+  box-shadow:0 0 0 1px rgba(0,0,0,.35),0 18px 40px -24px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.04);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.feature{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+@media (hover:hover){
+  .feature:hover{
+    transform:translateY(-3px);
+    border-color:rgba(34,211,238,.38) !important;
+    box-shadow:0 0 24px -6px rgba(34,211,238,.35),0 18px 40px -24px rgba(0,0,0,.9);
+  }
+}
+.faq details[open]{border-color:rgba(34,211,238,.32) !important}
+
+/* ---------- Line icons replacing emoji (injected by polish.js) ---------- */
+.pz-ico{display:inline-block;width:1em;height:1em;vertical-align:-.14em;flex:none}
+.pz-ico svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+.fi.pz-done{
+  width:44px;height:44px;display:grid;place-items:center;
+  font-size:22px;color:var(--pz-cy);
+  border:1px solid rgba(34,211,238,.28);border-radius:10px;
+  background:radial-gradient(circle at 50% 35%,rgba(34,211,238,.18),rgba(34,211,238,.03) 70%);
+  box-shadow:0 0 18px -6px rgba(34,211,238,.55);
+}
+.dl-ico.pz-done{display:grid;place-items:center;color:var(--pz-amber);font-size:1.15em}
+.dl:not(.gold) .dl-ico.pz-done{color:var(--pz-cy)}
+.tab-btn .pz-ico{margin-right:.45em;opacity:.9}
+.note .pz-ico{margin-right:.4em;color:var(--pz-amber)}
+
+/* ---------- Before / After slider: labels no longer collide in the middle ---------- */
+.ba-before,.ba-after{flex-direction:column}
+.ba-before .ba-tag,.ba-before .ba-sub,
+.ba-after .ba-tag,.ba-after .ba-sub{position:absolute;white-space:nowrap}
+.ba-before .ba-tag{top:16px;left:16px}
+.ba-before .ba-sub{top:48px;left:18px}
+.ba-after .ba-tag{top:16px;right:16px}
+.ba-after .ba-sub{top:48px;right:18px;text-align:right}
+
+/* ---------- Desktop before/after: badge no longer sits on the icons ---------- */
+.dt-label{top:auto !important;bottom:14px;left:14px;z-index:3;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* ---------- Section rhythm ---------- */
+.sec-title{letter-spacing:.01em;text-shadow:0 0 28px rgba(34,211,238,.18)}
+
+@media (prefers-reduced-motion:reduce){
+  .feature{transition:none}
+  .feature:hover{transform:none}
+}

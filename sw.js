@@ -1,5 +1,5 @@
-// NMS Icon Pack — Service Worker v1.0
-const CACHE = 'nms-icon-pack-v1';
+// NMS Icon Pack — Service Worker v9.0
+const CACHE = 'nms-icon-pack-v12';
 
 const CORE_FILES = [
   '/',
@@ -31,11 +31,25 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-// Fetch — cache first, network fallback
+// Fetch — HTML pages go network-first (so updates show immediately); everything else stays cache-first
 self.addEventListener('fetch', e => {
   // Skip non-GET and chrome-extension requests
   if (e.request.method !== 'GET') return;
   if (!e.request.url.startsWith('http')) return;
+
+  // HTML documents (index.html, preview.html): always try the network first
+  if (e.request.mode === 'navigate' || e.request.destination === 'document') {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const clone = response.clone();
+          caches.open(CACHE).then(cache => cache.put(e.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(e.request).then(cached => cached || caches.match('/index.html')))
+    );
+    return;
+  }
 
   e.respondWith(
     caches.match(e.request).then(cached => {
