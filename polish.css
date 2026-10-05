@@ -72,6 +72,12 @@
 /* ---------- Section rhythm ---------- */
 .sec-title{letter-spacing:.01em;text-shadow:0 0 28px rgba(34,211,238,.18)}
 
+/* ---------- translator example: NMS font <-> English ---------- */
+#transOutput.pz-en{font-family:Orbitron,'Segoe UI',sans-serif !important;font-size:clamp(16px,2.6vw,24px) !important;letter-spacing:.22em !important}
+#transOutput.pz-en small{font-family:'Share Tech Mono',monospace;font-size:.55em;letter-spacing:.15em;opacity:.6}
+.pz-glitch{animation:pzGlitch .45s ease}
+@keyframes pzGlitch{0%{opacity:0;transform:translateX(-4px);filter:blur(2px)}30%{opacity:1;transform:translateX(3px)}60%{transform:translateX(-1px)}100%{opacity:1;transform:none;filter:none}}
+
 @media (prefers-reduced-motion:reduce){
   .feature{transition:none}
   .feature:hover{transform:none}

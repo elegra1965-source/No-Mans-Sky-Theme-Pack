@@ -51,8 +51,26 @@
       return;
     }
   }
+  // Live translator example: when the box is empty the glyph example decodes to
+  // English and back (same rhythm as the Weather app: ~6s glyphs, ~3s English).
+  function exampleFlip(){
+    var inp = document.getElementById('transInput'), out = document.getElementById('transOutput');
+    if (!inp || !out || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var last = null;
+    function tick(){
+      if (inp.value) { out.classList.remove('pz-en'); last = null; return; }
+      var en = Math.floor(Date.now() / 1000) % 9 >= 6;
+      if (en === last) return; last = en;
+      out.classList.toggle('pz-en', en);
+      out.innerHTML = en ? 'EXPLORE THE ATLAS <small>\u00b7 DECODED</small>' : 'EXPLORE THE ATLAS';
+      out.classList.remove('pz-glitch'); void out.offsetWidth; out.classList.add('pz-glitch');
+    }
+    inp.addEventListener('input', function(){ if (inp.value) out.classList.remove('pz-en'); else last = null; });
+    tick(); setInterval(tick, 500);
+  }
   function run(){
     document.querySelectorAll('.fi, .dl-ico, .tab-btn, .note, .copy-btn').forEach(swap);
+    exampleFlip();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
