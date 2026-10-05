@@ -6,6 +6,8 @@ Turn your phone or desktop into a *No Man's Sky* terminal. 76 hand-themed icons,
 
 Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
+![No Man's Sky Theme Pack site with the interactive phone mockup](screenshots/01-hero.jpg)
+
 ## What's in the pack
 
 - **76 themed icons**, each exported as transparent PNGs in 7 sizes, plus Windows `.ico` versions
@@ -21,6 +23,10 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 - A live alien-alphabet translator and glyph chart
 - A drag-to-compare before/after slider, and before/after desktops for Windows and macOS
 - Platform-aware install as an app (Android prompt, iPhone guide)
+
+![Drag-to-compare: stock icons vs the NMS Theme Pack](screenshots/02-before-after.jpg)
+
+![A Windows desktop before and after the pack](screenshots/03-desktop-transformed.jpg)
 
 ## How it's built
 
