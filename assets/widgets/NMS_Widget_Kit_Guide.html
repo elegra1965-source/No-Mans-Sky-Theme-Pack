@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NMS Widget Kit — Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#f0a500; --cyan:#00e5ff; --cyan-dim:#0096a8;
+    --bg:#070b11; --bg2:#0b1119; --bg3:#0f1620;
+    --panel:rgba(255,255,255,0.035); --border:rgba(0,229,255,0.16); --border-soft:rgba(255,255,255,0.07);
+    --text:#cfe0f0; --text-dim:rgba(207,224,240,0.65); --text-faint:rgba(207,224,240,0.45);
+    --white:#eaf6ff; --radius:14px; --r-sm:8px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:17px;line-height:1.6;padding:32px 18px 60px;}
+  .wrap{max-width:720px;margin:0 auto;}
+  h1{font-family:'Orbitron',monospace;font-size:1.5rem;color:var(--white);margin:0 0 6px;letter-spacing:.5px;}
+  .sub{color:var(--cyan);font-family:'Orbitron',monospace;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:26px;}
+  h2{font-family:'Orbitron',monospace;font-size:1rem;color:var(--gold);margin:34px 0 14px;letter-spacing:.5px;padding-top:18px;border-top:1px solid var(--border-soft);}
+  h2:first-of-type{border-top:none;padding-top:0;margin-top:24px;}
+  h3{font-family:'Orbitron',monospace;font-size:.82rem;color:var(--cyan);letter-spacing:.5px;margin:20px 0 8px;}
+  p{color:var(--text-dim);margin:0 0 12px;}
+  a{color:var(--cyan);}
+  table{width:100%;border-collapse:collapse;margin:14px 0 20px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--r-sm);overflow:hidden;}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border-soft);font-size:.92rem;}
+  th{font-family:'Orbitron',monospace;font-size:.66rem;letter-spacing:1.5px;color:var(--cyan);text-transform:uppercase;}
+  tr:last-child td{border-bottom:none;}
+  code{background:var(--bg3);border:1px solid var(--border-soft);border-radius:4px;padding:2px 6px;font-size:.88em;color:var(--white);}
+  ol,ul{color:var(--text-dim);padding-left:22px;}
+  li{margin-bottom:8px;}
+  .step{display:flex;gap:14px;padding:14px 16px;background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--radius);margin-bottom:10px;}
+  .step-num{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:var(--bg3);border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:.74rem;color:var(--cyan);}
+  .step-content strong{display:block;color:var(--white);margin-bottom:2px;}
+  .step-content p{margin:0;font-size:.92rem;}
+  .note{margin:14px 0;padding:13px 16px;background:rgba(240,165,0,.07);border-left:3px solid var(--gold);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.9rem;color:var(--text-dim);}
+  .note strong{color:var(--gold);}
+  .warn{margin:14px 0;padding:13px 16px;background:rgba(255,80,80,.07);border-left:3px solid #ff5a5a;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.9rem;color:var(--text-dim);}
+  .warn strong{color:#ff8080;}
+  .good{margin:14px 0;padding:13px 16px;background:rgba(0,229,255,.06);border-left:3px solid var(--cyan);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.9rem;color:var(--text-dim);}
+  .good strong{color:var(--cyan);}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cyan),#0090ff);color:#00131a;font-family:'Orbitron',monospace;font-size:.72rem;letter-spacing:1px;text-decoration:none;padding:11px 18px;border-radius:var(--r-sm);font-weight:700;margin:6px 8px 6px 0;}
+  .swatch{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:6px;}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--border-soft);color:var(--text-faint);font-size:.8rem;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧩 NMS Widget Kit</h1>
+  <div class="sub">Setup Guide</div>
+
+  <p>This kit gives you two transparent NMS-styled widget frames, the real Orbitron font file, and the
+  exact colors/formulas to build a real home-screen widget with them using <strong>KWGT</strong> — a
+  free, hugely popular widget-maker app for Android.</p>
+
+  <a class="btn" href="https://play.google.com/store/apps/details?id=org.kustom.widget" target="_blank" rel="noopener">▶ Get KWGT — Google Play (free)</a>
+
+  <div class="note"><strong>iOS note:</strong> KWGT is Android-only — Kustom Industries has never
+  released an iOS version, and there's no direct equivalent app that works the same way (place an
+  image + freely-positioned text on top). iOS widget apps like Widgetsmith or Color Widgets can make
+  custom widgets, but through Apple's own WidgetKit system, which works differently from this guide.
+  This kit is built for Android.</div>
+
+  <h2>What's in this kit</h2>
+  <ul>
+    <li><code>nms_widget_frame_wide.png</code> — a 1080×540 frame, sized for a clock + date widget</li>
+    <li><code>nms_widget_frame_square.png</code> — a 540×540 frame, sized for something compact like battery, weather, or a single stat</li>
+    <li><code>Orbitron-Variable.ttf</code> — the real font file, since it doesn't reliably show up in KWGT's own font search</li>
+    <li>This guide</li>
+  </ul>
+  <p>Both frames are transparent — your phone wallpaper shows through them, so they'll look right on any background.</p>
+
+  <h3>Colors used in this kit</h3>
+  <table>
+    <tr><th>Color</th><th>Hex</th><th>Used for</th></tr>
+    <tr><td><span class="swatch" style="background:#00e5ff"></span>Cyan</td><td><code>#00E5FF</code></td><td>Frame, accents</td></tr>
+    <tr><td><span class="swatch" style="background:#f0a500"></span>Gold</td><td><code>#F0A500</code></td><td>Date text, the small diamond mark</td></tr>
+    <tr><td><span class="swatch" style="background:#eaf6ff;border:1px solid #333"></span>White</td><td><code>#EAF6FF</code></td><td>Clock text</td></tr>
+  </table>
+
+  <div class="warn"><strong>Importing the font:</strong> in KWGT, when setting a text layer's font, choose
+  <strong>File</strong> as the source (not the built-in Google Fonts search) and browse to
+  <code>Orbitron-Variable.ttf</code> from this kit. If the file picker can't see it, make sure it's been
+  unzipped out of this kit's own <code>.zip</code> first (KWGT can't reach into a zip), and that KWGT has
+  storage/file access permission (Android Settings → Apps → KWGT → Permissions).</div>
+
+  <h2>Building the widget</h2>
+
+  <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Install KWGT</strong><p>Get <strong>KWGT Kustom Widget Maker</strong> free from the Play Store (link above).</p></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Add a KWGT widget</strong><p>Long-press an empty spot on your home screen → <strong>Widgets</strong> → find <strong>KWGT</strong> → drag it onto your home screen. Its editor opens automatically.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Add the NMS frame as the background</strong><p>Tap <strong>+</strong> → <strong>Image</strong> → <strong>Gallery</strong> → browse to wherever you unzipped this kit → pick <code>nms_widget_frame_wide.png</code> (or the square one for something compact). Drag the corner handles to resize the widget on your home screen.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Add the clock text</strong><p>Tap <strong>+</strong> → <strong>Text</strong>. Tap the small <strong>fx</strong> formula icon and type <code>$df("HH:mm")$</code> for 24-hour time (or <code>$df("h:mm a")$</code> for 12-hour with AM/PM). Font: import Orbitron per the note above, color <code>#EAF6FF</code>. Center it in the upper-middle of the frame.</p></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-content"><strong>Add the date text</strong><p>Tap <strong>+</strong> → <strong>Text</strong> again. Formula: <code>$df("EEE MMM d")$</code> — add a galaxy name or any label you like after it, that's just plain text. Font: Orbitron, smaller size, color <code>#F0A500</code>. Place directly under the clock text.</p></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-content"><strong>Save</strong><p>Tap the checkmark / back arrow. Your widget is done — resize or move it like any other Android widget.</p></div></div>
+
+  <h3>Using the square frame instead</h3>
+  <p>Same steps, just start from <code>nms_widget_frame_square.png</code> in Step 3. It's a better fit
+  for a single stat, a short label, or a battery percentage — one bigger centered text box instead of
+  a stacked clock+date pair.</p>
+
+  <h2>🔁 Adding a simple on/off font toggle</h2>
+  <p>Want an on/off switch to flip between Orbitron and the NMS alien font — no auto-cycling, no tap
+  zone, just a real setting?</p>
+  <ol>
+    <li>Open the widget's <strong>Globals</strong> panel (top toolbar) → add a new Global → type
+    <strong>Switch/Boolean</strong>, name it e.g. <code>nmsFont</code>.</li>
+    <li>On each text layer, instead of picking a font directly, tap the <strong>fx</strong> icon next to
+    the font field and enter a formula: <code>$if(gv(nmsFont)=1,"kfile://.../nms-alphabet.ttf","kfile://.../Orbitron-Variable.ttf")$</code>
+    (KWGT fills in the real file paths for you once each font's been added to the layer once).</li>
+  </ol>
+  <p>The Global becomes a real switch in the widget's own Settings screen (long-press the widget →
+  gear icon).</p>
+
+  <h2>📤 Exporting your finished widget</h2>
+  <p>Once it looks right, you can save it as a <code>.kwgt</code> file — either to reuse on another
+  device, or to share:</p>
+  <ol>
+    <li>Open the widget in KWGT's editor</li>
+    <li>Tap the menu (⋮ or the Kustom icon, depending on your KWGT version) → <strong>Export</strong> (sometimes labelled <strong>Save as preset</strong> or <strong>Share</strong>)</li>
+    <li>Choose <strong>Export as .kwgt file</strong> — this saves a self-contained file with your layout, images and fonts all bundled in</li>
+  </ol>
+  <p>That exported file is the real, KWGT-verified format — reliable to share or reinstall anywhere,
+  unlike a hand-written one.</p>
+
+  <footer>No Man's Sky Theme Pack — fan-made, not affiliated with Hello Games</footer>
+</div>
+</body>
+</html>
