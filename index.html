@@ -350,6 +350,11 @@
   .clog ul{list-style:none;font-size:.92rem;color:var(--text-dim);}
   .clog li{padding-left:18px;position:relative;margin-bottom:4px;}
   .clog li::before{content:'▸';position:absolute;left:0;color:var(--gold);}
+  .clog-old summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:12px 14px;border:1px solid rgba(0,229,255,.3);border-radius:8px;background:rgba(0,229,255,.04);font-family:'Orbitron',monospace;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--cyan)}
+  .clog-old summary::-webkit-details-marker{display:none}
+  .clog-old summary::after{content:'▾';transition:transform .25s}
+  .clog-old[open] summary::after{transform:rotate(180deg)}
+  .clog-old[open] summary{margin-bottom:6px}
 
   /* Footer */
   footer{padding:46px 0;border-top:1px solid var(--border-soft);text-align:center;color:var(--text-faint);
@@ -1152,6 +1157,8 @@
         <li>Windows .ICO icons download card added</li>
         <li>Icon count corrected to 76 across all copy</li>
       </ul></div>
+      <details class="clog-old">
+        <summary>Earlier versions · v2.0, v1.x</summary>
       <div class="clog"><div class="ver">v2.0</div><ul>
         <li>Full visual rebuild — sci-fi HUD design system</li>
         <li>Interactive phone mockup &amp; live icon grid</li>
@@ -1164,6 +1171,7 @@
         <li>Fixed download paths &amp; font rendering</li>
         <li>Initial PWA, icons, wallpapers, charging animations</li>
       </ul></div>
+      </details>
     </div>
   </div>
 </section>
