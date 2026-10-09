@@ -1,5 +1,5 @@
 // NMS Icon Pack — Service Worker v9.0
-const CACHE = 'nms-icon-pack-v15';
+const CACHE = 'nms-icon-pack-v16';
 
 const CORE_FILES = [
   '/',
