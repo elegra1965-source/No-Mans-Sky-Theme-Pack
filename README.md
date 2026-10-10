@@ -27,6 +27,8 @@ Everything is drawn in your browser; nothing is uploaded.
 
 ![Portal wallpaper, planet of the day and the expedition countdown](screenshots/05-make-it-yours.jpg)
 
+![Making a portal wallpaper: tapping in the glyphs, changing the background, planet of the day and the countdown](screenshots/06-make-it-yours.gif)
+
 ## The site
 
 - An interactive phone mockup and a live grid of every icon
