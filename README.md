@@ -17,6 +17,16 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 - **Widget Kit** for KWGT: two NMS-styled frames, both fonts and a step-by-step clock/date widget guide
 - **Setup guides** for Android launchers, iPhone, Windows and Mac
 
+## Make it yours (new)
+
+- **Portal wallpaper:** your Traveller name (in the NMS alphabet and in English), home galaxy and home portal address, as glyphs and hex, on a No Man's Sky wallpaper for phone (1080x2400) or desktop (2560x1440). The name and galaxy come from your Hub Traveller ID if you've set one.
+- **Planet of the day:** the Weather Station surveys 8 real, player-charted worlds from [Voyager's Haven](https://havenmap.online) every day. Pick one of today's and download it as a wallpaper, with its portal glyphs, hex and discoverer, plus a link to fly there on the Galactic Map.
+- **Expedition countdown:** live time left in the current expedition (or until the next one), with a [home-screen widget page](https://theme.nomansskyhub.app/countdown.html) that installs like an app. Dates come from the No Man's Sky Wiki's List of Expeditions, redux runs included.
+
+Everything is drawn in your browser; nothing is uploaded.
+
+![Portal wallpaper, planet of the day and the expedition countdown](screenshots/05-make-it-yours.jpg)
+
 ## The site
 
 - An interactive phone mockup and a live grid of every icon
@@ -36,6 +46,8 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 |---|---|
 | `index.html` | The download site |
 | `polish.css`, `polish.js` | HUD-style card treatment and line icons (v2.2 polish) |
+| `studio.js`, `studio.css`, `assets/studio/` | "Make it yours": portal wallpaper, planet of the day and the countdown card |
+| `expedition.js`, `countdown.html`, `countdown.webmanifest` | Expedition dates from the NMS Wiki and the installable countdown widget page |
 | `preview.html` | Full phone preview |
 | `HOW_TO_APPLY_ICONS.html` | Setup guide |
 | `android_icon_pack_mapping.xml` | Launcher mapping for icon-pack apps |

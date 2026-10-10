@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>/* visitor stats: GoatCounter (free, no cookies), same dashboard as the Hub; pages are recorded as host/path */(function(){if(!/(^|\.)nomansskyhub\.app$/.test(location.hostname))return;window.goatcounter={path:function(p){return location.host+p}};var s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.setAttribute("data-goatcounter","https://nomansskyhub.goatcounter.com/count");document.head.appendChild(s);})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Expedition Countdown · No Man's Sky</title>
+<meta name="description" content="Live countdown for the current No Man's Sky expedition: time left, progress and the next expedition. Add it to your home screen. Free, fan-made.">
+<meta name="theme-color" content="#070b11">
+<link rel="manifest" href="countdown.webmanifest">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="pwa/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Expedition">
+<meta property="og:title" content="NMS Expedition Countdown">
+<meta property="og:description" content="Time left in the current No Man's Sky expedition, live. Add it to your home screen.">
+<meta property="og:url" content="https://theme.nomansskyhub.app/countdown.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#f0a500;--cyan:#00e5ff;--bg:#070b11;--text:#cfe0f0;--dim:rgba(207,224,240,.6);--white:#eaf6ff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--text);font-family:Rajdhani,sans-serif;display:grid;place-items:center;overflow:hidden;
+    padding:max(12px,env(safe-area-inset-top)) 14px max(12px,env(safe-area-inset-bottom))}
+  .sky{position:fixed;inset:0;z-index:0;background:
+    radial-gradient(60% 45% at 75% 15%,rgba(0,229,255,.16),transparent 70%),
+    radial-gradient(55% 45% at 15% 85%,rgba(240,165,0,.12),transparent 70%),var(--bg)}
+  .sky canvas{width:100%;height:100%;display:block}
+  .card{position:relative;z-index:1;width:min(560px,100%);text-align:center;padding:clamp(16px,4vw,30px) clamp(14px,4vw,28px);
+    border:1px solid rgba(0,229,255,.25);border-radius:14px;background:linear-gradient(180deg,rgba(12,20,30,.82),rgba(7,11,17,.88));
+    box-shadow:0 0 40px rgba(0,229,255,.08),inset 0 0 0 1px rgba(255,255,255,.02);backdrop-filter:blur(6px)}
+  .card:before,.card:after{content:"";position:absolute;width:18px;height:18px;border:2px solid var(--cyan)}
+  .card:before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .card:after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .kick{font-family:Orbitron,monospace;font-size:clamp(10px,2.6vw,12px);letter-spacing:3px;color:var(--gold)}
+  h1{font-family:Orbitron,monospace;font-weight:900;color:var(--white);font-size:clamp(18px,6vw,32px);letter-spacing:1px;line-height:1.15;margin:8px 0 4px;
+    text-shadow:0 0 18px rgba(0,229,255,.35)}
+  .sub{font-size:clamp(13px,3.6vw,16px);color:var(--dim)}
+  .clock{display:flex;justify-content:center;gap:clamp(6px,2.4vw,14px);margin:clamp(14px,4vw,22px) 0 clamp(10px,3vw,16px)}
+  .u{min-width:clamp(52px,17vw,96px);padding:clamp(6px,2vw,10px) 4px;border-radius:10px;border:1px solid rgba(0,229,255,.22);background:rgba(0,229,255,.05)}
+  .u b{display:block;font-family:Orbitron,monospace;font-weight:700;font-size:clamp(24px,9vw,46px);color:var(--white);line-height:1;font-variant-numeric:tabular-nums;
+    text-shadow:0 0 14px rgba(0,229,255,.45)}
+  .u i{display:block;margin-top:6px;font-style:normal;font-family:Orbitron,monospace;font-size:clamp(8px,2.2vw,10px);letter-spacing:2px;color:var(--dim)}
+  .bar{height:8px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;margin:4px 0 6px}
+  .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold));box-shadow:0 0 12px rgba(0,229,255,.5);transition:width .6s}
+  .row{display:flex;justify-content:space-between;gap:10px;font-size:clamp(12px,3.2vw,14px);color:var(--dim)}
+  .next{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);font-size:clamp(13px,3.4vw,15px);color:var(--text)}
+  .next b{color:var(--gold);font-weight:600}
+  .foot{margin-top:14px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-family:Orbitron,monospace;font-size:10px;letter-spacing:1.5px}
+  .foot a{color:rgba(0,229,255,.85);text-decoration:none}
+  .hint{margin-top:10px;font-size:13px;color:var(--dim)}
+  .hint[hidden]{display:none}
+  .end .u b{color:var(--gold)}
+  @media (display-mode:standalone){.hint{display:none}}
+  @media (max-height:420px){.foot,.hint,.next{display:none}.clock{margin:10px 0}}
+  @media (max-width:300px){.u i{letter-spacing:1px}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><canvas id="sky"></canvas></div>
+<main class="card" id="card">
+  <div class="kick" id="kick">EXPEDITION</div>
+  <h1 id="title">Reading the Atlas…</h1>
+  <div class="sub" id="sub">&nbsp;</div>
+  <div class="clock" role="timer" aria-live="off">
+    <div class="u"><b id="d">--</b><i>DAYS</i></div>
+    <div class="u"><b id="h">--</b><i>HOURS</i></div>
+    <div class="u"><b id="m">--</b><i>MINS</i></div>
+    <div class="u"><b id="s">--</b><i>SECS</i></div>
+  </div>
+  <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+  <div class="row"><span id="from">&nbsp;</span><span id="pct">&nbsp;</span><span id="to">&nbsp;</span></div>
+  <div class="next" id="next" hidden></div>
+  <p class="hint" id="hint">Add this page to your home screen and it opens like an app: on Android, Chrome menu → <b>Add to Home screen</b>; on iPhone, Share → <b>Add to Home Screen</b>.</p>
+  <div class="foot"><a href="https://theme.nomansskyhub.app/">THEME PACK</a><a href="https://atlas.nomansskyhub.app/">ASK ATLAS</a><a href="https://nomansskyhub.app/">NMS HUB</a></div>
+</main>
+<script src="expedition.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var S = null, timer = 0;
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function day(t) { return new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }); }
+  function when(t) { return new Date(t).toLocaleString(undefined, { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function setClock(ms) { var l = NMSExpedition.left(ms); $('d').textContent = l.d; $('h').textContent = pad(l.h); $('m').textContent = pad(l.m); $('s').textContent = pad(l.s); }
+  function tick() {
+    if (!S) return;
+    var now = Date.now();
+    if ((S.live && now >= S.live.end) || (!S.live && S.next && now >= S.next.start)) { S = NMSExpedition.pick(S.rows, now); render(); return; }
+    if (S.live) {
+      var e = S.live, tot = e.end - e.start, p = Math.min(100, Math.max(0, (now - e.start) / tot * 100));
+      setClock(e.end - now); $('bar').style.width = p.toFixed(1) + '%'; $('pct').textContent = Math.floor(p) + '% DONE';
+      document.title = timeLeft(e.end - now) + ' left · ' + e.title;
+    } else if (S.next) { setClock(S.next.start - now); }
+  }
+  function timeLeft(ms) { var l = NMSExpedition.left(ms); return l.d ? l.d + 'd ' + l.h + 'h' : l.h + 'h ' + l.m + 'm'; }
+  function render() {
+    var card = $('card'); card.classList.remove('end');
+    $('next').hidden = true;
+    if (S.live) {
+      var e = S.live;
+      $('kick').textContent = 'EXPEDITION ' + e.num + (e.redux ? ' · REDUX' : '') + ' · LIVE';
+      $('title').textContent = e.title.toUpperCase();
+      $('sub').textContent = 'Ends ' + when(e.end) + ' (your time)';
+      $('from').textContent = day(e.start); $('to').textContent = day(e.end);
+      if (S.next) { $('next').hidden = false; $('next').innerHTML = 'Next: <b>Expedition ' + S.next.num + ': ' + esc(S.next.title) + '</b> · ' + day(S.next.start); }
+    } else if (S.next) {
+      var n = S.next;
+      $('kick').textContent = 'NEXT EXPEDITION ' + n.num + (n.redux ? ' · REDUX' : '');
+      $('title').textContent = n.title.toUpperCase();
+      $('sub').textContent = 'Starts ' + when(n.start) + ' (your time)';
+      $('from').textContent = ''; $('pct').textContent = 'STARTS IN'; $('to').textContent = ''; $('bar').style.width = '0';
+      document.title = 'Starts in ' + timeLeft(n.start - Date.now()) + ' · ' + n.title;
+    } else {
+      card.classList.add('end');
+      var l = S.last;
+      $('kick').textContent = 'BETWEEN EXPEDITIONS';
+      $('title').textContent = 'NO EXPEDITION LIVE';
+      $('sub').textContent = l ? 'Last: Expedition ' + l.num + ': ' + l.title + ', ended ' + day(l.end) : 'The next one will appear here as soon as it is announced.';
+      ['d', 'h', 'm', 's'].forEach(function (k) { $(k).textContent = '--'; });
+      $('bar').style.width = '100%'; $('from').textContent = ''; $('pct').textContent = 'Check back soon'; $('to').textContent = '';
+      document.title = 'Expedition Countdown · No Man\'s Sky';
+    }
+    tick();
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function boot(force) {
+    NMSExpedition.load(force).then(function (r) { S = r; render(); }).catch(function () {
+      $('title').textContent = 'OFFLINE'; $('sub').textContent = 'Couldn’t reach the NMS Wiki. It will try again in a minute.';
+    });
+  }
+  boot();
+  clearInterval(timer); timer = setInterval(tick, 1000);
+  setInterval(function () { boot(true); }, 3 * 3600000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { boot(); tick(); } });
+  try { if (navigator.standalone) $('hint').hidden = true; } catch (e) {}
+
+  // a few slow stars
+  var cv = $('sky'), cx = cv.getContext('2d'), st = [];
+  function size() { var r = window.devicePixelRatio || 1; cv.width = innerWidth * r; cv.height = innerHeight * r; st = []; for (var i = 0; i < 140; i++) st.push([Math.random(), Math.random(), Math.random() * 1.4 + .3, Math.random() * 6.28]); }
+  function draw(t) {
+    cx.clearRect(0, 0, cv.width, cv.height); var r = window.devicePixelRatio || 1;
+    st.forEach(function (s) { cx.globalAlpha = .35 + .35 * Math.sin(t / 900 + s[3]); cx.fillStyle = '#cfe8ff'; cx.beginPath(); cx.arc(s[0] * cv.width, s[1] * cv.height, s[2] * r, 0, 6.28); cx.fill(); });
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(draw);
+  }
+  size(); addEventListener('resize', size); requestAnimationFrame(draw);
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
+})();
+</script>
+</body>
+</html>
