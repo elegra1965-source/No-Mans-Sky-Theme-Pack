@@ -1,5 +1,6 @@
 /* NMS Theme Pack — "Make it yours" studio (2026-10-10)
-   1. Portal wallpaper: your Traveller name, home galaxy and home portal address (glyphs + hex)
+   1. Portal wallpaper: your Traveller name, home galaxy, home planet name and portal address
+      (glyphs + hex) and, optionally, your NMS friend code; each line can be switched on or off,
       drawn onto a No Man's Sky wallpaper, for phone or desktop.
    2. Planet of the day: today's worlds from the Weather Station's daily survey
       (real player-charted planets from Voyager's Haven) as a wallpaper.
@@ -109,9 +110,15 @@
   }
   function stamp() { return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase(); }
 
-  /* ---------- 1. portal wallpaper ---------- */
+  /* ---------- 1. portal wallpaper ----------
+     2026-10-13: every line can be switched on/off (o.show), English name on top with the
+     alien-font name under it, a HOME PLANET line naming what the address points to, and the
+     NMS friend code at the bottom. The block is laid out once dry to measure it, then drawn
+     bottom-anchored so turning lines off never leaves gaps. */
+  var SHOW_DEF = { name: true, alien: true, gal: true, planet: true, glyphs: true, hex: true, code: false };
   function drawPortal(cv, o) {
     var W = SIZES[o.fmt][0], H = SIZES[o.fmt][1], desk = o.fmt === 'desk';
+    var sh = o.show || SHOW_DEF;
     cv.width = W; cv.height = H; var x = cv.getContext('2d');
     return Promise.all([fonts(), glyphs(), o.bg === 'stars' ? null : img(B + 'bg-' + o.bg + '-' + (desk ? 'desk' : 'phone') + '.jpg')]).then(function (r) {
       var G = r[1], bg = r[2];
@@ -122,26 +129,99 @@
       x.fillStyle = fade; x.fillRect(0, 0, W, H);
       var cx = W / 2, maxW = Math.min(W - 120 * s, desk ? 1250 * s : W - 120 * s);
       var name = nmsName(o.name) || 'TRAVELLER', hasAddr = /^[0-9A-F]{12}$/.test(o.hex || '');
-      var y = H - (hasAddr ? (desk ? 600 : 820) : (desk ? 400 : 560)) * s;
+      var code = String(o.code || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
+      var pl = nmsName(o.planet), plKind = o.planetKind === 'system' ? 'HOME SYSTEM' : 'HOME PLANET';
       x.textBaseline = 'alphabetic'; x.textAlign = 'center';
-      x.font = '600 ' + Math.round(28 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.9)'; spaced(x, 'TRAVELLER', cx, y, 9 * s);
-      // name in the NMS alphabet, then in English
-      var ns = fit(x, name, '{s}px NMSAlphaStudio', maxW, Math.round(124 * s), Math.round(54 * s));
-      y += ns * 1.05;
-      x.save(); x.shadowColor = 'rgba(0,229,255,.85)'; x.shadowBlur = 26 * s; x.fillStyle = '#eaf6ff'; x.fillText(name, cx, y); x.restore();
-      var es = fit(x, name, '900 {s}px Orbitron', maxW, Math.round(58 * s), Math.round(30 * s));
-      y += es * 1.35; x.fillStyle = '#ffffff'; x.save(); x.shadowColor = 'rgba(0,0,0,.6)'; x.shadowBlur = 12 * s; spaced(x, name, cx, y, 4 * s); x.restore();
-      var gal = (o.galaxyName || 'Euclid').toUpperCase();
-      y += 62 * s; x.font = '600 ' + Math.round(30 * s) + 'px Orbitron'; x.fillStyle = '#f0a500'; spaced(x, 'HOME · ' + gal + ' GALAXY', cx, y, 5 * s);
-      if (hasAddr) {
-        y += 46 * s;
-        var rowW = Math.min(maxW, (desk ? 760 : 960) * s);
-        y = glyphRow(x, G, o.hex, cx, y, rowW);
-        y += 74 * s; x.font = '700 ' + Math.round(50 * s) + 'px Orbitron'; x.fillStyle = '#ffc23d';
-        x.save(); x.shadowColor = 'rgba(240,165,0,.6)'; x.shadowBlur = 16 * s; spaced(x, o.hex, cx, y, 13 * s); x.restore();
+      function lay(go, y) {
+        var first = true;
+        function gap(v) { if (!first) y += v; first = false; }
+        if (sh.name || sh.alien) {
+          x.font = '600 ' + Math.round(28 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.9)';
+          if (go) spaced(x, 'TRAVELLER', cx, y, 9 * s); first = false;
+        }
+        if (sh.name) {
+          var es = fit(x, name, '900 {s}px Orbitron', maxW, Math.round(64 * s), Math.round(30 * s));
+          y += es * 1.3;
+          if (go) { x.fillStyle = '#ffffff'; x.save(); x.shadowColor = 'rgba(0,0,0,.6)'; x.shadowBlur = 12 * s; spaced(x, name, cx, y, 4 * s); x.restore(); }
+        }
+        if (sh.alien) {
+          var ns = fit(x, name, '{s}px NMSAlphaStudio', maxW, Math.round(112 * s), Math.round(50 * s));
+          y += ns * (sh.name ? 1.12 : 1.05);
+          if (go) { x.save(); x.shadowColor = 'rgba(0,229,255,.85)'; x.shadowBlur = 26 * s; x.fillStyle = '#eaf6ff'; x.fillText(name, cx, y); x.restore(); }
+        }
+        if (sh.gal) {
+          gap(62 * s); x.font = '600 ' + Math.round(30 * s) + 'px Orbitron';
+          if (go) { x.fillStyle = '#f0a500'; spaced(x, 'HOME · ' + (o.galaxyName || 'Euclid').toUpperCase() + ' GALAXY', cx, y, 5 * s); }
+        }
+        var addrOn = hasAddr && (sh.glyphs || sh.hex);
+        if (sh.planet && (pl || addrOn)) {
+          gap(60 * s);
+          var lab = plKind + (pl ? ' · ' : (addrOn ? ' · PORTAL ADDRESS' : ''));
+          x.font = '600 ' + Math.round(26 * s) + 'px Orbitron';
+          var lw = 0; lab.split('').forEach(function (ch) { lw += x.measureText(ch).width + 6 * s; });
+          var pf = pl ? fit(x, pl, '800 {s}px Orbitron', Math.max(200 * s, maxW - lw), Math.round(34 * s), Math.round(20 * s)) : 0;
+          if (go) {
+            var pw = 0; if (pl) { x.font = '800 ' + pf + 'px Orbitron'; pl.split('').forEach(function (ch) { pw += x.measureText(ch).width + 4 * s; }); }
+            var X0 = cx - (lw + pw) / 2;
+            x.font = '600 ' + Math.round(26 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.95)'; spaced(x, lab, X0, y, 6 * s, 'left');
+            if (pl) { x.font = '800 ' + pf + 'px Orbitron'; x.fillStyle = '#ffffff'; spaced(x, pl, X0 + lw, y, 4 * s, 'left'); }
+          }
+        }
+        if (hasAddr && sh.glyphs) {
+          gap(40 * s);
+          var rowW = Math.min(maxW, (desk ? 760 : 960) * s);
+          if (go) y = glyphRow(x, G, o.hex, cx, y, rowW); else y += rowW / 12;
+        }
+        if (hasAddr && sh.hex) {
+          gap(sh.glyphs ? 74 * s : 56 * s); x.font = '700 ' + Math.round(50 * s) + 'px Orbitron';
+          if (go) { x.fillStyle = '#ffc23d'; x.save(); x.shadowColor = 'rgba(240,165,0,.6)'; x.shadowBlur = 16 * s; spaced(x, o.hex, cx, y, 13 * s); x.restore(); }
+        }
+        if (sh.code && code) {
+          gap(80 * s); x.font = '700 ' + Math.round(30 * s) + 'px Orbitron';
+          var cl = 'FRIEND CODE · ' + code;
+          if (go) {
+            var cw = 0; cl.split('').forEach(function (ch) { cw += x.measureText(ch).width + 5 * s; });
+            x.strokeStyle = 'rgba(0,229,255,.35)'; x.lineWidth = Math.max(1, 2 * s); x.beginPath();
+            x.moveTo(cx - cw / 2, y - 52 * s); x.lineTo(cx + cw / 2, y - 52 * s); x.stroke();
+            x.fillStyle = '#7fefff'; spaced(x, cl, cx, y, 5 * s);
+          }
+        }
+        return y;
       }
+      var bottom = H - (desk ? 150 : 240) * s;
+      var top0 = 28 * s, end = lay(false, top0);
+      lay(true, top0 + (bottom - end));
       x.font = '600 ' + Math.round(20 * s) + 'px Orbitron'; x.fillStyle = 'rgba(207,224,240,.55)';
       spaced(x, 'THEME.NOMANSSKYHUB.APP', cx, H - (desk ? 44 : 70) * s, 4 * s);
+    });
+  }
+
+  /* home planet name from the address: Galactic Map community edits first, then
+     Voyager's Haven (via the map's haven-lookup), else nothing (the user can type one). */
+  var MAP = window.NMS_MAP_BASE || 'https://map.nomansskyhub.app';
+  var mapP = null;
+  function mapEdits() {
+    if (!mapP) mapP = fetch(MAP + '/.netlify/functions/system-edit').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+    mapP.catch(function () { mapP = null; });
+    return mapP;
+  }
+  function lookupPlanet(hex, g, gname) {
+    var P = Math.max(1, parseInt(hex[0], 16) || 1);
+    function pick(bodies, sysName, src) {
+      var b = (bodies || [])[P - 1];
+      if (b && b.name) return { name: b.name, kind: 'planet', src: src };
+      if (sysName) return { name: sysName, kind: 'system', src: src };
+      return null;
+    }
+    return mapEdits().then(function (d) {
+      var rec = d && d.systems && d.systems[g + ':1' + hex.slice(1)];
+      return rec && rec.data ? pick(rec.data.bodies, rec.data.name, 'Galactic Map') : null;
+    }).catch(function () { return null; }).then(function (hit) {
+      if (hit) return hit;
+      return fetch(MAP + '/.netlify/functions/haven-lookup?addr=' + hex + '&gname=' + encodeURIComponent(gname)).then(function (r) { return r.json(); }).then(function (d) {
+        var sy = d && d.found && d.system; if (!sy) return null;
+        return pick((sy.planets || []).map(function (p) { return { name: p.name }; }), sy.name, 'Voyager’s Haven');
+      }).catch(function () { return null; });
     });
   }
 
@@ -228,7 +308,7 @@
     var host = document.getElementById('studio'); if (!host) return;
     var t = traveller(), sv = saved();
     var st = {
-      name: sv.name || t.n || '', hex: sv.hex || '', g: sv.g != null ? sv.g : (t.g >= 0 ? t.g : 0),
+      name: sv.name || t.n || '', hex: sv.hex || '', code: sv.code != null ? sv.code : (t.fc || ''), planet: sv.planet || '', pkind: sv.pkind || 'planet', pman: !!sv.pman, show: Object.assign({}, SHOW_DEF, sv.show || {}), g: sv.g != null ? sv.g : (t.g >= 0 ? t.g : 0),
       bg: sv.bg || '13', fmt: sv.fmt || (matchMedia('(min-width: 900px)').matches ? 'desk' : 'phone'), world: 0, pfmt: null
     };
     var GAL = ['Euclid'];
@@ -243,9 +323,12 @@
       '<div class="st-form">' +
       '<label class="st-f"><span>Traveller name</span><input id="stName" maxlength="24" placeholder="Your in-game name" autocomplete="off"></label>' +
       '<label class="st-f"><span>Home galaxy</span><select id="stGal"></select></label>' +
+      '<label class="st-f"><span>NMS friend code <em>optional · from your Traveller ID</em></span><input id="stCode" maxlength="16" placeholder="e.g. 1ABC-D2EF-3GH4J" autocomplete="off" spellcheck="false"></label>' +
       '<div class="st-f"><span>Home portal address <em>tap the glyphs or type the hex</em></span>' +
       '<div class="st-slots" id="stSlots"></div><input id="stHex" maxlength="12" placeholder="e.g. 10A2F9557C30" autocomplete="off" spellcheck="false" inputmode="text">' +
       '<div class="st-pad" id="stPad"></div></div>' +
+      '<label class="st-f"><span>Home planet name <em id="stPlSrc">found from your address, or type your own</em></span><input id="stPlanet" maxlength="32" placeholder="Enter the full address to look it up" autocomplete="off"></label>' +
+      '<div class="st-f"><span>Show on wallpaper</span><div class="st-show" id="stShow"></div></div>' +
       '<div class="st-f"><span>Background</span><div class="st-bgs" id="stBgs"></div></div>' +
       '<div class="st-f"><span>Size</span><div class="st-seg" id="stFmt"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div></div>' +
       '<div class="st-acts"><button type="button" class="btn btn-primary" id="stSave">⬇ Download wallpaper</button><button type="button" class="btn btn-ghost" id="stShare">Share</button></div>' +
@@ -267,7 +350,24 @@
 
     /* portal wallpaper */
     var cv = $('stCv'), slots = $('stSlots'), hexIn = $('stHex'), gal = $('stGal'), pad = $('stPad'), note = function (s) { $('stNote').textContent = s; };
-    $('stName').value = st.name; hexIn.value = st.hex;
+    $('stName').value = st.name; hexIn.value = st.hex; $('stCode').value = st.code; $('stPlanet').value = st.planet;
+    var SHOWS = [['name', 'Name'], ['alien', 'Alien-font name'], ['gal', 'Home galaxy'], ['planet', 'Planet name'], ['glyphs', 'Glyphs'], ['hex', 'Hex address'], ['code', 'Friend code']];
+    $('stShow').innerHTML = SHOWS.map(function (k) { return '<label><input type="checkbox" data-s="' + k[0] + '"' + (st.show[k[0]] ? ' checked' : '') + '><span>' + k[1] + '</span></label>'; }).join('');
+    $('stShow').addEventListener('change', function (e) { var c = e.target; if (c.dataset.s) { st.show[c.dataset.s] = c.checked; redraw(); } });
+    $('stCode').addEventListener('input', function () { var v = $('stCode').value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 16); if (v !== $('stCode').value) $('stCode').value = v; if (v && !st.show.code) { st.show.code = true; var cb = $('stShow').querySelector('[data-s="code"]'); if (cb) cb.checked = true; } redraw(); });
+    $('stPlanet').addEventListener('input', function () { st.pman = !!$('stPlanet').value.trim(); st.pkind = 'planet'; $('stPlSrc').textContent = st.pman ? 'your own name' : 'found from your address, or type your own'; if (!st.pman) { lastLook = ''; } redraw(); });
+    var lastLook = '';
+    function look() {
+      if (st.pman || st.hex.length !== 12) return;
+      var k = st.g + ':' + st.hex; if (k === lastLook) return; lastLook = k;
+      $('stPlSrc').textContent = 'looking it up…';
+      lookupPlanet(st.hex, st.g, GAL[st.g] || 'Euclid').then(function (hit) {
+        if (lastLook !== k || st.pman) return;
+        st.planet = hit ? hit.name : ''; st.pkind = hit ? hit.kind : 'planet'; $('stPlanet').value = st.planet;
+        $('stPlSrc').textContent = hit ? (hit.kind === 'system' ? 'system name' : 'planet name') + ' from ' + hit.src : 'not charted yet, type your own';
+        redraw();
+      });
+    }
     pad.innerHTML = HEX.split('').map(function (c, k) { return '<button type="button" data-k="' + k + '" title="' + GN[k] + ' (' + c + ')"><img src="' + B + 'glyphs/g-' + c + '.png" alt="' + GN[k] + '"><i>' + c + '</i></button>'; }).join('') +
       '<button type="button" data-k="back" title="Backspace">⌫</button>';
     $('stBgs').innerHTML = BGS.map(function (b) {
@@ -276,14 +376,16 @@
     var pend = 0;
     function redraw() {
       st.name = $('stName').value; st.hex = hexIn.value.toUpperCase().replace(/[^0-9A-F]/g, '').slice(0, 12); st.g = +gal.value || 0;
-      save({ name: st.name, hex: st.hex, g: st.g, bg: st.bg, fmt: st.fmt });
+      st.code = $('stCode').value; if (st.pman) st.planet = $('stPlanet').value.trim();
+      save({ name: st.name, hex: st.hex, g: st.g, bg: st.bg, fmt: st.fmt, code: st.code, planet: st.planet, pkind: st.pkind, pman: st.pman, show: st.show });
+      look();
       slots.innerHTML = Array.apply(null, Array(12)).map(function (_, i) { var c = st.hex[i]; return '<span class="' + (c ? '' : 'e') + (i === 0 && c ? ' first' : '') + '">' + (c ? '<img src="' + B + 'glyphs/g-' + c + '.png" alt="' + GN[HEX.indexOf(c)] + '">' : i + 1) + '</span>'; }).join('');
       $('stBgs').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.b === st.bg); });
       $('stFmt').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.f === st.fmt); });
       cv.parentNode.classList.toggle('desk', st.fmt === 'desk');
       var my = ++pend;
       clearTimeout(redraw.t); redraw.t = setTimeout(function () {
-        drawPortal(cv, { name: st.name, hex: st.hex.length === 12 ? st.hex : '', galaxyName: GAL[st.g] || 'Euclid', bg: st.bg, fmt: st.fmt }).then(function () {
+        drawPortal(cv, { name: st.name, hex: st.hex.length === 12 ? st.hex : '', galaxyName: GAL[st.g] || 'Euclid', bg: st.bg, fmt: st.fmt, code: st.code, planet: st.hex.length === 12 || st.pman ? st.planet : '', planetKind: st.pkind, show: st.show }).then(function () {
           if (my === pend) note(st.hex.length && st.hex.length < 12 ? (12 - st.hex.length) + ' more glyph' + (12 - st.hex.length > 1 ? 's' : '') + ' to add the portal address.' : '');
         }).catch(function () { note('Couldn’t load the background. Check your connection.'); });
       }, 60);

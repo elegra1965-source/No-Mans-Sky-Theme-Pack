@@ -68,3 +68,9 @@
   .st-bgs{grid-template-columns:repeat(4,1fr)}
   .st-acts .btn{flex:1 1 45%;justify-content:center;text-align:center}
 }
+/* show-on-wallpaper toggles (2026-10-13) */
+.st-show{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.st-show label{display:flex;align-items:center;gap:10px;min-height:42px;padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:1rem;color:var(--text)}
+.st-show label:has(input:checked){border-color:var(--cyan);background:rgba(0,229,255,.08);color:var(--white)}
+.st-show input{width:18px;height:18px;margin:0;accent-color:#00e5ff;flex:none}
+#stCode{font-family:'Orbitron',monospace;letter-spacing:.12em;text-transform:uppercase}
