@@ -25,7 +25,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 Everything is drawn in your browser; nothing is uploaded. The only thing sent anywhere is your portal address, to look up the planet name.
 
-![Portal wallpaper options: name, planet and friend code, then adding the alien-font name, the hex address and the glyphs](screenshots/07-wallpaper-options.jpg)
+![Portal wallpaper options: all lines off, then name, planet and friend code, then adding the alien-font name, the hex address and the glyphs](screenshots/07-wallpaper-options.jpg)
 
 ![Portal wallpaper, planet of the day and the expedition countdown](screenshots/05-make-it-yours.jpg)
 
