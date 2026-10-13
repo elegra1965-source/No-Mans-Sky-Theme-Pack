@@ -83,3 +83,7 @@
 .st-fold[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
 .st-fold-b{display:grid;gap:8px;padding:0 12px 12px}
 .st-hint{font-style:normal;font-family:'Rajdhani',sans-serif;font-size:.9rem;color:var(--text-faint)}
+.st-fold-b input{width:100%;min-height:44px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--white);font:inherit;font-size:1.05rem}
+.st-fold-b input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.15)}
+.st-fold-b input::placeholder{color:var(--text-faint);letter-spacing:1px;font-family:'Rajdhani',sans-serif}
+.st-hexl{font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(0,229,255,.75);margin:4px 0 -4px}

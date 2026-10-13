@@ -325,8 +325,8 @@
       '<label class="st-f"><span>Home galaxy</span><select id="stGal"></select></label>' +
       '<label class="st-f"><span>NMS friend code <em>optional · from your Traveller ID</em></span><input id="stCode" maxlength="16" placeholder="e.g. 1ABC-D2EF-3GH4J" autocomplete="off" spellcheck="false"></label>' +
       '<label class="st-f"><span>Home planet name <em id="stPlSrc">found from your address, or type your own</em></span><input id="stPlanet" maxlength="32" placeholder="Enter the full address to look it up" autocomplete="off"></label>' +
-      '<details class="st-fold" id="stAddrF"><summary>Portal address <b id="stAddrS"></b></summary><div class="st-fold-b"><em class="st-hint">tap the glyphs or type the hex</em>' +
-      '<div class="st-slots" id="stSlots"></div><input id="stHex" maxlength="12" placeholder="e.g. 10A2F9557C30" autocomplete="off" spellcheck="false" inputmode="text">' +
+      '<details class="st-fold" id="stAddrF"><summary>Portal address <b id="stAddrS"></b></summary><div class="st-fold-b"><em class="st-hint">tap the glyph buttons below, or type the 12-digit hex in the box</em>' +
+      '<div class="st-slots" id="stSlots"></div><label class="st-hexl" for="stHex">Hex address</label><input id="stHex" maxlength="12" placeholder="Type hex, e.g. 10A2F9557C30" autocomplete="off" spellcheck="false" inputmode="text">' +
       '<div class="st-pad" id="stPad"></div></div></details>' +
       '<details class="st-fold" id="stShowF"><summary>Show on wallpaper <b id="stShowS"></b></summary><div class="st-fold-b"><div class="st-show" id="stShow"></div></div></details>' +
       '<div class="st-f"><span>Background <em>swipe for more</em></span><div class="st-bgs" id="stBgs"></div></div>' +
