@@ -159,12 +159,12 @@
           var lab = plKind + (pl ? ' · ' : (addrOn ? ' · PORTAL ADDRESS' : ''));
           x.font = '600 ' + Math.round(26 * s) + 'px Orbitron';
           var lw = 0; lab.split('').forEach(function (ch) { lw += x.measureText(ch).width + 6 * s; });
-          var pf = pl ? fit(x, pl, '800 {s}px Orbitron', Math.max(200 * s, maxW - lw), Math.round(34 * s), Math.round(20 * s)) : 0;
+          var pf = pl ? fit(x, pl, '700 {s}px Orbitron', Math.max(200 * s, maxW - lw), Math.round(34 * s), Math.round(20 * s)) : 0;
           if (go) {
-            var pw = 0; if (pl) { x.font = '800 ' + pf + 'px Orbitron'; pl.split('').forEach(function (ch) { pw += x.measureText(ch).width + 4 * s; }); }
+            var pw = 0; if (pl) { x.font = '700 ' + pf + 'px Orbitron'; pl.split('').forEach(function (ch) { pw += x.measureText(ch).width + 4 * s; }); }
             var X0 = cx - (lw + pw) / 2;
             x.font = '600 ' + Math.round(26 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.95)'; spaced(x, lab, X0, y, 6 * s, 'left');
-            if (pl) { x.font = '800 ' + pf + 'px Orbitron'; x.fillStyle = '#ffffff'; spaced(x, pl, X0 + lw, y, 4 * s, 'left'); }
+            if (pl) { x.font = '700 ' + pf + 'px Orbitron'; x.fillStyle = '#ffffff'; spaced(x, pl, X0 + lw, y, 4 * s, 'left'); }
           }
         }
         if (hasAddr && sh.hex) {
