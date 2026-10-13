@@ -12,7 +12,7 @@
   var GN = ['Sunset', 'Bird', 'Face', 'Diplo', 'Eclipse', 'Balloon', 'Boat', 'Bug', 'Dragonfly', 'Galaxy', 'Voxel', 'Fish', 'Tent', 'Rocket', 'Tree', 'Atlas'];
   var B = 'assets/studio/';
   var WX = window.NMS_WX_BASE || 'https://weather.nomansskyhub.app';
-  var BGS = [['13', 'The Atlas'], ['10', 'Moonrise'], ['07', 'Atlas Pyramid'], ['12', 'Shoreline'], ['09', 'Hangar'], ['01', 'Interface'], ['stars', 'Deep Space']];
+  var BGS = [['13', 'The Atlas'], ['10', 'Moonrise'], ['07', 'Atlas Pyramid'], ['12', 'Shoreline'], ['03', 'Traveller'], ['11', 'Diplo Plains'], ['08', 'Walker'], ['04', 'Landing'], ['05', 'Rock Arch'], ['09', 'Hangar'], ['01', 'Interface'], ['stars', 'Deep Space']];
   var SIZES = { phone: [1080, 2400], desk: [2560, 1440] };
   var LSK = 'nms_studio';
   var $ = function (id) { return document.getElementById(id); };
@@ -370,9 +370,13 @@
     }
     pad.innerHTML = HEX.split('').map(function (c, k) { return '<button type="button" data-k="' + k + '" title="' + GN[k] + ' (' + c + ')"><img src="' + B + 'glyphs/g-' + c + '.png" alt="' + GN[k] + '"><i>' + c + '</i></button>'; }).join('') +
       '<button type="button" data-k="back" title="Backspace">⌫</button>';
-    $('stBgs').innerHTML = BGS.map(function (b) {
-      return '<button type="button" data-b="' + b[0] + '" title="' + b[1] + '"' + (b[0] === 'stars' ? ' class="st-stars"' : ' style="background-image:url(' + B + 'bg-' + b[0] + '-thumb.jpg)"') + '><span>' + b[1] + '</span></button>';
-    }).join('');
+    function bgTile(b, dup) {
+      return '<button type="button" data-b="' + b[0] + '" title="' + b[1] + '"' + (dup ? ' aria-hidden="true" tabindex="-1"' : '') + (b[0] === 'stars' ? ' class="st-stars"' : ' style="background-image:url(' + B + 'bg-' + b[0] + '-thumb.jpg)"') + '><span>' + b[1] + '</span></button>';
+    }
+    var autoBg = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    // the row drifts in a loop (a second copy of the tiles makes it seamless) until you tap
+    // or click one; hovering with a mouse pauses it; touching/scrolling it stops it for good
+    $('stBgs').innerHTML = BGS.map(function (b) { return bgTile(b); }).join('') + (autoBg ? BGS.map(function (b) { return bgTile(b, 1); }).join('') : '');
     var pend = 0;
     function redraw() {
       st.name = $('stName').value; st.hex = hexIn.value.toUpperCase().replace(/[^0-9A-F]/g, '').slice(0, 12); st.g = +gal.value || 0;
@@ -403,8 +407,32 @@
       hexIn.value = v; redraw.typed = true; redraw();
     });
     if (st.hex.length < 12) $('stAddrF').open = true;
-    setTimeout(function () { var ob = $('stBgs').querySelector('button.on'); if (ob) $('stBgs').scrollLeft = ob.offsetLeft - 8; }, 120);
-    $('stBgs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.bg = b.dataset.b; redraw(); } });
+    var row = $('stBgs');
+    function showPick() { var ob = row.querySelector('button.on'); if (ob) row.scrollLeft += ob.getBoundingClientRect().left - row.getBoundingClientRect().left - 8; }
+    function stopBg() {
+      if (!autoBg) return; autoBg = false; row.classList.remove('st-auto');
+      var dups = row.querySelectorAll('button[aria-hidden]'); for (var i = 0; i < dups.length; i++) dups[i].remove();
+      showPick();
+    }
+    if (autoBg) {
+      var pos = 0, hover = false, last = 0, seen = true;
+      row.classList.add('st-auto');
+      row.addEventListener('mouseenter', function () { hover = true; });
+      row.addEventListener('mouseleave', function () { hover = false; });
+      ['touchstart', 'wheel', 'keydown'].forEach(function (ev) { row.addEventListener(ev, stopBg, { passive: true }); });
+      if (window.IntersectionObserver) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }).observe(row);
+      (function tick(t) {
+        if (!autoBg) return;
+        var dt = last ? Math.min(64, t - last) : 16; last = t;
+        if (!hover && seen && row.offsetParent) {
+          var half = row.scrollWidth / 2;
+          pos += dt * 0.035; if (half > 0 && pos >= half) pos -= half;
+          row.scrollLeft = pos;
+        }
+        requestAnimationFrame(tick);
+      })(0);
+    } else setTimeout(showPick, 120);
+    row.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.bg = b.dataset.b; stopBg(); redraw(); } });
     $('stFmt').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.fmt = b.dataset.f; redraw(); } });
     function fname(base) { return base + '-' + (nmsName(st.name).replace(/[^A-Z0-9]+/g, '-').toLowerCase() || 'traveller') + '-' + st.fmt + '.png'; }
     $('stSave').addEventListener('click', function () { exportPng(cv, fname('nms-portal-wallpaper'), note); });
