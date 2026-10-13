@@ -24,8 +24,8 @@
 .st-pad button:hover{border-color:var(--cyan);background:rgba(0,229,255,.08)}
 .st-pad img{width:78%;height:78%;object-fit:contain}
 .st-pad i{position:absolute;right:2px;bottom:0;font-style:normal;font-family:'Orbitron',monospace;font-size:.5rem;color:rgba(240,165,0,.85)}
-.st-bgs{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.st-bgs button{position:relative;aspect-ratio:9/16;border-radius:7px;border:2px solid transparent;background:#0a1119 center/cover no-repeat;cursor:pointer;overflow:hidden;min-width:0}
+.st-bgs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.st-bgs button{position:relative;flex:0 0 78px;height:132px;scroll-snap-align:start;border-radius:7px;border:2px solid transparent;background:#0a1119 center/cover no-repeat;cursor:pointer;overflow:hidden;min-width:0}
 .st-bgs button span{position:absolute;left:0;right:0;bottom:0;padding:10px 2px 3px;font-family:'Rajdhani',sans-serif;font-size:.68rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.75));line-height:1.1}
 .st-bgs button.on{border-color:var(--cyan);box-shadow:0 0 12px rgba(0,229,255,.4)}
 .st-bgs .st-stars{background:radial-gradient(circle at 70% 25%,rgba(0,229,255,.35),transparent 55%),radial-gradient(circle at 25% 70%,rgba(240,165,0,.25),transparent 55%),#05080e}
@@ -65,7 +65,7 @@
   .st-worlds{grid-template-columns:repeat(2,1fr)}
   .st-pad{grid-template-columns:repeat(6,1fr)}
   .st-slots{grid-template-columns:repeat(6,1fr)}
-  .st-bgs{grid-template-columns:repeat(4,1fr)}
+
   .st-acts .btn{flex:1 1 45%;justify-content:center;text-align:center}
 }
 /* show-on-wallpaper toggles (2026-10-13) */
@@ -74,3 +74,12 @@
 .st-show label:has(input:checked){border-color:var(--cyan);background:rgba(0,229,255,.08);color:var(--white)}
 .st-show input{width:18px;height:18px;margin:0;accent-color:#00e5ff;flex:none}
 #stCode{font-family:'Orbitron',monospace;letter-spacing:.12em;text-transform:uppercase}
+/* folding sections (2026-10-13) */
+.st-fold{border:1px solid var(--border);border-radius:10px;background:var(--bg2)}
+.st-fold>summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:46px;padding:0 14px;cursor:pointer;font-family:'Orbitron',monospace;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:rgba(0,229,255,.85)}
+.st-fold>summary::-webkit-details-marker{display:none}
+.st-fold>summary b{font-weight:600;color:var(--gold);letter-spacing:.12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-fold>summary::after{content:'';margin-left:auto;flex:none;width:8px;height:8px;border-right:2px solid rgba(0,229,255,.7);border-bottom:2px solid rgba(0,229,255,.7);transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.st-fold[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+.st-fold-b{display:grid;gap:8px;padding:0 12px 12px}
+.st-hint{font-style:normal;font-family:'Rajdhani',sans-serif;font-size:.9rem;color:var(--text-faint)}

@@ -112,8 +112,8 @@
 
   /* ---------- 1. portal wallpaper ----------
      2026-10-13: every line can be switched on/off (o.show), English name on top with the
-     alien-font name under it, a HOME PLANET line naming what the address points to, and the
-     NMS friend code at the bottom. The block is laid out once dry to measure it, then drawn
+     alien-font name under it, a HOME PLANET line naming what the address points to, the hex
+     then the glyphs, and the NMS friend code at the bottom. The block is laid out once dry to measure it, then drawn
      bottom-anchored so turning lines off never leaves gaps. */
   var SHOW_DEF = { name: true, alien: true, gal: true, planet: true, glyphs: true, hex: true, code: false };
   function drawPortal(cv, o) {
@@ -167,14 +167,14 @@
             if (pl) { x.font = '800 ' + pf + 'px Orbitron'; x.fillStyle = '#ffffff'; spaced(x, pl, X0 + lw, y, 4 * s, 'left'); }
           }
         }
+        if (hasAddr && sh.hex) {
+          gap(76 * s); x.font = '700 ' + Math.round(50 * s) + 'px Orbitron';
+          if (go) { x.fillStyle = '#ffc23d'; x.save(); x.shadowColor = 'rgba(240,165,0,.6)'; x.shadowBlur = 16 * s; spaced(x, o.hex, cx, y, 13 * s); x.restore(); }
+        }
         if (hasAddr && sh.glyphs) {
-          gap(40 * s);
+          gap(sh.hex ? 34 * s : 40 * s);
           var rowW = Math.min(maxW, (desk ? 760 : 960) * s);
           if (go) y = glyphRow(x, G, o.hex, cx, y, rowW); else y += rowW / 12;
-        }
-        if (hasAddr && sh.hex) {
-          gap(sh.glyphs ? 74 * s : 56 * s); x.font = '700 ' + Math.round(50 * s) + 'px Orbitron';
-          if (go) { x.fillStyle = '#ffc23d'; x.save(); x.shadowColor = 'rgba(240,165,0,.6)'; x.shadowBlur = 16 * s; spaced(x, o.hex, cx, y, 13 * s); x.restore(); }
         }
         if (sh.code && code) {
           gap(80 * s); x.font = '700 ' + Math.round(30 * s) + 'px Orbitron';
@@ -324,12 +324,12 @@
       '<label class="st-f"><span>Traveller name</span><input id="stName" maxlength="24" placeholder="Your in-game name" autocomplete="off"></label>' +
       '<label class="st-f"><span>Home galaxy</span><select id="stGal"></select></label>' +
       '<label class="st-f"><span>NMS friend code <em>optional · from your Traveller ID</em></span><input id="stCode" maxlength="16" placeholder="e.g. 1ABC-D2EF-3GH4J" autocomplete="off" spellcheck="false"></label>' +
-      '<div class="st-f"><span>Home portal address <em>tap the glyphs or type the hex</em></span>' +
-      '<div class="st-slots" id="stSlots"></div><input id="stHex" maxlength="12" placeholder="e.g. 10A2F9557C30" autocomplete="off" spellcheck="false" inputmode="text">' +
-      '<div class="st-pad" id="stPad"></div></div>' +
       '<label class="st-f"><span>Home planet name <em id="stPlSrc">found from your address, or type your own</em></span><input id="stPlanet" maxlength="32" placeholder="Enter the full address to look it up" autocomplete="off"></label>' +
-      '<div class="st-f"><span>Show on wallpaper</span><div class="st-show" id="stShow"></div></div>' +
-      '<div class="st-f"><span>Background</span><div class="st-bgs" id="stBgs"></div></div>' +
+      '<details class="st-fold" id="stAddrF"><summary>Portal address <b id="stAddrS"></b></summary><div class="st-fold-b"><em class="st-hint">tap the glyphs or type the hex</em>' +
+      '<div class="st-slots" id="stSlots"></div><input id="stHex" maxlength="12" placeholder="e.g. 10A2F9557C30" autocomplete="off" spellcheck="false" inputmode="text">' +
+      '<div class="st-pad" id="stPad"></div></div></details>' +
+      '<details class="st-fold" id="stShowF"><summary>Show on wallpaper <b id="stShowS"></b></summary><div class="st-fold-b"><div class="st-show" id="stShow"></div></div></details>' +
+      '<div class="st-f"><span>Background <em>swipe for more</em></span><div class="st-bgs" id="stBgs"></div></div>' +
       '<div class="st-f"><span>Size</span><div class="st-seg" id="stFmt"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div></div>' +
       '<div class="st-acts"><button type="button" class="btn btn-primary" id="stSave">⬇ Download wallpaper</button><button type="button" class="btn btn-ghost" id="stShare">Share</button></div>' +
       '<p class="st-note" id="stNote" aria-live="polite"></p></div>' +
@@ -380,6 +380,10 @@
       save({ name: st.name, hex: st.hex, g: st.g, bg: st.bg, fmt: st.fmt, code: st.code, planet: st.planet, pkind: st.pkind, pman: st.pman, show: st.show });
       look();
       slots.innerHTML = Array.apply(null, Array(12)).map(function (_, i) { var c = st.hex[i]; return '<span class="' + (c ? '' : 'e') + (i === 0 && c ? ' first' : '') + '">' + (c ? '<img src="' + B + 'glyphs/g-' + c + '.png" alt="' + GN[HEX.indexOf(c)] + '">' : i + 1) + '</span>'; }).join('');
+      $('stAddrS').textContent = st.hex.length === 12 ? '· ' + st.hex : st.hex.length ? '· ' + st.hex.length + ' of 12' : '· not set';
+      var on = SHOWS.filter(function (k) { return st.show[k[0]]; }).length; $('stShowS').textContent = '· ' + on + ' of ' + SHOWS.length;
+      if (st.hex.length === 12 && !redraw.full && redraw.typed) $('stAddrF').open = false;
+      redraw.full = st.hex.length === 12; redraw.typed = false;
       $('stBgs').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.b === st.bg); });
       $('stFmt').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.f === st.fmt); });
       cv.parentNode.classList.toggle('desk', st.fmt === 'desk');
@@ -391,13 +395,15 @@
       }, 60);
     }
     $('stName').addEventListener('input', redraw); gal.addEventListener('change', redraw);
-    hexIn.addEventListener('input', function () { var p = hexIn.selectionStart; hexIn.value = hexIn.value.toUpperCase().replace(/[^0-9A-F]/g, '').slice(0, 12); try { hexIn.setSelectionRange(p, p); } catch (e) {} redraw(); });
+    hexIn.addEventListener('input', function () { var p = hexIn.selectionStart; hexIn.value = hexIn.value.toUpperCase().replace(/[^0-9A-F]/g, '').slice(0, 12); try { hexIn.setSelectionRange(p, p); } catch (e) {} redraw.typed = true; redraw(); });
     pad.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       var v = hexIn.value;
       if (b.dataset.k === 'back') v = v.slice(0, -1); else if (v.length < 12) v += HEX[+b.dataset.k];
-      hexIn.value = v; redraw();
+      hexIn.value = v; redraw.typed = true; redraw();
     });
+    if (st.hex.length < 12) $('stAddrF').open = true;
+    setTimeout(function () { var ob = $('stBgs').querySelector('button.on'); if (ob) $('stBgs').scrollLeft = ob.offsetLeft - 8; }, 120);
     $('stBgs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.bg = b.dataset.b; redraw(); } });
     $('stFmt').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.fmt = b.dataset.f; redraw(); } });
     function fname(base) { return base + '-' + (nmsName(st.name).replace(/[^A-Z0-9]+/g, '-').toLowerCase() || 'traveller') + '-' + st.fmt + '.png'; }
