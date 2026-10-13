@@ -12,7 +12,7 @@
   var GN = ['Sunset', 'Bird', 'Face', 'Diplo', 'Eclipse', 'Balloon', 'Boat', 'Bug', 'Dragonfly', 'Galaxy', 'Voxel', 'Fish', 'Tent', 'Rocket', 'Tree', 'Atlas'];
   var B = 'assets/studio/';
   var WX = window.NMS_WX_BASE || 'https://weather.nomansskyhub.app';
-  var BGS = [['13', 'The Atlas'], ['10', 'Moonrise'], ['07', 'Atlas Pyramid'], ['12', 'Shoreline'], ['03', 'Traveller'], ['11', 'Diplo Plains'], ['08', 'Walker'], ['04', 'Landing'], ['05', 'Rock Arch'], ['09', 'Hangar'], ['01', 'Interface'], ['stars', 'Deep Space']];
+  var BGS = [['13', 'The Atlas'], ['10', 'Moonrise'], ['07', 'Atlas II'], ['12', 'Shoreline'], ['03', 'Traveller'], ['11', 'Diplo Plains'], ['08', 'Walker'], ['04', 'Landing'], ['05', 'Rock Arch'], ['14', 'Arch Valley'], ['02', 'Origins'], ['06', 'Beyond'], ['09', 'Hangar'], ['01', 'Interface'], ['stars', 'Deep Space']];
   var SIZES = { phone: [1080, 2400], desk: [2560, 1440] };
   var LSK = 'nms_studio';
   var $ = function (id) { return document.getElementById(id); };
