@@ -1578,23 +1578,21 @@
     });
   }
 
-  // ── Download counter (countapi.xyz) ────────────────────────────
-  var DL_BASE = 500;
+  // ── Download counter (2026-10-14: countapi.xyz shut down; now the map site's dl-count function) ──
+  var DL_BASE = 500, DL_API = 'https://map.nomansskyhub.app/.netlify/functions/dl-count';
   function updateDlDisplay(val){
     var el=document.getElementById('dlCount');
     if(el) el.textContent=(val+DL_BASE).toLocaleString()+'+';
   }
-  fetch('https://api.countapi.xyz/get/nms-sci-fi-theme-pack/downloads')
-    .then(function(r){return r.json();})
-    .then(function(d){updateDlDisplay(d.value||0);})
-    .catch(function(){});
-  document.querySelectorAll('a[download]').forEach(function(a){
-    a.addEventListener('click',function(){
-      fetch('https://api.countapi.xyz/hit/nms-sci-fi-theme-pack/downloads')
-        .then(function(r){return r.json();})
-        .then(function(d){updateDlDisplay(d.value||0);})
-        .catch(function(){});
-    });
+  fetch(DL_API).then(function(r){return r.json();})
+    .then(function(d){ if(d && d.ok) updateDlDisplay(d.value||0); }).catch(function(){});
+  // counts a click on any pack download (zip / video), unless something earlier cancelled it
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href]'); if(!a || e.defaultPrevented) return;
+    var h=a.getAttribute('href')||'';
+    if(!/^(\.\/)?assets\/.+\.(zip|mp4)(\?|#|$)/i.test(h)) return;
+    fetch(DL_API,{method:'POST',keepalive:true}).then(function(r){return r.json();})
+      .then(function(d){ if(d && d.ok) updateDlDisplay(d.value||0); }).catch(function(){});
   });
 </script>
 

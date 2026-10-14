@@ -90,6 +90,8 @@
   .src{margin-top:10px;font-size:13px;color:var(--dim);min-height:1.2em}
   .src a{color:var(--cyan)}
   .btn.ghost{background:transparent;margin-left:6px}
+  .fix{margin-top:10px;font-size:13px;color:var(--dim);line-height:1.35}
+  .fix b{color:var(--cyan);font-weight:600}
   .edit{margin-top:12px;text-align:left}
   .edit summary{cursor:pointer}
   .lb{display:block;margin-top:12px;font-family:Orbitron,monospace;font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
@@ -298,6 +300,8 @@
       });
     };
     var tried = {};
+    /* stale: the map (your own community edits) is checked daily, Haven weekly */
+    var stale = function(info){ return !info.gen || !info.mapAt || Date.now() - info.mapAt > 864e5 || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5; };
     var lookup = function(hex, g, force){
       var key = hex + ':' + g, info = getInfo();
       if (tried[key] && !force) return;
@@ -305,6 +309,9 @@
       if (!info || info.key !== key) info = {key: key};
       var jobs = [];
       if (!info.gen) jobs.push(genInfo(hex, g).then(function(x){ info.gen = x; }).catch(function(){}));
+      if (force || !info.mapAt || Date.now() - info.mapAt > 864e5)
+        jobs.push(fetch(MAP + '/.netlify/functions/system-edit?sys=' + g + ':' + hex)
+          .then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok){ info.map = j.found && j.system ? j.system.data : null; info.mapAt = Date.now(); } }).catch(function(){}));
       if (force || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5)
         jobs.push(fetch(MAP + '/.netlify/functions/haven-lookup?addr=' + hex + '&gname=' + encodeURIComponent(GAL[g]))
           .then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok){ info.haven = j.found ? j.system : null; info.havenAt = Date.now(); } }).catch(function(){}));
@@ -314,6 +321,9 @@
     };
 
     var cell = function(k, v, sub){ return v ? '<div class="cell"><i>' + k + '</i><b>' + esc(v) + '</b>' + (sub ? '<span>' + esc(sub) + '</span>' : '') + '</div>' : ''; };
+    var list = function(v){ return Array.isArray(v) ? v.filter(Boolean).join(', ') : (v || ''); };
+    /* one shape for planets from the Galactic Map's edits and from Haven */
+    var mapBody = function(b){ return {name: b.name, moon: !!b.moon, biome: [b.subtype || '', b.biome || ''].filter(Boolean).join(' ') || '', weather: b.descriptor || '', sentinels: b.sentinel || '', resources: list(b.resources), base: !!(b.base || b.baseName)}; };
     var draw = function(){
       var hex = (LS('nms-w-portal') || '').toUpperCase(), g = gIdx(), nm = LS('nms-w-name') || 'Home';
       var ok = /^[0-9A-F]{12}$/.test(hex);
@@ -331,33 +341,42 @@
         if (ok && !EMBED) lookup(hex, g);
         return;
       }
-      var gen = info.gen || {}, hv = info.haven || null;
-      var name = (hv && hv.name) || gen.name || '';
-      var star = ((hv && hv.star) || '').toLowerCase(); star = STAR[star] ? star : gen.star;
+      /* each field: the Galactic Map's community edit first, then Voyager's Haven, then worked out from the glyphs */
+      var gen = info.gen || {}, hv = info.haven || null, mp = info.map || null;
+      var pickF = function(){ for (var a = 0; a < arguments.length; a++){ var v = arguments[a]; if (v != null && String(v).trim() !== '') return v; } return ''; };
+      var name = pickF(mp && mp.name, hv && hv.name, gen.name);
+      var star = String(pickF(mp && mp.stars && mp.stars[0], hv && hv.star) || '').toLowerCase(); star = STAR[star] ? star : gen.star;
       $('sy').innerHTML = (star ? '<span class="dot" style="background:' + STAR[star] + ';box-shadow:0 0 10px ' + STAR[star] + '"></span>' : '') + esc(name || 'Unknown system');
-      $('rg').textContent = [(hv && hv.region) || gen.region, GAL[g]].filter(Boolean).join(' · ');
+      $('rg').textContent = [pickF(mp && mp.region, hv && hv.region, gen.region), GAL[g]].filter(Boolean).join(' · ');
 
-      /* planet: the one picked under Edit, else Haven's planet with the generated name, else just the generated name */
-      var planets = (hv && hv.planets) || [], pick = LS('nms-w-planet') || '', hp = null;
-      planets.forEach(function(p){ if (!hp && p.name && (p.name === pick || (!pick && p.name === gen.planet))) hp = p; });
+      /* planet: the one picked under Edit, else the one marked as a base, else the planet with the generated name */
+      var mb = (mp && mp.bodies && mp.bodies.length) ? mp.bodies.map(mapBody) : null;
+      var planets = mb || ((hv && hv.planets) || []), pick = LS('nms-w-planet') || '', hp = null;
+      planets.forEach(function(p){ if (!hp && p.name && p.name === pick) hp = p; });
+      if (!hp && !pick) planets.forEach(function(p){ if (!hp && p.base) hp = p; });
+      if (!hp && !pick) planets.forEach(function(p){ if (!hp && p.name && p.name === gen.planet) hp = p; });
       $('pw').hidden = !planets.length;
-      if (planets.length) $('ip').innerHTML = '<option value="">Auto (from the first glyph)</option>' + planets.map(function(p){
+      if (planets.length) $('ip').innerHTML = '<option value="">Auto</option>' + planets.filter(function(p){ return p.name; }).map(function(p){
         return '<option' + (hp && p.name === hp.name ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('');
       var pName = hp ? hp.name : gen.planet;
       var pSub = hp ? [hp.biome, hp.weather].filter(Boolean).join(' · ') : (gen.planet ? 'Original name, may differ in game' : '');
-      var econ = (hv && hv.economy) || gen.econ, tier = (hv && hv.economyTier) || gen.wealth;
+      var econ = pickF(mp && mp.econName, hv && hv.economy, gen.econ), tier = pickF(mp && mp.econDesc, hv && hv.economyTier, gen.wealth);
+      var outlaw = mp ? !!mp.outlaw : (!hv && gen.outlaw);
       $('facts').innerHTML =
         (pName ? '<div class="cell wide"><i>PLANET</i><b>' + esc(pName) + '</b>' + (pSub ? '<span>' + esc(pSub) + '</span>' : '') + '</div>' : '') +
-        cell('STAR', cap(star)) + cell('RACE', (hv && hv.lifeform) || gen.race) +
-        cell('ECONOMY', econ, tier) + cell('CONFLICT', (hv && hv.conflict) || gen.conflict, gen.outlaw && !hv ? 'Outlaw system' : '') +
+        cell('STAR', cap(star)) + cell('RACE', pickF(mp && mp.race, hv && hv.lifeform, gen.race)) +
+        cell('ECONOMY', econ, tier) + cell('CONFLICT', pickF(mp && mp.conflict, hv && hv.conflict, gen.conflict), outlaw ? 'Outlaw system' : '') +
         (hp && hp.sentinels ? cell('SENTINELS', hp.sentinels) : '') + (hp && hp.resources ? cell('RESOURCES', hp.resources) : '');
       $('facts').hidden = false;
-      $('src').innerHTML = hv ? '✓ Charted on <a href="' + esc(hv.url) + '" target="_blank" rel="noopener">Voyager\'s Haven</a>' + (hv.discoveredBy ? ' · found by ' + esc(hv.discoveredBy) : '')
+      var mapUrl = MAP + '/?arrival=1&addr=1' + hex.slice(1) + '&galaxy=' + g;
+      $('src').innerHTML = mp ? '✓ Charted on the <a href="' + esc(mapUrl) + '" target="_blank" rel="noopener">Galactic Map</a>' + (mp.editorName ? ' · by ' + esc(mp.editorName) : '') + (hv ? ' and Voyager\'s Haven' : '')
+        : hv ? '✓ Charted on <a href="' + esc(hv.url) + '" target="_blank" rel="noopener">Voyager\'s Haven</a>' + (hv.discoveredBy ? ' · found by ' + esc(hv.discoveredBy) : '')
         : (gen.name ? 'Worked out from your glyphs. If a traveller renamed it, the game shows their name.' : (navigator.onLine === false ? 'Offline. Your glyphs still work; system details load when you\'re back online.' : 'Couldn\'t reach the Galactic Map for system details. Tap Refresh to try again.'));
-      $('acts').innerHTML = '<a class="btn" href="' + MAP + '/?arrival=1&addr=' + hex + '&galaxy=' + g + '" target="_blank" rel="noopener">Open in Galactic Map ↗</a>' +
-        (EMBED ? '' : '<button class="btn ghost" id="rf" type="button">Refresh</button>');
+      $('acts').innerHTML = '<a class="btn" href="' + esc(mapUrl) + '" target="_blank" rel="noopener">Open in Galactic Map ↗</a>' +
+        (EMBED ? '' : '<button class="btn ghost" id="rf" type="button">Refresh</button>') +
+        (EMBED ? '' : '<p class="fix">Something wrong or missing? Open it on the Galactic Map, tap <b>Edit</b> and fix it there, then tap Refresh here.</p>');
       if ($('rf')) $('rf').onclick = function(){ lookup(hex, g, true); };
-      if (!EMBED && (!info.gen || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5)) lookup(hex, g);
+      if (!EMBED && stale(info)) lookup(hex, g);
     };
 
     $('pad').onclick = function(e){
