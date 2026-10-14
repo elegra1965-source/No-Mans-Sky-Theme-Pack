@@ -695,7 +695,7 @@
         <span><b>17</b> wallpapers</span>
         <span><b>5</b> charging clips</span>
         <span><b>100%</b> free</span>
-        <span>⬇ <b id="dlCount">500+</b> downloads</span>
+        <span id="dlStat"><b>No</b> account needed</span>
       </div>
       <a class="sister-link-btn" href="#sisters" onclick="var d=document.getElementById('sistersAcc');if(d)d.open=true;">⟁ More elegra1965 NMS projects</a>
     </div>
@@ -1579,10 +1579,12 @@
   }
 
   // ── Download counter (2026-10-14: countapi.xyz shut down; now the map site's dl-count function) ──
-  var DL_BASE = 500, DL_API = 'https://map.nomansskyhub.app/.netlify/functions/dl-count';
+  // Real count only (no made-up base). Until it reaches DL_SHOW it shows a true line instead,
+  // so the page never shows a tiny number or an invented one.
+  var DL_SHOW = 50, DL_API = 'https://map.nomansskyhub.app/.netlify/functions/dl-count';
   function updateDlDisplay(val){
-    var el=document.getElementById('dlCount');
-    if(el) el.textContent=(val+DL_BASE).toLocaleString()+'+';
+    var el=document.getElementById('dlStat'); if(!el || !(val >= DL_SHOW)) return;
+    el.innerHTML='⬇ <b>'+Number(val).toLocaleString()+'</b> downloads since Oct 2026';
   }
   fetch(DL_API).then(function(r){return r.json();})
     .then(function(d){ if(d && d.ok) updateDlDisplay(d.value||0); }).catch(function(){});

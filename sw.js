@@ -1,5 +1,5 @@
 // NMS Icon Pack — Service Worker v9.0
-const CACHE = 'nms-icon-pack-v29';
+const CACHE = 'nms-icon-pack-v30';
 
 // 2026-10-14: downloads (zips, videos, fonts, xml) are never kept in the app's cache -- they already
 // go to the phone's Downloads folder, so caching them too doubled the storage the app used.
