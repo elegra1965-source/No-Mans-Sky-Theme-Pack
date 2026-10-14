@@ -1,5 +1,10 @@
 // NMS Icon Pack — Service Worker v9.0
-const CACHE = 'nms-icon-pack-v25';
+const CACHE = 'nms-icon-pack-v26';
+
+// 2026-10-14: downloads (zips, videos, fonts, xml) are never kept in the app's cache -- they already
+// go to the phone's Downloads folder, so caching them too doubled the storage the app used.
+const NO_CACHE_RE = /\.(zip|mp4|webm|mov|ttf|otf|xml|apk)(\?|$)/i;
+const MAX_CACHE_BYTES = 1.5 * 1024 * 1024; // anything bigger than this is fetched fresh, not stored
 
 const CORE_FILES = [
   '/',
@@ -23,11 +28,15 @@ self.addEventListener('install', e => {
 
 // Activate — clean old caches
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    )
-  );
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    // Give back space taken by downloads an older version of this worker cached.
+    try {
+      const c = await caches.open(CACHE);
+      for (const req of await c.keys()) if (NO_CACHE_RE.test(req.url)) await c.delete(req);
+    } catch (err) {}
+  })());
   self.clients.claim();
 });
 
@@ -51,12 +60,16 @@ self.addEventListener('fetch', e => {
     return;
   }
 
+  // Downloads: straight from the network, never stored in the app cache.
+  if (NO_CACHE_RE.test(e.request.url)) return;
+
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
       return fetch(e.request).then(response => {
         // Cache successful responses
-        if (response && response.status === 200 && response.type === 'basic') {
+        const len = +(response && response.headers.get('content-length')) || 0;
+        if (response && response.status === 200 && response.type === 'basic' && len <= MAX_CACHE_BYTES) {
           const clone = response.clone();
           caches.open(CACHE).then(cache => cache.put(e.request, clone));
         }

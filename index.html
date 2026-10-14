@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex">
 <script>/* the old *.netlify.app address is retired: one family domain so the Traveller ID cookie reaches every app */if(/\.netlify\.app$/.test(location.hostname))location.replace("https://theme.nomansskyhub.app"+location.pathname+location.search+location.hash);</script>
 <script>/* visitor stats: GoatCounter (free, no cookies), same dashboard as the Hub; pages are recorded as host/path */(function(){if(!/(^|\.)nomansskyhub\.app$/.test(location.hostname))return;window.goatcounter={path:function(p){return location.host+p}};var s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.setAttribute("data-goatcounter","https://nomansskyhub.goatcounter.com/count");document.head.appendChild(s);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -562,6 +563,83 @@
 </style>
 <link rel="stylesheet" href="polish.css">
 <link rel="stylesheet" href="studio.css">
+
+<style>
+/* ===== 2026-10-14 preview additions ===== */
+.phone-clock .t{letter-spacing:.08em;}
+.phone-screen.living{transition:background-image .9s ease;}
+.phone-screen .app .ico img{transition:opacity .45s ease,transform .45s ease;}
+.phone-screen .app .ico img.swap{opacity:0;transform:scale(.7);}
+.req-line{margin:14px 0 0;text-align:center;font-size:.92rem;color:var(--text-faint);}
+.req-line a{color:var(--cyan);text-decoration:none;border-bottom:1px dashed rgba(0,229,255,.4);}
+.req-box{margin-top:16px;padding:14px 16px;border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--panel);}
+.req-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;}
+.req-row .cov{font-size:.92rem;color:var(--text-dim);}
+.req-row .cov b{color:var(--gold);font-family:'Orbitron',monospace;letter-spacing:.08em;}
+.req-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:var(--r-sm);border:1px solid rgba(0,229,255,.4);
+  background:rgba(0,229,255,.08);color:var(--cyan);font-family:'Orbitron',monospace;font-size:.66rem;letter-spacing:1px;text-decoration:none;cursor:pointer;}
+.req-form{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.req-form input{flex:1;min-width:160px;padding:9px 12px;border-radius:var(--r-sm);border:1px solid var(--border-soft);background:rgba(0,0,0,.3);color:var(--white);font-family:inherit;font-size:.95rem}
+.req-box details{margin-top:10px}
+.req-box summary{cursor:pointer;color:var(--text-faint);font-size:.88rem}
+.cov-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cov-chips span{font-size:.78rem;padding:4px 9px;border-radius:100px;border:1px solid rgba(0,229,255,.2);color:var(--text-dim);background:rgba(0,229,255,.04)}
+.dl{position:relative}
+.dl-done{position:absolute;top:8px;right:10px;font-family:'Orbitron',monospace;font-size:.52rem;letter-spacing:1px;color:var(--green,#42e88a)}
+.dl-again{grid-column:1/-1;margin-top:-4px;padding:10px 14px;border-radius:var(--r-sm);border:1px solid rgba(240,165,0,.35);background:rgba(240,165,0,.07);font-size:.9rem;color:var(--text-dim)}
+.dl-again button{margin-left:8px;padding:5px 10px;border-radius:6px;border:1px solid rgba(240,165,0,.5);background:transparent;color:var(--gold);font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:1px;cursor:pointer}
+.parts{margin-top:14px;border:1px solid var(--border-soft);border-radius:var(--radius);padding:12px 14px;background:var(--panel)}
+.parts summary{cursor:pointer;font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:1.5px;color:var(--cyan)}
+.parts .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px 14px;margin-top:12px}
+.parts h4{font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:2px;color:var(--gold);margin:4px 0 6px;text-transform:uppercase}
+.parts a{display:flex;justify-content:space-between;gap:10px;padding:7px 10px;border-radius:8px;border:1px solid rgba(0,229,255,.14);
+  color:var(--text);text-decoration:none;font-size:.9rem;margin-bottom:6px;background:rgba(0,229,255,.03)}
+.parts a span{color:var(--text-faint);font-size:.8rem;white-space:nowrap}
+.parts p{font-size:.85rem;color:var(--text-faint);margin-top:6px}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:6px 0 14px}
+@media(max-width:600px){.wgrid{grid-template-columns:1fr 1fr;gap:8px}.wcard{padding:10px 10px 24px}.wcard .wt{font-size:1.15rem}.wcard .ws{font-size:.76rem}}
+.wcard{display:block;text-decoration:none;color:var(--text);border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--panel);padding:14px 14px 26px;position:relative;overflow:hidden}
+.wcard:hover{border-color:rgba(0,229,255,.45)}
+.wcard .wk{font-family:'Orbitron',monospace;font-size:.56rem;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase}
+.wcard .wt{font-family:'Orbitron',monospace;font-size:1.6rem;color:var(--white);letter-spacing:.1em;margin:6px 0 2px;font-weight:700;text-shadow:0 0 14px rgba(0,229,255,.35)}
+.wcard .ws{font-size:.85rem;color:var(--text-faint)}
+.wcard .wbar{height:7px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden;margin:8px 0 4px}
+.wcard .wbar i{display:block;height:100%;width:72%;background:linear-gradient(90deg,var(--cyan),var(--gold))}
+.wcard .wg{display:flex;flex-wrap:wrap;gap:2px;margin:8px 0 4px}
+.wcard .wg img{width:calc((100% - 22px)/12);max-width:18px;height:auto}
+.wcard .wgo{position:absolute;right:12px;bottom:10px;font-family:'Orbitron',monospace;font-size:.56rem;letter-spacing:1px;color:var(--cyan)}
+.kwgt-adv{margin-top:8px;border:1px solid var(--border-soft);border-radius:var(--radius);padding:12px 14px}
+.kwgt-adv>summary{cursor:pointer;font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:1.5px;color:var(--text-dim)}
+.kwgt-adv[open]>summary{margin-bottom:12px}
+</style>
+<style>
+/* pills sit under the phone instead of over its edge */
+.phone-stage{flex-direction:column;align-items:center;}
+.phone-pills{position:static;flex-direction:row;flex-wrap:wrap;justify-content:center;margin-top:18px;right:auto;top:auto;}
+/* drone stops while the mouse is over its strip (or it has keyboard focus), so it's easy to click */
+.hub-flyer:hover .flyer-move,.flyer-move:focus-visible{animation-play-state:paused;}
+.hub-flyer:hover .flyer-banner{animation-play-state:paused;}
+.hub-flyer:hover .flyer-banner.right,.hub-flyer:hover .flyer-banner.left{opacity:0;}
+.flyer-move:hover .flyer-banner.right{opacity:1;}
+.nav-links a,.brand{white-space:nowrap;}
+@media(max-width:1340px){.nav-links{gap:2px}.nav-links a{letter-spacing:1.2px;padding-left:7px;padding-right:7px}.brand{font-size:.68rem;letter-spacing:2px}}
+.flyer-move:hover .flyer-drone img{filter:drop-shadow(0 0 10px rgba(0,229,255,.9)) drop-shadow(0 0 3px rgba(0,229,255,1));}
+</style>
+<style>
+.wpop{position:fixed;left:0;top:0;z-index:9999;width:250px;padding:10px 10px 8px;border-radius:24px;background:#05080d;border:1px solid rgba(0,229,255,.4);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 18px 50px rgba(0,0,0,.65),0 0 30px rgba(0,229,255,.15);opacity:0;pointer-events:none;transform:translateY(6px) scale(.97);transition:opacity .18s,transform .18s}
+.wpop.on{opacity:1;pointer-events:auto;transform:none}
+.wpop-phone{width:228px;height:408px;border-radius:16px;overflow:hidden;background:#070b11;border:1px solid rgba(0,229,255,.15)}
+.wpop iframe{width:380px;height:680px;border:0;transform:scale(.6);transform-origin:0 0;pointer-events:none;display:block}
+.wpop-bar{display:flex;align-items:center;gap:10px;margin-top:8px;padding:0 4px;font-family:'Orbitron',monospace;font-size:.58rem;letter-spacing:1.5px}
+.wpop-t{flex:1;color:var(--gold);text-transform:uppercase}
+.wpop-open{color:var(--cyan);text-decoration:none}
+.wpop-x{display:none;background:none;border:0;color:var(--text-faint);font-size:.9rem;cursor:pointer;padding:2px 4px}
+.wpop.sheet{left:50%;top:50%;transform:translate(-50%,-46%) scale(.97)}
+.wpop.sheet.on{transform:translate(-50%,-50%)}
+.wpop.sheet .wpop-x{display:block}
+.wpop.sheet .wpop-open{border:1px solid rgba(0,229,255,.4);border-radius:8px;padding:7px 10px}
+</style>
 </head>
 <body>
 
@@ -579,6 +657,7 @@
     <div class="nav-links">
       <a href="preview.html" target="_blank" rel="noopener">Preview</a>
       <a href="#studio">Make it yours</a>
+      <a href="#widgets" onclick="var d=document.querySelector('#widgets details');if(d)d.open=true;">Widgets</a>
       <a href="#alphabet">Font</a>
       <a href="#downloads">Downloads</a>
       <a href="#sisters">Sisters</a>
@@ -605,7 +684,7 @@
       <div class="trust">
         <span><b>76</b> icons</span>
         <span><b>5</b> platforms</span>
-        <span><b>33</b> wallpapers</span>
+        <span><b>17</b> wallpapers</span>
         <span><b>5</b> charging clips</span>
         <span><b>100%</b> free</span>
         <span>⬇ <b id="dlCount">500+</b> downloads</span>
@@ -649,6 +728,37 @@
     </summary>
     <p class="sec-desc">Put your Traveller name and home portal glyphs on a wallpaper, wear one of today's real player-charted planets from the Weather Station, or keep a live expedition countdown on your home screen. Made on your device, free.</p>
     <div class="st-root"></div>
+    </details>
+  </div>
+</section>
+
+
+<!-- WIDGETS (2026-10-14) -->
+<section class="sec" id="widgets">
+  <div class="wrap">
+    <details class="sec-accordion">
+    <summary class="sec-summary">
+    <div class="sum-inner">
+      <span class="acc-dot"></span>
+      <span class="acc-kicker">New</span>
+      <span class="acc-divider"></span>
+      <div class="acc-title-col"><h2 class="sec-title">Widgets</h2></div>
+      <span class="acc-corner-tl"></span>
+      <span class="acc-corner-br"></span>
+      <div class="acc-arrow-box"><span class="acc-arrow">▾</span></div>
+    </div>
+    </summary>
+      <p style="font-size:.92rem;color:var(--text-faint);margin-bottom:12px;">Ready-made NMS widgets — nothing extra to install. Open one, then use your browser's <strong>Add to Home screen</strong> and it opens straight to that widget, live. Works on Android, iPhone and desktop.</p>
+      <div class="wgrid">
+        <a class="wcard" href="widgets.html?w=clock" target="_blank" rel="noopener"><div class="wk">NMS Clock</div><div class="wt" id="wPrevT">15:34</div><div class="ws">Big clock and date, with a line of alien text that decodes</div><span class="wgo">OPEN ↗</span></a>
+        <a class="wcard" href="widgets.html?w=status" target="_blank" rel="noopener"><div class="wk">Exosuit Status</div><div class="ws" style="margin-top:6px">Life support</div><div class="wbar"><i></i></div><div class="ws">Clock, date and your battery as life support</div><span class="wgo">OPEN ↗</span></a>
+        <a class="wcard" href="widgets.html?w=weather" target="_blank" rel="noopener"><div class="wk">Planet Scan</div><div class="wt">14°</div><div class="ws">Your local weather as a planetary scan, with hazard level</div><span class="wgo">OPEN ↗</span></a>
+        <a class="wcard" href="widgets.html?w=portal" target="_blank" rel="noopener"><div class="wk">Home Portal</div><div class="wg"><img src="assets/studio/glyphs/g-1.png" alt=""><img src="assets/studio/glyphs/g-0.png" alt=""><img src="assets/studio/glyphs/g-A.png" alt=""><img src="assets/studio/glyphs/g-3.png" alt=""><img src="assets/studio/glyphs/g-F.png" alt=""><img src="assets/studio/glyphs/g-2.png" alt=""><img src="assets/studio/glyphs/g-B.png" alt=""><img src="assets/studio/glyphs/g-9.png" alt=""><img src="assets/studio/glyphs/g-C.png" alt=""><img src="assets/studio/glyphs/g-4.png" alt=""><img src="assets/studio/glyphs/g-E.png" alt=""><img src="assets/studio/glyphs/g-1.png" alt=""></div><div class="ws">Your home glyphs, plus the system, planet, race and economy</div><span class="wgo">OPEN ↗</span></a>
+        <a class="wcard" href="countdown.html" target="_blank" rel="noopener"><div class="wk">Expedition</div><div class="wt" style="font-size:1.2rem">12d 04h</div><div class="ws">Time left in the current expedition</div><span class="wgo">OPEN ↗</span></a>
+      </div>
+      <div class="req-box" style="margin:0 0 14px"><div class="req-row"><span class="cov"><b>5</b> widgets ready, with more to come</span><button type="button" class="req-btn" id="wreqOpen">＋ Request a widget</button></div><div class="req-form" id="wreqForm" hidden><input id="wreqApp" maxlength="80" placeholder="What should it show? e.g. Nanite balance"><a class="req-btn" id="wreqSend" href="https://github.com/elegra1965-source/No-Mans-Sky-Theme-Pack/issues/new?labels=widget-request&title=Widget%20request%3A%20" target="_blank" rel="noopener">Send request ↗</a></div><details><summary>Show the 5 widgets already made</summary><div class="cov-chips"><span>NMS Clock</span><span>Exosuit Status</span><span>Planet Scan</span><span>Home Portal</span><span>Expedition</span></div></details><p style="font-size:.82rem;color:var(--text-faint);margin-top:8px">Requests go to the pack's GitHub page. Most-requested widgets get built first.</p></div>
+<script>(function(){var o=document.getElementById("wreqOpen"),f=document.getElementById("wreqForm"),i=document.getElementById("wreqApp"),s=document.getElementById("wreqSend");o.onclick=function(){f.hidden=!f.hidden;if(!f.hidden)i.focus();};i.oninput=function(){s.href="https://github.com/elegra1965-source/No-Mans-Sky-Theme-Pack/issues/new?labels=widget-request&title="+encodeURIComponent("Widget request: "+i.value)+"&body="+encodeURIComponent("Widget idea: "+i.value+"\nWhat it should show: ");};})();</script>
+      <div class="note" style="margin-top:0">💡 These are live mini-apps on your home screen. A real resizable widget that sits <em>on</em> the home screen needs either KWGT (How to apply → Widgets tab) or a proper app from the Play Store.</div>
     </details>
   </div>
 </section>
@@ -767,7 +877,7 @@
       <p class="sec-desc">A complete sci-fi customization suite — not just icons. All free, no account, works offline once installed.</p>
     <div class="features">
       <div class="feature"><span class="fi">🛸</span><h3>76 Themed Icons</h3><p>Hand-built No Man's Sky icons, each exported in multiple sizes as transparent PNGs — ready for Android, iPhone, Windows, Mac &amp; Linux. A curated set inspired by NMS characters, ships and lore — not a full app replacement, but a distinctive themed highlight pack.</p></div>
-      <div class="feature"><span class="fi">🖼️</span><h3>Wallpaper Pack</h3><p>33 wallpapers across 6 resolutions for phone and desktop, tuned to the palette.</p></div>
+      <div class="feature"><span class="fi">🖼️</span><h3>Wallpaper Pack</h3><p>17 wallpapers across 6 resolutions for phone and desktop, tuned to the palette.</p></div>
       <div class="feature"><span class="fi">⚡</span><h3>Charging Animations</h3><p>5 watermark-free MP4 charging screens for Android &amp; iOS.</p></div>
       <div class="feature"><span class="fi">🔤</span><h3>Custom Alien Font</h3><p>The NMS-style alphabet as an installable TTF — type in alien script anywhere.</p></div>
       <div class="feature"><span class="fi">📖</span><h3>Setup Guides</h3><p>Step-by-step guides for Android, iPhone, Mac &amp; Windows, plus a launcher mapping file.</p></div>
@@ -883,6 +993,8 @@
         <div class="icon-tile" role="listitem" data-name="nms_lore_21_harmonic_seal.png" title="Harmonic Seal"><img loading="lazy" src="assets/icons/nms_lore_21_harmonic_seal.png" alt="Harmonic Seal"></div>
         <div class="icon-tile" role="listitem" data-name="nms_lore_22_mission_portal.png" title="Mission Portal"><img loading="lazy" src="assets/icons/nms_lore_22_mission_portal.png" alt="Mission Portal"></div>
     </div>
+    <div class="req-box"><div class="req-row"><span class="cov">Ready-mapped for <b>40</b> popular apps on Android launchers</span><button type="button" class="req-btn" id="reqOpen">＋ Request an icon</button></div><div class="req-form" id="reqForm" hidden><input id="reqApp" maxlength="60" placeholder="Which app? e.g. Duolingo"><a class="req-btn" id="reqSend" href="https://github.com/elegra1965-source/No-Mans-Sky-Theme-Pack/issues/new?labels=icon-request&title=Icon%20request%3A%20&body=App%20name%3A%20%0AStore%20link%20(optional)%3A%20" target="_blank" rel="noopener">Send request ↗</a></div><details><summary>Show the 40 apps already covered</summary><div class="cov-chips"><span>Amazon</span><span>Apple Music</span><span>Calculator</span><span>Calendar</span><span>Camera</span><span>Chrome</span><span>Clock</span><span>Discord</span><span>Disney+</span><span>Drive</span><span>Excel</span><span>Files</span><span>Gmail</span><span>Google Fit</span><span>Instagram</span><span>Keep</span><span>Maps</span><span>Messages</span><span>Netflix</span><span>Outlook</span><span>Phone</span><span>Photos</span><span>Play Store</span><span>Podcast Addict</span><span>Reddit</span><span>Samsung Health</span><span>Settings</span><span>Snapchat</span><span>Spotify</span><span>Steam</span><span>Telegram</span><span>TikTok</span><span>VLC</span><span>Wallet</span><span>Waze</span><span>WhatsApp</span><span>Word</span><span>X (Twitter)</span><span>YouTube</span><span>YouTube Music</span></div></details><p style="font-size:.82rem;color:var(--text-faint);margin-top:8px">Requests go to the pack's GitHub page. Most-requested apps get added in batches.</p></div>
+<script>(function(){var o=document.getElementById("reqOpen"),f=document.getElementById("reqForm"),i=document.getElementById("reqApp"),s=document.getElementById("reqSend");o.onclick=function(){f.hidden=!f.hidden;if(!f.hidden)i.focus();};i.oninput=function(){s.href="https://github.com/elegra1965-source/No-Mans-Sky-Theme-Pack/issues/new?labels=icon-request&title="+encodeURIComponent("Icon request: "+i.value)+"&body="+encodeURIComponent("App name: "+i.value+"\nStore link (optional): ");};})();</script>
     </details>
   </div>
 </section>
@@ -976,6 +1088,8 @@
     </div>
 
     <div id="tab-widgets" class="tab-panel">
+      <p style="font-size:.92rem;color:var(--text-faint);margin-bottom:12px;">Want a widget without installing anything? <a href="#widgets" style="color:var(--cyan)" onclick="var d=document.querySelector('#widgets details');if(d)d.open=true;">Ready-made widgets are in the Widgets section ↑</a>. This tab is the advanced route: build your own home-screen widget with KWGT.</p>
+      <details class="kwgt-adv" open><summary>Advanced: build your own home-screen widget with KWGT (Android)</summary>
       <p style="font-size:.92rem;color:var(--text-faint);margin-bottom:16px;">Add an actual NMS-styled clock/date widget to your home screen using <strong>KWGT</strong> (free) and the <strong>Widget Kit</strong> download below — two transparent frames, both fonts (Orbitron + the NMS alien alphabet), and the exact colors to match.</p>
       <img src="assets/widgets/nms_widget_kit_preview.png" alt="Example NMS-styled clock and date widget built with the Widget Kit and KWGT" loading="lazy" style="width:100%;max-width:640px;display:block;margin:0 auto 16px;border-radius:var(--radius);border:1px solid var(--border-soft);">
       <a href="https://play.google.com/store/apps/details?id=org.kustom.widget" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cyan),#0090ff);color:#00131a;font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:1px;text-decoration:none;padding:10px 16px;border-radius:var(--r-sm);font-weight:700;margin-bottom:18px;">▶ Get KWGT — Google Play (free)</a>
@@ -987,6 +1101,7 @@
       </div>
       <div class="note">💡 Full step-by-step — plus a real on/off Settings toggle for the NMS alien font, and how to export your finished widget as a reusable <code>.kwgt</code> file — is inside the Widget Kit zip.</div>
       <div class="note">⚠️ KWGT is Android-only — there's no direct iOS equivalent that works the same way (image + freely-placed text). iOS widget apps use Apple's own WidgetKit system instead.</div>
+      </details>
     </div>
     </details>
   </div>
@@ -1016,8 +1131,8 @@
       </a>
       <a class="dl" href="assets/NMS_wallpaper_pack_MOBILE.zip" download>
         <div class="dl-ico">🖼️</div>
-        <div class="dl-txt"><span class="dl-title">Wallpapers <span class="dl-tag">Mobile</span></span><span class="dl-desc">33 wallpapers · phone &amp; iPhone resolutions only</span></div>
-        <span class="dl-size">~11.5 MB</span>
+        <div class="dl-txt"><span class="dl-title">Wallpapers <span class="dl-tag">Mobile</span></span><span class="dl-desc">17 wallpapers · phone &amp; iPhone resolutions only</span></div>
+        <span class="dl-size">~13 MB</span>
       </a>
       <a class="dl" href="assets/NMS_Charging_Animations.zip" download>
         <div class="dl-ico">⚡</div>
@@ -1053,8 +1168,8 @@
       </a>
       <a class="dl" href="assets/NMS_wallpaper_pack_DESKTOP.zip" download>
         <div class="dl-ico">🖼️</div>
-        <div class="dl-txt"><span class="dl-title">Wallpapers <span class="dl-tag dl-tag-desk">Desktop</span></span><span class="dl-desc">33 wallpapers · 720p / 1080p / 1440p / 4K</span></div>
-        <span class="dl-size">~32.8 MB</span>
+        <div class="dl-txt"><span class="dl-title">Wallpapers <span class="dl-tag dl-tag-desk">Desktop</span></span><span class="dl-desc">17 wallpapers · 720p / 1080p / 1440p / 4K</span></div>
+        <span class="dl-size">~37 MB</span>
       </a>
       <a class="dl" href="assets/windows-icons.zip" download>
         <div class="dl-ico">🪟</div>
@@ -1067,6 +1182,26 @@
         <span class="dl-size">XML</span>
       </a>
     </div>
+
+    <details class="parts">
+      <summary>Short on space? Grab just the parts you need</summary>
+      <div class="pgrid">
+        <div><h4>Icons — pick one size</h4>
+          <a href="assets/parts/NMS_icons_phone_128px.zip" download>Phone size · 128px <span>2.5 MB</span></a>
+          <a href="assets/parts/NMS_icons_small_64px.zip" download>Small · 64px <span>1.7 MB</span></a>
+          <a href="assets/parts/NMS_icons_large_256px.zip" download>Large · 256px <span>4.7 MB</span></a></div>
+        <div><h4>Phone wallpapers</h4>
+          <a href="assets/parts/NMS_wallpapers_android_1080x1920.zip" download>Android · 1080×1920 <span>5.5 MB</span></a>
+          <a href="assets/parts/NMS_wallpapers_iphone.zip" download>iPhone <span>7.5 MB</span></a></div>
+        <div><h4>Charging animations — one at a time</h4>
+          <a href="assets/parts/charging_1.mp4" download>Animation 1 <span>8.8 MB</span></a>
+          <a href="assets/parts/charging_2.mp4" download>Animation 2 <span>1.9 MB</span></a>
+          <a href="assets/parts/charging_3.mp4" download>Animation 3 <span>2.1 MB</span></a>
+          <a href="assets/parts/charging_4.mp4" download>Animation 4 <span>3.7 MB</span></a>
+          <a href="assets/parts/charging_5.mp4" download>Animation 5 <span>1.6 MB</span></a></div>
+      </div>
+      <p>Each part is the same files as the full packs above, just split up so you only keep what you use. Once you've set an icon or wallpaper you can delete the zip.</p>
+    </details>
     </details>
   </div>
 </section>
@@ -1181,7 +1316,7 @@
         <li>Expedition countdown: live time left in the current expedition, as a home-screen widget page</li>
       </ul></div>
       <div class="clog"><div class="ver">v2.1</div><ul>
-        <li>Wallpaper pack expanded to 33 designs (6 resolutions each)</li>
+        <li>Wallpaper pack expanded with 14 new designs (6 resolutions each)</li>
         <li>Favicon added — NMS diamond icon in browser tab</li>
         <li>Floating back-to-top button on all pages</li>
         <li>Windows .ICO icons download card added</li>
@@ -1497,5 +1632,123 @@
 <script src="polish.js" defer></script>
 <script src="expedition.js" defer></script>
 <script src="studio.js" defer></script>
+
+<script>
+/* ===== 2026-10-14 preview: living phone (hero demo without a video file) =====
+   Cycles the phone wallpaper through 4 of the pack's own backgrounds and swaps a few
+   icons every few seconds, so the hero shows the pack "in use". Images load one at a time,
+   only while the hero is on screen, and it stops for reduced-motion users. */
+(function(){
+  var scr = document.getElementById('phoneScreen'); if (!scr) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var BG = ['01','04','07','10'].map(function(n){ return 'assets/studio/bg-' + n + '-phone.jpg'; });
+  var POOL = ['nms_lore_11_gek','nms_lore_13_vy_keen','nms_lore_14_apollo','nms_lore_15_artemis','nms_lore_20_the_construct',
+    'nms_lore_22_mission_portal','nms_36_camera_drone','nms_43_horse_mech','nms_49_helmet_teal','nms_52_tree_head',
+    'nms_05_diamond_gold','nms_10_diamond_green','nms_28_wing_orange','nms_33_logo_gold','nms_44_frog_head','nms_48_brain_alien'];
+  var i = 0, visible = true, timer = null;
+  scr.classList.add('living');
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }).observe(scr);
+  function step(){
+    if (!visible || document.hidden) return;
+    var src = BG[i % BG.length], im = new Image();
+    im.onload = function(){ scr.style.backgroundImage = 'linear-gradient(rgba(7,11,17,.25),rgba(7,11,17,.55)),url(' + src + ')'; };
+    im.src = src;
+    var icons = scr.querySelectorAll('.app .ico img');
+    [0,1,2].forEach(function(k){
+      var el = icons[(i * 3 + k * 4) % icons.length]; if (!el) return;
+      var nx = 'assets/icons/' + POOL[(i * 3 + k) % POOL.length] + '.png';
+      el.classList.add('swap'); setTimeout(function(){ el.src = nx; el.classList.remove('swap'); }, 450);
+    });
+    i++;
+  }
+  setTimeout(function(){ step(); timer = setInterval(step, 4200); }, 2500);
+})();
+</script>
+
+<script>
+/* ===== 2026-10-14 preview: remember downloads so people don't fill their phone with copies =====
+   Each download remembers when it was taken (on this device only). Tapping it again asks first,
+   because the file is already in the Downloads folder and a second tap makes "file (1).zip". */
+(function(){
+  var KEY = 'nms-dl-done';
+  var get = function(){ try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ return {}; } };
+  var put = function(o){ try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e){} };
+  var fmt = function(t){ var d = new Date(t); return d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]; };
+  function mark(a, t){
+    var b = a.querySelector('.dl-done');
+    if (!b){ b = document.createElement('span'); b.className = 'dl-done'; a.appendChild(b); }
+    b.textContent = '✓ ' + fmt(t);
+  }
+  var done = get();
+  document.querySelectorAll('a[download]').forEach(function(a){
+    var k = a.getAttribute('href');
+    if (done[k]) mark(a, done[k]);
+    a.addEventListener('click', function(ev){
+      var d = get();
+      if (d[k] && !a._again){
+        ev.preventDefault();
+        var host = a.closest('.btn-grid, .pgrid') || a.parentNode;
+        var old = host.querySelector('.dl-again'); if (old) old.remove();
+        var box = document.createElement('div'); box.className = 'dl-again';
+        box.innerHTML = 'You downloaded this on <b>' + fmt(d[k]) + '</b> — it should already be in your <b>Downloads</b> folder.';
+        var go = document.createElement('button'); go.type = 'button'; go.textContent = 'Download again';
+        go.onclick = function(){ a._again = true; a.click(); a._again = false; box.remove(); };
+        box.appendChild(go);
+        a.insertAdjacentElement('afterend', box);
+        return;
+      }
+      d[k] = Date.now(); put(d); mark(a, d[k]);
+    });
+  });
+})();
+</script>
+<script>
+/* Widgets: hovering a card shows the real widget running in a little phone. On touch screens a tap shows it, with an Open button. */
+(function(){
+  var cards = document.querySelectorAll('#widgets .wcard'); if (!cards.length) return;
+  var pop = document.createElement('div'); pop.className = 'wpop';
+  pop.innerHTML = '<div class="wpop-phone"><iframe title="Widget preview" tabindex="-1" aria-hidden="true"></iframe></div>' +
+    '<div class="wpop-bar"><span class="wpop-t"></span><a class="wpop-open" target="_blank" rel="noopener">Open ↗</a><button type="button" class="wpop-x" aria-label="Close preview">✕</button></div>';
+  document.body.appendChild(pop);
+  var fr = pop.querySelector('iframe'), cur = null, hideT = 0, showT = 0;
+  var hover = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if (!hover) pop.classList.add('sheet');
+  var place = function(a){
+    if (!hover) return;
+    var r = a.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight, x = r.right + 12;
+    if (x + w > innerWidth - 8) x = r.left - w - 12;
+    if (x < 8) x = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2));
+    var y = Math.max(8, Math.min(innerHeight - h - 8, r.top + r.height / 2 - h / 2));
+    pop.style.left = x + 'px'; pop.style.top = y + 'px';
+  };
+  var show = function(a){
+    clearTimeout(hideT);
+    if (cur !== a){
+      cur = a; var h = a.getAttribute('href'), s = h + (h.indexOf('?') < 0 ? '?' : '&') + 'embed=1';
+      if (fr.getAttribute('src') !== s) fr.setAttribute('src', s);
+      pop.querySelector('.wpop-t').textContent = a.querySelector('.wk').textContent;
+      pop.querySelector('.wpop-open').href = h;
+    }
+    place(a); pop.classList.add('on');
+  };
+  var hide = function(){ pop.classList.remove('on'); cur = null; };
+  cards.forEach(function(a){
+    if (hover){
+      a.addEventListener('mouseenter', function(){ clearTimeout(hideT); clearTimeout(showT); showT = setTimeout(function(){ show(a); }, 160); });
+      a.addEventListener('mouseleave', function(){ clearTimeout(showT); hideT = setTimeout(hide, 160); });
+      a.addEventListener('focus', function(){ show(a); });
+      a.addEventListener('blur', function(){ hideT = setTimeout(hide, 160); });
+    } else {
+      a.addEventListener('click', function(e){ e.preventDefault(); show(a); });
+    }
+  });
+  pop.addEventListener('mouseenter', function(){ clearTimeout(hideT); });
+  pop.addEventListener('mouseleave', function(){ if (hover) hideT = setTimeout(hide, 160); });
+  pop.querySelector('.wpop-x').onclick = hide;
+  document.addEventListener('click', function(e){ if (!hover && cur && !pop.contains(e.target) && !e.target.closest('#widgets .wcard')) hide(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') hide(); });
+  addEventListener('scroll', function(){ if (hover && cur) hide(); }, {passive: true});
+})();
+</script>
 </body>
 </html>

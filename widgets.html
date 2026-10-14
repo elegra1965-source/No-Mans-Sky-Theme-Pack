@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NMS Widgets · No Man's Sky Theme Pack</title>
+<meta name="description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, planet scan weather and your home portal address. Add any of them to your home screen. Free, fan-made.">
+<meta name="theme-color" content="#070b11">
+<script>
+/* Each widget gets its own install name/icon: pick the manifest before the browser reads it. */
+(function(){
+  var W = ['clock','status','weather','portal'];
+  var w = new URLSearchParams(location.search).get('w');
+  if (W.indexOf(w) < 0) w = '';
+  window.NMS_W = w;
+  var l = document.createElement('link'); l.rel = 'manifest';
+  l.href = w ? 'widgets/' + w + '.webmanifest' : 'widgets/widgets.webmanifest';
+  document.head.appendChild(l);
+})();
+</script>
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="pwa/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'NMSAlien';src:url('assets/nms-alphabet.ttf') format('truetype');font-display:swap}
+  :root{--gold:#f0a500;--cyan:#00e5ff;--bg:#070b11;--text:#cfe0f0;--dim:rgba(207,224,240,.6);--white:#eaf6ff;--red:#ff5a4f;--green:#42e88a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%;overflow-x:hidden}
+  body{background:var(--bg);color:var(--text);font-family:Rajdhani,sans-serif;
+    padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom))}
+  .sky{position:fixed;inset:0;z-index:0;background:
+    radial-gradient(60% 45% at 75% 15%,rgba(0,229,255,.14),transparent 70%),
+    radial-gradient(55% 45% at 15% 85%,rgba(240,165,0,.10),transparent 70%),var(--bg)}
+  main{position:relative;z-index:1;max-width:620px;margin:0 auto}
+  .single main{min-height:calc(100vh - 28px);display:grid;place-items:center;grid-template-columns:minmax(0,1fr)}
+  .card{position:relative;width:min(560px,100%);margin:0 auto 18px;text-align:center;padding:clamp(16px,4vw,26px);
+    border:1px solid rgba(0,229,255,.25);border-radius:14px;background:linear-gradient(180deg,rgba(12,20,30,.84),rgba(7,11,17,.9));
+    box-shadow:0 0 40px rgba(0,229,255,.08)}
+  .card:before,.card:after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--cyan)}
+  .card:before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .card:after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .kick{font-family:Orbitron,monospace;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+  .big{font-family:Orbitron,monospace;font-weight:700;color:var(--white);font-size:clamp(46px,17vw,92px);line-height:1;
+    letter-spacing:.1em;font-variant-numeric:tabular-nums;text-shadow:0 0 22px rgba(0,229,255,.4);margin:10px 0 6px}
+  .big small{font-size:.38em;color:var(--dim);letter-spacing:.08em}
+  .mid{font-family:Orbitron,monospace;font-weight:700;color:var(--white);font-size:clamp(30px,10vw,52px);letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;line-height:1}
+  .line{font-family:Orbitron,monospace;font-size:clamp(11px,3.2vw,13px);letter-spacing:2px;color:var(--cyan);text-transform:uppercase;min-height:1.4em}
+  .alien{font-family:NMSAlien,Orbitron,monospace;letter-spacing:3px;text-transform:none}
+  .glitch{animation:gl .25s steps(2) 2}
+  @keyframes gl{0%{transform:translateX(-2px);opacity:.6;filter:hue-rotate(60deg)}50%{transform:translateX(2px)}100%{transform:none;opacity:1;filter:none}}
+  .dec{font-size:.8em;color:var(--gold);margin-left:6px}
+  .sub{font-size:clamp(14px,3.8vw,17px);color:var(--dim)}
+  .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;margin:6px 0}
+  .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold));box-shadow:0 0 12px rgba(0,229,255,.5);transition:width .6s}
+  .bar.low span{background:linear-gradient(90deg,var(--red),var(--gold))}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;text-align:left}
+  .cell{border:1px solid rgba(0,229,255,.18);border-radius:10px;padding:10px 12px;background:rgba(0,229,255,.04)}
+  .cell i{display:block;font-style:normal;font-family:Orbitron,monospace;font-size:10px;letter-spacing:2px;color:var(--dim)}
+  .cell b{display:block;font-family:Orbitron,monospace;font-size:clamp(15px,4.6vw,20px);color:var(--white);letter-spacing:.08em;margin-top:4px}
+  .glyphs{display:flex;justify-content:center;flex-wrap:nowrap;gap:3px;margin:14px 0 8px;width:100%}
+  .glyphs img{flex:1 1 0;min-width:0;max-width:34px;height:auto;filter:drop-shadow(0 0 6px rgba(0,229,255,.35))}
+  .hex{font-family:Orbitron,monospace;font-size:clamp(15px,4.6vw,20px);letter-spacing:.14em;color:var(--white)}
+  input{width:100%;margin-top:8px;padding:10px 12px;border-radius:8px;border:1px solid rgba(0,229,255,.3);background:rgba(0,0,0,.35);
+    color:var(--white);font-family:Orbitron,monospace;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+  .btn{display:inline-block;margin-top:12px;padding:9px 14px;border-radius:8px;border:1px solid rgba(0,229,255,.35);background:rgba(0,229,255,.08);
+    color:var(--cyan);font-family:Orbitron,monospace;font-size:11px;letter-spacing:1.5px;text-decoration:none;cursor:pointer}
+  .btn.gold{border-color:rgba(240,165,0,.45);color:var(--gold);background:rgba(240,165,0,.08)}
+  .foot{margin-top:12px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-family:Orbitron,monospace;font-size:10px;letter-spacing:1.5px}
+  .foot a{color:rgba(0,229,255,.85);text-decoration:none}
+  .hint{margin-top:10px;font-size:13px;color:var(--dim)}
+  @media (display-mode:standalone){.hint,.foot .add{display:none}}
+  .muted{color:var(--dim);font-size:14px}
+  .hazard{color:var(--gold)} .hazard.hot{color:var(--red)} .hazard.cold{color:#7fd4ff}
+  h1{font-family:Orbitron,monospace;color:var(--white);font-size:clamp(18px,5vw,26px);letter-spacing:1px;margin:6px 0 4px}
+  .picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 4px;text-align:left}
+  .pick{display:block;padding:12px;border-radius:10px;border:1px solid rgba(0,229,255,.22);background:rgba(0,229,255,.04);text-decoration:none;color:var(--text)}
+  .pick b{display:block;font-family:Orbitron,monospace;font-size:12px;letter-spacing:1px;color:var(--white)}
+  .pick span{font-size:13px;color:var(--dim)}
+  .embed .foot,.embed .hint,.embed .edit,.embed #scan{display:none!important}
+  .embed body{padding:10px}
+  .sys{font-family:Orbitron,monospace;font-weight:700;color:var(--white);font-size:clamp(19px,6vw,28px);letter-spacing:.06em;margin:10px 0 2px;line-height:1.15}
+  .sys .dot{display:inline-block;width:.5em;height:.5em;border-radius:50%;margin-right:.45em;vertical-align:.12em}
+  .cell span{display:block;font-size:13px;color:var(--dim);margin-top:2px;line-height:1.2}
+  .cell.wide{grid-column:1/-1}
+  .portal .grid2 b{font-size:clamp(13px,4vw,17px);letter-spacing:.05em}
+  .src{margin-top:10px;font-size:13px;color:var(--dim);min-height:1.2em}
+  .src a{color:var(--cyan)}
+  .btn.ghost{background:transparent;margin-left:6px}
+  .edit{margin-top:12px;text-align:left}
+  .edit summary{cursor:pointer}
+  .lb{display:block;margin-top:12px;font-family:Orbitron,monospace;font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
+  .pad{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-top:6px}
+  .pad button{position:relative;aspect-ratio:1;border-radius:8px;border:1px solid rgba(0,229,255,.25);background:rgba(0,229,255,.05);cursor:pointer;padding:5px;display:grid;place-items:center}
+  .pad button:active{background:rgba(0,229,255,.2)}
+  .pad img{width:100%;height:auto;filter:drop-shadow(0 0 4px rgba(0,229,255,.4))}
+  .pad i{position:absolute;right:3px;bottom:1px;font-style:normal;font-family:Orbitron,monospace;font-size:8px;color:var(--dim)}
+  .pad .wide{grid-column:span 4;aspect-ratio:auto;padding:8px;color:var(--cyan);font-family:Orbitron,monospace;font-size:12px;letter-spacing:1px}
+  select{width:100%;margin-top:6px;padding:10px 12px;border-radius:8px;border:1px solid rgba(0,229,255,.3);background:#0b121b;color:var(--white);font-family:Rajdhani,sans-serif;font-size:15px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<main id="app"></main>
+<script>
+(function(){
+  var W = window.NMS_W, app = document.getElementById('app');
+  var EMBED = /[?&]embed=1\b/.test(location.search);
+  if (EMBED) document.documentElement.classList.add('embed');
+  var LS = function(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } };
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var foot = function(){
+    return '<div class="foot"><a href="widgets.html">All widgets</a><a href="index.html#apply">Theme Pack</a>' +
+      '<a href="https://nomansskyhub.app" target="_blank" rel="noopener">NMS Hub</a></div>' +
+      '<p class="hint">Add to your home screen: browser menu → <b>Add to Home screen</b> / <b>Install</b>. It opens straight to this widget.</p>';
+  };
+
+  /* NMS alien text that switches to English and back (~6s alien, ~3s English "· DECODED", glitch on each switch) */
+  function alienLine(el, text){
+    var alien = true;
+    function show(){
+      el.classList.remove('glitch'); void el.offsetWidth; el.classList.add('glitch');
+      if (alien){ el.className = 'line alien glitch'; el.textContent = text; }
+      else { el.className = 'line glitch'; el.innerHTML = ''; el.appendChild(document.createTextNode(text)); var d = document.createElement('span'); d.className='dec'; d.textContent='· DECODED'; el.appendChild(d); }
+      setTimeout(function(){ alien = !alien; show(); }, alien ? 6000 : 3000);
+    }
+    show();
+    return function(t){ text = t; };
+  }
+
+  if (!W){
+    document.title = 'NMS Widgets · Theme Pack';
+    app.innerHTML = '<div class="card"><div class="kick">Theme Pack · Widgets</div><h1>Ready-made NMS widgets</h1>' +
+      '<p class="sub">Pick one, then add it to your home screen. Nothing to install, no extra apps.</p><div class="picker">' +
+      [['clock','NMS Clock','Big clock, date and a line of alien text that decodes'],
+       ['status','Exosuit Status','Clock, date and battery as your life support'],
+       ['weather','Planet Scan','Your local weather as a planetary scan'],
+       ['portal','Home Portal','Your home glyphs, plus the system, planet, race and economy'],
+       ['countdown','Expedition','Time left in the current expedition']].map(function(p){
+         var href = p[0]==='countdown' ? 'countdown.html' : 'widgets.html?w=' + p[0];
+         return '<a class="pick" href="'+href+'"><b>'+p[1]+'</b><span>'+p[2]+'</span></a>';
+       }).join('') + '</div>' + foot() + '</div>';
+    return;
+  }
+  document.body.classList.add('single');
+
+  if (W === 'clock'){
+    document.title = 'NMS Clock';
+    app.innerHTML = '<div class="card"><div class="kick">Local time</div><div class="big" id="t">--:--</div>' +
+      '<div class="sub" id="d"></div><div class="line" id="al"></div>' + foot() + '</div>';
+    var setAl = alienLine(document.getElementById('al'), 'Traveller');
+    var tick = function(){ var n = new Date();
+      document.getElementById('t').innerHTML = pad(n.getHours()) + ':' + pad(n.getMinutes()) + '<small>:' + pad(n.getSeconds()) + '</small>';
+      document.getElementById('d').textContent = DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()] + ' ' + n.getFullYear();
+      setAl(DAYS[n.getDay()]); };
+    tick(); setInterval(tick, 1000);
+  }
+
+  if (W === 'status'){
+    document.title = 'Exosuit Status';
+    app.innerHTML = '<div class="card"><div class="kick">Exosuit status</div><div class="mid" id="t" style="margin:12px 0 4px">--:--</div>' +
+      '<div class="sub" id="d"></div>' +
+      '<div style="margin-top:14px;text-align:left"><div style="display:flex;justify-content:space-between" class="muted"><span>LIFE SUPPORT</span><span id="bp">--</span></div>' +
+      '<div class="bar" id="bb"><span id="bf"></span></div><div class="muted" id="bs">Reading power cells…</div></div>' +
+      '<div class="grid2"><div class="cell"><i>HAZARD PROTECTION</i><b id="hz">100%</b></div><div class="cell"><i>UPTIME</i><b id="up">--</b></div></div>' + foot() + '</div>';
+    var t0 = Date.now();
+    var tick2 = function(){ var n = new Date();
+      document.getElementById('t').textContent = pad(n.getHours()) + ':' + pad(n.getMinutes());
+      document.getElementById('d').textContent = DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()];
+      var m = Math.floor((Date.now() - t0) / 60000); document.getElementById('up').textContent = Math.floor(m/60) + 'h ' + pad(m%60) + 'm'; };
+    tick2(); setInterval(tick2, 15000);
+    var showB = function(b){
+      var p = Math.round(b.level * 100);
+      document.getElementById('bp').textContent = p + '%';
+      document.getElementById('bf').style.width = p + '%';
+      document.getElementById('bb').classList.toggle('low', p <= 20);
+      document.getElementById('hz').textContent = Math.max(0, Math.min(100, p + 10)) + '%';
+      document.getElementById('bs').textContent = b.charging ? 'Recharging life support…' : (p <= 20 ? 'Warning: life support low' : 'Life support stable');
+    };
+    if (navigator.getBattery){
+      navigator.getBattery().then(function(b){ showB(b); ['levelchange','chargingchange'].forEach(function(e){ b.addEventListener(e, function(){ showB(b); }); }); })
+        .catch(function(){ document.getElementById('bs').textContent = 'Power cells not readable in this browser'; });
+    } else {
+      document.getElementById('bs').textContent = 'Power cells not readable in this browser (works in Chrome on Android)';
+    }
+  }
+
+  if (W === 'weather'){
+    document.title = 'Planet Scan';
+    app.innerHTML = '<div class="card"><div class="kick">Planet scan</div><div class="big" id="tp" style="font-size:clamp(44px,15vw,80px)">--°</div>' +
+      '<div class="line" id="cond">Awaiting scan</div>' +
+      '<div class="grid2"><div class="cell"><i>WIND</i><b id="wd">--</b></div><div class="cell"><i>HAZARD</i><b id="hzd" class="hazard">--</b></div>' +
+      '<div class="cell"><i>FEELS LIKE</i><b id="fl">--</b></div><div class="cell"><i>HUMIDITY</i><b id="hu">--</b></div></div>' +
+      '<div class="muted" id="msg" style="margin-top:10px"></div><button class="btn" id="scan">Scan my location</button>' +
+      '<a class="btn gold" href="https://weather.nomansskyhub.app" target="_blank" rel="noopener" style="margin-left:6px">Full Weather Station</a>' + foot() + '</div>';
+    var COND = function(c){
+      if (c === 0) return 'Clear skies'; if (c <= 2) return 'Light cloud'; if (c === 3) return 'Overcast';
+      if (c === 45 || c === 48) return 'Dense fog'; if (c <= 57) return 'Drizzle'; if (c <= 67) return 'Rainstorms';
+      if (c <= 77) return 'Snowfall'; if (c <= 82) return 'Heavy showers'; if (c <= 86) return 'Snowstorm'; return 'Electrical storm'; };
+    var load = function(lat, lon){
+      document.getElementById('msg').textContent = 'Scanning…';
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
+        '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto')
+        .then(function(r){ return r.json(); }).then(function(j){
+          var c = j.current; if (!c) throw 0;
+          document.getElementById('tp').textContent = Math.round(c.temperature_2m) + '°';
+          document.getElementById('fl').textContent = Math.round(c.apparent_temperature) + '°';
+          document.getElementById('hu').textContent = Math.round(c.relative_humidity_2m) + '%';
+          document.getElementById('wd').textContent = Math.round(c.wind_speed_10m) + ' km/h';
+          document.getElementById('cond').textContent = COND(c.weather_code);
+          var h = document.getElementById('hzd'), t = c.temperature_2m;
+          h.className = 'hazard' + (t >= 30 ? ' hot' : t <= 0 ? ' cold' : '');
+          h.textContent = t >= 30 ? 'Extreme heat' : t <= 0 ? 'Freezing' : 'Low';
+          document.getElementById('msg').textContent = 'Last scan ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+          document.getElementById('scan').textContent = 'Rescan';
+        }).catch(function(){ document.getElementById('msg').textContent = 'Scan failed. Check your connection and try again.'; });
+    };
+    var saved = LS('nms-w-loc');
+    var scan = function(){
+      if (!navigator.geolocation){ document.getElementById('msg').textContent = 'Location not available in this browser.'; return; }
+      navigator.geolocation.getCurrentPosition(function(p){
+        var la = p.coords.latitude.toFixed(2), lo = p.coords.longitude.toFixed(2);
+        LS('nms-w-loc', la + ',' + lo); load(la, lo);
+      }, function(){ document.getElementById('msg').textContent = 'Location permission needed for a scan.'; }, {timeout: 10000, maximumAge: 3600000});
+    };
+    document.getElementById('scan').onclick = scan;
+    if (saved){ var s = saved.split(','); load(s[0], s[1]); setInterval(function(){ load(s[0], s[1]); }, 30 * 60000); }
+    else if (EMBED){ [['tp','14°'],['fl','12°'],['hu','71%'],['wd','18 km/h'],['cond','Light cloud'],['hzd','Low'],['msg','Sample scan']].forEach(function(x){ document.getElementById(x[0]).textContent = x[1]; }); }
+    else document.getElementById('msg').textContent = 'Tap scan once; your rough location is kept on this device only.';
+  }
+
+  if (W === 'portal'){
+    document.title = 'Home Portal';
+    /* System details come from the NMS Galactic Map: the real Voyager's Haven record when the system is
+       charted there, otherwise the game's own generation code (nms-core) worked out from the address. */
+    var MAP = 'https://map.nomansskyhub.app';
+    try{ var mq = new URLSearchParams(location.search).get('mapbase'); if (mq && /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) MAP = mq; }catch(e){}
+    var GAL = ["Euclid","Hilbert Dimension","Calypso","Hesperius Dimension","Hyades","Ickjamatew","Budullangr","Kikolgallr","Eltiensleen","Eissentam","Elkupalos","Aptarkaba","Ontiniangp","Odiwagiri","Ogtialabi","Muhacksonto","Hitonskyer","Rerasmutul","Isdoraijung","Doctinawyra","Loychazinq","Zukasizawa","Ekwathore","Yeberhahne","Twerbetek","Sivarates","Eajerandal","Aldukesci","Wotyarogii","Sudzerbal","Maupenzhay","Sugueziume","Brogoweldian","Ehbogdenbu","Ijsenufryos","Nipikulha","Autsurabin","Lusontrygiamh","Rewmanawa","Ethiophodhe","Urastrykle","Xobeurindj","Oniijialdu","Wucetosucc","Ebyeloof","Odyavanta","Milekistri","Waferganh","Agnusopwit","Teyaypilny","Zalienkosm","Ladgudiraf","Mushonponte","Amsentisz","Fladiselm","Laanawemb","Ilkerloor","Davanossi","Ploehrliou","Corpinyaya","Leckandmeram","Quulngais","Nokokipsechl","Rinblodesa","Loydporpen","Ibtrevskip","Elkowaldb","Heholhofsko","Yebrilowisod","Husalvangewi","Ovna'uesed","Bahibusey","Nuybeliaure","Doshawchuc","Ruckinarkh","Thorettac","Nuponoparau","Moglaschil","Uiweupose","Nasmilete","Ekdaluskin","Hakapanasy","Dimonimba","Cajaccari","Olonerovo","Umlanswick","Henayliszm","Utzenmate","Umirpaiya","Paholiang","Iaereznika","Yudukagath","Boealalosnj","Yaevarcko","Coellosipp","Wayndohalou","Smoduraykl","Apmaneessu","Hicanpaav","Akvasanta","Tuychelisaor","Rivskimbe","Daksanquix","Kissonlin","Aediabiel","Ulosaginyik","Roclaytonycar","Kichiaroa","Irceauffey","Nudquathsenfe","Getaizakaal","Hansolmien","Bloytisagra","Ladsenlay","Luyugoslasr","Ubredhatk","Cidoniana","Jasinessa","Torweierf","Saffneckm","Thnistner","Dotusingg","Luleukous","Jelmandan","Otimanaso","Enjaxusanto","Sezviktorew","Zikehpm","Bephembah","Broomerrai","Meximicka","Venessika","Gaiteseling","Zosakasiro","Drajayanes","Ooibekuar","Urckiansi","Dozivadido","Emiekereks","Meykinunukur","Kimycuristh","Roansfien","Isgarmeso","Daitibeli","Gucuttarik","Enlaythie","Drewweste","Akbulkabi","Homskiw","Zavainlani","Jewijkmas","Itlhotagra","Podalicess","Hiviusauer","Halsebenk","Puikitoac","Gaybakuaria","Grbodubhe","Rycempler","Indjalala","Fontenikk","Pasycihelwhee","Ikbaksmit","Telicianses","Oyleyzhan","Uagerosat","Impoxectin","Twoodmand","Hilfsesorbs","Ezdaranit","Wiensanshe","Ewheelonc","Litzmantufa","Emarmatosi","Mufimbomacvi","Wongquarum","Hapirajua","Igbinduina","Wepaitvas","Sthatigudi","Yekathsebehn","Ebedeagurst","Nolisonia","Ulexovitab","Iodhinxois","Irroswitzs","Bifredait","Beiraghedwe","Yeonatlak","Cugnatachh","Nozoryenki","Ebralduri","Evcickcandj","Ziybosswin","Heperclait","Sugiuniam","Aaseertush","Uglyestemaa","Horeroedsh","Drundemiso","Ityanianat","Purneyrine","Dokiessmat","Nupiacheh","Dihewsonj","Rudrailhik","Tweretnort","Snatreetze","Iwundaracos","Digarlewena","Erquagsta","Logovoloin","Boyaghosganh","Kuolungau","Pehneldept","Yevettiiqidcon","Sahliacabru","Noggalterpor","Chmageaki","Veticueca","Vittesbursul","Nootanore","Innebdjerah","Kisvarcini","Cuzcogipper","Pamanhermonsu","Brotoghek","Mibittara","Huruahili","Raldwicarn","Ezdartlic","Badesclema","Isenkeyan","Iadoitesu","Yagrovoisi","Ewcomechio","Inunnunnoda","Dischiutun","Yuwarugha","Ialmendra","Reponudrle","Rinjanagrbo","Zeziceloh","Oeileutasc","Zicniijinis","Dugnowarilda","Neuxoisan","Ilmenhorn","Rukwatsuku","Nepitzaspru","Chcehoemig","Haffneyrin","Uliciawai","Tuhgrespod","Iousongola","Odyalutai"];
+    var STAR = {yellow:'#ffd34d',green:'#5cff8a',blue:'#5cc8ff',red:'#ff5a4f',purple:'#c77dff'};
+    var STAR_KEYS = ['yellow','green','blue','red','purple'];
+    var RACE = {1:'Gek',2:'Korvax',3:"Vy'keen"};
+    var ECON = ['Trading','Advanced Materials','Scientific','Mining','Manufacturing','Technology','Power Generation'];
+    var TIER = ['Low','Medium','High'];
+    var esc = function(t){ return String(t == null ? '' : t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+    var cap = function(t){ t = String(t || ''); return t.charAt(0).toUpperCase() + t.slice(1); };
+
+    /* galaxy: saved index, else an old saved name, else the Hub Traveller cookie's home galaxy, else Euclid */
+    var gIdx = function(){
+      var v = parseInt(LS('nms-w-gidx'), 10); if (v >= 0 && v < GAL.length) return v;
+      var nm = (LS('nms-w-galaxy') || '').toLowerCase();
+      for (var i = 0; i < GAL.length; i++) if (GAL[i].toLowerCase() === nm) return i;
+      try{ var m = document.cookie.match(/(?:^|; )nmsTraveller=([^;]*)/); var g = m ? JSON.parse(decodeURIComponent(m[1])).g : null; if (g >= 0 && g < GAL.length) return g; }catch(e){}
+      return 0;
+    };
+    var getInfo = function(){ try{ return JSON.parse(LS('nms-w-info') || 'null'); }catch(e){ return null; } };
+
+    app.innerHTML = '<div class="card portal"><div class="kick">Home portal</div><div class="line" id="nm"></div>' +
+      '<div class="sys" id="sy"></div><div class="sub" id="rg"></div>' +
+      '<div class="glyphs" id="gl"></div><div class="hex" id="hx">------------</div>' +
+      '<div class="grid2" id="facts" hidden></div><div class="src" id="src"></div>' +
+      '<div id="acts"></div>' +
+      '<details class="edit" id="ed"><summary class="muted">Edit</summary>' +
+      '<label class="lb">Portal glyphs</label>' +
+      '<div class="pad" id="pad">' + '0123456789ABCDEF'.split('').map(function(c){ return '<button type="button" data-c="' + c + '"><img src="assets/studio/glyphs/g-' + c + '.png" alt="' + c + '"><i>' + c + '</i></button>'; }).join('') +
+      '<button type="button" data-c="back" class="wide">⌫</button><button type="button" data-c="clear" class="wide">Clear</button></div>' +
+      '<input id="in" maxlength="12" placeholder="12-digit portal address (hex)" autocomplete="off">' +
+      '<label class="lb">Galaxy</label><select id="ig">' + GAL.map(function(g, i){ return '<option value="' + i + '">' + (i + 1) + ' · ' + esc(g) + '</option>'; }).join('') + '</select>' +
+      '<label class="lb">Base name</label><input id="it" maxlength="24" placeholder="e.g. Home Base" style="text-transform:none;letter-spacing:.04em">' +
+      '<div id="pw" hidden><label class="lb">Your planet</label><select id="ip"></select></div>' +
+      '<button class="btn" id="sv">Save</button></details>' + foot() + '</div>';
+    var setNm = alienLine(document.getElementById('nm'), 'Home');
+    var $ = function(id){ return document.getElementById(id); };
+
+    var core = null;
+    var genInfo = function(hex, g){
+      if (!core) core = Promise.all([import(MAP + '/nms-core/index.js?v=20261013'), import(MAP + '/nms-core/loadLetterMap.js?v=20261013')])
+        .then(function(m){ return m[1].loadLetterMap(MAP + '/nms-core/letter-map').then(function(lm){ return {C: m[0], lm: lm}; }); });
+      core.catch(function(){ core = null; });
+      return core.then(function(k){
+        var C = k.C, lm = k.lm, code = BigInt('0x' + hex), o = {}, a = C.systemAttributes(code, g);
+        o.star = STAR_KEYS[a.star_type] || 'yellow'; o.bodies = a.planet_count;
+        o.race = (a.abandoned || a.uncharted) ? 'Uninhabited' : (RACE[a.dominant_race] || 'Uninhabited');
+        o.econ = a.abandoned ? 'Abandoned' : a.uncharted ? 'None' : (ECON[(a.economy_type || 1) - 1] || '');
+        o.wealth = (a.abandoned || a.uncharted) ? '' : TIER[Math.max(0, Math.min(2, (a.wealth || 1) - 1))];
+        o.conflict = (a.abandoned || a.uncharted) ? 'None' : TIER[Math.max(0, Math.min(2, (a.conflict_level || 1) - 1))];
+        o.outlaw = !!a.pirate;
+        try{ o.name = C.systemName(code, g, lm); }catch(e){}
+        try{ o.region = C.regionName(code, g, lm); }catch(e){}
+        var d = parseInt(hex.charAt(0), 16);
+        if (d >= 1){ try{ o.planet = C.planetName(code, g, lm); }catch(e){} }
+        return o;
+      });
+    };
+    var tried = {};
+    var lookup = function(hex, g, force){
+      var key = hex + ':' + g, info = getInfo();
+      if (tried[key] && !force) return;
+      tried[key] = 1;
+      if (!info || info.key !== key) info = {key: key};
+      var jobs = [];
+      if (!info.gen) jobs.push(genInfo(hex, g).then(function(x){ info.gen = x; }).catch(function(){}));
+      if (force || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5)
+        jobs.push(fetch(MAP + '/.netlify/functions/haven-lookup?addr=' + hex + '&gname=' + encodeURIComponent(GAL[g]))
+          .then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok){ info.haven = j.found ? j.system : null; info.havenAt = Date.now(); } }).catch(function(){}));
+      if (!jobs.length) return;
+      $('src').textContent = 'Scanning system…';
+      Promise.all(jobs).then(function(){ LS('nms-w-info', JSON.stringify(info)); draw(); });
+    };
+
+    var cell = function(k, v, sub){ return v ? '<div class="cell"><i>' + k + '</i><b>' + esc(v) + '</b>' + (sub ? '<span>' + esc(sub) + '</span>' : '') + '</div>' : ''; };
+    var draw = function(){
+      var hex = (LS('nms-w-portal') || '').toUpperCase(), g = gIdx(), nm = LS('nms-w-name') || 'Home';
+      var ok = /^[0-9A-F]{12}$/.test(hex);
+      if (!ok && EMBED){ hex = '10A3F2B9C4E1'; g = 8; nm = 'Home Base'; ok = true; }
+      $('gl').innerHTML = ok ? hex.split('').map(function(c){ return '<img src="assets/studio/glyphs/g-' + c + '.png" alt="' + c + '">'; }).join('')
+        : '<span class="muted">Tap Edit and enter your portal glyphs</span>';
+      $('hx').textContent = ok ? hex.replace(/(.{4})/g, '$1 ').trim() : '';
+      setNm(nm);
+      $('in').value = ok && !EMBED ? hex : ''; $('ig').value = String(g); $('it').value = nm === 'Home' ? '' : nm;
+      var info = getInfo();
+      if (EMBED && !LS('nms-w-portal')) info = {key: hex + ':' + g, gen: {name:'Sottihrei VII', region:'Atvian Sector', star:'yellow', bodies:4, race:"Vy'keen", econ:'Scientific', wealth:'Medium', conflict:'High', planet:'Gospor Sago'}};
+      if (!ok || !info || info.key !== hex + ':' + g){
+        $('sy').textContent = ''; $('rg').textContent = ok ? GAL[g] : ''; $('facts').hidden = true; $('acts').innerHTML = '';
+        $('src').textContent = ok ? 'Scanning system…' : ''; $('pw').hidden = true;
+        if (ok && !EMBED) lookup(hex, g);
+        return;
+      }
+      var gen = info.gen || {}, hv = info.haven || null;
+      var name = (hv && hv.name) || gen.name || '';
+      var star = ((hv && hv.star) || '').toLowerCase(); star = STAR[star] ? star : gen.star;
+      $('sy').innerHTML = (star ? '<span class="dot" style="background:' + STAR[star] + ';box-shadow:0 0 10px ' + STAR[star] + '"></span>' : '') + esc(name || 'Unknown system');
+      $('rg').textContent = [(hv && hv.region) || gen.region, GAL[g]].filter(Boolean).join(' · ');
+
+      /* planet: the one picked under Edit, else Haven's planet with the generated name, else just the generated name */
+      var planets = (hv && hv.planets) || [], pick = LS('nms-w-planet') || '', hp = null;
+      planets.forEach(function(p){ if (!hp && p.name && (p.name === pick || (!pick && p.name === gen.planet))) hp = p; });
+      $('pw').hidden = !planets.length;
+      if (planets.length) $('ip').innerHTML = '<option value="">Auto (from the first glyph)</option>' + planets.map(function(p){
+        return '<option' + (hp && p.name === hp.name ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('');
+      var pName = hp ? hp.name : gen.planet;
+      var pSub = hp ? [hp.biome, hp.weather].filter(Boolean).join(' · ') : (gen.planet ? 'Original name, may differ in game' : '');
+      var econ = (hv && hv.economy) || gen.econ, tier = (hv && hv.economyTier) || gen.wealth;
+      $('facts').innerHTML =
+        (pName ? '<div class="cell wide"><i>PLANET</i><b>' + esc(pName) + '</b>' + (pSub ? '<span>' + esc(pSub) + '</span>' : '') + '</div>' : '') +
+        cell('STAR', cap(star)) + cell('RACE', (hv && hv.lifeform) || gen.race) +
+        cell('ECONOMY', econ, tier) + cell('CONFLICT', (hv && hv.conflict) || gen.conflict, gen.outlaw && !hv ? 'Outlaw system' : '') +
+        (hp && hp.sentinels ? cell('SENTINELS', hp.sentinels) : '') + (hp && hp.resources ? cell('RESOURCES', hp.resources) : '');
+      $('facts').hidden = false;
+      $('src').innerHTML = hv ? '✓ Charted on <a href="' + esc(hv.url) + '" target="_blank" rel="noopener">Voyager\'s Haven</a>' + (hv.discoveredBy ? ' · found by ' + esc(hv.discoveredBy) : '')
+        : (gen.name ? 'Worked out from your glyphs. If a traveller renamed it, the game shows their name.' : (navigator.onLine === false ? 'Offline. Your glyphs still work; system details load when you\'re back online.' : 'Couldn\'t reach the Galactic Map for system details. Tap Refresh to try again.'));
+      $('acts').innerHTML = '<a class="btn" href="' + MAP + '/?arrival=1&addr=' + hex + '&galaxy=' + g + '" target="_blank" rel="noopener">Open in Galactic Map ↗</a>' +
+        (EMBED ? '' : '<button class="btn ghost" id="rf" type="button">Refresh</button>');
+      if ($('rf')) $('rf').onclick = function(){ lookup(hex, g, true); };
+      if (!EMBED && (!info.gen || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5)) lookup(hex, g);
+    };
+
+    $('pad').onclick = function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      var v = $('in').value.replace(/[^0-9a-f]/gi, '').toUpperCase(), c = b.getAttribute('data-c');
+      v = c === 'back' ? v.slice(0, -1) : c === 'clear' ? '' : (v + c).slice(0, 12);
+      $('in').value = v;
+    };
+    $('sv').onclick = function(){
+      var h = $('in').value.replace(/[^0-9a-f]/gi, '').toUpperCase().slice(0, 12);
+      if (h && h.length !== 12){ alertBox('Portal address needs all 12 glyphs (0-9, A-F).'); return; }
+      var g = parseInt($('ig').value, 10) || 0, old = getInfo();
+      LS('nms-w-portal', h); LS('nms-w-gidx', String(g)); LS('nms-w-galaxy', GAL[g]); LS('nms-w-name', $('it').value.trim() || 'Home');
+      if (!old || old.key !== h + ':' + g) LS('nms-w-planet', ''); else LS('nms-w-planet', $('ip').value || '');
+      $('ed').open = false;
+      draw();
+    };
+    var alertBox = function(t){ var d = document.createElement('div'); d.className = 'muted'; d.style.color = 'var(--gold)'; d.textContent = t; $('sv').after(d); setTimeout(function(){ d.remove(); }, 3500); };
+    draw();
+  }
+})();
+</script>
+</body>
+</html>
