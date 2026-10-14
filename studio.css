@@ -89,3 +89,44 @@
 .st-hexl{font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(0,229,255,.75);margin:4px 0 -4px}
 .st-bgs.st-auto{scroll-snap-type:none;scrollbar-width:none}
 .st-bgs.st-auto::-webkit-scrollbar{display:none}
+
+/* 2026-10-14: tabs carry a one-line description (the three side-by-side items) */
+.st-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.st-tab{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;padding:12px 14px;text-align:left}
+.st-tab span{color:var(--gold)}
+.st-tab.on span{color:var(--white)}
+.st-tab small{font-family:'Rajdhani',sans-serif;font-size:.9rem;letter-spacing:0;text-transform:none;color:var(--text-dim);line-height:1.35}
+@media (max-width:700px){.st-tabs{grid-template-columns:1fr}.st-tab small{font-size:.85rem}}
+
+/* 2026-10-14: background strip + size/download/share live under the preview on wide screens */
+.st-side{display:grid;gap:14px;align-content:start;min-width:0}
+.st-side .st-prev{position:relative;top:0}
+.st-side .st-prev canvas{max-height:58vh}
+.st-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.st-row .st-acts{flex:1 1 auto}
+.st-row .st-acts .btn{flex:1 1 auto;justify-content:center;text-align:center}
+@media (max-width:820px){
+  .st-side{display:contents}
+  .st-side .st-prev canvas{max-height:56vh}
+  .st-row .st-seg{width:100%}
+  .st-row .st-seg button{flex:1}
+}
+/* 2026-10-14: size + share on one line, download centred full-width under them */
+.st-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+.st-row .st-acts{display:contents}
+.st-row #stFmt{grid-column:1;grid-row:1;width:max-content}
+.st-row #stShare{grid-column:3;grid-row:1}
+.st-row #stSave{grid-column:1/-1;grid-row:2;justify-content:center;text-align:center;width:100%}
+.st-side .st-note:empty{display:none}
+/* the two columns end on the same line: the last item on the shorter side drops to meet the other */
+@media (min-width:821px){
+  .st-pane[data-p="portal"] .st-grid{align-items:stretch}
+  .st-pane[data-p="portal"] .st-form{display:flex;flex-direction:column;gap:14px}
+  .st-pane[data-p="portal"] .st-form>#stShowF{margin-top:auto}
+  .st-side{display:flex;flex-direction:column;gap:14px}
+  .st-side .st-row{margin-top:auto}
+}
+@media (max-width:820px){
+  .st-row #stFmt{width:auto}
+  .st-row .st-seg button{flex:1}
+}

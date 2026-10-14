@@ -315,9 +315,9 @@
     var root = host.querySelector('.st-root');
     root.innerHTML =
       '<div class="st-tabs" role="tablist">' +
-      '<button type="button" class="st-tab on" role="tab" aria-selected="true" data-t="portal">◈ Portal wallpaper</button>' +
-      '<button type="button" class="st-tab" role="tab" aria-selected="false" data-t="planet">◉ Planet of the day</button>' +
-      '<button type="button" class="st-tab" role="tab" aria-selected="false" data-t="exp">⧗ Expedition countdown</button></div>' +
+      '<button type="button" class="st-tab on" role="tab" aria-selected="true" data-t="portal"><span>◈ Traveller wallpaper</span><small>Your name and home portal glyphs, built into a wallpaper</small></button>' +
+      '<button type="button" class="st-tab" role="tab" aria-selected="false" data-t="planet"><span>◉ Planet of the day</span><small>Wear one of today\'s real player-charted planets</small></button>' +
+      '<button type="button" class="st-tab" role="tab" aria-selected="false" data-t="exp"><span>⧗ Expedition countdown</span><small>A live countdown to the end of the current expedition</small></button></div>' +
       // portal wallpaper
       '<div class="st-pane on" data-p="portal"><div class="st-grid">' +
       '<div class="st-form">' +
@@ -329,11 +329,13 @@
       '<div class="st-slots" id="stSlots"></div><label class="st-hexl" for="stHex">Hex address</label><input id="stHex" maxlength="12" placeholder="Type hex, e.g. 10A2F9557C30" autocomplete="off" spellcheck="false" inputmode="text">' +
       '<div class="st-pad" id="stPad"></div></div></details>' +
       '<details class="st-fold" id="stShowF"><summary>Show on wallpaper <b id="stShowS"></b></summary><div class="st-fold-b"><div class="st-show" id="stShow"></div></div></details>' +
-      '<div class="st-f"><span>Background <em>swipe for more</em></span><div class="st-bgs" id="stBgs"></div></div>' +
-      '<div class="st-f"><span>Size</span><div class="st-seg" id="stFmt"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div></div>' +
-      '<div class="st-acts"><button type="button" class="btn btn-primary" id="stSave">⬇ Download wallpaper</button><button type="button" class="btn btn-ghost" id="stShare">Share</button></div>' +
-      '<p class="st-note" id="stNote" aria-live="polite"></p></div>' +
-      '<div class="st-prev"><canvas id="stCv" aria-label="Wallpaper preview"></canvas></div></div></div>' +
+      '</div>' +
+      // 2026-10-14: preview column also holds the background strip and one row of size + download + share
+      '<div class="st-side"><div class="st-prev"><canvas id="stCv" aria-label="Wallpaper preview"></canvas></div>' +
+      '<div class="st-f st-bgf"><span>Background <em>swipe for more</em></span><div class="st-bgs" id="stBgs"></div></div>' +
+      '<div class="st-row"><div class="st-seg" id="stFmt" role="group" aria-label="Size"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div>' +
+      '<div class="st-acts"><button type="button" class="btn btn-primary" id="stSave">⬇ Download wallpaper</button><button type="button" class="btn btn-ghost" id="stShare">Share</button></div></div>' +
+      '<p class="st-note" id="stNote" aria-live="polite"></p></div></div></div>' +
       // planet of the day
       '<div class="st-pane" data-p="planet"><p class="st-lead">The Weather Station surveys 8 real, player-charted worlds every day. Pick one of today’s and wear it. Tomorrow there are 8 new ones.</p>' +
       '<div class="st-worlds" id="stWorlds"><p class="st-note">Loading today’s survey…</p></div><div class="st-grid">' +
