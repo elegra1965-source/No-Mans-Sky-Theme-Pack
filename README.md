@@ -37,6 +37,7 @@ Everything is drawn in your browser; nothing is uploaded. The only thing sent an
 - A live alien-alphabet translator and glyph chart
 - A drag-to-compare before/after slider, and before/after desktops for Windows and macOS
 - Platform-aware install as an app (Android prompt, iPhone guide)
+- **Calm mode.** A small **Calm** switch in the bottom-left corner swaps the patterned and image backgrounds for a plain dark one, for anyone who finds the page busy. It's shared across the whole No Man's Sky Hub family (one switch turns it on for every site), in `calm.js`.
 
 ![Drag-to-compare: stock icons vs the NMS Theme Pack](screenshots/02-before-after.jpg)
 
