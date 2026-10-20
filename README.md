@@ -21,7 +21,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 - **Portal wallpaper:** your Traveller name (in English and in the NMS alphabet), home galaxy, home planet name, home portal address (hex and glyphs) and, if you like, your NMS friend code, on one of 15 No Man's Sky backgrounds for phone (1080x2400) or desktop (2560x1440). Switch each line on or off and watch the preview before you download. The name, galaxy and friend code come from your Hub Traveller ID if you've set one. The planet name is looked up from your address in the [Galactic Map](https://map.nomansskyhub.app)'s community edits, then [Voyager's Haven](https://havenmap.online), or you can type your own.
 - **Planet of the day:** the Weather Station surveys 8 real, player-charted worlds from [Voyager's Haven](https://havenmap.online) every day. Pick one of today's and download it as a wallpaper, with its portal glyphs, hex and discoverer, plus a link to fly there on the Galactic Map.
-- **Expedition countdown:** live time left in the current expedition (or until the next one), with a [home-screen widget page](https://theme.nomansskyhub.app/countdown.html) that installs like an app. Dates come from the No Man's Sky Wiki's List of Expeditions, redux runs included.
+- **Expedition countdown:** live time left in the current expedition (or until the next one), with a [home-screen widget page](https://theme.nomansskyhub.app/countdown.html) that installs like an app. Dates come from the No Man's Sky Wiki's List of Expeditions, redux runs included. Under the clock, the widget page also shows the live **Community Research** tier and progress (e.g. *Tier 2 of 2 · 41%*), read from Hello Games' official Galactic Atlas, the same number as its [Community Research](https://galacticatlas.nomanssky.com/poi/community-research) sidebar; tap it to open that page.
 
 Everything is drawn in your browser; nothing is uploaded. The only thing sent anywhere is your portal address, to look up the planet name.
 
@@ -53,6 +53,7 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 | `polish.css`, `polish.js` | HUD-style card treatment and line icons (v2.2 polish) |
 | `studio.js`, `studio.css`, `assets/studio/` | "Make it yours": portal wallpaper, planet of the day and the countdown card |
 | `expedition.js`, `countdown.html`, `countdown.webmanifest` | Expedition dates from the NMS Wiki and the installable countdown widget page |
+| `_redirects` | Same-origin proxy `/nms-api/*` to the Galactic Atlas API (Community Research on the countdown page) |
 | `preview.html` | Full phone preview |
 | `HOW_TO_APPLY_ICONS.html` | Setup guide |
 | `android_icon_pack_mapping.xml` | Launcher mapping for icon-pack apps |

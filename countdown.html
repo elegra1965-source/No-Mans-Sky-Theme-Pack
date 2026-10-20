@@ -62,8 +62,15 @@
   .hint{margin-top:10px;font-size:13px;color:var(--dim)}
   .hint[hidden]{display:none}
   .end .u b{color:var(--gold)}
+  .res{display:block;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);color:inherit;text-decoration:none}
+  .res[hidden]{display:none}
+  .res-k{font-family:Orbitron,monospace;font-size:clamp(10px,2.6vw,12px);letter-spacing:3px;color:#b48cff}
+  .res-t{font-family:Orbitron,monospace;font-weight:700;color:var(--white);font-size:clamp(15px,4.6vw,20px);letter-spacing:.12em;margin:6px 0 8px}
+  .res .bar span{background:linear-gradient(90deg,#ff8c00,#b48cff);box-shadow:0 0 12px rgba(180,140,255,.5)}
+  .res-p{font-family:Orbitron,monospace;letter-spacing:.1em;color:#b48cff}
+  .res-n{margin-top:6px;font-size:clamp(12px,3.2vw,14px);color:var(--dim)}
   @media (display-mode:standalone){.hint{display:none}}
-  @media (max-height:420px){.foot,.hint,.next{display:none}.clock{margin:10px 0}}
+  @media (max-height:420px){.foot,.hint,.next,.res{display:none}.clock{margin:10px 0}}
   @media (max-width:300px){.u i{letter-spacing:1px}}
 </style>
 </head>
@@ -82,6 +89,13 @@
   <div class="bar" aria-hidden="true"><span id="bar"></span></div>
   <div class="row"><span id="from">&nbsp;</span><span id="pct">&nbsp;</span><span id="to">&nbsp;</span></div>
   <div class="next" id="next" hidden></div>
+  <a class="res" id="res" hidden href="https://galacticatlas.nomanssky.com/poi/community-research" target="_blank" rel="noopener">
+    <div class="res-k">COMMUNITY RESEARCH</div>
+    <div class="res-t" id="resT">TIER –</div>
+    <div class="bar" aria-hidden="true"><span id="resBar"></span></div>
+    <div class="row"><span>Space Anomaly research</span><span class="res-p" id="resP">--%</span></div>
+    <div class="res-n">The Quicksilver Synthesis Companion unlocks more collectables as Travellers submit data.</div>
+  </a>
   <p class="hint" id="hint">Add this page to your home screen and it opens like an app: on Android, Chrome menu → <b>Add to Home screen</b>; on iPhone, Share → <b>Add to Home Screen</b>.</p>
   <div class="foot"><a href="https://theme.nomansskyhub.app/">THEME PACK</a><a href="https://atlas.nomansskyhub.app/">ASK ATLAS</a><a href="https://nomansskyhub.app/">NMS HUB</a></div>
 </main>
@@ -141,6 +155,23 @@
       $('title').textContent = 'OFFLINE'; $('sub').textContent = 'Couldn’t reach the NMS Wiki. It will try again in a minute.';
     });
   }
+  /* Community Research: the Galactic Atlas mission 116 feed via the same-origin /nms-api/ proxy (_redirects).
+     Shows what the official Atlas sidebar shows: TIER currentTier - tierPercentage%. Hidden if it doesn't answer. */
+  function research() {
+    var ac = ('AbortController' in window) ? new AbortController() : null, tm = setTimeout(function () { if (ac) ac.abort(); }, 6000);
+    fetch('/nms-api/mission/116?platform=merged', ac ? { signal: ac.signal } : undefined)
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (j) {
+        clearTimeout(tm);
+        var t = j && +j.currentTier, of = j && +j.totalTiers, p = j && +j.tierPercentage;
+        if (!(t > 0) || !isFinite(p)) return;
+        p = Math.max(0, Math.min(100, p));
+        $('resT').textContent = 'TIER ' + t + (of > 0 ? ' OF ' + of : '');
+        $('resP').textContent = p.toFixed(1) + '%'; $('resBar').style.width = p + '%'; $('res').hidden = false;
+      }).catch(function () { clearTimeout(tm); });
+  }
+  research(); setInterval(research, 10 * 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) research(); });
   boot();
   clearInterval(timer); timer = setInterval(tick, 1000);
   setInterval(function () { boot(true); }, 3 * 3600000);

@@ -1,0 +1,4 @@
+# Same-origin proxy for the official Galactic Atlas API (it sends no CORS header, so the browser
+# blocks a direct fetch). 200 = rewrite, not redirect. Same rule as the Hub. Used by countdown.html
+# for the live Community Research tier (mission 116). Added 2026-10-20.
+/nms-api/*  https://galacticatlas-api.nomanssky.com/api/:splat  200

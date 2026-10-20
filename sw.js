@@ -1,5 +1,5 @@
 // NMS Icon Pack — Service Worker v9.0
-const CACHE = 'nms-icon-pack-v30';
+const CACHE = 'nms-icon-pack-v31';
 
 // 2026-10-14: downloads (zips, videos, fonts, xml) are never kept in the app's cache -- they already
 // go to the phone's Downloads folder, so caching them too doubled the storage the app used.
@@ -62,6 +62,8 @@ self.addEventListener('fetch', e => {
 
   // Downloads: straight from the network, never stored in the app cache.
   if (NO_CACHE_RE.test(e.request.url)) return;
+  // Live data (Galactic Atlas proxy, used by countdown.html): always fresh from the network.
+  if (new URL(e.request.url).pathname.startsWith('/nms-api/')) return;
 
   e.respondWith(
     caches.match(e.request).then(cached => {
