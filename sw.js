@@ -1,5 +1,5 @@
 // NMS Icon Pack — Service Worker v9.0
-const CACHE = 'nms-icon-pack-v33';
+const CACHE = 'nms-icon-pack-v34';
 
 // 2026-10-14: downloads (zips, videos, fonts, xml) are never kept in the app's cache -- they already
 // go to the phone's Downloads folder, so caching them too doubled the storage the app used.
@@ -105,3 +105,20 @@ if (/\.netlify\.app$/.test(self.location.hostname)) {
     wins.forEach(c => { const u = new URL(c.url); c.navigate('https://theme.nomansskyhub.app' + u.pathname + u.search).catch(() => {}); });
   })()));
 }
+
+// --- Push alerts (2026-10-23): sent by the Weather station's alert server, signed up via nms-push.js ---
+self.addEventListener('push', event => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch (e) { data = { title: '◈ No Man\'s Sky Hub', body: event.data ? event.data.text() : '' }; }
+  event.waitUntil(self.registration.showNotification(data.title || '◈ No Man\'s Sky Hub', {
+    body: data.body || '', icon: data.icon || 'pwa/icon-192.png', badge: 'badge-96.png', tag: data.tag || 'nms-alert', data: data.url || './'
+  }));
+});
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const abs = new URL(event.notification.data || './', self.registration.scope);
+  event.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) { if (c.url.split('#')[0] === abs.href && 'focus' in c) return c.focus(); }
+    return clients.openWindow ? clients.openWindow(abs.href) : null;
+  }));
+});

@@ -23,6 +23,8 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 - **Planet of the day:** the Weather Station surveys 8 real, player-charted worlds from [Voyager's Haven](https://havenmap.online) every day. Pick one of today's and download it as a wallpaper, with its portal glyphs, hex and discoverer, plus a link to fly there on the Galactic Map.
 - **Expedition countdown:** live time left in the current expedition (or until the next one), with a [home-screen widget page](https://theme.nomansskyhub.app/countdown.html) that installs like an app. Dates come from the No Man's Sky Wiki's List of Expeditions, redux runs included. Under the clock, the widget page also shows the live **Community Research** tier and progress (e.g. *Tier 2 of 2 · 41%*), read from Hello Games' official Galactic Atlas, the same number as its [Community Research](https://galacticatlas.nomanssky.com/poi/community-research) sidebar; tap it to open that page.
 
+**🔔 Tell me about new wallpapers & icons** (under Downloads) turns on a phone notification when something new is added. New things are listed in `updates.json` (`id`, `date`, `en` text); the Weather station's alert server sends the newest one once (`nms-push.js`).
+
 Everything is drawn in your browser; nothing is uploaded. The only thing sent anywhere is your portal address, to look up the planet name.
 
 ![Portal wallpaper options: all lines off, then name, planet and friend code, then adding the NMS-font name, the hex address and the glyphs](screenshots/07-wallpaper-options.jpg)

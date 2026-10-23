@@ -181,6 +181,7 @@
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 34px rgba(0,229,255,.42);}
   .btn-ghost{background:var(--panel);border-color:var(--border);color:var(--white);}
   .btn-ghost:hover{border-color:var(--cyan);background:var(--panel-2);transform:translateY(-2px);}
+  .btn-ghost.on{border-color:rgba(0,255,136,.5);color:#00ff88;}
 
   .trust{display:flex;gap:22px;flex-wrap:wrap;font-size:.82rem;color:var(--text-faint);}
   @media(max-width:880px){.trust{justify-content:center;}}
@@ -1240,6 +1241,7 @@
       <p>Each part is the same files as the full packs above, just split up so you only keep what you use. Once you've set an icon or wallpaper you can delete the zip.</p>
     </details>
     </details>
+    <div style="text-align:center;margin-top:18px"><button type="button" class="btn btn-ghost" id="newStuffAlertBtn">🔔 TELL ME ABOUT NEW WALLPAPERS &amp; ICONS</button></div>
   </div>
 </section>
 
@@ -1794,6 +1796,14 @@
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') hide(); });
   addEventListener('scroll', function(){ if (hover && cur) hide(); }, {passive: true});
 })();
+</script>
+<script src="nms-push.js"></script>
+<script>
+/* 2026-10-23 (Tony): an alert when new wallpapers or icons are added (listed in updates.json) */
+if (window.NMS_PUSH) NMS_PUSH.wire(document.getElementById('newStuffAlertBtn'), 'theme', {
+  label: '🔔 TELL ME ABOUT NEW WALLPAPERS & ICONS', onLabel: '🔔 NEW-STUFF ALERTS ON',
+  okMsg: 'Alerts on. You’ll hear when new wallpapers or icons are added.'
+});
 </script>
 </body>
 </html>
