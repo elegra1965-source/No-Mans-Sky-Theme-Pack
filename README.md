@@ -2,7 +2,7 @@
 
 **Live:** [theme.nomansskyhub.app](https://theme.nomansskyhub.app)
 
-Turn your phone or desktop into a *No Man's Sky* terminal. 76 hand-themed icons, 17 wallpapers, 5 charging animations and the alien alphabet as an installable font. Free, no account, for Android, iPhone, Windows, Mac and Linux.
+Turn your phone or desktop into a *No Man's Sky* terminal. 80 hand-themed icons, 17 wallpapers, 5 charging animations and the NMS alphabet as an installable font. Free, no account, for Android, iPhone, Windows, Mac and Linux.
 
 Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
@@ -10,10 +10,10 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 ## What's in the pack
 
-- **76 themed icons**, each exported as transparent PNGs in 7 sizes, plus Windows `.ico` versions
+- **80 themed icons**, each exported as transparent PNGs in 7 sizes, plus Windows `.ico` versions
 - **17 wallpapers** in 6 resolutions each, for phone and desktop
 - **5 charging animations** as watermark-free MP4s for Android and iPhone
-- **The NMS alien alphabet** as an installable TTF font
+- **The NMS alphabet** as an installable TTF font
 - **Widget Kit** for KWGT: two NMS-styled frames, both fonts and a step-by-step clock/date widget guide
 - **Setup guides** for Android launchers, iPhone, Windows and Mac
 
@@ -25,7 +25,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 Everything is drawn in your browser; nothing is uploaded. The only thing sent anywhere is your portal address, to look up the planet name.
 
-![Portal wallpaper options: all lines off, then name, planet and friend code, then adding the alien-font name, the hex address and the glyphs](screenshots/07-wallpaper-options.jpg)
+![Portal wallpaper options: all lines off, then name, planet and friend code, then adding the NMS-font name, the hex address and the glyphs](screenshots/07-wallpaper-options.jpg)
 
 ![Portal wallpaper, planet of the day and the expedition countdown](screenshots/05-make-it-yours.jpg)
 
@@ -34,7 +34,7 @@ Everything is drawn in your browser; nothing is uploaded. The only thing sent an
 ## The site
 
 - An interactive phone mockup and a live grid of every icon
-- A live alien-alphabet translator and glyph chart
+- A live NMS alphabet translator and glyph chart
 - A drag-to-compare before/after slider, and before/after desktops for Windows and macOS
 - Platform-aware install as an app (Android prompt, iPhone guide)
 - **Calm mode.** A small **Calm** switch in the bottom-left corner swaps the patterned and image backgrounds for a plain dark one, for anyone who finds the page busy. It's shared across the whole No Man's Sky Hub family (one switch turns it on for every site), in `calm.js`.

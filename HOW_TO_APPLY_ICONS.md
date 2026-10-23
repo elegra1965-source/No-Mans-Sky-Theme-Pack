@@ -1,8 +1,8 @@
 # 🎮 Icon Pack — How to Apply Your Icons
 
 ## 📦 What's Included
-- **99 icons** in 7 sizes (16, 32, 48, 64, 128, 256, 512px) — all transparent PNG
-- **3 wallpapers** in 6 resolutions (720p, 1080p, 1440p, 4K, mobile)
+- **80 icons** in 7 sizes (16, 32, 48, 64, 128, 256, 512px) — all transparent PNG
+- **17 wallpapers** in 6 resolutions (720p, 1080p, 1440p, 4K, mobile)
 - This guide
 
 ---

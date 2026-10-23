@@ -14,10 +14,10 @@ android_icon_pack_mapping.xml
 README.md
 /assets
    NMS_icon_pack_FINAL.zip       Clean, foldered, multi-size icon pack
-   NMS_wallpaper_pack_FINAL.zip  3 wallpapers x 6 resolutions each
+   NMS_wallpaper_pack_FINAL.zip  17 wallpapers x 6 resolutions each
    NMS_Charging_Animations.zip   5 charging videos
-   icons/ + icons.json           76 preview icons for the on-page grid
-   nms-alphabet.ttf              alien font
+   icons/ + icons.json           80 preview icons for the on-page grid
+   nms-alphabet.ttf              NMS font
 /pwa     8 app-install icons (72-512px)
 /guides  3 charging setup guides (Word docs)
 

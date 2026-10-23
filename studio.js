@@ -353,7 +353,7 @@
     /* portal wallpaper */
     var cv = $('stCv'), slots = $('stSlots'), hexIn = $('stHex'), gal = $('stGal'), pad = $('stPad'), note = function (s) { $('stNote').textContent = s; };
     $('stName').value = st.name; hexIn.value = st.hex; $('stCode').value = st.code; $('stPlanet').value = st.planet;
-    var SHOWS = [['name', 'Name'], ['alien', 'Alien-font name'], ['gal', 'Home galaxy'], ['planet', 'Planet name'], ['glyphs', 'Glyphs'], ['hex', 'Hex address'], ['code', 'Friend code']];
+    var SHOWS = [['name', 'Name'], ['alien', 'NMS-font name'], ['gal', 'Home galaxy'], ['planet', 'Planet name'], ['glyphs', 'Glyphs'], ['hex', 'Hex address'], ['code', 'Friend code']];
     $('stShow').innerHTML = SHOWS.map(function (k) { return '<label><input type="checkbox" data-s="' + k[0] + '"' + (st.show[k[0]] ? ' checked' : '') + '><span>' + k[1] + '</span></label>'; }).join('');
     $('stShow').addEventListener('change', function (e) { var c = e.target; if (c.dataset.s) { st.show[c.dataset.s] = c.checked; redraw(); } });
     $('stCode').addEventListener('input', function () { var v = $('stCode').value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 16); if (v !== $('stCode').value) $('stCode').value = v; if (v && !st.show.code) { st.show.code = true; var cb = $('stShow').querySelector('[data-s="code"]'); if (cb) cb.checked = true; } redraw(); });

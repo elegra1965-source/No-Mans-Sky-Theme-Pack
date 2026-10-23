@@ -224,10 +224,6 @@
 "label": "Sentinel"
 },
 {
-"file": "assets/icons/nms_lore_03_sentinel.png",
-"label": "Sentinel"
-},
-{
 "file": "assets/icons/nms_lore_04_interceptor.png",
 "label": "Interceptor"
 },
@@ -302,5 +298,25 @@
 {
 "file": "assets/icons/nms_lore_22_mission_portal.png",
 "label": "Mission Portal"
+},
+{
+"file": "assets/icons/nms_lore_23_arachnid_large.png",
+"label": "Arachnid Large"
+},
+{
+"file": "assets/icons/nms_lore_24_arachnid_medium.png",
+"label": "Arachnid Medium"
+},
+{
+"file": "assets/icons/nms_lore_25_arachnid_small.png",
+"label": "Arachnid Small"
+},
+{
+"file": "assets/icons/nms_lore_26_corrupted_sentinel.png",
+"label": "Corrupted Sentinel"
+},
+{
+"file": "assets/icons/nms_lore_27_title_unlocked.png",
+"label": "Title Unlocked"
 }
 ]
