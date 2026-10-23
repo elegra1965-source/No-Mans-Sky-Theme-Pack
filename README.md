@@ -2,7 +2,7 @@
 
 **Live:** [theme.nomansskyhub.app](https://theme.nomansskyhub.app)
 
-Turn your phone or desktop into a *No Man's Sky* terminal. 80 hand-themed icons, 17 wallpapers, 5 charging animations and the NMS alphabet as an installable font. Free, no account, for Android, iPhone, Windows, Mac and Linux.
+Turn your phone or desktop into a *No Man's Sky* terminal. 79 hand-themed icons, 17 wallpapers, 5 charging animations and the NMS alphabet as an installable font. Free, no account, for Android, iPhone, Windows, Mac and Linux.
 
 Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
@@ -10,7 +10,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 ## What's in the pack
 
-- **80 themed icons**, each exported as transparent PNGs in 7 sizes, plus Windows `.ico` versions
+- **79 themed icons**, each exported as transparent PNGs in 6 sizes, plus Windows `.ico` versions
 - **17 wallpapers** in 6 resolutions each, for phone and desktop
 - **5 charging animations** as watermark-free MP4s for Android and iPhone
 - **The NMS alphabet** as an installable TTF font
