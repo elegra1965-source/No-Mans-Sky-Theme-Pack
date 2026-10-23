@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>/* the old *.netlify.app address is retired: one family domain so the Traveller ID cookie reaches every app */if(/\.netlify\.app$/.test(location.hostname))location.replace("https://theme.nomansskyhub.app"+location.pathname+location.search+location.hash);</script>
+<script src="/lang.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NMS Widgets · No Man's Sky Theme Pack</title>
 <meta name="description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, planet scan weather and your home portal address. Add any of them to your home screen. Free, fan-made.">
@@ -171,7 +172,7 @@
     var setAl = alienLine(document.getElementById('al'), 'Traveller');
     var tick = function(){ var n = new Date();
       document.getElementById('t').innerHTML = pad(n.getHours()) + ':' + pad(n.getMinutes()) + '<small>:' + pad(n.getSeconds()) + '</small>';
-      document.getElementById('d').textContent = DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()] + ' ' + n.getFullYear();
+      document.getElementById('d').textContent = (window.NMS_LANG && NMS_LANG() !== 'en') ? NMS_DATE(n, {weekday:'long'}) + ' · ' + NMS_DATE(n, {day:'numeric', month:'short', year:'numeric'}) : DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()] + ' ' + n.getFullYear();
       setAl(DAYS[n.getDay()]); };
     tick(); setInterval(tick, 1000);
   }
@@ -186,7 +187,7 @@
     var t0 = Date.now();
     var tick2 = function(){ var n = new Date();
       document.getElementById('t').textContent = pad(n.getHours()) + ':' + pad(n.getMinutes());
-      document.getElementById('d').textContent = DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()];
+      document.getElementById('d').textContent = (window.NMS_LANG && NMS_LANG() !== 'en') ? NMS_DATE(n, {weekday:'long'}) + ' · ' + NMS_DATE(n, {day:'numeric', month:'short'}) : DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()];
       var m = Math.floor((Date.now() - t0) / 60000); document.getElementById('up').textContent = Math.floor(m/60) + 'h ' + pad(m%60) + 'm'; };
     tick2(); setInterval(tick2, 15000);
     var showB = function(b){

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>/* the old *.netlify.app address is retired: one family domain so the Traveller ID cookie reaches every app */if(/\.netlify\.app$/.test(location.hostname))location.replace("https://theme.nomansskyhub.app"+location.pathname+location.search+location.hash);</script>
+<script src="/lang.js?v=1"></script>
 <script>/* visitor stats: GoatCounter (free, no cookies), same dashboard as the Hub; pages are recorded as host/path */(function(){if(!/(^|\.)nomansskyhub\.app$/.test(location.hostname))return;window.goatcounter={path:function(p){return location.host+p}};var s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.setAttribute("data-goatcounter","https://nomansskyhub.goatcounter.com/count");document.head.appendChild(s);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Expedition Countdown · No Man's Sky</title>
@@ -106,8 +107,9 @@
   var $ = function (id) { return document.getElementById(id); };
   var S = null, timer = 0;
   function pad(n) { return (n < 10 ? '0' : '') + n; }
-  function day(t) { return new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }); }
-  function when(t) { return new Date(t).toLocaleString(undefined, { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
+  function loc() { return window.NMS_LANG && NMS_LANG() !== 'en' ? NMS_LANG() : undefined; }
+  function day(t) { return new Date(t).toLocaleDateString(loc(), { day: 'numeric', month: 'short' }); }
+  function when(t) { return new Date(t).toLocaleString(loc(), { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
   function setClock(ms) { var l = NMSExpedition.left(ms); $('d').textContent = l.d; $('h').textContent = pad(l.h); $('m').textContent = pad(l.m); $('s').textContent = pad(l.s); }
   function tick() {
     if (!S) return;
@@ -129,7 +131,7 @@
       $('title').textContent = e.title.toUpperCase();
       $('sub').textContent = 'Ends ' + when(e.end) + ' (your time)';
       $('from').textContent = day(e.start); $('to').textContent = day(e.end);
-      if (S.next) { $('next').hidden = false; $('next').innerHTML = 'Next: <b>Expedition ' + S.next.num + ': ' + esc(S.next.title) + '</b> · ' + day(S.next.start); }
+      if (S.next) { $('next').hidden = false; $('next').innerHTML = T('Next:') + ' <b>' + T('Expedition {n}', { n: S.next.num }) + ': ' + esc(S.next.title) + '</b> · ' + day(S.next.start); }
     } else if (S.next) {
       var n = S.next;
       $('kick').textContent = 'NEXT EXPEDITION ' + n.num + (n.redux ? ' · REDUX' : '');
@@ -149,6 +151,8 @@
     }
     tick();
   }
+  function T(s, v) { return window.NMS_T ? NMS_T(s, v) : s.replace(/\{n\}/, v && v.n); }
+  document.addEventListener('nms-lang', function () { if (S) render(); });
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function boot(force) {
     NMSExpedition.load(force).then(function (r) { S = r; render(); }).catch(function () {

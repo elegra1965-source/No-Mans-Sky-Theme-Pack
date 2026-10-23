@@ -38,10 +38,13 @@ Everything is drawn in your browser; nothing is uploaded. The only thing sent an
 - A drag-to-compare before/after slider, and before/after desktops for Windows and macOS
 - Platform-aware install as an app (Android prompt, iPhone guide)
 - **Calm mode.** A small **Calm** switch in the bottom-left corner swaps the patterned and image backgrounds for a plain dark one, for anyone who finds the page busy. It's shared across the whole No Man's Sky Hub family (one switch turns it on for every site), in `calm.js`.
+- **Your language.** The 🌐 button switches the page between English, Español, Deutsch, Nederlands, Polski, Français, Português (Brasil) and Italiano. The widgets and the countdown page follow it too, with dates in your language. The choice is shared by the whole No Man's Sky Hub family: pick it once and every site follows (a small cookie on `.nomansskyhub.app`, nothing goes to a server). On a first visit the page offers your phone's language once instead of switching by itself. Names, glyphs and portal addresses stay as they are. It lives in `lang.js` (the same file on every site), with one small pack per language in `lang/` and a font for Polish letters in `fonts/`.
 
 ![Drag-to-compare: stock icons vs the NMS Theme Pack](screenshots/02-before-after.jpg)
 
 ![A Windows desktop before and after the pack](screenshots/03-desktop-transformed.jpg)
+
+<img src="screenshots/08-languages.jpg" alt="The Theme Pack on a phone: the language picker (left) and the page in Italiano (right)" width="560">
 
 ## How it's built
 
@@ -60,6 +63,7 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 | `assets/*.zip` | The downloads: icons, wallpapers, charging animations, widget kit |
 | `assets/icons/`, `assets/widgets/` | Icon previews and widget kit files |
 | `sw.js`, `manifest.json`, `pwa/` | Install and offline support |
+| `lang.js`, `lang/`, `fonts/` | Language picker and translations, shared by every Hub site |
 
 ## Credits
 

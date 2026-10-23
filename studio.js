@@ -484,12 +484,13 @@
       if (EX.live) $('stExpBar').style.width = Math.min(100, (now - e.start) / (e.end - e.start) * 100).toFixed(1) + '%';
     }
     function expRender() {
-      var d = function (t) { return new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }); };
+      var d = function (t) { return window.NMS_DATE ? NMS_DATE(new Date(t), { day: 'numeric', month: 'short' }) : new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }); };
       if (EX.live) { $('stExpK').textContent = 'EXPEDITION ' + EX.live.num + (EX.live.redux ? ' · REDUX' : '') + ' · ENDS IN'; $('stExpT').textContent = EX.live.title; $('stExpS').textContent = d(EX.live.start) + ' – ' + d(EX.live.end) + (EX.next ? ' · next: ' + EX.next.title + ', ' + d(EX.next.start) : ''); }
       else if (EX.next) { $('stExpK').textContent = 'NEXT EXPEDITION ' + EX.next.num + ' · STARTS IN'; $('stExpT').textContent = EX.next.title; $('stExpS').textContent = 'Starts ' + d(EX.next.start); $('stExpBar').style.width = '0'; }
       else { $('stExpK').textContent = 'BETWEEN EXPEDITIONS'; $('stExpT').textContent = 'No expedition live'; $('stExpC').textContent = 'Check back soon'; $('stExpS').textContent = EX.last ? 'Last: ' + EX.last.title + ', ended ' + d(EX.last.end) : ''; }
       expTick();
     }
+    document.addEventListener('nms-lang', function () { if (EX) expRender(); });
     function loadExp() {
       if (expOn) return; expOn = true;
       if (!window.NMSExpedition) return;
