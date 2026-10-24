@@ -33,6 +33,12 @@ Everything is drawn in your browser; nothing is uploaded. The only thing sent an
 
 ![Making a portal wallpaper: tapping in the glyphs, changing the background, planet of the day and the countdown](screenshots/06-make-it-yours.gif)
 
+## New here? Take the tour
+
+First-time visitors get a small **New here? ▶ Take the tour / Dive in** box (shown once, never again). The tour dims the page and spotlights Install / Download, the personalised HUD, widgets, the NMS font, the live preview and How to apply, one step at a time with Back / Next / Skip. Replay it any time from the **▷ TOUR (next to See it live)** button. The phone's Back button closes it, and it's translated into every language the site offers. Shared `nms-tour.js`, the same file on every nomansskyhub.app site.
+
+<img src="screenshots/08-tour.jpg" alt="Left: the New here? Take the tour prompt. Right: tour step 2 of 6, Your personalised HUD" width="560">
+
 ## The site
 
 - An interactive phone mockup and a live grid of every icon
