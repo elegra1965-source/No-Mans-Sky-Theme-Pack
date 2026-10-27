@@ -8,8 +8,9 @@
 <title>No Man's Sky Theme Pack — 79 Icons, Wallpapers &amp; NMS Font</title>
 <script src="/calm.js?v=1"></script>
 <script src="/lang.js?v=2"></script>
-<script src="/nms-update.js?v=1" defer></script>
-<meta name="description" content="A free No Man's Sky-inspired customization pack: 79 hand-themed No Man's Sky icons in multiple sizes for Android, iPhone, Windows, Mac &amp; Linux, plus wallpapers, charging animations and a custom NMS font. Installable as an app.">
+<script src="/nms-update.js?v=2" defer></script>
+<meta name="robots" content="max-image-preview:large">
+<meta name="description" content="79 free No Man's Sky icons for Android, iPhone, Windows, Mac &amp; Linux, plus wallpapers, charging animations and a custom NMS font. Installs as an app.">
 <meta name="theme-color" content="#070b11">
 <link rel="canonical" href="https://theme.nomansskyhub.app/">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -21,11 +22,14 @@
 <meta property="og:title" content="No Man's Sky Theme Pack — Free Sci-Fi Customization Suite">
 <meta property="og:description" content="79 hand-themed No Man's Sky icons for Android, iPhone, Windows, Mac &amp; Linux, plus wallpapers, charging animations and a custom NMS font. Free.">
 <meta property="og:url" content="https://theme.nomansskyhub.app/">
-<meta property="og:image" content="https://theme.nomansskyhub.app/pwa/icon-512.png">
+<meta property="og:image" content="https://theme.nomansskyhub.app/screenshots/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="No Man's Sky Theme Pack: icons, wallpapers and NMS font">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="No Man's Sky Theme Pack — Free Sci-Fi Customization Suite">
 <meta name="twitter:description" content="79 hand-themed No Man's Sky icons for Android, iPhone, Windows, Mac &amp; Linux, plus wallpapers, charging animations and a custom NMS font. Free.">
-<meta name="twitter:image" content="https://theme.nomansskyhub.app/pwa/icon-512.png">
+<meta name="twitter:image" content="https://theme.nomansskyhub.app/screenshots/og-card.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -276,6 +280,8 @@
   .share-btn.twitter{color:#1d9bf0;border-color:rgba(29,155,240,.4);background:rgba(29,155,240,.08);}
   .share-btn.twitter:hover{background:rgba(29,155,240,.18);border-color:#1d9bf0;}
   .share-btn.copy{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.08);}
+  .share-btn.discord{color:#8c9eff;border-color:rgba(88,101,242,.5);background:rgba(88,101,242,.1);}
+  .share-btn.discord:hover{background:rgba(88,101,242,.22);border-color:#5865f2;}
   .share-btn.copy:hover{background:rgba(0,229,255,.18);border-color:var(--cyan);}
   .dl-count{text-align:center;margin-top:18px;font-size:.7rem;letter-spacing:2px;color:var(--text-dim);}
   .dl-count span{color:var(--gold);font-weight:700;}
@@ -390,7 +396,8 @@
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
     background:rgba(7,11,17,.95);border:1px solid var(--cyan);border-radius:var(--r-sm);padding:11px 18px;
     font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:1px;color:var(--cyan);z-index:10000;
-    opacity:0;pointer-events:none;transition:.25s;box-shadow:0 6px 30px rgba(0,229,255,.25);}
+    opacity:0;pointer-events:none;transition:.25s;box-shadow:0 6px 30px rgba(0,229,255,.25);
+    width:max-content;max-width:calc(100vw - 32px);text-align:center;line-height:1.5;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   /* Install banner */
@@ -582,7 +589,7 @@
   }
 </style>
 <link rel="stylesheet" href="polish.css">
-<link rel="stylesheet" href="studio.css">
+<link rel="stylesheet" href="studio.css?v=20261027">
 
 <style>
 /* ===== 2026-10-14 preview additions ===== */
@@ -690,7 +697,7 @@
     <a class="brand" href="#top" translate="no"><img src="data:image/png;base64,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" alt=""> No Man's Sky Theme Pack</a>
     <div class="nav-links">
       <a href="preview.html" target="_blank" rel="noopener">Preview</a>
-      <a href="#studio" onclick="var d=document.querySelector('#studio details');if(d)d.open=true;">Your HUD</a>
+      <a href="#studio" onclick="var d=document.querySelector('#studio details');if(d)d.open=true;">Make it yours</a>
       <a href="#widgets" onclick="var d=document.querySelector('#widgets details');if(d)d.open=true;">Widgets</a>
       <a href="#alphabet">Font</a>
       <a href="#downloads">Downloads</a>
@@ -711,9 +718,10 @@
       <span class="eyebrow"><span class="dot"></span> Free · v2.1 · Installable app</span>
       <h1 id="mainTitle">NO MAN'S SKY THEME PACK</h1>
       <span class="h1-sub" id="fontHint">↕ tap title to switch font · now showing: NMS font</span>
-      <p class="lede">Turn your phone into a No Man's Sky terminal — 79 hand-themed No Man's Sky icons for Android, iPhone, Windows, Mac &amp; Linux, plus wallpapers, charging animations and a custom NMS font.</p>
+      <p class="lede">Make No Man's Sky yours: your Traveller name and portal glyphs on a wallpaper (on our art or your own picture), today's real planet and the expedition countdown. Plus 79 hand-themed icons for Android, iPhone, Windows, Mac &amp; Linux, wallpapers, charging animations and a custom NMS font.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" id="heroInstall" href="#downloads">⬇ Install / Download</a>
+        <a class="btn btn-primary" id="heroMake" href="#studio" onclick="var d=document.querySelector('#studio details');if(d)d.open=true;">✦ Make it yours</a>
+        <a class="btn btn-ghost" id="heroInstall" href="#downloads">⬇ Install / Download</a>
         <a class="btn btn-ghost" href="preview.html" target="_blank" rel="noopener">◎ See it live</a>
       </div>
       <div class="trust">
@@ -755,7 +763,7 @@
       <span class="acc-dot"></span>
       <span class="acc-kicker">New</span>
       <span class="acc-divider"></span>
-      <div class="acc-title-col"><h2 class="sec-title">Traveller's Personalised HUD</h2><span class="acc-sub">Your name &amp; glyphs on a wallpaper · planet of the day · expedition countdown</span></div>
+      <div class="acc-title-col"><h2 class="sec-title">Traveller's Personalised HUD</h2><span class="acc-sub">Your name &amp; glyphs on our art or your own picture · planet of the day · expedition countdown</span></div>
       <span class="acc-corner-tl"></span>
       <span class="acc-corner-br"></span>
       <div class="acc-arrow-box"><span class="acc-arrow">▾</span></div>
@@ -1316,9 +1324,9 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.243 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         Share on X
       </a>
-      <button class="share-btn copy" id="copyLinkBtn" onclick="copyLink()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        <span id="copyLinkTxt">Copy Link</span>
+      <button class="share-btn discord" id="discordShareBtn" type="button" onclick="shareDiscord()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18.2 18.2 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.4C.6 9 -.3 13.5.1 18a19.8 19.8 0 0 0 6 3l1.3-2.1a12.8 12.8 0 0 1-2-1l.5-.4a14.1 14.1 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.7 19.7 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.6zM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg>
+        Discord
       </button>
     </div>
   </div>
@@ -1475,9 +1483,9 @@
   // stagger tile animation
   document.querySelectorAll('.icon-tile').forEach(function(el,i){el.style.animationDelay=(i*0.02)+'s';});
 
-  function showToast(msg){
+  function showToast(msg,ms){
     var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-    clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show');},1600);
+    clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show');},ms||1600);
   }
 
   // ---- Before / after slider ----
@@ -1601,12 +1609,14 @@
   }
 })();
 
-  function copyLink() {
-    navigator.clipboard.writeText('https://theme.nomansskyhub.app').then(function() {
-      var btn = document.getElementById('copyLinkTxt');
-      btn.textContent = 'Copied!';
-      setTimeout(function(){ btn.textContent = 'Copy Link'; }, 2000);
-    });
+  /* 2026-10-27 (Tony): Discord has no share link -- copy the message + link, then open Discord
+     so they pick the server / DM to paste it in (same idea as the Hub). Opened straight away so
+     pop-up blockers don't stop it. */
+  function shareDiscord() {
+    var txt = "Free No Man's Sky Theme Pack \u2014 79 icons, wallpapers, charging animations & custom NMS font. https://theme.nomansskyhub.app";
+    var done = function(){ showToast((window.NMS_TR || String)('\u2713 COPIED \u2014 PASTE IT IN ANY SERVER OR DM'), 4500); };
+    try { navigator.clipboard.writeText(txt).then(done, done); } catch(e) { done(); }
+    window.open('https://discord.com/app', '_blank');
   }
 
   // ── Download counter (2026-10-14: countapi.xyz shut down; now the map site's dl-count function) ──
@@ -1678,7 +1688,7 @@
 </script>
 <script src="polish.js" defer></script>
 <script src="expedition.js" defer></script>
-<script src="studio.js" defer></script>
+<script src="studio.js?v=20261027" defer></script>
 
 <script>
 /* ===== 2026-10-14 preview: living phone (hero demo without a video file) =====
@@ -1755,7 +1765,7 @@
   var cards = document.querySelectorAll('#widgets .wcard'); if (!cards.length) return;
   var pop = document.createElement('div'); pop.className = 'wpop';
   pop.innerHTML = '<div class="wpop-phone"><iframe title="Widget preview" tabindex="-1" aria-hidden="true"></iframe></div>' +
-    '<div class="wpop-bar"><span class="wpop-t"></span><a class="wpop-open" target="_blank" rel="noopener">Open ↗</a><button type="button" class="wpop-x" aria-label="Close preview">✕</button></div>';
+    '<div class="wpop-bar"><span class="wpop-t"></span><a class="wpop-open" href="widgets.html" target="_blank" rel="noopener">Open ↗</a><button type="button" class="wpop-x" aria-label="Close preview">✕</button></div>';
   document.body.appendChild(pop);
   var fr = pop.querySelector('iframe'), cur = null, hideT = 0, showT = 0;
   var hover = matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -1806,6 +1816,6 @@ if (window.NMS_PUSH) NMS_PUSH.wire(document.getElementById('newStuffAlertBtn'), 
 });
 </script>
 <script src="/nms-tour.js?v=1"></script>
-<script>NMSTour.init({id:'theme',button:{after:'.cta-row .btn-ghost',className:'btn btn-ghost',label:'▷ TOUR'},steps:[{"sel": "#heroInstall", "title": "Get the pack", "body": "Icons, wallpapers and charging animations for your phone or computer, all free."}, {"sel": "#studio .sec-title", "title": "Your personalised HUD", "body": "Make a wallpaper with your name, galaxy and portal glyphs."}, {"sel": "#widgets .sec-title", "title": "Widgets", "body": "Ready-made NMS widgets: live clock, home portal and planet scan. Add one to your home screen."}, {"sel": "#alphabet .sec-title", "title": "Write in NMS", "body": "Type anything to see it in the NMS font. The font itself comes with the pack."}, {"sel": "#preview .sec-title", "title": "Live preview", "body": "A live look at the real icons. Tap any icon to copy its filename."}, {"sel": "#apply .sec-title", "title": "How to apply", "body": "Step-by-step setup for Android, iPhone, Windows, Mac and Linux."}]});</script>
+<script>NMSTour.init({id:'theme',button:{after:'.cta-row a[href="preview.html"]',className:'btn btn-ghost',label:'▷ TOUR'},steps:[{"sel": "#heroMake", "title": "Make it yours", "body": "Make a wallpaper with your name, galaxy and portal glyphs, on our art or your own picture."}, {"sel": "#heroInstall", "title": "Get the pack", "body": "Icons, wallpapers and charging animations for your phone or computer, all free."}, {"sel": "#widgets .sec-title", "title": "Widgets", "body": "Ready-made NMS widgets: live clock, home portal and planet scan. Add one to your home screen."}, {"sel": "#alphabet .sec-title", "title": "Write in NMS", "body": "Type anything to see it in the NMS font. The font itself comes with the pack."}, {"sel": "#preview .sec-title", "title": "Live preview", "body": "A live look at the real icons. Tap any icon to copy its filename."}, {"sel": "#apply .sec-title", "title": "How to apply", "body": "Step-by-step setup for Android, iPhone, Windows, Mac and Linux."}]});</script>
 </body>
 </html>

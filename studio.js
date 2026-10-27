@@ -16,6 +16,7 @@
   var SIZES = { phone: [1080, 2400], desk: [2560, 1440] };
   var LSK = 'nms_studio';
   var $ = function (id) { return document.getElementById(id); };
+  function T(s) { return window.NMS_TR ? window.NMS_TR(s) : s; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function traveller() { try { var m = document.cookie.match(/(?:^|; )nmsTraveller=([^;]*)/); return m ? JSON.parse(decodeURIComponent(m[1])) : {}; } catch (e) { return {}; } }
   function saved() { try { return JSON.parse(localStorage.getItem(LSK) || '{}') || {}; } catch (e) { return {}; } }
@@ -116,11 +117,31 @@
      then the glyphs, and the NMS friend code at the bottom. The block is laid out once dry to measure it, then drawn
      bottom-anchored so turning lines off never leaves gaps. */
   var SHOW_DEF = { name: true, alien: true, gal: true, planet: true, glyphs: true, hex: true, code: false };
+  /* 2026-10-27 (Tony): use your own picture as the background. It is shrunk to at most 2560 px on the
+     long side in the browser and kept only on this device (localStorage); nothing is uploaded. */
+  var OWNK = 'nms_studio_own', OWN = null;
+  try { OWN = localStorage.getItem(OWNK) || null; } catch (e) {}
+  function readOwn(file) {
+    return new Promise(function (res, rej) {
+      var u = URL.createObjectURL(file), im = new Image();
+      im.onload = function () {
+        var k = Math.min(1, 2560 / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas');
+        c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k);
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(u);
+        var d = c.toDataURL('image/jpeg', .85);
+        try { localStorage.setItem(OWNK, d); } catch (e) { try { d = c.toDataURL('image/jpeg', .6); localStorage.setItem(OWNK, d); } catch (e2) {} }
+        res(d);
+      };
+      im.onerror = function () { URL.revokeObjectURL(u); rej(new Error('read')); };
+      im.src = u;
+    });
+  }
   function drawPortal(cv, o) {
     var W = SIZES[o.fmt][0], H = SIZES[o.fmt][1], desk = o.fmt === 'desk';
     var sh = o.show || SHOW_DEF;
     cv.width = W; cv.height = H; var x = cv.getContext('2d');
-    return Promise.all([fonts(), glyphs(), o.bg === 'stars' ? null : img(B + 'bg-' + o.bg + '-' + (desk ? 'desk' : 'phone') + '.jpg')]).then(function (r) {
+    var bgP = o.bg === 'stars' ? null : o.bg === 'own' ? (OWN ? img(OWN) : null) : img(B + 'bg-' + o.bg + '-' + (desk ? 'desk' : 'phone') + '.jpg');
+    return Promise.all([fonts(), glyphs(), bgP]).then(function (r) {
       var G = r[1], bg = r[2];
       if (bg) cover(x, bg, W, H, desk ? .5 : .4); else stars(x, W, H, (o.name || 'T').length * 997 + 11);
       var s = desk ? H / 1440 * 1.5 : W / 1080;
@@ -245,11 +266,40 @@
       return { biome: b, name: p[1], raw: p[2], weather: p[3], by: p[7], extreme: !!p[8], sys: s[0], galaxy: s[1], glyph: s[2], race: s[3], star: s[4], key: b.toLowerCase() };
     }).filter(Boolean);
   }
+  /* 2026-10-27 (Tony: Haven data -> also use the Almanac): Haven still picks the 8 worlds and who charted
+     them; NMS Almanac (through the map's server, key kept there) adds the real planet: its description,
+     weather, sentinels, the planet's own portal address and its disc picture. Same pairing as the Weather
+     Station (by planet name or game name). Falls back to the Haven data when the Almanac doesn't know it. */
+  var ALM = 'https://map.nomansskyhub.app/.netlify/functions/almanac', ALK = 'nms_studio_alm1';
+  function almGet(k) { try { var o = JSON.parse(localStorage.getItem(ALK) || '{}'), e = o[k]; return e && Date.now() - e.t < 7 * 864e5 ? e.v : undefined; } catch (e) { return undefined; } }
+  function almPut(k, v) { try { var o = JSON.parse(localStorage.getItem(ALK) || '{}'); o[k] = { t: Date.now(), v: v }; localStorage.setItem(ALK, JSON.stringify(o)); } catch (e) {} }
+  function almFetch(w) {
+    var k = w.gIndex + ':' + w.glyph.slice(1), c = almGet(k);
+    if (c !== undefined) return Promise.resolve(c);
+    var ctl = window.AbortController ? new AbortController() : null, tm = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
+    return fetch(ALM + '?addr=' + encodeURIComponent(w.glyph) + '&galaxy=' + w.gIndex, ctl ? { signal: ctl.signal } : {})
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.ok) return null;
+        var want = String(w.name || '').toLowerCase(), b = null;
+        (d.found && d.bodies || []).forEach(function (x) { if (!b && (String(x.name || '').toLowerCase() === want || String(x.gameName || '').toLowerCase() === want)) b = x; });
+        var out = b ? { portal: b.portal, desc: b.desc, weather: b.weather, extreme: !!b.extreme, sent: b.sentinels, disc: b.disc, discS: b.discSmall || b.disc } : false;
+        almPut(k, out); return out;
+      }).catch(function () { return null; }).then(function (x) { clearTimeout(tm); return x; });
+  }
+  function almApply(w, a) {
+    var slug = String(w.galaxy).toLowerCase().replace(/[\s']+/g, '-');
+    w.glyph = a.portal; w.raw = String(a.desc || '').replace(/ (Planet|Moon)$/, ''); w.weather = a.weather || w.weather;
+    w.extreme = a.extreme; w.sent = a.sent; w.disc = a.disc; w.discS = a.discS;
+    w.almUrl = 'https://nmsalmanac.com/planet/' + encodeURIComponent(slug) + '/' + a.portal;
+  }
   function drawPlanet(cv, w, fmt, who) {
     var W = SIZES[fmt][0], H = SIZES[fmt][1], desk = fmt === 'desk';
     cv.width = W; cv.height = H; var x = cv.getContext('2d');
-    return Promise.all([fonts(), glyphs(), img(WX + '/hd/hd-' + w.key + '.jpg', true)]).then(function (r) {
-      var G = r[1], im = r[2], s = desk ? H / 1440 * 1.1 : W / 1080, cx = W / 2;
+    var disc = w.disc ? img(w.disc, true).catch(function () { return null; }) : Promise.resolve(null);
+    return Promise.all([fonts(), glyphs(), img(WX + '/hd/hd-' + w.key + '.jpg', true), disc]).then(function (r) {
+      var G = r[1], im = r[2], D = r[3], s = desk ? H / 1440 * 1.1 : W / 1080, cx = W / 2;
+      var discAt = function (dx, dy, dd) { x.save(); x.shadowColor = 'rgba(0,229,255,.45)'; x.shadowBlur = 36 * s; x.drawImage(D, dx - dd / 2, dy - dd / 2, dd, dd); x.restore(); };
       x.textAlign = 'center'; x.textBaseline = 'alphabetic';
       if (desk) {
         cover(x, im, W, H);
@@ -264,19 +314,27 @@
         spaced(x, 'PLANET OF THE DAY · ' + stamp(), cx, py - 40 * s, 6 * s);
       }
       var y = desk ? H - 700 * s : H * .4 + (W - 80 * s) * 9 / 16 + 120 * s;
+      if (desk && D) discAt(W - 330 * s, H - 330 * s, 380 * s); /* desktop: bottom right, clear of the centred text */
       if (desk) { x.font = '600 ' + Math.round(24 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.95)'; spaced(x, 'PLANET OF THE DAY · ' + stamp(), cx, y, 6 * s); y += 84 * s; }
-      var ns = fit(x, w.name.toUpperCase(), '900 {s}px Orbitron', W - 120 * s, Math.round(78 * s), Math.round(40 * s));
-      x.save(); x.shadowColor = 'rgba(0,229,255,.6)'; x.shadowBlur = 20 * s; x.fillStyle = '#eaf6ff'; spaced(x, w.name.toUpperCase(), cx, y, 3 * s); x.restore();
+      /* phone: the Almanac planet disc sits just left of the planet name, the pair centred */
+      var nd = (D && !desk) ? 130 * s : 0, ng = nd ? 22 * s : 0, NM = w.name.toUpperCase();
+      var ns = fit(x, NM, '900 {s}px Orbitron', W - 120 * s - nd - ng, Math.round(78 * s), Math.round(40 * s));
+      if (nd) {
+        var tw = 0; NM.split('').forEach(function (ch) { tw += x.measureText(ch).width + 3 * s; }); tw -= 3 * s;
+        var gx = cx - (nd + ng + tw) / 2;
+        discAt(gx + nd / 2, y - ns * 0.36, nd);
+        x.save(); x.shadowColor = 'rgba(0,229,255,.6)'; x.shadowBlur = 20 * s; x.fillStyle = '#eaf6ff'; spaced(x, NM, gx + nd + ng, y, 3 * s, 'left'); x.restore();
+      } else { x.save(); x.shadowColor = 'rgba(0,229,255,.6)'; x.shadowBlur = 20 * s; x.fillStyle = '#eaf6ff'; spaced(x, NM, cx, y, 3 * s); x.restore(); }
       y += 56 * s; x.font = '600 ' + Math.round(34 * s) + 'px Rajdhani'; x.fillStyle = 'rgba(207,224,240,.85)';
       x.fillText(w.sys + ' system · ' + w.star + ' star · ' + w.galaxy, cx, y);
       y += 52 * s; x.font = '700 ' + Math.round(26 * s) + 'px Orbitron'; x.fillStyle = '#f0a500';
       spaced(x, (w.raw && w.raw !== w.biome ? w.biome + ' · ' + w.raw : w.biome).toUpperCase() + (w.extreme ? '  ⚠ EXTREME' : ''), cx, y, 4 * s);
-      y += 46 * s; x.font = '500 ' + Math.round(30 * s) + 'px Rajdhani'; x.fillStyle = 'rgba(207,224,240,.75)'; x.fillText(w.weather, cx, y);
+      y += 46 * s; x.font = '500 ' + Math.round(30 * s) + 'px Rajdhani'; x.fillStyle = 'rgba(207,224,240,.75)'; x.fillText(w.weather + (w.sent ? ' · Sentinels: ' + w.sent : ''), cx, y);
       y += 40 * s;
       y = glyphRow(x, G, w.glyph, cx, y, Math.min(W - 120 * s, 900 * s));
       y += 64 * s; x.font = '700 ' + Math.round(44 * s) + 'px Orbitron'; x.fillStyle = '#ffc23d'; spaced(x, w.glyph, cx, y, 11 * s);
       y += 54 * s; x.font = '500 ' + Math.round(24 * s) + 'px Rajdhani'; x.fillStyle = 'rgba(207,224,240,.6)';
-      x.fillText('Charted by ' + w.by + ' · Voyager’s Haven' + (who ? ' · saved by ' + who : ''), cx, y);
+      x.fillText('Charted by ' + w.by + ' · Voyager’s Haven' + (w.disc ? ' · Data + picture: NMS Almanac' : '') + (who ? ' · saved by ' + who : ''), cx, y);
       x.font = '600 ' + Math.round(19 * s) + 'px Orbitron'; x.fillStyle = 'rgba(207,224,240,.5)';
       spaced(x, 'WEATHER.NOMANSSKYHUB.APP · THEME.NOMANSSKYHUB.APP', cx, H - (desk ? 30 : 66) * s, 3 * s);
     });
@@ -332,7 +390,8 @@
       '</div>' +
       // 2026-10-14: preview column also holds the background strip and one row of size + download + share
       '<div class="st-side"><div class="st-prev"><canvas id="stCv" aria-label="Wallpaper preview"></canvas></div>' +
-      '<div class="st-f st-bgf"><span>Background <em>swipe for more</em></span><div class="st-bgs" id="stBgs"></div></div>' +
+      '<div class="st-f st-bgf"><span>Background <em>swipe for more</em></span><div class="st-bgs" id="stBgs"></div>' +
+      '<label class="st-own"><input type="file" accept="image/*" id="stOwn"><span>📷 Use your own picture</span></label><small class="st-ownh">Your picture stays on this device. Nothing is uploaded.</small></div>' +
       '<div class="st-row"><div class="st-seg" id="stFmt" role="group" aria-label="Size"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div>' +
       '<div class="st-acts"><button type="button" class="btn btn-primary" id="stSave">⬇ Download wallpaper</button><button type="button" class="btn btn-ghost" id="stShare">Share</button></div></div>' +
       '<p class="st-note" id="stNote" aria-live="polite"></p></div></div></div>' +
@@ -342,7 +401,7 @@
       '<div class="st-form"><div class="st-f"><span>Size</span><div class="st-seg" id="stPFmt"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div></div>' +
       '<div class="st-acts"><button type="button" class="btn btn-primary" id="stPSave">⬇ Download today’s planet</button><button type="button" class="btn btn-ghost" id="stPShare">Share</button>' +
       '<a class="btn btn-ghost" id="stPMap" target="_blank" rel="noopener">Fly there on the map →</a></div>' +
-      '<p class="st-note" id="stPNote" aria-live="polite"></p></div>' +
+      '<p class="st-note st-credit" id="stPCredit"></p><p class="st-note" id="stPNote" aria-live="polite"></p></div>' +
       '<div class="st-prev"><canvas id="stPCv" aria-label="Planet of the day preview"></canvas></div></div></div>' +
       // expedition
       '<div class="st-pane" data-p="exp"><div class="st-exp" id="stExp"><div class="st-exp-k" id="stExpK">EXPEDITION</div><div class="st-exp-t" id="stExpT">Reading the Atlas…</div>' +
@@ -373,12 +432,16 @@
     pad.innerHTML = HEX.split('').map(function (c, k) { return '<button type="button" data-k="' + k + '" title="' + GN[k] + ' (' + c + ')"><img src="' + B + 'glyphs/g-' + c + '.png" alt="' + GN[k] + '"><i>' + c + '</i></button>'; }).join('') +
       '<button type="button" data-k="back" title="Backspace">⌫</button>';
     function bgTile(b, dup) {
-      return '<button type="button" data-b="' + b[0] + '" title="' + b[1] + '"' + (dup ? ' aria-hidden="true" tabindex="-1"' : '') + (b[0] === 'stars' ? ' class="st-stars"' : ' style="background-image:url(' + B + 'bg-' + b[0] + '-thumb.jpg)"') + '><span>' + b[1] + '</span></button>';
+      var look = b[0] === 'stars' ? ' class="st-stars"' : b[0] === 'own' ? ' style="background-image:url(' + OWN + ')"' : ' style="background-image:url(' + B + 'bg-' + b[0] + '-thumb.jpg)"';
+      return '<button type="button" data-b="' + b[0] + '" title="' + b[1] + '"' + (dup ? ' aria-hidden="true" tabindex="-1"' : '') + look + '><span>' + b[1] + '</span></button>';
     }
+    function bgList() { return (OWN ? [['own', T('Your picture')]] : []).concat(BGS); }
     var autoBg = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
     // the row drifts in a loop (a second copy of the tiles makes it seamless); hovering with a
     // mouse, touching, scrolling or picking a tile pauses it, and it drifts on again after a few idle seconds
-    $('stBgs').innerHTML = BGS.map(function (b) { return bgTile(b); }).join('') + (autoBg ? BGS.map(function (b) { return bgTile(b, 1); }).join('') : '');
+    function fillBgs() { var L = bgList(); $('stBgs').innerHTML = L.map(function (b) { return bgTile(b); }).join('') + (autoBg ? L.map(function (b) { return bgTile(b, 1); }).join('') : ''); }
+    if (st.bg === 'own' && !OWN) st.bg = 'stars';
+    fillBgs();
     var pend = 0;
     function redraw() {
       st.name = $('stName').value; st.hex = hexIn.value.toUpperCase().replace(/[^0-9A-F]/g, '').slice(0, 12); st.g = +gal.value || 0;
@@ -434,6 +497,12 @@
       })(0);
     } else setTimeout(showPick, 120);
     row.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.bg = b.dataset.b; pauseBg(); redraw(); } });
+    $('stOwn').addEventListener('change', function () {
+      var f = this.files && this.files[0]; this.value = ''; if (!f) return;
+      note(T('Preparing your wallpaper…'));
+      readOwn(f).then(function (d) { OWN = d; imgCache[d] = null; delete imgCache[d]; fillBgs(); st.bg = 'own'; pauseBg(); row.scrollLeft = 0; redraw(); })
+        .catch(function () { note(T('Couldn’t read that picture.')); });
+    });
     $('stFmt').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.fmt = b.dataset.f; redraw(); } });
     function fname(base) { return base + '-' + (nmsName(st.name).replace(/[^A-Z0-9]+/g, '-').toLowerCase() || 'traveller') + '-' + st.fmt + '.png'; }
     $('stSave').addEventListener('click', function () { exportPng(cv, fname('nms-portal-wallpaper'), note); });
@@ -451,6 +520,7 @@
       var w = worlds[st.world]; if (!w) return;
       $('stWorlds').querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('on', i === st.world); });
       $('stPMap').href = 'https://map.nomansskyhub.app/?arrival=1&addr=' + w.glyph + '&galaxy=' + (w.gIndex || 0);
+      var cr = $('stPCredit'); if (cr) cr.innerHTML = w.almUrl ? 'Data + picture: <a href="' + esc(w.almUrl) + '" target="_blank" rel="noopener">NMS Almanac</a> · charted by ' + esc(w.by) + ' via Voyager’s Haven' : 'Charted by ' + esc(w.by) + ' via Voyager’s Haven';
       drawPlanet(pcv, w, st.pfmt, nmsName(st.name) ? st.name : '').then(function () { pnote(''); }).catch(function () { pnote('Couldn’t load the planet picture. Check your connection.'); });
     }
     var plOpen = false;
@@ -459,10 +529,19 @@
       haven().then(function (H) {
         worlds = survey(H).map(function (w) { w.gIndex = (H.meta && H.meta.galaxies || {})[w.galaxy] || 0; return w; });
         st.world = Math.floor(Date.now() / 86400000) % worlds.length;
-        $('stWorlds').innerHTML = worlds.map(function (w, i) {
-          return '<button type="button" data-i="' + i + '" style="background-image:url(' + WX + '/hd/card-' + w.key + '.jpg)"><b>' + esc(w.name) + '</b><span>' + esc(w.biome) + '</span></button>';
-        }).join('');
-        pdraw();
+        var cards = function () {
+          $('stWorlds').innerHTML = worlds.map(function (w, i) {
+            return '<button type="button" data-i="' + i + '" style="background-image:url(' + WX + '/hd/card-' + w.key + '.jpg)">' + (w.discS ? '<img class="st-wdisc" src="' + esc(w.discS) + '" alt="">' : '') + '<b>' + esc(w.name) + '</b><span>' + esc(w.biome) + '</span></button>';
+          }).join('');
+          $('stWorlds').querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('on', i === st.world); });
+        };
+        cards(); pdraw();
+        var i = 0;
+        (function next() {
+          if (i >= worlds.length) return;
+          var w = worlds[i++];
+          almFetch(w).then(function (a) { if (a && a.portal) { almApply(w, a); cards(); if (worlds[st.world] === w) pdraw(); } next(); });
+        })();
       }).catch(function () { plOpen = false; $('stWorlds').innerHTML = '<p class="st-note">Couldn’t reach the Weather Station’s survey. Try again in a moment.</p>'; });
     }
     $('stWorlds').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.world = +b.dataset.i; pdraw(); } });

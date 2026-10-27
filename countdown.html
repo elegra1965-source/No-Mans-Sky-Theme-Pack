@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <script>/* the old *.netlify.app address is retired: one family domain so the Traveller ID cookie reaches every app */if(/\.netlify\.app$/.test(location.hostname))location.replace("https://theme.nomansskyhub.app"+location.pathname+location.search+location.hash);</script>
 <script src="/lang.js?v=2"></script>
-<script src="/nms-update.js?v=1" defer></script>
+<script src="/nms-update.js?v=2" defer></script>
 <script>/* visitor stats: GoatCounter (free, no cookies), same dashboard as the Hub; pages are recorded as host/path */(function(){if(!/(^|\.)nomansskyhub\.app$/.test(location.hostname))return;window.goatcounter={path:function(p){return location.host+p}};var s=document.createElement("script");s.async=true;s.src="https://gc.zgo.at/count.js";s.setAttribute("data-goatcounter","https://nomansskyhub.goatcounter.com/count");document.head.appendChild(s);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Expedition Countdown · No Man's Sky</title>
+<meta name="robots" content="max-image-preview:large">
 <meta name="description" content="Live countdown for the current No Man's Sky expedition: time left, progress and the next expedition. Add it to your home screen. Free, fan-made.">
 <meta name="theme-color" content="#070b11">
 <link rel="manifest" href="countdown.webmanifest">
@@ -74,13 +75,14 @@
   @media (display-mode:standalone){.hint{display:none}}
   @media (max-height:420px){.foot,.hint,.next,.res{display:none}.clock{margin:10px 0}}
   @media (max-width:300px){.u i{letter-spacing:1px}}
+  .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"><canvas id="sky"></canvas></div>
 <main class="card" id="card">
   <div class="kick" id="kick">EXPEDITION</div>
-  <h1 id="title">Reading the Atlas…</h1>
+  <h1><span class="vh">No Man's Sky expedition countdown: </span><span id="title">Reading the Atlas…</span></h1>
   <div class="sub" id="sub">&nbsp;</div>
   <div class="clock" role="timer" aria-live="off">
     <div class="u"><b id="d">--</b><i>DAYS</i></div>

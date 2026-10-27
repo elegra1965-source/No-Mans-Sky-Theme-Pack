@@ -1,3 +1,7 @@
+# Old Netlify address -> the family domain (2026-10-27). A real 301 so search engines move the old address's ranking here
+# (the old JS redirect in the pages stays as a backup). Must stay first so it wins.
+https://nms-theme-pack.netlify.app/*  https://theme.nomansskyhub.app/:splat  301!
+
 # Same-origin proxy for the official Galactic Atlas API (it sends no CORS header, so the browser
 # blocks a direct fetch). 200 = rewrite, not redirect. Same rule as the Hub. Used by countdown.html
 # for the live Community Research tier (mission 116). Added 2026-10-20.

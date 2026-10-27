@@ -28,6 +28,10 @@
 .st-bgs button{position:relative;flex:0 0 78px;height:132px;scroll-snap-align:start;border-radius:7px;border:2px solid transparent;background:#0a1119 center/cover no-repeat;cursor:pointer;overflow:hidden;min-width:0}
 .st-bgs button span{position:absolute;left:0;right:0;bottom:0;padding:10px 2px 3px;font-family:'Rajdhani',sans-serif;font-size:.68rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.75));line-height:1.1}
 .st-bgs button.on{border-color:var(--cyan);box-shadow:0 0 12px rgba(0,229,255,.4)}
+.st-own{position:relative;display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:7px 12px;border:1px dashed rgba(0,229,255,.5);border-radius:7px;color:var(--cyan);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;max-width:100%}
+.st-own:hover,.st-own:focus-within{background:rgba(0,229,255,.08);border-style:solid}
+.st-own input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.st-ownh{display:block;margin-top:4px;color:var(--text-faint);font-size:.75rem}
 .st-bgs .st-stars{background:radial-gradient(circle at 70% 25%,rgba(0,229,255,.35),transparent 55%),radial-gradient(circle at 25% 70%,rgba(240,165,0,.25),transparent 55%),#05080e}
 .st-seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;width:max-content}
 .st-seg button{min-height:40px;padding:0 18px;background:transparent;border:0;color:var(--text);font-family:'Orbitron',monospace;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}
@@ -49,6 +53,10 @@
 .st-worlds button:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));z-index:0}
 .st-worlds button b,.st-worlds button span{z-index:1}
 .st-worlds button.on{border-color:var(--cyan);box-shadow:0 0 14px rgba(0,229,255,.4)}
+/* 2026-10-27: NMS Almanac planet disc on each survey card + credit line */
+.st-worlds .st-wdisc{position:absolute;right:6px;bottom:6px;width:26%;max-width:44px;aspect-ratio:1;object-fit:contain;z-index:1;filter:drop-shadow(0 0 5px rgba(0,229,255,.4))}
+.st-worlds button:has(.st-wdisc) b,.st-worlds button:has(.st-wdisc) span{right:calc(min(26%,44px) + 10px)}
+.st-credit a{color:var(--cyan)}
 .st-exp{position:relative;text-align:center;padding:22px 16px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(0,229,255,.07),rgba(255,255,255,.01))}
 .st-exp-k{font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:3px;color:var(--gold)}
 .st-exp-t{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(1.2rem,4vw,1.8rem);color:var(--white);text-transform:uppercase;margin:6px 0 10px;text-shadow:0 0 16px rgba(0,229,255,.35)}
