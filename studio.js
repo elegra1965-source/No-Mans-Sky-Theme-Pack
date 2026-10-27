@@ -218,7 +218,7 @@
   }
 
   /* home planet name from the address: Galactic Map community edits first, then
-     Voyager's Haven (via the map's haven-lookup), else nothing (the user can type one). */
+     Voyager's Haven (via the map's haven-lookup), then NMS Almanac, else nothing (the user can type one). */
   var MAP = window.NMS_MAP_BASE || 'https://map.nomansskyhub.app';
   var mapP = null;
   function mapEdits() {
@@ -242,6 +242,15 @@
       return fetch(MAP + '/.netlify/functions/haven-lookup?addr=' + hex + '&gname=' + encodeURIComponent(gname)).then(function (r) { return r.json(); }).then(function (d) {
         var sy = d && d.found && d.system; if (!sy) return null;
         return pick((sy.planets || []).map(function (p) { return { name: p.name }; }), sy.name, 'Voyager’s Haven');
+      }).catch(function () { return null; });
+    }).then(function (hit) {
+      /* 2026-10-27: not charted by a traveller on the map or Haven -> the planet's real name from NMS Almanac */
+      if (hit) return hit;
+      return fetch(MAP + '/.netlify/functions/almanac?addr=' + hex + '&galaxy=' + g).then(function (r) { return r.json(); }).then(function (d) {
+        if (!d || !d.found) return null;
+        var b = null; (d.bodies || []).forEach(function (x) { if (!b && x.portal && x.portal.charAt(0) === hex.charAt(0)) b = x; });
+        if (b && b.name) return { name: b.name, kind: 'planet', src: 'NMS Almanac' };
+        return d.system && d.system.name ? { name: d.system.name, kind: 'system', src: 'NMS Almanac' } : null;
       }).catch(function () { return null; });
     });
   }

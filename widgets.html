@@ -101,6 +101,9 @@
   .sys .dot{display:inline-block;width:.5em;height:.5em;border-radius:50%;margin-right:.45em;vertical-align:.12em}
   .cell span{display:block;font-size:13px;color:var(--dim);margin-top:2px;line-height:1.2}
   .cell.wide{grid-column:1/-1}
+  .cell.wide.hasdisc{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:10px}
+  .cell .pdisc{grid-row:1/4;grid-column:2;width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(0,229,255,.45))}
+  .src a.alm{color:var(--cyan)}
   .portal .grid2 b{font-size:clamp(13px,4vw,17px);letter-spacing:.05em}
   .src{margin-top:10px;font-size:13px;color:var(--dim);min-height:1.2em}
   .src a{color:var(--cyan)}
@@ -257,6 +260,8 @@
     /* System details come from the NMS Galactic Map: the real Voyager's Haven record when the system is
        charted there, otherwise the game's own generation code (nms-core) worked out from the address. */
     var MAP = 'https://map.nomansskyhub.app';
+    /* 2026-10-27 (Tony: Haven data -> also use the Almanac): NMS Almanac via the map's server (key kept there) */
+    var ALM = MAP + '/.netlify/functions/almanac';
     try{ var mq = new URLSearchParams(location.search).get('mapbase'); if (mq && /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) MAP = mq; }catch(e){}
     var GAL = ["Euclid","Hilbert Dimension","Calypso","Hesperius Dimension","Hyades","Ickjamatew","Budullangr","Kikolgallr","Eltiensleen","Eissentam","Elkupalos","Aptarkaba","Ontiniangp","Odiwagiri","Ogtialabi","Muhacksonto","Hitonskyer","Rerasmutul","Isdoraijung","Doctinawyra","Loychazinq","Zukasizawa","Ekwathore","Yeberhahne","Twerbetek","Sivarates","Eajerandal","Aldukesci","Wotyarogii","Sudzerbal","Maupenzhay","Sugueziume","Brogoweldian","Ehbogdenbu","Ijsenufryos","Nipikulha","Autsurabin","Lusontrygiamh","Rewmanawa","Ethiophodhe","Urastrykle","Xobeurindj","Oniijialdu","Wucetosucc","Ebyeloof","Odyavanta","Milekistri","Waferganh","Agnusopwit","Teyaypilny","Zalienkosm","Ladgudiraf","Mushonponte","Amsentisz","Fladiselm","Laanawemb","Ilkerloor","Davanossi","Ploehrliou","Corpinyaya","Leckandmeram","Quulngais","Nokokipsechl","Rinblodesa","Loydporpen","Ibtrevskip","Elkowaldb","Heholhofsko","Yebrilowisod","Husalvangewi","Ovna'uesed","Bahibusey","Nuybeliaure","Doshawchuc","Ruckinarkh","Thorettac","Nuponoparau","Moglaschil","Uiweupose","Nasmilete","Ekdaluskin","Hakapanasy","Dimonimba","Cajaccari","Olonerovo","Umlanswick","Henayliszm","Utzenmate","Umirpaiya","Paholiang","Iaereznika","Yudukagath","Boealalosnj","Yaevarcko","Coellosipp","Wayndohalou","Smoduraykl","Apmaneessu","Hicanpaav","Akvasanta","Tuychelisaor","Rivskimbe","Daksanquix","Kissonlin","Aediabiel","Ulosaginyik","Roclaytonycar","Kichiaroa","Irceauffey","Nudquathsenfe","Getaizakaal","Hansolmien","Bloytisagra","Ladsenlay","Luyugoslasr","Ubredhatk","Cidoniana","Jasinessa","Torweierf","Saffneckm","Thnistner","Dotusingg","Luleukous","Jelmandan","Otimanaso","Enjaxusanto","Sezviktorew","Zikehpm","Bephembah","Broomerrai","Meximicka","Venessika","Gaiteseling","Zosakasiro","Drajayanes","Ooibekuar","Urckiansi","Dozivadido","Emiekereks","Meykinunukur","Kimycuristh","Roansfien","Isgarmeso","Daitibeli","Gucuttarik","Enlaythie","Drewweste","Akbulkabi","Homskiw","Zavainlani","Jewijkmas","Itlhotagra","Podalicess","Hiviusauer","Halsebenk","Puikitoac","Gaybakuaria","Grbodubhe","Rycempler","Indjalala","Fontenikk","Pasycihelwhee","Ikbaksmit","Telicianses","Oyleyzhan","Uagerosat","Impoxectin","Twoodmand","Hilfsesorbs","Ezdaranit","Wiensanshe","Ewheelonc","Litzmantufa","Emarmatosi","Mufimbomacvi","Wongquarum","Hapirajua","Igbinduina","Wepaitvas","Sthatigudi","Yekathsebehn","Ebedeagurst","Nolisonia","Ulexovitab","Iodhinxois","Irroswitzs","Bifredait","Beiraghedwe","Yeonatlak","Cugnatachh","Nozoryenki","Ebralduri","Evcickcandj","Ziybosswin","Heperclait","Sugiuniam","Aaseertush","Uglyestemaa","Horeroedsh","Drundemiso","Ityanianat","Purneyrine","Dokiessmat","Nupiacheh","Dihewsonj","Rudrailhik","Tweretnort","Snatreetze","Iwundaracos","Digarlewena","Erquagsta","Logovoloin","Boyaghosganh","Kuolungau","Pehneldept","Yevettiiqidcon","Sahliacabru","Noggalterpor","Chmageaki","Veticueca","Vittesbursul","Nootanore","Innebdjerah","Kisvarcini","Cuzcogipper","Pamanhermonsu","Brotoghek","Mibittara","Huruahili","Raldwicarn","Ezdartlic","Badesclema","Isenkeyan","Iadoitesu","Yagrovoisi","Ewcomechio","Inunnunnoda","Dischiutun","Yuwarugha","Ialmendra","Reponudrle","Rinjanagrbo","Zeziceloh","Oeileutasc","Zicniijinis","Dugnowarilda","Neuxoisan","Ilmenhorn","Rukwatsuku","Nepitzaspru","Chcehoemig","Haffneyrin","Uliciawai","Tuhgrespod","Iousongola","Odyalutai"];
     var STAR = {yellow:'#ffd34d',green:'#5cff8a',blue:'#5cc8ff',red:'#ff5a4f',purple:'#c77dff'};
@@ -316,7 +321,7 @@
     };
     var tried = {};
     /* stale: the map (your own community edits) is checked daily, Haven weekly */
-    var stale = function(info){ return !info.gen || !info.mapAt || Date.now() - info.mapAt > 864e5 || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5; };
+    var stale = function(info){ return !info.gen || !info.mapAt || Date.now() - info.mapAt > 864e5 || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5 || !info.almAt || Date.now() - info.almAt > 7 * 864e5; };
     var lookup = function(hex, g, force){
       var key = hex + ':' + g, info = getInfo();
       if (tried[key] && !force) return;
@@ -330,6 +335,11 @@
       if (force || !info.havenAt || Date.now() - info.havenAt > 7 * 864e5)
         jobs.push(fetch(MAP + '/.netlify/functions/haven-lookup?addr=' + hex + '&gname=' + encodeURIComponent(GAL[g]))
           .then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok){ info.haven = j.found ? j.system : null; info.havenAt = Date.now(); } }).catch(function(){}));
+      if (force || !info.almAt || Date.now() - info.almAt > 7 * 864e5)
+        jobs.push(fetch(ALM + '?addr=' + hex + '&galaxy=' + g)
+          .then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok){
+            info.alm = j.found ? {system: j.system || {}, bodies: (j.bodies || []).map(function(b){ return {portal: b.portal, name: b.name, gameName: b.gameName, desc: b.desc, weather: b.weather, sentinels: b.sentinels, resources: b.resources || [], discS: b.discSmall || b.disc}; })} : null;
+            info.almAt = Date.now(); } }).catch(function(){}));
       if (!jobs.length) return;
       $('src').textContent = 'Scanning system…';
       Promise.all(jobs).then(function(){ LS('nms-w-info', JSON.stringify(info)); draw(); });
@@ -358,34 +368,47 @@
       }
       /* each field: the Galactic Map's community edit first, then Voyager's Haven, then worked out from the glyphs */
       var gen = info.gen || {}, hv = info.haven || null, mp = info.map || null;
+      /* NMS Almanac: what a planet IS (type, weather, sentinels) and the system's race/economy/conflict follow
+         the Almanac; names a traveller gave (Galactic Map edit, Haven) still win. Pairing by name or game name. */
+      var al = info.alm || null, as = al ? al.system : null;
+      var almB = function(nm){ if (!al || !nm) return null; nm = String(nm).toLowerCase(); var r = null;
+        al.bodies.forEach(function(b){ if (!r && (String(b.name || '').toLowerCase() === nm || String(b.gameName || '').toLowerCase() === nm)) r = b; }); return r; };
+      var almP = null; if (al) al.bodies.forEach(function(b){ if (!almP && b.portal && b.portal.charAt(0) === hex.charAt(0)) almP = b; });
+      var almBody = function(b){ return {name: b.name, moon: false, biome: String(b.desc || '').replace(/ (Planet|Moon)$/, ''), weather: b.weather || '', sentinels: b.sentinels || '', resources: list(b.resources), base: false}; };
       var pickF = function(){ for (var a = 0; a < arguments.length; a++){ var v = arguments[a]; if (v != null && String(v).trim() !== '') return v; } return ''; };
-      var name = pickF(mp && mp.name, hv && hv.name, gen.name);
-      var star = String(pickF(mp && mp.stars && mp.stars[0], hv && hv.star) || '').toLowerCase(); star = STAR[star] ? star : gen.star;
+      var name = pickF(mp && mp.name, hv && hv.name, as && as.name, gen.name);
+      var star = String(pickF(as && as.star, mp && mp.stars && mp.stars[0], hv && hv.star) || '').toLowerCase(); star = STAR[star] ? star : gen.star;
       $('sy').innerHTML = (star ? '<span class="dot" style="background:' + STAR[star] + ';box-shadow:0 0 10px ' + STAR[star] + '"></span>' : '') + esc(name || 'Unknown system');
       $('rg').textContent = [pickF(mp && mp.region, hv && hv.region, gen.region), GAL[g]].filter(Boolean).join(' · ');
 
       /* planet: the one picked under Edit, else the one marked as a base, else the planet with the generated name */
       var mb = (mp && mp.bodies && mp.bodies.length) ? mp.bodies.map(mapBody) : null;
-      var planets = mb || ((hv && hv.planets) || []), pick = LS('nms-w-planet') || '', hp = null;
+      var planets = mb || ((hv && hv.planets && hv.planets.length) ? hv.planets : (al ? al.bodies.map(almBody) : [])), pick = LS('nms-w-planet') || '', hp = null;
       planets.forEach(function(p){ if (!hp && p.name && p.name === pick) hp = p; });
       if (!hp && !pick) planets.forEach(function(p){ if (!hp && p.base) hp = p; });
+      if (!hp && !pick && almP) planets.forEach(function(p){ if (!hp && p.name && almB(p.name) === almP) hp = p; });
       if (!hp && !pick) planets.forEach(function(p){ if (!hp && p.name && p.name === gen.planet) hp = p; });
+      var ab = hp ? almB(hp.name) : almP;
+      if (ab){ var a2 = almBody(ab); hp = hp ? {name: hp.name, moon: hp.moon, base: hp.base, biome: a2.biome || hp.biome, weather: a2.weather || hp.weather, sentinels: a2.sentinels || hp.sentinels, resources: hp.resources || a2.resources} : a2; }
       $('pw').hidden = !planets.length;
       if (planets.length) $('ip').innerHTML = '<option value="">Auto</option>' + planets.filter(function(p){ return p.name; }).map(function(p){
         return '<option' + (hp && p.name === hp.name ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('');
       var pName = hp ? hp.name : gen.planet;
       var pSub = hp ? [hp.biome, hp.weather].filter(Boolean).join(' · ') : (gen.planet ? 'Original name, may differ in game' : '');
-      var econ = pickF(mp && mp.econName, hv && hv.economy, gen.econ), tier = pickF(mp && mp.econDesc, hv && hv.economyTier, gen.wealth);
+      var econ = pickF(as && (as.economyType || as.economy), mp && mp.econName, hv && hv.economy, gen.econ), tier = pickF(as && as.wealth, mp && mp.econDesc, hv && hv.economyTier, gen.wealth);
       var outlaw = mp ? !!mp.outlaw : (!hv && gen.outlaw);
       $('facts').innerHTML =
-        (pName ? '<div class="cell wide"><i>PLANET</i><b>' + esc(pName) + '</b>' + (pSub ? '<span>' + esc(pSub) + '</span>' : '') + '</div>' : '') +
-        cell('STAR', cap(star)) + cell('RACE', pickF(mp && mp.race, hv && hv.lifeform, gen.race)) +
-        cell('ECONOMY', econ, tier) + cell('CONFLICT', pickF(mp && mp.conflict, hv && hv.conflict, gen.conflict), outlaw ? 'Outlaw system' : '') +
+        (pName ? '<div class="cell wide' + (ab && ab.discS ? ' hasdisc' : '') + '"><i>PLANET</i><b>' + esc(pName) + '</b>' + (pSub ? '<span>' + esc(pSub) + '</span>' : '') + (ab && ab.discS ? '<img class="pdisc" src="' + esc(ab.discS) + '" alt="">' : '') + '</div>' : '') +
+        cell('STAR', cap(star)) + cell('RACE', pickF(as && as.race, mp && mp.race, hv && hv.lifeform, gen.race)) +
+        cell('ECONOMY', econ, tier) + cell('CONFLICT', pickF(as && as.conflict, mp && mp.conflict, hv && hv.conflict, gen.conflict), outlaw ? 'Outlaw system' : '') +
         (hp && hp.sentinels ? cell('SENTINELS', hp.sentinels) : '') + (hp && hp.resources ? cell('RESOURCES', hp.resources) : '');
       $('facts').hidden = false;
       var mapUrl = MAP + '/?arrival=1&addr=1' + hex.slice(1) + '&galaxy=' + g;
-      $('src').innerHTML = mp ? '✓ Charted on the <a href="' + esc(mapUrl) + '" target="_blank" rel="noopener">Galactic Map</a>' + (mp.editorName ? ' · by ' + esc(mp.editorName) : '') + (hv ? ' and Voyager\'s Haven' : '')
-        : hv ? '✓ Charted on <a href="' + esc(hv.url) + '" target="_blank" rel="noopener">Voyager\'s Haven</a>' + (hv.discoveredBy ? ' · found by ' + esc(hv.discoveredBy) : '')
+      var almUrl = ab ? 'https://nmsalmanac.com/planet/' + encodeURIComponent(String(GAL[g] || '').toLowerCase().replace(/[\s']+/g, '-')) + '/' + ab.portal : 'https://nmsalmanac.com';
+      var almCr = al ? ' · Data: <a class="alm" href="' + esc(almUrl) + '" target="_blank" rel="noopener">NMS Almanac</a>' : '';
+      $('src').innerHTML = mp ? '✓ Charted on the <a href="' + esc(mapUrl) + '" target="_blank" rel="noopener">Galactic Map</a>' + (mp.editorName ? ' · by ' + esc(mp.editorName) : '') + (hv ? ' and Voyager\'s Haven' : '') + almCr
+        : hv ? '✓ Charted on <a href="' + esc(hv.url) + '" target="_blank" rel="noopener">Voyager\'s Haven</a>' + (hv.discoveredBy ? ' · found by ' + esc(hv.discoveredBy) : '') + almCr
+        : al ? '✓ Planet and system data from <a class="alm" href="' + esc(almUrl) + '" target="_blank" rel="noopener">NMS Almanac</a>'
         : (gen.name ? 'Worked out from your glyphs. If a traveller renamed it, the game shows their name.' : (navigator.onLine === false ? 'Offline. Your glyphs still work; system details load when you\'re back online.' : 'Couldn\'t reach the Galactic Map for system details. Tap Refresh to try again.'));
       $('acts').innerHTML = '<a class="btn" href="' + esc(mapUrl) + '" target="_blank" rel="noopener">Open in Galactic Map ↗</a>' +
         (EMBED ? '' : '<button class="btn ghost" id="rf" type="button">Refresh</button>') +
