@@ -8,6 +8,19 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 ![No Man's Sky Theme Pack site with the interactive phone mockup](screenshots/01-hero.jpg)
 
+**Contents** — long sections are folded; tap to open.
+
+- [What's in the pack](#whats-in-the-pack)
+- [Make it yours (new)](#make-it-yours-new)
+- [New here? Take the tour](#new-here-take-the-tour)
+- [The site](#the-site)
+- [How it's built](#how-its-built)
+- [Credits](#credits)
+- [Using this code?](#using-this-code)
+- [Licence](#licence)
+
+<!-- folded -->
+
 ## What's in the pack
 
 - **79 themed icons**, each exported as transparent PNGs in 6 sizes, plus Windows `.ico` versions
@@ -18,6 +31,9 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 - **Setup guides** for Android launchers, iPhone, Windows and Mac
 
 ## Make it yours (new)
+
+<details>
+<summary>▸ Tap to open</summary>
 
 The page now leads with this: the first button on the page is **✦ Make it yours**.
 
@@ -37,6 +53,8 @@ Everything is drawn in your browser; nothing is uploaded. The only thing sent an
 
 ![Making a portal wallpaper: tapping in the glyphs, changing the background, planet of the day and the countdown](screenshots/06-make-it-yours.gif)
 
+</details>
+
 ## New here? Take the tour
 
 First-time visitors get a small **New here? ▶ Take the tour / Dive in** box (shown once, never again). The tour dims the page and spotlights Install / Download, the personalised HUD, widgets, the NMS font, the live preview and How to apply, one step at a time with Back / Next / Skip. Replay it any time from the **▷ TOUR (next to See it live)** button. The phone's Back button closes it, and it's translated into every language the site offers. Shared `nms-tour.js`, the same file on every nomansskyhub.app site.
@@ -44,6 +62,9 @@ First-time visitors get a small **New here? ▶ Take the tour / Dive in** box (s
 <img src="screenshots/08-tour.jpg" alt="Left: the New here? Take the tour prompt. Right: tour step 2 of 6, Your personalised HUD" width="560">
 
 ## The site
+
+<details>
+<summary>▸ Tap to open</summary>
 
 - An interactive phone mockup and a live grid of every icon
 - A live NMS alphabet translator and glyph chart
@@ -64,7 +85,12 @@ First-time visitors get a small **New here? ▶ Take the tour / Dive in** box (s
 
 <img src="screenshots/08-languages.jpg" alt="The Theme Pack on a phone: the language picker (left) and the page in Italiano (right)" width="560">
 
+</details>
+
 ## How it's built
+
+<details>
+<summary>▸ Tap to open</summary>
 
 A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straight from this repo: every push to `main` goes live.
 
@@ -82,6 +108,8 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 | `assets/icons/`, `assets/widgets/` | Icon previews and widget kit files |
 | `sw.js`, `manifest.json`, `pwa/` | Install and offline support |
 | `lang.js`, `lang/`, `fonts/` | Language picker and translations, shared by every Hub site |
+
+</details>
 
 ## Credits
 
