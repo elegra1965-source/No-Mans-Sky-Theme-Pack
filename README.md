@@ -35,7 +35,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 <details>
 <summary>▸ Tap to open</summary>
 
-The page now leads with this: the first button on the page is **✦ Make it yours**.
+The page now leads with this: the first buttons on the page are **✦ Make it yours** and **▷ Tour**, with Install / Download and See it live underneath. The top menu highlights the section you're reading.
 
 - **Portal wallpaper:** your Traveller name (in English and in the NMS alphabet), home galaxy, home planet name, home portal address (hex and glyphs) and, if you like, your NMS friend code, on one of 15 No Man's Sky backgrounds for phone (1080x2400) or desktop (2560x1440). Switch each line on or off and watch the preview before you download. The name, galaxy and friend code come from your Hub Traveller ID if you've set one. The planet name is looked up from your address in the [Galactic Map](https://map.nomansskyhub.app)'s community edits, then [Voyager's Haven](https://havenmap.online), or you can type your own.
 - **Planet of the day:** the Weather Station surveys 8 real, player-charted worlds from [Voyager's Haven](https://havenmap.online) every day. Pick one of today's and download it as a wallpaper, with its portal glyphs, hex and discoverer, plus a link to fly there on the Galactic Map.
@@ -119,6 +119,8 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 ## Credits
 
 - NMS Alphabet font by seontonppa (built with FontStruct), used with permission
+- Planet info and planet pictures (Planet of the day, Home portal widget, home planet name): [NMS Almanac](https://nmsalmanac.com) by Borjomi
+- Player-charted worlds: [Voyager's Haven](https://havenmap.online)
 
 ## Using this code?
 
