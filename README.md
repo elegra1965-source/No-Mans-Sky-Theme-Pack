@@ -90,6 +90,10 @@ The last step is **Your language**: it points at the 🌐 button, because one ch
 
 <img src="screenshots/08-languages.jpg" alt="The Theme Pack on a phone: the language picker (left) and the page in Italiano (right)" width="560">
 
+- **★ Reviews & feedback.** The REVIEWS & FEEDBACK button in the footer (and a new last FAQ, "Found a bug or have an idea?") opens the same pop-up as the Hub: leave a review (stars, and an "OK to show" switch), report a bug (your device type and browser are added so it can be fixed faster) or ask for something new. This site is ticked for you. Everything goes to elegra1965 through the Hub, and nothing shows on the site without his OK. In all 8 languages; the question at the top now reads "What's it about, traveller?".
+
+  <img src="screenshots/10-reviews-feedback.jpg" alt="The Reviews and feedback button in the footer and the pop-up it opens, on a phone" width="560">
+
 </details>
 
 ## How it's built
