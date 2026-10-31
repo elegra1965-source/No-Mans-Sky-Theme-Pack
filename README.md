@@ -83,6 +83,10 @@ The last step is **Your language**: it points at the 🌐 button, because one ch
 
   <img src="screenshots/09-update-bar.jpg" alt="The update bar at the bottom of the page on a phone: New version ready, tap to update, with a close button" width="390">
 
+- **Patch notes after a big update.** After you tap the update bar (or the first time you open a new version) a short pop-up says what changed, with NEW / IMPROVED / FIXED tags: a scan line sweeps down the screen and the panel appears behind it. It shows once per version, in your language, and only the newest notes if you skipped a version.
+
+  <img src="screenshots/10-patch-notes.jpg" alt="The patch notes pop-up on a phone: System update received, Patch notes with the version, and the list of changes with NEW and IMPROVED tags" width="390">
+
 
 ![Drag-to-compare: stock icons vs the NMS Theme Pack](screenshots/02-before-after.jpg)
 
