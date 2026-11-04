@@ -1,5 +1,5 @@
 {
- "version": "v42",
+ "version": "v43",
  "date": "2026-11-06",
  "site": "NMS THEME PACK",
  "lastToday": false,
@@ -17,6 +17,19 @@
     "it": "Medaglie sulla Mappa galattica: mappa nuovi sistemi per medaglie di serie giornaliere, settimanali e mensili"
    },
    "url": "https://map.nomansskyhub.app/"
+  },
+  {
+   "tag": "improved",
+   "text": {
+    "en": "New FAQ answers: Samsung phones, blurry icons, icons resetting after a restart, Windows icon cache",
+    "es": "Nuevas respuestas en las preguntas frecuentes: móviles Samsung, iconos borrosos, iconos que vuelven a su estado tras reiniciar y la caché de iconos de Windows",
+    "de": "Neue FAQ-Antworten: Samsung-Handys, unscharfe Symbole, Symbole nach Neustart zurückgesetzt, Windows-Symbolcache",
+    "fr": "Nouvelles réponses dans la FAQ : téléphones Samsung, icônes floues, icônes réinitialisées après un redémarrage, cache d'icônes Windows",
+    "it": "Nuove risposte nelle FAQ: telefoni Samsung, icone sfocate, icone ripristinate dopo il riavvio, cache delle icone di Windows",
+    "nl": "Nieuwe FAQ-antwoorden: Samsung-telefoons, wazige pictogrammen, pictogrammen die na een herstart terugspringen, Windows-pictogramcache",
+    "pl": "Nowe odpowiedzi w FAQ: telefony Samsung, rozmyte ikony, ikony wracające po restarcie, pamięć podręczna ikon Windows",
+    "pt-BR": "Novas respostas no FAQ: celulares Samsung, ícones borrados, ícones que voltam ao normal após reiniciar, cache de ícones do Windows"
+   }
   },
   {
    "tag": "new",
