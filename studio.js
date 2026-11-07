@@ -60,6 +60,12 @@
     var s = Math.max(W / im.width, H / im.height), w = im.width * s, h = im.height * s;
     x.drawImage(im, (W - w) / 2, (H - h) * (fy == null ? 0.5 : fy), w, h);
   }
+  /* cover with zoom (z >= 1) and a focus point (cx, cy = 0..1 of the picture); keeps the picture covering the whole canvas */
+  function coverZ(x, im, W, H, z, cx, cy) {
+    var s = Math.max(W / im.width, H / im.height) * (z || 1), w = im.width * s, h = im.height * s;
+    var ox = Math.min(0, Math.max(W - w, W / 2 - (cx == null ? .5 : cx) * w)), oy = Math.min(0, Math.max(H - h, H / 2 - (cy == null ? .5 : cy) * h));
+    x.drawImage(im, ox, oy, w, h);
+  }
   // letter-spaced text (canvas letterSpacing isn't everywhere yet)
   function spaced(x, text, cx, y, sp, align) {
     var chars = String(text).split(''), w = 0;
@@ -302,17 +308,17 @@
     w.extreme = a.extreme; w.sent = a.sent; w.disc = a.disc; w.discS = a.discS;
     w.almUrl = 'https://nmsalmanac.com/planet/' + encodeURIComponent(slug) + '/' + a.portal;
   }
-  function drawPlanet(cv, w, fmt, who) {
-    var W = SIZES[fmt][0], H = SIZES[fmt][1], desk = fmt === 'desk';
+  function drawPlanet(cv, w, fmt, who, view) {
+    var W = SIZES[fmt][0], H = SIZES[fmt][1], desk = fmt === 'desk', fill = desk || !!(view && view.fill), vz = view || {};
     cv.width = W; cv.height = H; var x = cv.getContext('2d');
     var disc = w.disc ? img(w.disc, true).catch(function () { return null; }) : Promise.resolve(null);
     return Promise.all([fonts(), glyphs(), img(WX + '/hd/hd-' + w.key + '.jpg', true), disc]).then(function (r) {
       var G = r[1], im = r[2], D = r[3], s = desk ? H / 1440 * 1.1 : W / 1080, cx = W / 2;
       var discAt = function (dx, dy, dd) { x.save(); x.shadowColor = 'rgba(0,229,255,.45)'; x.shadowBlur = 36 * s; x.drawImage(D, dx - dd / 2, dy - dd / 2, dd, dd); x.restore(); };
       x.textAlign = 'center'; x.textBaseline = 'alphabetic';
-      if (desk) {
-        cover(x, im, W, H);
-        var g = x.createLinearGradient(0, H * .3, 0, H); g.addColorStop(0, 'rgba(3,7,12,0)'); g.addColorStop(.45, 'rgba(3,7,12,.7)'); g.addColorStop(1, 'rgba(3,7,12,.95)'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+      if (fill) {
+        coverZ(x, im, W, H, vz.z, vz.cx, vz.cy);
+        var g = x.createLinearGradient(0, H * (desk ? .3 : .42), 0, H); g.addColorStop(0, 'rgba(3,7,12,0)'); g.addColorStop(.45, 'rgba(3,7,12,.7)'); g.addColorStop(1, 'rgba(3,7,12,.95)'); x.fillStyle = g; x.fillRect(0, 0, W, H);
       } else {
         x.filter = 'blur(' + Math.round(26 * s) + 'px) brightness(.55)'; cover(x, im, W, H); x.filter = 'none';
         var pw = W - 80 * s, ph = pw * 9 / 16, py = H * .4;
@@ -322,9 +328,9 @@
         x.font = '600 ' + Math.round(26 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.95)';
         spaced(x, 'PLANET OF THE DAY · ' + stamp(), cx, py - 40 * s, 6 * s);
       }
-      var y = desk ? H - 700 * s : H * .4 + (W - 80 * s) * 9 / 16 + 120 * s;
+      var y = fill ? H - 700 * s : H * .4 + (W - 80 * s) * 9 / 16 + 120 * s;
       if (desk && D) discAt(W - 330 * s, H - 330 * s, 380 * s); /* desktop: bottom right, clear of the centred text */
-      if (desk) { x.font = '600 ' + Math.round(24 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.95)'; spaced(x, 'PLANET OF THE DAY · ' + stamp(), cx, y, 6 * s); y += 84 * s; }
+      if (fill) { x.font = '600 ' + Math.round(24 * s) + 'px Orbitron'; x.fillStyle = 'rgba(0,229,255,.95)'; spaced(x, 'PLANET OF THE DAY · ' + stamp(), cx, y, 6 * s); y += 84 * s; }
       /* phone: the Almanac planet disc sits just left of the planet name, the pair centred */
       var nd = (D && !desk) ? 130 * s : 0, ng = nd ? 22 * s : 0, NM = w.name.toUpperCase();
       var ns = fit(x, NM, '900 {s}px Orbitron', W - 120 * s - nd - ng, Math.round(78 * s), Math.round(40 * s));
@@ -408,6 +414,8 @@
       '<div class="st-pane" data-p="planet"><p class="st-lead">The Weather Station surveys 8 real, player-charted worlds every day. Pick one of today’s and wear it. Tomorrow there are 8 new ones.</p>' +
       '<div class="st-worlds" id="stWorlds"><p class="st-note">Loading today’s survey…</p></div><div class="st-grid">' +
       '<div class="st-form"><div class="st-f"><span>Size</span><div class="st-seg" id="stPFmt"><button type="button" data-f="phone">Phone</button><button type="button" data-f="desk">Desktop</button></div></div>' +
+      '<div class="st-f" id="stPFitF"><span>Picture</span><div class="st-seg" id="stPFit" role="group" aria-label="Picture"><button type="button" data-m="fill">Fill screen</button><button type="button" data-m="frame">Framed</button></div></div>' +
+      '<div class="st-f st-zoomf" id="stPZF"><span>Zoom</span><div class="st-zrow"><button type="button" id="stPZm" aria-label="Zoom out">−</button><input type="range" id="stPZ" min="1" max="4" step="0.01" value="1" aria-label="Zoom"><button type="button" id="stPZp" aria-label="Zoom in">+</button><button type="button" id="stPZr">Reset</button></div><small>Drag the picture to move it · pinch or scroll to zoom</small></div>' +
       '<div class="st-acts"><button type="button" class="btn btn-primary" id="stPSave">⬇ Download today’s planet</button><button type="button" class="btn btn-ghost" id="stPShare">Share</button>' +
       '<a class="btn btn-ghost" id="stPMap" target="_blank" rel="noopener">Fly there on the map →</a></div>' +
       '<p class="st-note st-credit" id="stPCredit"></p><p class="st-note" id="stPNote" aria-live="polite"></p></div>' +
@@ -522,15 +530,21 @@
 
     /* planet of the day */
     var pcv = $('stPCv'), worlds = [], pnote = function (s) { $('stPNote').textContent = s; };
-    st.pfmt = st.fmt;
+    st.pfmt = st.fmt; st.pfill = true; st.pz = 1; st.pcx = .5; st.pcy = .5;
+    function pview() { return { fill: st.pfill, z: st.pz, cx: st.pcx, cy: st.pcy }; }
     function pdraw() {
+      var isFill = st.pfmt === 'desk' || st.pfill;
+      $('stPFit').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', (b.dataset.m === 'fill') === st.pfill); });
+      $('stPFitF').style.display = st.pfmt === 'desk' ? 'none' : '';
+      $('stPZF').style.display = isFill ? '' : 'none';
+      $('stPZ').value = st.pz; pcv.classList.toggle('st-drag', isFill);
       $('stPFmt').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.f === st.pfmt); });
       pcv.parentNode.classList.toggle('desk', st.pfmt === 'desk');
       var w = worlds[st.world]; if (!w) return;
       $('stWorlds').querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('on', i === st.world); });
       $('stPMap').href = 'https://map.nomansskyhub.app/?arrival=1&addr=' + w.glyph + '&galaxy=' + (w.gIndex || 0);
       var cr = $('stPCredit'); if (cr) cr.innerHTML = w.almUrl ? 'Data + picture: <a href="' + esc(w.almUrl) + '" target="_blank" rel="noopener">NMS Almanac</a> · charted by ' + esc(w.by) + ' via Voyager’s Haven' : 'Charted by ' + esc(w.by) + ' via Voyager’s Haven';
-      drawPlanet(pcv, w, st.pfmt, nmsName(st.name) ? st.name : '').then(function () { pnote(''); }).catch(function () { pnote('Couldn’t load the planet picture. Check your connection.'); });
+      drawPlanet(pcv, w, st.pfmt, nmsName(st.name) ? st.name : '', pview()).then(function () { pnote(''); }).catch(function () { pnote('Couldn’t load the planet picture. Check your connection.'); });
     }
     var plOpen = false;
     function loadPlanets() {
@@ -553,8 +567,32 @@
         })();
       }).catch(function () { plOpen = false; $('stWorlds').innerHTML = '<p class="st-note">Couldn’t reach the Weather Station’s survey. Try again in a moment.</p>'; });
     }
-    $('stWorlds').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.world = +b.dataset.i; pdraw(); } });
-    $('stPFmt').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.pfmt = b.dataset.f; pdraw(); } });
+    function preset() { st.pz = 1; st.pcx = .5; st.pcy = .5; }
+    $('stWorlds').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.world = +b.dataset.i; preset(); pdraw(); } });
+    $('stPFit').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.pfill = b.dataset.m === 'fill'; pdraw(); } });
+    /* move + zoom the picture: drag, pinch, mouse wheel, slider, buttons */
+    var pim = null, pts = {}, pd0 = 0, pz0 = 1, raf = 0;
+    function pnow(z) { st.pz = Math.max(1, Math.min(4, z)); if (!raf) raf = requestAnimationFrame(function () { raf = 0; pdraw(); }); }
+    function pmove(dx, dy) { /* dx, dy in canvas pixels; the picture follows the finger */
+      var W = pcv.width, H = pcv.height, im = pim; if (!im) return;
+      var k = Math.max(W / im.w, H / im.h) * st.pz, w = im.w * k, h = im.h * k;
+      st.pcx = Math.min(1, Math.max(0, st.pcx - dx / w)); st.pcy = Math.min(1, Math.max(0, st.pcy - dy / h));
+    }
+    pim = null;
+    function pimg() { var w = worlds[st.world]; if (!w) return; img(WX + '/hd/hd-' + w.key + '.jpg', true).then(function (i) { pim = { w: i.width, h: i.height }; }); }
+    pcv.addEventListener('pointerdown', function (e) { if (!(st.pfmt === 'desk' || st.pfill)) return; pimg(); pcv.setPointerCapture(e.pointerId); pts[e.pointerId] = { x: e.clientX, y: e.clientY }; var ids = Object.keys(pts); if (ids.length === 2) { pd0 = Math.hypot(pts[ids[0]].x - pts[ids[1]].x, pts[ids[0]].y - pts[ids[1]].y); pz0 = st.pz; } });
+    pcv.addEventListener('pointermove', function (e) {
+      var p = pts[e.pointerId]; if (!p) return; var ids = Object.keys(pts), r = pcv.width / pcv.getBoundingClientRect().width;
+      if (ids.length === 2) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; var d = Math.hypot(pts[ids[0]].x - pts[ids[1]].x, pts[ids[0]].y - pts[ids[1]].y); if (pd0) pnow(pz0 * d / pd0); return; }
+      pmove((e.clientX - p.x) * r, (e.clientY - p.y) * r); pts[e.pointerId] = { x: e.clientX, y: e.clientY }; pnow(st.pz);
+    });
+    ['pointerup', 'pointercancel'].forEach(function (n) { pcv.addEventListener(n, function (e) { delete pts[e.pointerId]; pd0 = 0; }); });
+    pcv.addEventListener('wheel', function (e) { if (!(st.pfmt === 'desk' || st.pfill)) return; e.preventDefault(); pnow(st.pz * Math.exp(-e.deltaY * .0015)); }, { passive: false });
+    $('stPZ').addEventListener('input', function () { pnow(+this.value); });
+    $('stPZm').addEventListener('click', function () { pnow(st.pz / 1.25); });
+    $('stPZp').addEventListener('click', function () { pnow(st.pz * 1.25); });
+    $('stPZr').addEventListener('click', function () { preset(); pdraw(); });
+    $('stPFmt').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { st.pfmt = b.dataset.f; preset(); pdraw(); } });
     function pname() { var w = worlds[st.world] || { name: 'planet' }; return 'nms-planet-of-the-day-' + new Date().toISOString().slice(0, 10) + '-' + w.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + st.pfmt + '.png'; }
     $('stPSave').addEventListener('click', function () { if (worlds.length) exportPng(pcv, pname(), pnote); });
     $('stPShare').addEventListener('click', function () { if (worlds.length) sharePng(pcv, pname(), 'Today’s No Man\'s Sky planet of the day, from weather.nomansskyhub.app', pnote); });

@@ -138,3 +138,11 @@
   .st-row #stFmt{width:auto}
   .st-row .st-seg button{flex:1}
 }
+
+/* Planet of the day: move + zoom the picture */
+canvas.st-drag{cursor:grab;touch-action:none}
+canvas.st-drag:active{cursor:grabbing}
+.st-zoomf small{display:block;margin-top:6px;color:var(--text-dim);font-size:.85rem}
+.st-zrow{display:flex;align-items:center;gap:8px}
+.st-zrow input[type=range]{flex:1;min-height:44px;padding:0;accent-color:var(--cyan)}
+.st-zrow button{min-width:44px;min-height:44px;padding:0 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--white);font-family:'Orbitron',monospace;font-size:.75rem;letter-spacing:1px;cursor:pointer}
