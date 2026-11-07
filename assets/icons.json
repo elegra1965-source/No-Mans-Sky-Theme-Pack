@@ -1,215 +1,215 @@
 [
 {
 "file": "assets/icons/nms_01_plush_red.png",
-"label": "Plush Red"
+"label": "Traveller Plush"
 },
 {
 "file": "assets/icons/nms_02_plush_green.png",
-"label": "Plush Green"
+"label": "Gek Plush"
 },
 {
 "file": "assets/icons/nms_03_helmet.png",
-"label": "Helmet"
+"label": "Traveller"
 },
 {
 "file": "assets/icons/nms_04_diamond_dark.png",
-"label": "Diamond Dark"
+"label": "No Man's Sky Emblem"
 },
 {
 "file": "assets/icons/nms_05_diamond_gold.png",
-"label": "Diamond Gold"
+"label": "Unknown Grave"
 },
 {
 "file": "assets/icons/nms_07_diamond_purple.png",
-"label": "Diamond Purple"
+"label": "Korvax"
 },
 {
 "file": "assets/icons/nms_08_ship_yellow.png",
-"label": "Ship Yellow"
+"label": "Harmonic Seal"
 },
 {
 "file": "assets/icons/nms_09_yellow_block.png",
-"label": "Yellow Block"
+"label": "Title Unlocked"
 },
 {
 "file": "assets/icons/nms_10_diamond_green.png",
-"label": "Diamond Green"
+"label": "Gek"
 },
 {
 "file": "assets/icons/nms_11_gold_card.png",
-"label": "Gold Card"
+"label": "Atlas Pass"
 },
 {
 "file": "assets/icons/nms_12_shield_purple.png",
-"label": "Shield Purple"
+"label": "Rank A"
 },
 {
 "file": "assets/icons/nms_13_shield_gold_s.png",
-"label": "Shield Gold S"
+"label": "Rank S"
 },
 {
 "file": "assets/icons/nms_14_shield_blue_b.png",
-"label": "Shield Blue B"
+"label": "Rank B"
 },
 {
 "file": "assets/icons/nms_15_shield_green_c.png",
-"label": "Shield Green C"
+"label": "Rank C"
 },
 {
 "file": "assets/icons/nms_16_robot_biped.png",
-"label": "Robot Biped"
+"label": "Sentinel Walker"
 },
 {
 "file": "assets/icons/nms_17_robot_quad.png",
-"label": "Robot Quad"
+"label": "Sentinel Quad"
 },
 {
 "file": "assets/icons/nms_18_ship_cone.png",
-"label": "Ship Cone"
+"label": "Sentinel Summoner"
 },
 {
 "file": "assets/icons/nms_19_robot_mech.png",
-"label": "Robot Mech"
+"label": "Hardframe Mech"
 },
 {
 "file": "assets/icons/nms_20_drone_eye.png",
-"label": "Drone Eye"
+"label": "Sentinel Drone"
 },
 {
 "file": "assets/icons/nms_21_spider_dark.png",
-"label": "Spider Dark"
+"label": "Arachnid (Small)"
 },
 {
 "file": "assets/icons/nms_22_spider_purple.png",
-"label": "Spider Purple"
+"label": "Arachnid (Large)"
 },
 {
 "file": "assets/icons/nms_23_spider_pixel.png",
-"label": "Spider Pixel"
+"label": "Arachnid (Medium)"
 },
 {
 "file": "assets/icons/nms_24_mech_orange.png",
-"label": "Mech Orange"
+"label": "Hardframe Mech (Alt)"
 },
 {
 "file": "assets/icons/nms_25_drone_purple.png",
-"label": "Drone Purple"
+"label": "Corrupted Sentinel"
 },
 {
 "file": "assets/icons/nms_26_ship_orange.png",
-"label": "Ship Orange"
+"label": "Sentinel Interceptor"
 },
 {
 "file": "assets/icons/nms_27_diamond_grey.png",
-"label": "Diamond Grey"
+"label": "Mission Portal"
 },
 {
 "file": "assets/icons/nms_28_wing_orange.png",
-"label": "Wing Orange"
+"label": "Sentinel Ship"
 },
 {
 "file": "assets/icons/nms_29_gold_card2.png",
-"label": "Gold Card2"
+"label": "Atlas Pass (Alt)"
 },
 {
 "file": "assets/icons/nms_30_alien_head.png",
-"label": "Alien Head"
+"label": "Artemis"
 },
 {
 "file": "assets/icons/nms_31_lizard_head.png",
-"label": "Lizard Head"
+"label": "Polo"
 },
 {
 "file": "assets/icons/nms_32_robot_head.png",
-"label": "Robot Head"
+"label": "Nada"
 },
 {
 "file": "assets/icons/nms_33_logo_gold.png",
-"label": "Logo Gold"
+"label": "Apollo"
 },
 {
 "file": "assets/icons/nms_34_diamond_copper.png",
-"label": "Diamond Copper"
+"label": "Vy'keen"
 },
 {
 "file": "assets/icons/nms_35_turret_purple.png",
-"label": "Turret Purple"
+"label": "Exocraft Weapon: Mounted Cannon"
 },
 {
 "file": "assets/icons/nms_36_camera_drone.png",
-"label": "Camera Drone"
+"label": "Telamon"
 },
 {
 "file": "assets/icons/nms_37_robot_badge.png",
-"label": "Robot Badge"
+"label": "Null"
 },
 {
 "file": "assets/icons/nms_38_owl_head.png",
-"label": "Owl Head"
+"label": "Iteration: Hesperus Visage"
 },
 {
 "file": "assets/icons/nms_39_alien_mask.png",
-"label": "Alien Mask"
+"label": "Iteration: Ariadne Visage"
 },
 {
 "file": "assets/icons/nms_40_sheep_head.png",
-"label": "Sheep Head"
+"label": "Iteration: Selene Visage"
 },
 {
 "file": "assets/icons/nms_41_skull_purple.png",
-"label": "Skull Purple"
+"label": "Iteration: Mercury Visage"
 },
 {
 "file": "assets/icons/nms_42_alien_blue.png",
-"label": "Alien Blue"
+"label": "Iteration: Hyperion Visage"
 },
 {
 "file": "assets/icons/nms_43_horse_mech.png",
-"label": "Horse Mech"
+"label": "Iteration: Eos Visage"
 },
 {
 "file": "assets/icons/nms_44_frog_head.png",
-"label": "Frog Head"
+"label": "Iteration: Gemini Visage"
 },
 {
 "file": "assets/icons/nms_45_bulldog_head.png",
-"label": "Bulldog Head"
+"label": "Iteration: Perses Visage"
 },
 {
 "file": "assets/icons/nms_46_alien_blue2.png",
-"label": "Alien Blue2"
+"label": "Iteration: Hyperion Visage (Alt)"
 },
 {
 "file": "assets/icons/nms_47_horse_mech2.png",
-"label": "Horse Mech2"
+"label": "Iteration: Eos Visage (Alt)"
 },
 {
 "file": "assets/icons/nms_48_brain_alien.png",
-"label": "Brain Alien"
+"label": "Iteration: Ares Visage"
 },
 {
 "file": "assets/icons/nms_49_helmet_teal.png",
-"label": "Helmet Teal"
+"label": "Iteration: Cronus Visage"
 },
 {
 "file": "assets/icons/nms_50_spider_mech.png",
-"label": "Spider Mech"
+"label": "The Construct"
 },
 {
 "file": "assets/icons/nms_51_brain_alien2.png",
-"label": "Brain Alien2"
+"label": "Iteration: Ares Visage (Alt)"
 },
 {
 "file": "assets/icons/nms_52_tree_head.png",
-"label": "Tree Head"
+"label": "Iteration: Helios Visage"
 },
 {
 "file": "assets/icons/nms_53_lizard_green.png",
-"label": "Lizard Green"
+"label": "Iteration: Tethys Visage"
 },
 {
 "file": "assets/icons/nms_54_symbol_gold.png",
-"label": "Symbol Gold"
+"label": "Units"
 },
 {
 "file": "assets/icons/nms_lore_01_atlas_pass.png",
@@ -221,15 +221,15 @@
 },
 {
 "file": "assets/icons/nms_lore_04_interceptor.png",
-"label": "Interceptor"
+"label": "Sentinel Interceptor"
 },
 {
 "file": "assets/icons/nms_lore_05_walker.png",
-"label": "Walker"
+"label": "Sentinel Walker"
 },
 {
 "file": "assets/icons/nms_lore_06_quad.png",
-"label": "Quad"
+"label": "Sentinel Quad"
 },
 {
 "file": "assets/icons/nms_lore_07_sentinel_ship.png",
@@ -237,15 +237,15 @@
 },
 {
 "file": "assets/icons/nms_lore_08_hardframe.png",
-"label": "Hardframe"
+"label": "Hardframe Mech"
 },
 {
 "file": "assets/icons/nms_lore_09_summoner.png",
-"label": "Summoner"
+"label": "Sentinel Summoner"
 },
 {
 "file": "assets/icons/nms_lore_10_flare.png",
-"label": "Flare"
+"label": "Sentinel Flare"
 },
 {
 "file": "assets/icons/nms_lore_11_gek.png",
