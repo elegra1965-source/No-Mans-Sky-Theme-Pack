@@ -12,6 +12,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 
 - [What's in the pack](#whats-in-the-pack)
 - [Make it yours (new)](#make-it-yours-new)
+- [S Pen Icons (new, Android only)](#s-pen-icons-new-android-only)
 - [New here? Take the tour](#new-here-take-the-tour)
 - [The site](#the-site)
 - [How it's built](#how-its-built)
@@ -57,9 +58,29 @@ Everything is drawn in your browser; nothing is uploaded. The only thing sent an
 
 </details>
 
+## S Pen Icons (new, Android only)
+
+<details>
+<summary>▸ Tap to open</summary>
+
+Six No Man's Sky floating icons and pointers for the Samsung Galaxy S Pen, to use with Good Lock > Pentastic. Fan-made and AI-assisted, not official.
+
+- **Pick one, change what you like:** choose a picture, then switch between **Pointer**, **Floating icon** or **Both**, so the pen tip and the floating icon can be different pictures.
+- **To-scale phone preview:** drag the S Pen around the phone (it leans as it moves) and change the wallpaper. Double-tap the floating icon (or double-tap with the pen tip over it) to open Samsung's side panel, which grows up from the bottom.
+- **See it on a real Galaxy:** a short picture and video pop-up recorded on a real phone.
+- **Downloads:** 512 px PNG for the icon you are looking at, or all six in one zip. A folded four-step how-to covers Pentastic.
+- **Make your own:** a link to the Exosuit HUD Icons tab in [Photo Mode Studio](photo-studio.html#icon), which links back here.
+- Android only. Touch handling is on the phone mock only, so the page still scrolls normally. Translated into the same languages as the rest of the site. Code in `spen.js` and `spen.css`, images in `assets/spen/`.
+
+![S Pen Icons on a phone: the picker, Pointer / Floating icon / Both, and the to-scale phone](screenshots/11-spen-icons-phone.jpg)
+
+![S Pen Icons on desktop](screenshots/11-spen-icons-desktop.jpg)
+
+</details>
+
 ## New here? Take the tour
 
-First-time visitors get a small **New here? ▶ Take the tour / Dive in** box (shown once, never again). The tour dims the page and spotlights Install / Download, the personalised HUD, widgets, the NMS font, the live preview and How to apply, one step at a time with Back / Next / Skip. Replay it any time from the **▷ TOUR (next to See it live)** button. The phone's Back button closes it, and it's translated into every language the site offers. Shared `nms-tour.js`, the same file on every nomansskyhub.app site.
+First-time visitors get a small **New here? ▶ Take the tour / Dive in** box (shown once, never again). The tour dims the page and spotlights Install / Download, the personalised HUD, widgets, the NMS font, S Pen icons, the live preview and How to apply, one step at a time with Back / Next / Skip. Replay it any time from the **▷ TOUR (next to See it live)** button. The phone's Back button closes it, and it's translated into every language the site offers. Shared `nms-tour.js`, the same file on every nomansskyhub.app site.
 
 The last step is **Your language**: it points at the 🌐 button, because one choice there changes every site in the family.
 

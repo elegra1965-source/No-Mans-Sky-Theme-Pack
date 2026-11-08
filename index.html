@@ -595,6 +595,7 @@
 <link rel="stylesheet" href="polish.css">
 <link rel="stylesheet" href="wmini.css?v=20261108">
 <link rel="stylesheet" href="studio.css?v=20261107">
+<link rel="stylesheet" href="spen.css?v=20261108">
 
 <style>
 /* ===== 2026-10-14 preview additions ===== */
@@ -835,6 +836,59 @@
     </details>
   </div>
 </section>
+
+<!-- S PEN ICONS (2026-11-08, Android only) -->
+<section class="sec" id="spen">
+  <div class="wrap">
+    <details class="sec-accordion">
+    <summary class="sec-summary">
+    <div class="sum-inner">
+      <span class="acc-dot"></span>
+      <span class="acc-kicker">New</span>
+      <span class="acc-divider"></span>
+      <div class="acc-title-col"><h2 class="sec-title">S Pen Icons</h2><span class="acc-sub">Floating icons and pointers for Samsung Galaxy · Android only</span></div>
+      <span class="acc-corner-tl"></span>
+      <span class="acc-corner-br"></span>
+      <div class="acc-arrow-box"><span class="acc-arrow">▾</span></div>
+    </div>
+    </summary>
+    <div class="sp-body">
+    <div class="sp-badge"><b>ANDROID ONLY</b><span>For Samsung Galaxy phones and tablets with an S Pen, using Good&nbsp;Lock. Not for iPhone or iPad.</span></div>
+    <p class="sp-lead">Floating icons and pointers for your S Pen. Pick one, save it, set it in Good&nbsp;Lock&nbsp;&gt;&nbsp;Pentastic. Drag the pen around the phone.</p>
+    <div class="sp-stage">
+      <div class="sp-top">
+        <div class="sp-big"><img id="spBigImg" alt="" width="84" height="84"><div><div class="sp-nm" id="spNm"></div><div class="sp-ln" id="spLn"></div></div></div>
+        <div class="sp-grid" id="spGrid"></div>
+        <div class="sp-tg" id="spTg"><span>CHANGE</span><div class="sp-tgr"><button type="button" data-t="p">POINTER</button><button type="button" data-t="f">FLOATING ICON</button><button type="button" class="on" data-t="b">BOTH</button></div></div>
+        <p class="sp-tgn">Use a different picture for the pen tip.</p>
+      </div>
+      <div class="sp-phonewrap"><div class="sp-phone"><div class="sp-screen" id="spSc"><span class="sp-notch"></span><div class="sp-ac" id="spAc"><img src="assets/spen/strip.webp" alt="" loading="lazy"></div><div class="sp-fl" id="spFl"><img id="spFlImg" alt=""></div></div>
+        <div class="sp-clip"><div class="sp-tw" id="spTw"><div class="sp-pt" id="spPt"><img id="spPtImg" alt=""></div><div class="sp-pen"><i></i></div></div></div></div>
+        <p class="sp-hint">Shown to scale. Double-tap the floating icon (top right) to open the side panel, like on a real Galaxy. Drag anywhere on the phone to move the pen.</p>
+        <p class="sp-seewrap"><button type="button" class="sp-see" id="spSee">▶ SEE IT ON A REAL GALAXY</button></p>
+        <a href="#" class="sp-wpl" id="spBgn">WALLPAPER 1</a></div>
+      <div class="sp-rest">
+        <div class="sp-real"><div><img id="spR1" width="52" height="52" alt=""><span>Floating icon<br>actual size</span></div><div><img id="spR2" width="28" height="28" alt=""><span>Pointer<br>actual size</span></div><div class="sp-sm">This is how small they really look on your phone, so we made them bold.</div></div>
+        <div class="sp-btns"><a class="sp-btn p" id="spDl" href="assets/spen/nms-spen-1-atlas.png" download>⬇ THIS ICON · 512 PNG</a><a class="sp-btn" href="assets/spen/NMS_SPen_Icons.zip" download>⬇ ALL 6 · ZIP</a></div>
+        <a class="sp-btn g" href="photo-studio.html#icon">✦ MAKE YOUR OWN: EXOSUIT HUD ICONS</a>
+        <p class="sp-note">Turn any picture into a round NMS icon with Exosuit HUD Icons (in Photo Mode Studio), then use it in Pentastic. Saved on your device only.</p>
+      </div>
+    </div>
+    <details class="sp-adv"><summary>HOW TO SET IT UP (4 STEPS)</summary>
+    <ol><li><b>Save</b> the icon to your phone (Gallery).</li>
+    <li>Open <b>Good Lock → Pentastic</b> (get it from Galaxy Store). Good Lock isn't offered in every country.</li>
+    <li><b>Floating Icon → Custom</b>: pick the picture and crop it to the circle. This is the button that shows when you pull the S Pen out.</li>
+    <li><b>Pointer → Custom</b>: pick the same picture, or a different one. This is the little icon that follows the pen tip when it hovers over the screen.</li></ol>
+    <p class="sp-note">Needs a Galaxy with an S Pen and Air Command, plus Good Lock. Device and region support may vary. Fan-made, AI-assisted artwork, not official.</p></details>
+    </div>
+    </details>
+  </div>
+</section>
+<div class="sp-lb" id="spLb"><div class="sp-lbc">
+<div class="sp-lbt"><button type="button" id="spTp" class="on">PICTURE</button><button type="button" id="spTv">VIDEO</button><button type="button" class="x" id="spX">✕ CLOSE</button></div>
+<div id="spLp"><img id="spReal" alt="Pentastic on a real Galaxy with a custom floating icon" width="560" height="1155"><p class="cap">A real Galaxy: Pentastic with a custom floating icon and pointer set. This is what you will see on your phone.</p></div>
+<div id="spLv" style="display:none"><video id="spVid" muted loop playsinline controls preload="none"></video><p class="cap">A real Galaxy: the pen hovers, a double-tap on the floating icon opens the side panel.</p></div>
+</div></div>
 
 <!-- ALPHABET / FONT -->
 <section class="sec" id="alphabet">
@@ -1739,6 +1793,7 @@
 <script src="expedition.js" defer></script>
 <script src="wmini.js?v=20261108" defer></script>
 <script src="studio.js?v=20261107" defer></script>
+<script src="spen.js?v=20261108" defer></script>
 
 <script>
 /* ===== 2026-10-14 preview: living phone (hero demo without a video file) =====
@@ -1887,7 +1942,7 @@ if (window.NMS_PUSH) NMS_PUSH.wire(document.getElementById('newStuffAlertBtn'), 
 });
 </script>
 <script src="/nms-tour.js?v=3"></script>
-<script>NMSTour.init({id:'theme',button:{after:'#heroMake',className:'btn btn-ghost',label:'▷ TOUR'},steps:[{"sel": "#heroMake", "title": "Make it yours", "body": "Make a wallpaper with your name, galaxy and portal glyphs, on our art or your own picture."}, {"sel": "#heroInstall", "title": "Get the pack", "body": "Icons, wallpapers and charging animations for your phone or computer, all free."}, {"sel": "#widgets .sec-title", "title": "Widgets", "body": "Ready-made NMS widgets: live clock, home portal and planet scan. Add one to your home screen."}, {"sel": "#alphabet .sec-title", "title": "Write in NMS", "body": "Type anything to see it in the NMS font. The font itself comes with the pack."}, {"sel": "#preview .sec-title", "title": "Live preview", "body": "A live look at the real icons. Tap any icon to copy its filename."}, {"sel": "#apply .sec-title", "title": "How to apply", "body": "Step-by-step setup for Android, iPhone, Windows, Mac and Linux."}, {"sel": "#fbOpenBtn", "title": "Reviews & feedback", "body": "Tell us what you think, report a bug or ask for something new."}, {"sel": "[data-lang-btn]", "top": true, "title": "Your language", "body": "Pick your language once and every site in the family follows."}]});</script>
+<script>NMSTour.init({id:'theme',button:{after:'#heroMake',className:'btn btn-ghost',label:'▷ TOUR'},steps:[{"sel": "#heroMake", "title": "Make it yours", "body": "Make a wallpaper with your name, galaxy and portal glyphs, on our art or your own picture."}, {"sel": "#heroInstall", "title": "Get the pack", "body": "Icons, wallpapers and charging animations for your phone or computer, all free."}, {"sel": "#widgets .sec-title", "title": "Widgets", "body": "Ready-made NMS widgets: live clock, home portal and planet scan. Add one to your home screen."},{"sel": "#spen .sec-title", "title": "S Pen Icons", "body": "Android only: floating icons and pointers for your Samsung Galaxy S Pen, with a phone to try them on."}, {"sel": "#alphabet .sec-title", "title": "Write in NMS", "body": "Type anything to see it in the NMS font. The font itself comes with the pack."}, {"sel": "#preview .sec-title", "title": "Live preview", "body": "A live look at the real icons. Tap any icon to copy its filename."}, {"sel": "#apply .sec-title", "title": "How to apply", "body": "Step-by-step setup for Android, iPhone, Windows, Mac and Linux."}, {"sel": "#fbOpenBtn", "title": "Reviews & feedback", "body": "Tell us what you think, report a bug or ask for something new."}, {"sel": "[data-lang-btn]", "top": true, "title": "Your language", "body": "Pick your language once and every site in the family follows."}]});</script>
 <script src="/nms-feedback/nms-feedback.js?v=20261104" data-tool="theme" defer></script>
 </body>
 </html>
