@@ -1,9 +1,49 @@
 {
- "version": "v43",
- "date": "2026-11-06",
+ "version": "v44",
+ "date": "2026-11-08",
  "site": "NMS THEME PACK",
  "lastToday": false,
  "items": [
+  {
+   "tag": "new",
+   "text": {
+    "en": "Widgets are now live previews: Weather Scan, Home Planet and a new Planet of the Day (matched to your weather, with a quote of the day)",
+    "es": "Los widgets ahora son vistas en vivo: Escaneo del clima, Planeta natal y un nuevo Planeta del día (según tu clima, con cita del día)",
+    "de": "Widgets sind jetzt Live-Vorschauen: Wetter-Scan, Heimatplanet und neu: Planet des Tages (passend zu deinem Wetter, mit Zitat des Tages)",
+    "nl": "Widgets zijn nu live voorbeelden: Weerscan, Thuisplaneet en nieuw: Planeet van de dag (past bij je weer, met citaat van de dag)",
+    "pl": "Widżety to teraz podglądy na żywo: Skan pogody, Planeta domowa i nowość: Planeta dnia (dopasowana do pogody, z cytatem dnia)",
+    "fr": "Les widgets sont désormais des aperçus en direct : Scan météo, Planète d'origine et nouveau : Planète du jour (selon ta météo, avec citation du jour)",
+    "pt-BR": "Os widgets agora são prévias ao vivo: Varredura do clima, Planeta natal e novo Planeta do dia (conforme seu clima, com citação do dia)",
+    "it": "I widget ora sono anteprime dal vivo: Scansione meteo, Pianeta natale e il nuovo Pianeta del giorno (in base al tuo meteo, con citazione del giorno)"
+   },
+   "url": "https://theme.nomansskyhub.app/widgets.html"
+  },
+  {
+   "tag": "new",
+   "text": {
+    "en": "NMS Clock: a portal-ring face that lights the glyphs for the hour and minute, or a digital Traveller HUD with a world clock",
+    "es": "Reloj NMS: una esfera de portal que ilumina los glifos de la hora y el minuto, o un HUD digital con hora mundial",
+    "de": "NMS-Uhr: ein Portalring, der die Glyphen für Stunde und Minute aufleuchten lässt, oder ein digitales Reisenden-HUD mit Weltzeit",
+    "nl": "NMS-klok: een portaalring die de glyphs voor uur en minuut oplicht, of een digitale reizigers-HUD met wereldklok",
+    "pl": "Zegar NMS: tarcza w kształcie portalu podświetlająca glify godziny i minuty lub cyfrowy HUD z czasem światowym",
+    "fr": "Horloge NMS : un cadran-portail qui allume les glyphes de l'heure et des minutes, ou un HUD numérique avec heure mondiale",
+    "pt-BR": "Relógio NMS: um mostrador em anel de portal que acende os glifos da hora e do minuto, ou um HUD digital com hora mundial",
+    "it": "Orologio NMS: un quadrante a portale che accende i glifi di ore e minuti, oppure un HUD digitale con ora mondiale"
+   }
+  },
+  {
+   "tag": "improved",
+   "text": {
+    "en": "Exosuit Status now shows your connection and a battery history for the visit",
+    "es": "Estado del exotraje ahora muestra tu conexión y el historial de batería de la visita",
+    "de": "Exoanzug-Status zeigt jetzt deine Verbindung und den Akkuverlauf des Besuchs",
+    "nl": "Exopak-status toont nu je verbinding en het accuverloop van het bezoek",
+    "pl": "Status egzoskafandra pokazuje teraz połączenie i historię baterii z wizyty",
+    "fr": "L'état de l'exo-combinaison affiche maintenant ta connexion et l'historique de la batterie",
+    "pt-BR": "O status do exotraje agora mostra sua conexão e o histórico da bateria da visita",
+    "it": "Lo stato dell'esotuta ora mostra la connessione e la cronologia della batteria della visita"
+   }
+  },
   {
    "tag": "new",
    "text": {

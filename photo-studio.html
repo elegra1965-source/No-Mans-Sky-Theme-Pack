@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>if(/\.netlify\.app$/.test(location.hostname))location.replace("https://theme.nomansskyhub.app"+location.pathname+location.search);</script>
+<script src="/lang.js?v=2"></script>
+<script src="/nms-update.js?v=4" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Photo Mode Studio &amp; Exosuit HUD Icons · No Man's Sky Theme Pack</title>
+<meta name="description" content="Make your own No Man's Sky style wallpaper from your screenshots, with photo-mode style filters and your Traveller HUD, and make Exosuit HUD icons. All on your device, free, fan-made.">
+<meta name="theme-color" content="#070b11">
+<link rel="canonical" href="https://theme.nomansskyhub.app/photo-studio.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="No Man's Sky Theme Pack">
+<meta property="og:title" content="Photo Mode Studio &amp; Exosuit HUD Icons">
+<meta property="og:description" content="Turn your No Man's Sky screenshots into wallpapers and make your own HUD icons. Free, on your device.">
+<meta property="og:url" content="https://theme.nomansskyhub.app/photo-studio.html">
+<meta property="og:image" content="https://theme.nomansskyhub.app/screenshots/og-card.jpg">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="pwa/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: one tool at a time under two tabs; looks and size always visible, everything else folded. */
+:root{
+  --bg:#060a13; --panel:#0d1524; --panel2:#111d33; --line:#1d2b45;
+  --text:#e8f1ff; --muted:#8196b8; --accent:#4fe3ff; --gold:#ffcf5a;
+  --display:'Orbitron','Segoe UI',system-ui,sans-serif;
+  --body:'Exo 2','Segoe UI',system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.45}
+body{padding:16px 16px 48px;max-width:560px;margin:0 auto}
+h1{font-family:var(--display);font-size:20px;letter-spacing:.12em;margin:0 0 4px;font-weight:700;text-wrap:balance}
+h2{font-family:var(--display);font-size:13px;letter-spacing:.14em;margin:18px 0 8px;color:var(--accent);font-weight:500;text-transform:uppercase}
+.badge{display:inline-block;font-family:var(--display);font-size:10px;letter-spacing:.14em;color:#06101e;background:var(--gold);padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:8px}
+.note{color:var(--muted);font-size:14px;margin:0 0 14px}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tab{flex:1;min-height:44px;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:10px;font-family:var(--display);font-size:12px;letter-spacing:.1em;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--text);border-color:var(--accent);background:var(--panel2)}
+.tab:focus-visible,.btn:focus-visible,.chip:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.stage{display:flex;justify-content:center;background:#02050b;border:1px solid var(--line);border-radius:12px;padding:10px}
+canvas{display:block;max-width:100%;border-radius:8px;touch-action:none}
+.hint{color:var(--muted);font-size:13px;margin:6px 0 0;text-align:center}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.btn{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#04101c;font-family:var(--display);font-size:12px;letter-spacing:.1em;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.file input{position:absolute;opacity:0;width:1px;height:1px}
+.btn.file{position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-family:var(--body);font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:var(--panel2)}
+details{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:10px 0}
+summary{cursor:pointer;min-height:44px;display:flex;align-items:center;padding:0 14px;font-family:var(--display);font-size:12px;letter-spacing:.1em}
+details>div{padding:0 14px 14px}
+.sl{display:grid;grid-template-columns:92px 1fr 48px;align-items:center;gap:8px;margin:6px 0;font-size:14px}
+.sl output{font-family:var(--display);font-size:12px;letter-spacing:.1em;text-align:right;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent);min-height:32px}
+input[type=text]{width:100%;min-height:42px;background:#08101d;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:0 10px;font-family:var(--display);font-size:13px;letter-spacing:.1em}
+label.f{display:block;font-size:13px;color:var(--muted);margin:8px 0 4px}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{border-color:#fff;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--gold)}
+.big{display:flex;justify-content:center;background:#02050b;border:1px solid var(--line);border-radius:12px;padding:16px;
+  background-image:radial-gradient(circle at 30% 20%,#1b2c55 0,#050a15 70%)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+.grid button{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 2px;cursor:pointer;color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:44px}
+.grid button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.grid canvas{width:48px;height:48px}
+.result{margin-top:12px;background:var(--panel);border:1px solid var(--gold);border-radius:12px;padding:12px}
+.result img{display:block;max-width:100%;max-height:420px;margin:0 auto;border-radius:8px;background:repeating-conic-gradient(#1a2640 0 25%,#0d1524 0 50%) 0 0/16px 16px}
+.result p{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.mockbar{border:1px dashed var(--line);border-radius:10px;padding:8px 12px;color:var(--muted);font-size:13px;margin-bottom:6px}
+.stage,.big{position:sticky;top:0;z-index:6;box-shadow:0 12px 14px -8px var(--bg)}
+input[type=range]{touch-action:pan-y}
+.big{padding:10px}
+.anch{display:grid;grid-template-columns:repeat(3,44px);gap:6px}
+.anch button{width:44px;height:44px;border:1px solid var(--line);background:var(--panel2);border-radius:8px;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
+.anch button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.anch i{display:block;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.sw.wheel{position:relative;background:conic-gradient(#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00);overflow:hidden;display:inline-block}
+.sw.wheel input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
+
+.back{display:inline-block;margin:0 0 10px;font-family:Orbitron,monospace;font-size:11px;letter-spacing:1.5px;color:#00e5ff;text-decoration:none}
+.more{margin:8px 0 0}
+.grid.cap button:nth-child(n+11){display:none}
+.grid.open{max-height:340px;overflow-y:auto;padding-right:4px}
+.res-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.nms-fb-ico{vertical-align:-4px;margin-right:6px}
+.chips.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.chips.g3 .chip{text-align:center;padding-left:6px;padding-right:6px}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&larr; THEME PACK</a>
+<h1>Photo Mode Studio</h1>
+<p class="note">Made on your device. Nothing is uploaded, and your settings stay on this device only.</p>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" id="tab-shot" aria-selected="true" aria-controls="shot">PHOTO MODE STUDIO</button>
+  <button class="tab" role="tab" id="tab-icon" aria-selected="false" aria-controls="icon">EXOSUIT HUD ICONS</button>
+</div>
+
+<!-- ============ SCREENSHOT EDITOR ============ -->
+<section id="shot" role="tabpanel" aria-labelledby="tab-shot">
+  <div class="stage"><canvas id="pv" aria-label="Wallpaper preview"></canvas></div>
+  <p class="hint">Drag to move. Pinch or use the slider to zoom. Drag the HUD box to place it.</p>
+  <div class="sl"><label for="zoom">Zoom</label><input type="range" id="zoom" min="0.5" max="3" step="0.01" value="1"><output id="zoomO">1.00</output></div>
+  <div class="row">
+    <label class="btn file" for="file">CHOOSE YOUR SCREENSHOT<input type="file" id="file" accept="image/*"></label>
+    <button class="btn ghost" id="useSample" type="button">USE SAMPLE</button>
+  </div>
+
+  <h2>Filters</h2>
+  <div class="chips" id="looks"></div>
+  <div class="sl" style="margin-top:10px"><label for="strength">Intensity</label><input type="range" id="strength" min="0" max="1.5" step="0.01" value="1"><output id="strengthO">1.00</output></div>
+
+  <h2>Wallpaper size</h2>
+  <div class="chips" id="sizes"></div>
+
+  <details>
+    <summary>FINE TUNE</summary>
+    <div>
+      <p class="note" style="margin:0 0 6px">When zoomed out, fill the edges with</p>
+      <div class="chips" id="fills" style="margin-bottom:10px"></div>
+      <div class="sl"><label for="bloom">Bloom</label><input type="range" id="bloom" min="0" max="1" step="0.01"><output id="bloomO"></output></div>
+      <div class="sl"><label for="vig">Vignette</label><input type="range" id="vig" min="0" max="0.9" step="0.01"><output id="vigO"></output></div>
+      <div class="sl"><label for="haze">Fog</label><input type="range" id="haze" min="0" max="0.6" step="0.01"><output id="hazeO"></output></div>
+      <div class="sl"><label for="dim">Dim</label><input type="range" id="dim" min="0" max="0.6" step="0.01" value="0"><output id="dimO">0</output></div>
+    </div>
+  </details>
+
+  <details>
+    <summary>TRAVELLER HUD</summary>
+    <div>
+      <div class="chips" style="margin-bottom:8px">
+        <button class="chip" id="hudOn" aria-pressed="true" type="button">Show HUD</button>
+        <button class="chip" id="hudWide" aria-pressed="true" type="button">Horizontal</button>
+        <button class="chip" id="hudTall" aria-pressed="false" type="button">Vertical</button>
+        <button class="chip" id="hudGame" aria-pressed="false" type="button">Game style</button>
+      </div>
+      <p class="note" style="margin:6px 0">Snap to position</p>
+      <div class="anch" id="anch"></div>
+      <div class="sl" style="margin-top:10px"><label for="hudSize">Size</label><input type="range" id="hudSize" min="0.6" max="1.6" step="0.01" value="1"><output id="hudSizeO">1.00</output></div>
+      <label class="f" for="tName">Traveller</label><input type="text" id="tName" value="" maxlength="24" placeholder="Your in-game name">
+      <label class="f" for="tGal">Home galaxy</label><input type="text" id="tGal" value="EUCLID" maxlength="16">
+      <label class="f" for="tHex">Portal address (hex)</label><input type="text" id="tHex" value="" maxlength="12" placeholder="12 characters, 0-9 and A-F">
+      <p class="hint" style="text-align:left">While you drag the HUD, dashed lines show the centre of the screen and turn gold when it snaps to the centre or the edge margins. Your name and portal glyphs come from your Traveller ID if you have set one.</p>
+    </div>
+  </details>
+
+  <div class="row"><button class="btn" id="make" type="button">CAPTURE</button></div>
+  <div class="result" id="res" hidden>
+    <img id="out" alt="Finished wallpaper">
+    <p id="resNote"></p>
+    <div class="res-row"><a class="btn" id="dl" download="nms-wallpaper.jpg" href="#">SAVE</a></div>
+  </div>
+</section>
+
+<!-- ============ ICON MAKER ============ -->
+<section id="icon" role="tabpanel" aria-labelledby="tab-icon" hidden>
+  <div class="big"><canvas id="ipv" width="512" height="512" style="width:160px;height:160px" aria-label="Icon preview"></canvas></div>
+  <p class="hint" id="ihint">Pick an icon below. With your own picture, drag it to move it.</p>
+  <input type="search" id="igSearch" placeholder="Search icons…" aria-label="Search icons" style="width:100%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:inherit;font-size:16px">
+  <div class="grid cap" id="ig"></div>
+  <div class="row more"><button class="btn ghost" id="igMore" type="button">SHOW ALL ICONS</button></div>
+  <div class="row">
+    <label class="btn file" for="ifile">USE YOUR OWN PICTURE<input type="file" id="ifile" accept="image/*"></label>
+  </div>
+
+  <h2>Style</h2>
+  <div class="chips" id="styles"></div>
+  <div class="sl" style="margin-top:10px"><label for="istr" id="istrL">Glow</label><input type="range" id="istr" min="0" max="1" step="0.01" value="0.6"><output id="istrO">0.60</output></div>
+  <div class="sl"><label for="ishine">Shine</label><input type="range" id="ishine" min="0" max="1" step="0.01" value="0"><output id="ishineO">0.00</output></div>
+  <div class="sl"><label for="ishineA">Shine angle</label><input type="range" id="ishineA" min="0" max="360" step="1" value="300"><output id="ishineAO">300</output></div>
+
+  <h2>Colour</h2>
+  <div class="swatches" id="tints"></div>
+  <details>
+    <summary>COLOUR GRADE</summary>
+    <div>
+      <div class="sl"><label for="ih">Hue</label><input type="range" id="ih" min="0" max="360" step="1"><output id="ihO"></output></div>
+      <div class="sl"><label for="isat">Saturation</label><input type="range" id="isat" min="0" max="100" step="1"><output id="isatO"></output></div>
+      <div class="sl"><label for="il">Brightness</label><input type="range" id="il" min="15" max="100" step="1"><output id="ilO"></output></div>
+    </div>
+  </details>
+  <details>
+    <summary>ADJUST ICON SHAPE</summary>
+    <div>
+      <p class="note" style="margin:0 0 6px">Shape</p>
+      <div class="chips g3" id="shapes"></div>
+      <div class="sl" style="margin-top:10px"><label for="iround">Roundness</label><input type="range" id="iround" min="0.05" max="0.5" step="0.01" value="0.28"><output id="iroundO">0.28</output></div>
+      <div class="sl"><label for="ishineS">Shine size</label><input type="range" id="ishineS" min="0.3" max="1.2" step="0.01" value="0.7"><output id="ishineSO">0.70</output></div>
+      <div class="sl"><label for="igs">Symbol size</label><input type="range" id="igs" min="0.5" max="1.4" step="0.01" value="1"><output id="igsO">1.00</output></div>
+      <div class="sl"><label for="ipz">Picture zoom</label><input type="range" id="ipz" min="1" max="3" step="0.01" value="1"><output id="ipzO">1.00</output></div>
+      <div class="sl"><label for="iang">Gradient angle</label><input type="range" id="iang" min="0" max="360" step="1" value="135"><output id="iangO">135</output></div>
+      <p class="note" style="margin:12px 0 6px">Export size</p>
+      <div class="chips" id="isizes"></div>
+      <p class="hint" style="text-align:left">Our icons are 256 px originals, so 512 is plenty. Choose 1024 for your own picture to get the sharpest result in Samsung Theme Park.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>MY STYLES</summary>
+    <div>
+      <p class="note" style="margin:0 0 8px">Save the look you have made and bring it back any time. Saved on this device only.</p>
+      <div class="chips" id="myStyles"></div>
+      <div class="row"><button class="btn ghost" id="saveStyle" type="button">SAVE THIS STYLE</button><button class="btn ghost" id="delStyle" type="button" hidden>REMOVE SELECTED</button></div>
+    </div>
+  </details>
+  <div class="row"><button class="btn" id="imake" type="button">FABRICATE</button><button class="btn ghost" id="imakeAll" type="button">FABRICATE ALL (ZIP)</button></div>
+  <div class="result" id="ires" hidden>
+    <img id="iout" alt="Finished icon">
+    <p id="iresNote"></p>
+    <div class="res-row"><a class="btn" id="idl" download="nms-icon.png" href="#">SAVE</a></div>
+  </div>
+  <p class="note" style="margin-top:14px;text-align:center">Android only: use your icon as a Samsung S Pen floating icon or pointer in Good Lock Pentastic. <a href="index.html#spen" style="color:var(--gold,#f0c040)">See the S Pen Icons</a></p>
+</section>
+<details id="idea">
+  <summary>SEND A SIGNAL TO THE ATLAS</summary>
+  <div>
+    <p class="note" style="margin:0 0 8px">Want a new look, icon style, wallpaper size or anything else? Tell us in the Reviews &amp; Feedback form.</p>
+    <div class="row"><button class="btn ghost nms-fb-btn" type="button" data-nms-feedback aria-haspopup="dialog"><img class="nms-fb-ico" src="/nms-feedback/fb-ico-idea.webp" srcset="/nms-feedback/fb-ico-idea@2x.webp 2x" alt="" width="20" height="20"><span data-fbt="REVIEWS &amp; FEEDBACK">REVIEWS &amp; FEEDBACK</span></button></div>
+  </div>
+</details>
+<script src="/nms-feedback/nms-feedback.js" defer></script>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const lerp=(a,b,t)=>a+(b-a)*t;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function hexRgb(h){const n=parseInt(h.slice(1),16);return [(n>>16)&255,(n>>8)&255,n&255];}
+function rgba(h,a){const c=hexRgb(h);return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
+function rr(ctx,x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h);}
+function spaced(ctx,t,x,y,sp,align){let w=0;const cs=[...t];cs.forEach(c=>{w+=ctx.measureText(c).width+sp;});w-=sp;let cx=align==='center'?x-w/2:x;cs.forEach(c=>{ctx.fillText(c,cx,y);cx+=ctx.measureText(c).width+sp;});return w;}
+function chipRow(host,items,isOn,onPick){host.innerHTML='';items.forEach(it=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=it.n;b.setAttribute('aria-pressed',String(isOn(it.k)));b.addEventListener('click',()=>{onPick(it.k);[...host.children].forEach((c,i)=>c.setAttribute('aria-pressed',String(isOn(items[i].k))));});host.appendChild(b);});}
+try{document.fonts.load('700 20px Orbitron');document.fonts.load('500 20px Orbitron');}catch(e){}
+
+/* ---------- tabs ---------- */
+const tabs=[['tab-shot','shot'],['tab-icon','icon']];
+tabs.forEach(([t,p])=>{$('#'+t).addEventListener('click',()=>{tabs.forEach(([t2,p2])=>{$('#'+t2).setAttribute('aria-selected',String(t2===t));$('#'+p2).hidden=(p2!==p);});if(p==='shot')queueShot();else queueIcon();});});
+if(location.hash==='#icon')setTimeout(()=>$('#tab-icon').click(),0);
+
+/* =====================  SCREENSHOT EDITOR  ===================== */
+const _d=Math.min(window.devicePixelRatio||1,3),_w=Math.round(screen.width*_d),_h=Math.round(screen.height*_d),_k=Math.min(1,4096/Math.max(_w,_h));
+const TARGETS={device:{n:'This device',w:Math.round(_w*_k),h:Math.round(_h*_k)},phone:{n:'Android phone',w:1080,h:1920},iphone:{n:'iPhone',w:1179,h:2556},hd:{n:'Desktop 1080p',w:1920,h:1080},qhd:{n:'1440p',w:2560,h:1440},uhd:{n:'4K',w:3840,h:2160}};
+const LOOKS={
+  natural:{n:'Natural',sat:1,con:1,bri:0,tone:0,bloom:.15,vig:.25,haze:0},
+  vivid:{n:'Vivid',sat:1.45,con:1.12,bri:.02,tone:0,bloom:.3,vig:.3,haze:0},
+  dusk:{n:'Warm dusk',sat:1.15,con:1.1,bri:-.02,sh:[40,30,90],hi:[255,170,90],tone:.4,bloom:.4,vig:.4,haze:.15},
+  cold:{n:'Cold',sat:.9,con:1.1,bri:0,sh:[20,50,110],hi:[170,225,255],tone:.4,bloom:.25,vig:.35,haze:.2},
+  noir:{n:'Noir',sat:0,con:1.3,bri:-.03,tone:0,bloom:.1,vig:.5,haze:0},
+  neon:{n:'Neon',sat:1.6,con:1.2,bri:0,sh:[30,10,110],hi:[255,80,200],tone:.45,bloom:.5,vig:.35,haze:0}
+};
+const st={look:'natural',size:'phone',zoom:1,panX:0,panY:0,bloom:.15,vig:.25,haze:0,dim:0,strength:1,fill:'blur',src:null,
+  hud:{on:true,x:.5,y:.8,scale:1,tall:false,game:false},guide:null};
+
+function makeSample(){
+  const c=document.createElement('canvas');c.width=1920;c.height=1080;const x=c.getContext('2d');
+  let g=x.createLinearGradient(0,0,0,1080);
+  g.addColorStop(0,'#0a1033');g.addColorStop(.45,'#3a2a7a');g.addColorStop(.7,'#d9578f');g.addColorStop(.86,'#ffb36b');g.addColorStop(1,'#2a1a3a');
+  x.fillStyle=g;x.fillRect(0,0,1920,1080);
+  let s=7;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;
+  for(let i=0;i<300;i++){x.globalAlpha=.35+rnd()*.65;x.fillStyle='#fff';x.beginPath();x.arc(rnd()*1920,rnd()*620,rnd()*1.7+.3,0,7);x.fill();}
+  x.globalAlpha=1;
+  const pg=x.createRadialGradient(1230,300,20,1300,380,240);pg.addColorStop(0,'#a8f3ff');pg.addColorStop(.55,'#3a7fd0');pg.addColorStop(1,'#14224f');
+  x.fillStyle=pg;x.beginPath();x.arc(1300,380,230,0,7);x.fill();
+  x.strokeStyle='rgba(255,225,185,.75)';x.lineWidth=14;x.beginPath();x.ellipse(1300,380,390,72,-.3,0,7);x.stroke();
+  const mg=x.createRadialGradient(560,250,5,580,270,90);mg.addColorStop(0,'#fff6e0');mg.addColorStop(1,'#c58a6a');
+  x.fillStyle=mg;x.beginPath();x.arc(580,270,80,0,7);x.fill();
+  const sun=x.createRadialGradient(960,860,10,960,860,380);sun.addColorStop(0,'rgba(255,240,200,.95)');sun.addColorStop(.3,'rgba(255,170,100,.45)');sun.addColorStop(1,'rgba(255,120,80,0)');
+  x.fillStyle=sun;x.fillRect(0,400,1920,680);
+  x.fillStyle='#120c24';x.beginPath();x.moveTo(0,1080);x.lineTo(0,900);
+  for(let px=0;px<=1920;px+=80){x.lineTo(px,880+Math.sin(px*.006)*50+Math.sin(px*.021)*22);}
+  x.lineTo(1920,1080);x.closePath();x.fill();
+  x.fillStyle='#0a0718';x.beginPath();x.moveTo(0,1080);x.lineTo(0,980);
+  for(let px=0;px<=1920;px+=60){x.lineTo(px,975+Math.sin(px*.011+2)*34);}
+  x.lineTo(1920,1080);x.closePath();x.fill();
+  return c;
+}
+st.src=makeSample();
+let SAMPLE=st.src,picked=false;{const im=new Image();im.onload=()=>{SAMPLE=im;if(!picked){st.src=im;queueShot();}};im.src='assets/studio/bg-03-phone.jpg';}
+
+function grade(d,L,s){
+  const a=d.data,n=a.length,sat=lerp(1,L.sat,s),con=lerp(1,L.con,s),bri=L.bri*s*255,t=(L.tone||0)*.38*s,sh=L.sh||[0,0,0],hi=L.hi||[0,0,0];
+  for(let i=0;i<n;i+=4){
+    let r=a[i],g=a[i+1],b=a[i+2];const y=.2126*r+.7152*g+.0722*b;
+    r=y+(r-y)*sat;g=y+(g-y)*sat;b=y+(b-y)*sat;
+    r=(r-128)*con+128+bri;g=(g-128)*con+128+bri;b=(b-128)*con+128+bri;
+    if(t){const l=clamp(y/255,0,1);r=lerp(r,lerp(sh[0],hi[0],l),t);g=lerp(g,lerp(sh[1],hi[1],l),t);b=lerp(b,lerp(sh[2],hi[2],l),t);}
+    a[i]=r;a[i+1]=g;a[i+2]=b;
+  }
+}
+const small=document.createElement('canvas'),tiny=document.createElement('canvas'),fA=document.createElement('canvas'),fB=document.createElement('canvas');
+function bloomPass(ctx,W,H,amt){
+  if(amt<=0)return;
+  const k=Math.max(6,Math.round(W/110));const bw=Math.max(4,Math.ceil(W/k)),bh=Math.max(4,Math.ceil(H/k));
+  small.width=bw;small.height=bh;const sx=small.getContext('2d');sx.imageSmoothingEnabled=true;sx.drawImage(ctx.canvas,0,0,bw,bh);
+  const id=sx.getImageData(0,0,bw,bh),a=id.data;
+  for(let i=0;i<a.length;i+=4){const y=.2126*a[i]+.7152*a[i+1]+.0722*a[i+2];const v=Math.max(0,(y-140)/115);a[i]*=v;a[i+1]*=v;a[i+2]*=v;}
+  sx.putImageData(id,0,0);
+  tiny.width=Math.max(2,Math.ceil(bw/3));tiny.height=Math.max(2,Math.ceil(bh/3));const tx=tiny.getContext('2d');tx.imageSmoothingEnabled=true;tx.drawImage(small,0,0,tiny.width,tiny.height);
+  ctx.save();ctx.globalCompositeOperation='screen';ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  ctx.globalAlpha=amt*.9;ctx.drawImage(tiny,0,0,W,H);ctx.globalAlpha=amt*.5;ctx.drawImage(small,0,0,W,H);ctx.restore();
+}
+const GLY=[];'0123456789ABCDEF'.split('').forEach((h,i)=>{const im=new Image();im.onload=()=>queueShot();im.src='assets/studio/glyphs/g-'+h+'.png';GLY[i]=im;});
+function glyphMark(ctx,x,y,s,d){const im=GLY[d];if(im&&im.complete&&im.naturalWidth)ctx.drawImage(im,x,y,s,s);}
+function hudRect(W,H){
+  const u=Math.min(W,H)/1080*st.hud.scale;let pw,ph;
+  if(st.hud.game){pw=12*(34+4)*u-4*u;ph=(34+8+22+22)*u;}
+  else if(st.hud.tall){pw=340*u;ph=(168+12*48+16)*u;}else{pw=Math.min(W*.94,820*u);ph=250*u;}
+  return {x:clamp(st.hud.x*W-pw/2,6,Math.max(6,W-pw-6)),y:clamp(st.hud.y*H-ph/2,6,Math.max(6,H-ph-6)),w:pw,h:ph,u};
+}
+function hudPass(ctx,W,H){
+  if(!st.hud.on)return;
+  const R=hudRect(W,H),u=R.u,px=R.x,py=R.y,pw=R.w,ph=R.h;
+  let hx=($('#tHex').value||'0123456789AB').toUpperCase().replace(/[^0-9A-F]/g,'');hx=(hx+'000000000000').slice(0,12);
+  const name=($('#tName').value||'').toUpperCase(),gal=($('#tGal').value||'').toUpperCase();
+  ctx.save();
+  if(st.hud.game){/* like the in-game photo mode: no panel, glyph strip with galaxy name under it (hex kept too) */
+    ctx.textBaseline='alphabetic';const ts=34*u,gap=4*u;
+    for(let i=0;i<12;i++)glyphMark(ctx,px+i*(ts+gap),py,ts,parseInt(hx[i],16));
+    ctx.shadowColor='rgba(0,0,0,.7)';ctx.shadowBlur=4*u;
+    ctx.fillStyle='#e8f1ff';ctx.font='600 '+(18*u)+'px "Exo 2", sans-serif';ctx.fillText(gal+' GALAXY',px,py+ts+26*u);
+    ctx.fillStyle='#ffcf5a';ctx.font='700 '+(18*u)+'px Orbitron, sans-serif';spaced(ctx,hx,px,py+ts+48*u,3*u);
+    ctx.restore();return;
+  }
+  ctx.fillStyle='rgba(5,10,22,.55)';rr(ctx,px,py,pw,ph,22*u);ctx.fill();
+  ctx.strokeStyle='rgba(79,227,255,.7)';ctx.lineWidth=2*u;rr(ctx,px,py,pw,ph,22*u);ctx.stroke();
+  ctx.textBaseline='alphabetic';
+  if(!st.hud.tall){
+    ctx.fillStyle='#e8f1ff';ctx.font='700 '+(30*u)+'px Orbitron, sans-serif';
+    spaced(ctx,'TRAVELLER  '+name,px+30*u,py+52*u,3.2*u);
+    ctx.fillStyle='rgba(232,241,255,.75)';ctx.font='500 '+(22*u)+'px Orbitron, sans-serif';
+    spaced(ctx,'GALAXY  '+gal,px+30*u,py+90*u,3*u);
+    const ts=Math.min(46*u,(pw-60*u-11*8*u)/12),gap=8*u;ctx.strokeStyle='#4fe3ff';ctx.fillStyle='#4fe3ff';ctx.lineWidth=2.4*u;
+    for(let i=0;i<12;i++)glyphMark(ctx,px+30*u+i*(ts+gap),py+112*u,ts,parseInt(hx[i],16));
+    ctx.fillStyle='#ffcf5a';ctx.font='700 '+(30*u)+'px Orbitron, sans-serif';
+    spaced(ctx,hx,px+30*u,py+ph-28*u,6*u);
+  }else{
+    ctx.fillStyle='rgba(232,241,255,.6)';ctx.font='500 '+(17*u)+'px Orbitron, sans-serif';spaced(ctx,'TRAVELLER',px+28*u,py+42*u,3*u);
+    ctx.fillStyle='#e8f1ff';ctx.font='700 '+(28*u)+'px Orbitron, sans-serif';spaced(ctx,name,px+28*u,py+78*u,3*u);
+    ctx.fillStyle='rgba(232,241,255,.6)';ctx.font='500 '+(17*u)+'px Orbitron, sans-serif';spaced(ctx,'GALAXY',px+28*u,py+110*u,3*u);
+    ctx.fillStyle='rgba(232,241,255,.85)';ctx.font='500 '+(22*u)+'px Orbitron, sans-serif';spaced(ctx,gal,px+28*u,py+140*u,2.5*u);
+    const ts=40*u,gap=8*u;ctx.strokeStyle='#4fe3ff';ctx.lineWidth=2.2*u;
+    for(let i=0;i<12;i++){
+      const ty=py+168*u+i*(ts+gap);ctx.fillStyle='#4fe3ff';glyphMark(ctx,px+28*u,ty,ts,parseInt(hx[i],16));
+      ctx.fillStyle='#ffcf5a';ctx.font='700 '+(28*u)+'px Orbitron, sans-serif';ctx.fillText(hx[i],px+28*u+ts+24*u,ty+ts*.74);
+    }
+  }
+  ctx.restore();
+}
+function guideLines(ctx,W,H){
+  ctx.save();const lw=Math.max(1.5,W/320);ctx.lineWidth=lw;ctx.setLineDash([W/50,W/70]);
+  const line=(t,p)=>{ctx.beginPath();if(t==='v'){ctx.moveTo(p*W,0);ctx.lineTo(p*W,H);}else{ctx.moveTo(0,p*H);ctx.lineTo(W,p*H);}ctx.stroke();};
+  ctx.strokeStyle='rgba(79,227,255,.6)';line('v',.5);line('h',.5);
+  ctx.strokeStyle='#ffcf5a';ctx.setLineDash([]);ctx.lineWidth=lw*1.8;
+  (st.guide.snaps||[]).forEach(s=>line(s.t,s.p));
+  ctx.restore();
+}
+function renderShot(ctx,W,H,preview){
+  const L=LOOKS[st.look],S=st.src,sw=S.width,sh=S.height;
+  ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+  const k=Math.max(W/sw,H/sh)*st.zoom,dw=sw*k,dh=sh*k;
+  if(dw<W-1||dh<H-1){
+    if(st.fill==='blur'){
+      fA.width=16;fA.height=Math.max(8,Math.round(16*H/W));fA.getContext('2d').drawImage(S,0,0,fA.width,fA.height);
+      fB.width=64;fB.height=Math.max(32,Math.round(64*H/W));const bx=fB.getContext('2d');bx.imageSmoothingEnabled=true;bx.imageSmoothingQuality='high';bx.drawImage(fA,0,0,fB.width,fB.height);
+      ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(fB,0,0,W,H);ctx.fillStyle='rgba(0,0,0,.4)';ctx.fillRect(0,0,W,H);
+    }else if(st.fill==='edge'){
+      fA.width=1;fA.height=2;const ax=fA.getContext('2d');ax.drawImage(S,0,0,1,2);const px=ax.getImageData(0,0,1,2).data;
+      const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgb('+px[0]+','+px[1]+','+px[2]+')');g.addColorStop(1,'rgb('+px[4]+','+px[5]+','+px[6]+')');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    }
+  }
+  const ox=(W-dw)/2*(1-st.panX),oy=(H-dh)/2*(1-st.panY);
+  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(S,ox,oy,dw,dh);
+  const id=ctx.getImageData(0,0,W,H);grade(id,L,st.strength);ctx.putImageData(id,0,0);
+  bloomPass(ctx,W,H,st.bloom);
+  if(st.haze>0){const g=ctx.createLinearGradient(0,H*.4,0,H);g.addColorStop(0,'rgba(150,190,235,0)');g.addColorStop(1,'rgba(150,190,235,'+(st.haze*.7)+')');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+  if(st.vig>0){const r=Math.hypot(W,H)/2;const g=ctx.createRadialGradient(W/2,H/2,r*.32,W/2,H/2,r*.98);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,'+st.vig+')');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+  if(st.dim>0){ctx.fillStyle='rgba(0,0,0,'+st.dim+')';ctx.fillRect(0,0,W,H);}
+  hudPass(ctx,W,H);
+  if(preview&&st.guide)guideLines(ctx,W,H);
+}
+const pv=$('#pv');let shotQ=false;
+function queueShot(){if(shotQ)return;shotQ=true;requestAnimationFrame(()=>{shotQ=false;drawPreview();});}
+function previewDims(){const T=TARGETS[st.size],asp=T.w/T.h;const avail=Math.min(window.innerWidth-52,520);const maxH=Math.max(200,Math.min(480,Math.round(window.innerHeight*.36)));let w=Math.min(avail,maxH*asp);return {w:Math.round(w),h:Math.round(w/asp),asp};}
+function drawPreview(){
+  if($('#shot').hidden)return;
+  const d=previewDims(),dpr=Math.min(window.devicePixelRatio||1,2);
+  pv.style.width=d.w+'px';pv.style.height=d.h+'px';
+  const W=Math.round(d.w*dpr),H=Math.round(d.h*dpr);
+  if(pv.width!==W||pv.height!==H){pv.width=W;pv.height=H;}
+  renderShot(pv.getContext('2d',{willReadFrequently:true}),W,H,true);
+}
+function setSliders(){['bloom','vig','haze','dim'].forEach(k=>{$('#'+k).value=st[k];$('#'+k+'O').textContent=Number(st[k]).toFixed(2);});$('#zoom').value=st.zoom;$('#zoomO').textContent=st.zoom.toFixed(2);$('#strength').value=st.strength;$('#strengthO').textContent=st.strength.toFixed(2);}
+function setZoom(z){const was=st.zoom;st.zoom=clamp(z,.5,3);if(was>=1&&st.zoom<1)st.panY=1;$('#zoom').value=st.zoom;$('#zoomO').textContent=st.zoom.toFixed(2);queueShot();}
+function pickLook(k){st.look=k;const L=LOOKS[k];st.bloom=L.bloom;st.vig=L.vig;st.haze=L.haze;st.dim=0;st.strength=1;setSliders();queueShot();}
+chipRow($('#looks'),Object.keys(LOOKS).map(k=>({k,n:LOOKS[k].n})),k=>st.look===k,pickLook);
+chipRow($('#fills'),[{k:'blur',n:'Blurred picture'},{k:'black',n:'Black'},{k:'edge',n:'Edge colours'}],k=>st.fill===k,k=>{st.fill=k;queueShot();});
+st.size='device';
+chipRow($('#sizes'),Object.keys(TARGETS).map(k=>({k,n:TARGETS[k].n})),k=>st.size===k,k=>{st.size=k;st.panX=0;st.panY=0;queueShot();});
+['bloom','vig','haze','dim'].forEach(k=>$('#'+k).addEventListener('input',e=>{st[k]=parseFloat(e.target.value);$('#'+k+'O').textContent=st[k].toFixed(2);queueShot();}));
+$('#zoom').addEventListener('input',e=>setZoom(parseFloat(e.target.value)));
+$('#strength').addEventListener('input',e=>{st.strength=parseFloat(e.target.value);$('#strengthO').textContent=st.strength.toFixed(2);queueShot();});
+$('#hudOn').addEventListener('click',e=>{st.hud.on=!st.hud.on;e.currentTarget.setAttribute('aria-pressed',String(st.hud.on));queueShot();});
+function setTall(t,g){st.hud.tall=t;st.hud.game=!!g;$('#hudWide').setAttribute('aria-pressed',String(!t&&!g));$('#hudTall').setAttribute('aria-pressed',String(t));$('#hudGame').setAttribute('aria-pressed',String(!!g));
+  if(g){const d=previewDims(),R=hudRect(d.w,d.h);st.hud.x=.06+R.w/d.w/2;st.hud.y=.94-R.h/d.h/2;}queueShot();}
+$('#hudWide').addEventListener('click',()=>setTall(false));
+$('#hudTall').addEventListener('click',()=>setTall(true));
+$('#hudGame').addEventListener('click',()=>setTall(false,true));
+$('#hudSize').addEventListener('input',e=>{st.hud.scale=parseFloat(e.target.value);$('#hudSizeO').textContent=st.hud.scale.toFixed(2);queueShot();});
+['tName','tGal','tHex'].forEach(id=>$('#'+id).addEventListener('input',queueShot));
+const ANCH=[['Top left',0,0],['Top centre',1,0],['Top right',2,0],['Middle left',0,1],['Centre',1,1],['Middle right',2,1],['Bottom left',0,2],['Bottom centre',1,2],['Bottom right',2,2]];
+(function(){const host=$('#anch');ANCH.forEach(a=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',a[0]);b.innerHTML='<i></i>';
+  b.addEventListener('click',()=>{const d=previewDims(),R=hudRect(d.w,d.h),wf=R.w/d.w,hf=R.h/d.h;
+    st.hud.x=a[1]===0?.06+wf/2:a[1]===1?.5:.94-wf/2;st.hud.y=a[2]===0?.06+hf/2:a[2]===1?.5:.94-hf/2;queueShot();});
+  host.appendChild(b);});})();
+function loadImg(file,cb){const url=URL.createObjectURL(file);const im=new Image();im.onload=()=>{cb(im);setTimeout(()=>URL.revokeObjectURL(url),2000);};im.src=url;}
+$('#file').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;loadImg(f,im=>{picked=true;st.src=im;st.panX=0;st.panY=0;st.zoom=1;setSliders();queueShot();});});
+$('#useSample').addEventListener('click',()=>{st.src=SAMPLE;st.panX=0;st.panY=0;st.zoom=1;setSliders();queueShot();});
+
+/* pointer: drag picture, drag HUD (with snapping), pinch zoom */
+const ptrs=new Map();let mode=null,lastPinch=0,grab=null;
+const pinchDist=()=>{const p=[...ptrs.values()];return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);};
+function pvPos(e){const r=pv.getBoundingClientRect();return {x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height};}
+pv.addEventListener('pointerdown',e=>{
+  pv.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(ptrs.size===2){mode='pinch';lastPinch=pinchDist();st.guide=null;return;}
+  const p=pvPos(e),d=previewDims(),R=hudRect(d.w,d.h),px=p.x*d.w,py=p.y*d.h;
+  if(st.hud.on&&px>=R.x&&px<=R.x+R.w&&py>=R.y&&py<=R.y+R.h){mode='hud';grab={dx:p.x-st.hud.x,dy:p.y-st.hud.y};st.guide={snaps:[]};queueShot();}
+  else mode='pan';
+});
+pv.addEventListener('pointermove',e=>{
+  const prev=ptrs.get(e.pointerId);if(!prev)return;ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(mode==='pinch'&&ptrs.size===2){const dd=pinchDist();if(lastPinch>0)setZoom(st.zoom*dd/lastPinch);lastPinch=dd;return;}
+  const d=previewDims();
+  if(mode==='hud'){
+    const p=pvPos(e),R=hudRect(d.w,d.h),wf=R.w/d.w,hf=R.h/d.h,m=.06,T=.022;let x=p.x-grab.dx,y=p.y-grab.dy;const snaps=[];
+    if(Math.abs(x-.5)<T){x=.5;snaps.push({t:'v',p:.5});}
+    else if(Math.abs(x-wf/2-m)<T){x=m+wf/2;snaps.push({t:'v',p:m});}
+    else if(Math.abs(x+wf/2-(1-m))<T){x=1-m-wf/2;snaps.push({t:'v',p:1-m});}
+    if(Math.abs(y-.5)<T){y=.5;snaps.push({t:'h',p:.5});}
+    else if(Math.abs(y-hf/2-m)<T){y=m+hf/2;snaps.push({t:'h',p:m});}
+    else if(Math.abs(y+hf/2-(1-m))<T){y=1-m-hf/2;snaps.push({t:'h',p:1-m});}
+    st.hud.x=clamp(x,.03,.97);st.hud.y=clamp(y,.03,.97);st.guide={snaps};queueShot();return;
+  }
+  if(mode==='pan'){
+    const S=st.src,k=Math.max(d.w/S.width,d.h/S.height)*st.zoom,ex=(S.width*k-d.w)/2,ey=(S.height*k-d.h)/2;
+    if(Math.abs(ex)>1)st.panX=clamp(st.panX+(e.clientX-prev.x)/ex,-1,1);
+    if(Math.abs(ey)>1)st.panY=clamp(st.panY+(e.clientY-prev.y)/ey,-1,1);
+    queueShot();
+  }
+});
+['pointerup','pointercancel'].forEach(ev=>pv.addEventListener(ev,e=>{ptrs.delete(e.pointerId);if(ptrs.size===0){mode=null;st.guide=null;queueShot();}else if(ptrs.size===1&&mode==='pinch'){mode='pan';}}));
+pv.addEventListener('wheel',e=>{e.preventDefault();setZoom(st.zoom*(e.deltaY<0?1.06:.94));},{passive:false});
+let lastUrl=null;
+$('#make').addEventListener('click',()=>{
+  const T=TARGETS[st.size],c=document.createElement('canvas');c.width=T.w;c.height=T.h;
+  renderShot(c.getContext('2d',{willReadFrequently:true}),T.w,T.h,false);
+  c.toBlob(b=>{if(!b)return;if(lastUrl)URL.revokeObjectURL(lastUrl);lastUrl=URL.createObjectURL(b);$('#out').src=lastUrl;$('#dl').href=lastUrl;$('#resNote').textContent=tt('{d} wallpaper, {w} x {h} px. Tap SAVE. If nothing downloads, press and hold the picture to save it.',{d:tt(T.n),w:T.w,h:T.h});$('#res').hidden=false;$('#res').scrollIntoView({block:'nearest'});},'image/jpeg',.92);
+});
+
+/* =====================  ICON MAKER  ===================== */
+function hexHsl(h){let [r,g,b]=hexRgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;let hh=0,s=0;
+  if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);hh=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;hh*=60;}
+  return [Math.round(hh)%360,Math.round(s*100),Math.round(l*100)];}
+function hslHex(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));
+  return '#'+[f(0),f(8),f(4)].map(v=>Math.round(v*255).toString(16).padStart(2,'0')).join('');}
+const tt=(e,v)=>{try{return window.NMS_T?NMS_T(e,v):(v?e.replace(/\{(\w+)\}/g,(m,k)=>v[k]):e);}catch(x){return e;}};
+const NMSIC=[['03_helmet','Traveller'],['36_camera_drone','Telamon'],['20_drone_eye','Sentinel Drone'],['18_ship_cone','Summoner'],['26_ship_orange','Interceptor'],['16_robot_biped','Walker'],['30_alien_head','Artemis'],['49_helmet_teal','Cronus'],['07_diamond_purple','Korvax'],['05_diamond_gold','Unknown Grave'],['54_symbol_gold','Units'],['33_logo_gold','Apollo'],
+['01_plush_red','Traveller Plush'],['08_ship_yellow','Harmonic Seal'],['24_mech_orange','Hardframe'],['25_drone_purple','Corrupted'],['43_horse_mech','Eos'],['48_brain_alien','Ares'],['21_spider_dark','Arachnid'],['38_owl_head','Hesperus'],['13_shield_gold_s','Rank S'],['41_skull_purple','Mercury'],['44_frog_head','Gemini'],['52_tree_head','Helios']];
+const mkImg=src=>{const im=new Image();im.onload=()=>queueIcon();im.src=src;return im;};
+let GL=NMSIC.map(a=>[a[1],mkImg('assets/icons/nms_'+a[0]+'.png')]);
+fetch('assets/icons.json').then(r=>r.json()).then(list=>{
+  const have=new Set(NMSIC.map(a=>'assets/icons/nms_'+a[0]+'.png'));
+  list.forEach(e=>{if(!have.has(e.file))GL.push([e.label,mkImg(e.file)]);});
+  buildGrid();applySearch();queueIcon();
+}).catch(()=>{});
+const PRESETS=[{n:'Cyan',c:'#4fe3ff'},{n:'Gold',c:'#ffcf5a'},{n:'Magenta',c:'#ff5fd2'},{n:'Green',c:'#6dffa0'},{n:'White',c:'#f2f6ff'},{n:'Red',c:'#ff6a5a'}];
+const ic={gi:0,img:null,userImg:null,style:'basic',shape:'squircle',h:190,s:100,l:65,size:512,strength:.6,gsize:1,round:.28,shine:0,shA:300,shS:.7,pz:1,px:0,py:0,ang:135};
+const STR_LABEL={basic:'Glow',glass:'Glass strength',duotone:'Duotone mix',gradient:'Gradient strength',grain:'Grain amount'};
+const tmp=document.createElement('canvas');
+function tintOf(){return {c:hslHex(ic.h,ic.s,ic.l),c2:hslHex((ic.h+45)%360,ic.s,Math.max(25,ic.l-8))};}
+function opts(gi,img){return Object.assign({},ic,{gi:gi,img:img,tint:tintOf()});}
+function glyph(t,gi,S,color,lw,glowAmt,gs){
+  t.save();t.translate(S/2,S/2);const k=S/100*.62*gs;t.scale(k,k);t.strokeStyle=color;t.fillStyle=color;t.lineWidth=lw;t.lineCap='round';t.lineJoin='round';
+  if(glowAmt>0){t.shadowColor=color;t.shadowBlur=S*.08*glowAmt/k;}
+  t.restore();
+}
+function compose(t,o,S){
+  const tint=o.tint,useImg=!!o.img,sg=o.strength;
+  t.clearRect(0,0,S,S);
+  const bgDark=()=>{const g=t.createLinearGradient(0,0,S,S);g.addColorStop(0,'#0a1328');g.addColorStop(1,'#1b2f5c');t.fillStyle=g;t.fillRect(0,0,S,S);};
+  const pic=()=>{const im=o.img,k=Math.max(S/im.width,S/im.height)*o.pz,w=im.width*k,h=im.height*k;t.drawImage(im,(S-w)/2*(1-o.px),(S-h)/2*(1-o.py),w,h);};
+  if(o.style==='basic'||o.style==='grain'){
+    if(useImg){pic();t.fillStyle='rgba(6,12,24,.22)';t.fillRect(0,0,S,S);}else{bgDark();glyph(t,o.gi,S,tint.c,5.5,sg,o.gsize);}
+  }else if(o.style==='glass'){
+    if(useImg)pic();else bgDark();
+    const g=t.createLinearGradient(0,0,0,S);g.addColorStop(0,rgba(tint.c,.15+.7*sg));g.addColorStop(1,rgba(tint.c,.05+.2*sg));t.fillStyle=g;t.fillRect(0,0,S,S);
+    if(!useImg)glyph(t,o.gi,S,'#ffffff',5.5,sg,o.gsize);
+  }else if(o.style==='duotone'){
+    if(useImg)pic();else{bgDark();glyph(t,o.gi,S,'#ffffff',6.5,0,o.gsize);}
+    const base=hexRgb(tint.c),dk=base.map(v=>v*.12),lt=base.map(v=>lerp(v,255,.7)),mix=Math.min(1,sg*1.5);
+    const id=t.getImageData(0,0,S,S),a=id.data;
+    for(let i=0;i<a.length;i+=4){const y=(.2126*a[i]+.7152*a[i+1]+.0722*a[i+2])/255;a[i]=lerp(a[i],lerp(dk[0],lt[0],y),mix);a[i+1]=lerp(a[i+1],lerp(dk[1],lt[1],y),mix);a[i+2]=lerp(a[i+2],lerp(dk[2],lt[2],y),mix);}
+    t.putImageData(id,0,0);
+  }else if(o.style==='gradient'){
+    const ang=o.ang*Math.PI/180,cx=S/2,r=S*.71;
+    const g=t.createLinearGradient(cx-Math.cos(ang)*r,cx-Math.sin(ang)*r,cx+Math.cos(ang)*r,cx+Math.sin(ang)*r);g.addColorStop(0,tint.c);g.addColorStop(1,tint.c2);
+    if(useImg){pic();t.globalCompositeOperation='soft-light';t.globalAlpha=Math.min(1,.3+sg);t.fillStyle=g;t.fillRect(0,0,S,S);t.globalAlpha=1;t.globalCompositeOperation='source-over';}
+    else{t.fillStyle=g;t.fillRect(0,0,S,S);glyph(t,o.gi,S,'#ffffff',6,sg,o.gsize);}
+  }
+  const amt=(o.style==='glass'?.1+.3*sg:0)+o.shine*.7;
+  if(amt>0){const a=o.shA*Math.PI/180,R=S*.42,cx=S/2+Math.cos(a)*R,cy=S/2+Math.sin(a)*R,r=S*o.shS;const g=t.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,'rgba(255,255,255,'+Math.min(.9,amt)+')');g.addColorStop(1,'rgba(255,255,255,0)');t.fillStyle=g;t.fillRect(0,0,S,S);}
+  if(o.style==='grain'){
+    const id=t.getImageData(0,0,S,S),a=id.data,amp=20+90*sg;let s=11;
+    for(let i=0;i<a.length;i+=4){s=(s*16807)%2147483647;const n=((s/2147483647)-.5)*amp;a[i]+=n;a[i+1]+=n;a[i+2]+=n;}
+    t.putImageData(id,0,0);
+  }
+}
+const POLY={hexagon:[6,-Math.PI/2],diamond:[4,-Math.PI/2],octagon:[8,Math.PI/8]};
+function polyPath(c,S,n,off,r){c.beginPath();const R=S/2,P=[];for(let i=0;i<n;i++){const a=off+i*2*Math.PI/n;P.push([S/2+Math.cos(a)*R,S/2+Math.sin(a)*R]);}
+  for(let i=0;i<n;i++){const p0=P[(i+n-1)%n],p1=P[i],p2=P[(i+1)%n],m0=[(p0[0]+p1[0])/2,(p0[1]+p1[1])/2],m1=[(p1[0]+p2[0])/2,(p1[1]+p2[1])/2];if(i===0)c.moveTo(m0[0],m0[1]);c.arcTo(p1[0],p1[1],m1[0],m1[1],r);}c.closePath();}
+function shapePath(c,S,shape,round){
+  if(shape==='shield'){c.beginPath();c.moveTo(S*.10,S*.12);c.quadraticCurveTo(S*.5,S*-.02,S*.90,S*.12);c.lineTo(S*.90,S*.50);c.bezierCurveTo(S*.90,S*.78,S*.70,S*.92,S*.5,S);c.bezierCurveTo(S*.30,S*.92,S*.10,S*.78,S*.10,S*.50);c.closePath();return;}
+  if(shape==='wide'||shape==='tall'){c.beginPath();const w=shape==='wide'?S:S*.7,h=shape==='wide'?S*.7:S,x=(S-w)/2,y=(S-h)/2;if(c.roundRect)c.roundRect(x,y,w,h,S*round*.45);else c.rect(x,y,w,h);return;}
+  if(POLY[shape]){polyPath(c,S,POLY[shape][0],POLY[shape][1],S*round*.5);return;}c.beginPath();if(shape==='circle')c.arc(S/2,S/2,S/2,0,7);else if(c.roundRect)c.roundRect(0,0,S,S,shape==='squircle'?S*round:S*.06);else c.rect(0,0,S,S);}
+function drawIcon(cv,o){
+  const S=cv.width,c=cv.getContext('2d');c.clearRect(0,0,S,S);
+  tmp.width=tmp.height=S;compose(tmp.getContext('2d',{willReadFrequently:true}),o,S);
+  c.save();shapePath(c,S,o.shape,o.round);c.clip();c.drawImage(tmp,0,0);c.restore();
+  c.save();c.translate(S*.01,S*.01);c.scale(.98,.98);shapePath(c,S,o.shape,o.round);
+  c.lineWidth=S*(o.style==='glass'?.012:.018);c.strokeStyle=o.style==='glass'?'rgba(255,255,255,.5)':rgba(o.tint.c,.9);c.stroke();c.restore();
+}
+let iconQ=false;
+let queueIcon=function(){if(iconQ)return;iconQ=true;requestAnimationFrame(()=>{iconQ=false;drawIcons();});}
+const gridBtns=[];
+function buildGrid(){
+  const host=$('#ig');host.innerHTML='';gridBtns.length=0;
+  const items=GL.map((g,i)=>({i,n:g[0]}));items.unshift({i:-1,n:'Yours'});
+  items.forEach(it=>{
+    const b=document.createElement('button');b.type='button';const cv=document.createElement('canvas');cv.width=cv.height=128;
+    const sp=document.createElement('span');sp.textContent=it.n;b.append(cv,sp);
+    b.addEventListener('click',()=>{if(it.i===-1&&!ic.userImg){$('#ifile').click();return;}ic.gi=it.i;ic.img=it.i===-1?ic.userImg:GL[it.i][1];ic.pz=1;ic.px=0;ic.py=0;$('#ipz').value=1;$('#ipzO').textContent='1.00';queueIcon();});
+    host.appendChild(b);gridBtns.push({b,cv,i:it.i,n:it.n.toLowerCase()});
+  });
+}
+function drawIcons(){
+  if($('#icon').hidden)return;
+  drawIcon($('#ipv'),opts(Math.max(0,ic.gi),ic.img||GL[Math.max(0,ic.gi)][1]));
+  gridBtns.forEach(g=>{
+    if(g.b.offsetParent===null)return;
+    if(g.i===-1&&!ic.userImg){const c=g.cv.getContext('2d');c.clearRect(0,0,128,128);c.strokeStyle='#4a5f86';c.lineWidth=5;c.setLineDash([10,8]);c.beginPath();if(c.roundRect)c.roundRect(8,8,112,112,30);else c.rect(8,8,112,112);c.stroke();c.setLineDash([]);c.beginPath();c.moveTo(64,40);c.lineTo(64,88);c.moveTo(40,64);c.lineTo(88,64);c.stroke();}
+    else drawIcon(g.cv,opts(Math.max(0,g.i),g.i===-1?ic.userImg:GL[g.i][1]));
+    g.b.setAttribute('aria-pressed',String(g.i===ic.gi));
+  });
+}
+function applySearch(){
+  const q=$('#igSearch').value.trim().toLowerCase(),g=$('#ig');
+  if(q){g.classList.remove('cap');g.classList.add('open');$('#igMore').textContent='SHOW FEWER';}
+  gridBtns.forEach(x=>{x.b.style.display=(!q||x.n.includes(q))?'':'none';});
+  queueIcon();
+}
+$('#igSearch').addEventListener('input',applySearch);
+$('#igMore').addEventListener('click',()=>{const g=$('#ig');if($('#igSearch').value){$('#igSearch').value='';applySearch();}const c=g.classList.toggle('cap');g.classList.toggle('open',!c);$('#igMore').textContent=c?'SHOW ALL ICONS':'SHOW FEWER';gridBtns.forEach(x=>x.b.style.display='');queueIcon();});
+function styleLabel(){$('#istrL').textContent=STR_LABEL[ic.style];}
+chipRow($('#styles'),[{k:'basic',n:'Basic'},{k:'glass',n:'Glass'},{k:'duotone',n:'Duotone'},{k:'gradient',n:'Gradient'},{k:'grain',n:'Film grain'}],k=>ic.style===k,k=>{ic.style=k;styleLabel();queueIcon();});
+chipRow($('#shapes'),[{k:'circle',n:'Circle'},{k:'squircle',n:'Squircle'},{k:'square',n:'Square'},{k:'hexagon',n:'Hexagon'},{k:'diamond',n:'Diamond'},{k:'octagon',n:'Octagon'},{k:'shield',n:'Shield'},{k:'wide',n:'Wide'},{k:'tall',n:'Tall'}],k=>ic.shape===k,k=>{ic.shape=k;queueIcon();});
+chipRow($('#isizes'),[{k:1024,n:'1024 px'},{k:512,n:'512 px'}],k=>ic.size===k,k=>{ic.size=k;});
+const wheel=document.createElement('label');wheel.className='sw wheel';wheel.title='Colour wheel';wheel.innerHTML='<input type="color" id="iwheel" aria-label="Pick any colour">';
+function syncColour(fromWheel){
+  $('#ih').value=ic.h;$('#isat').value=ic.s;$('#il').value=ic.l;$('#ihO').textContent=ic.h;$('#isatO').textContent=ic.s;$('#ilO').textContent=ic.l;
+  const hex=hslHex(ic.h,ic.s,ic.l);if(!fromWheel)$('#iwheel').value=hex;
+  [...$('#tints').querySelectorAll('button')].forEach((b,i)=>b.setAttribute('aria-pressed',String(PRESETS[i].c.toLowerCase()===hex.toLowerCase())));
+}
+(function(){const host=$('#tints');PRESETS.forEach(t=>{const b=document.createElement('button');b.type='button';b.className='sw';b.style.background=t.c;b.setAttribute('aria-label',t.n);b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>{const v=hexHsl(t.c);ic.h=v[0];ic.s=v[1];ic.l=v[2];syncColour();queueIcon();});host.appendChild(b);});host.appendChild(wheel);})();
+$('#iwheel').addEventListener('input',e=>{const v=hexHsl(e.target.value);ic.h=v[0];ic.s=v[1];ic.l=v[2];syncColour(true);queueIcon();});
+[['ih','h','ihO',0],['isat','s','isatO',0],['il','l','ilO',0]].forEach(a=>$('#'+a[0]).addEventListener('input',e=>{ic[a[1]]=parseFloat(e.target.value);syncColour();queueIcon();}));
+[['istr','strength',2],['igs','gsize',2],['iround','round',2],['ipz','pz',2],['iang','ang',0],['ishine','shine',2],['ishineA','shA',0],['ishineS','shS',2]].forEach(a=>$('#'+a[0]).addEventListener('input',e=>{ic[a[1]]=parseFloat(e.target.value);$('#'+a[0]+'O').textContent=ic[a[1]].toFixed(a[2]);queueIcon();}));
+$('#ifile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;loadImg(f,im=>{ic.userImg=im;ic.img=im;ic.gi=-1;ic.pz=1;ic.px=0;ic.py=0;$('#ipz').value=1;$('#ipzO').textContent='1.00';queueIcon();});});
+const ipv=$('#ipv');let idrag=null;
+ipv.addEventListener('pointerdown',e=>{if(!ic.img)return;ipv.setPointerCapture(e.pointerId);idrag={x:e.clientX,y:e.clientY};});
+ipv.addEventListener('pointermove',e=>{if(!idrag||!ic.img)return;const im=ic.img,D=160,k=Math.max(D/im.width,D/im.height)*ic.pz,ex=(im.width*k-D)/2,ey=(im.height*k-D)/2;
+  if(Math.abs(ex)>1)ic.px=clamp(ic.px+(e.clientX-idrag.x)/ex,-1,1);if(Math.abs(ey)>1)ic.py=clamp(ic.py+(e.clientY-idrag.y)/ey,-1,1);idrag={x:e.clientX,y:e.clientY};queueIcon();});
+['pointerup','pointercancel'].forEach(ev=>ipv.addEventListener(ev,()=>{idrag=null;}));
+function trimShape(c){if(ic.shape!=='wide'&&ic.shape!=='tall')return c;const S=c.width,w=ic.shape==='wide'?S:Math.round(S*.7),h=ic.shape==='wide'?Math.round(S*.7):S,o=document.createElement('canvas');o.width=w;o.height=h;o.getContext('2d').drawImage(c,(S-w)/2,(S-h)/2,w,h,0,0,w,h);return o;}
+let lastIcon=null;
+$('#imake').addEventListener('click',()=>{
+  const c=document.createElement('canvas');c.width=c.height=ic.size;
+  drawIcon(c,opts(Math.max(0,ic.gi),ic.img||GL[Math.max(0,ic.gi)][1]));
+  trimShape(c).toBlob(b=>{if(!b)return;if(lastIcon)URL.revokeObjectURL(lastIcon);lastIcon=URL.createObjectURL(b);$('#iout').src=lastIcon;$('#idl').href=lastIcon;$('#idl').download='nms-icon-'+ic.size+'.png';$('#iresNote').textContent=tt('Icon {s} x {s} px with a clear background. Tap SAVE. If nothing downloads, press and hold the picture to save it.',{s:ic.size});$('#ires').hidden=false;$('#ires').scrollIntoView({block:'nearest'});},'image/png');
+});
+(function(){try{let t={},s={};try{const m=document.cookie.match(/(?:^|; )nmsTraveller=([^;]*)/);if(m)t=JSON.parse(decodeURIComponent(m[1]))||{};}catch(e){}try{s=JSON.parse(localStorage.getItem('nms_studio')||'{}')||{};}catch(e){}
+  const n=(s.name||t.n||'').toString().toUpperCase().slice(0,24),h=(s.hex||'').toString().toUpperCase().replace(/[^0-9A-F]/g,'').slice(0,12);
+  if(n)$('#tName').value=n;if(h)$('#tHex').value=h;}catch(e){}})();
+ic.img=GL[0][1];
+const PK='nms_studio_icstyles',LK='nms_studio_iclast',KEYS=['style','shape','h','s','l','strength','gsize','round','shine','shA','shS','ang','size'];
+const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d;}catch(e){return d;}},lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+const snap=()=>{const o={};KEYS.forEach(k=>o[k]=ic[k]);return o;};
+const SL=[['istr','strength',2],['igs','gsize',2],['iround','round',2],['iang','ang',0],['ishine','shine',2],['ishineA','shA',0],['ishineS','shS',2]];
+function applyIc(o){KEYS.forEach(k=>{if(o[k]!=null)ic[k]=o[k];});SL.forEach(a=>{$('#'+a[0]).value=ic[a[1]];$('#'+a[0]+'O').textContent=Number(ic[a[1]]).toFixed(a[2]);});
+  [...$('#styles').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(['basic','glass','duotone','gradient','grain'][i]===ic.style)));
+  [...$('#shapes').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(['circle','squircle','square','hexagon','diamond','octagon','shield','wide','tall'][i]===ic.shape)));
+  [...$('#isizes').children].forEach((b,i)=>b.setAttribute('aria-pressed',String([1024,512][i]===ic.size)));
+  styleLabel();syncColour();queueIcon();}
+let selStyle=-1;
+function drawStyles(){const host=$('#myStyles'),L=lsGet(PK,[]);host.innerHTML='';if(!L.length){const s=document.createElement('span');s.className='note';s.textContent='No saved styles yet.';host.appendChild(s);}
+  L.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=o.name;b.setAttribute('aria-pressed',String(i===selStyle));b.addEventListener('click',()=>{selStyle=i;applyIc(o);drawStyles();});host.appendChild(b);});
+  $('#delStyle').hidden=selStyle<0;}
+$('#saveStyle').addEventListener('click',()=>{const L=lsGet(PK,[]);if(L.length>=12)L.shift();const o=snap();o.name='Style '+(L.length?parseInt(L[L.length-1].name.replace(/\D/g,'')||L.length)+1:1);L.push(o);lsSet(PK,L);selStyle=L.length-1;drawStyles();});
+$('#delStyle').addEventListener('click',()=>{const L=lsGet(PK,[]);if(selStyle>=0){L.splice(selStyle,1);lsSet(PK,L);}selStyle=-1;drawStyles();});
+{const last=lsGet(LK,null);if(last)setTimeout(()=>applyIc(last),0);}
+{const _q=queueIcon;queueIcon=function(){lsSet(LK,snap());_q();};}
+drawStyles();
+/* tiny ZIP writer (stored, no compression): saves every icon with the current style in one file */
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return b=>{let c=~0;for(let i=0;i<b.length;i++)c=t[(c^b[i])&255]^(c>>>8);return ~c>>>0;};})();
+function makeZip(files){const enc=new TextEncoder(),parts=[],cd=[];let off=0;
+  files.forEach(f=>{const nm=enc.encode(f.name),crc=CRC(f.data),h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(8,0,true);h.setUint32(14,crc,true);h.setUint32(18,f.data.length,true);h.setUint32(22,f.data.length,true);h.setUint16(26,nm.length,true);
+    parts.push(new Uint8Array(h.buffer),nm,f.data);const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint32(16,crc,true);c.setUint32(20,f.data.length,true);c.setUint32(24,f.data.length,true);c.setUint16(28,nm.length,true);c.setUint32(42,off,true);cd.push(new Uint8Array(c.buffer),nm);off+=30+nm.length+f.data.length;});
+  let cs=0;cd.forEach(x=>cs+=x.length);const e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+  return new Blob([...parts,...cd,new Uint8Array(e.buffer)],{type:'application/zip'});}
+$('#imakeAll').addEventListener('click',async()=>{const btn=$('#imakeAll');btn.disabled=true;const S=ic.size,files=[];
+  for(let i=0;i<GL.length;i++){const c=document.createElement('canvas');c.width=c.height=S;drawIcon(c,opts(i,GL[i][1]));
+    const b=await new Promise(r=>trimShape(c).toBlob(r,'image/png'));files.push({name:'nms-icon-'+String(i+1).padStart(2,'0')+'-'+GL[i][0].toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-'+S+'.png',data:new Uint8Array(await b.arrayBuffer())});btn.textContent=tt('MAKING {a}/{b}',{a:i+1,b:GL.length});}
+  const z=makeZip(files),u=URL.createObjectURL(z),a=document.createElement('a');a.href=u;a.download='nms-exosuit-hud-icons-'+S+'.zip';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+  btn.textContent='FABRICATE ALL (ZIP)';btn.disabled=false;$('#iresNote').textContent='';});
+buildGrid();setSliders();pickLook('natural');syncColour();styleLabel();
+window.addEventListener('resize',()=>{queueShot();});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{queueShot();queueIcon();});
+})();
+</script>
+</body>
+</html>

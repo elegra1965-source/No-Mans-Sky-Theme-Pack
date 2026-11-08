@@ -1,6 +1,6 @@
 {
- "name": "NMS Home Portal",
- "short_name": "Home Portal",
+ "name": "NMS Home Planet",
+ "short_name": "Home Planet",
  "description": "No Man's Sky style widget from the free Theme Pack. Fan-made.",
  "id": "/widgets.html?w=portal",
  "start_url": "/widgets.html?w=portal",

@@ -1,6 +1,6 @@
 {
- "name": "NMS Planet Scan",
- "short_name": "Planet Scan",
+ "name": "NMS Weather Scan",
+ "short_name": "Weather Scan",
  "description": "No Man's Sky style widget from the free Theme Pack. Fan-made.",
  "id": "/widgets.html?w=weather",
  "start_url": "/widgets.html?w=weather",

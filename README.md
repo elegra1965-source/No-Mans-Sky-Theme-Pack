@@ -41,7 +41,8 @@ The page now leads with this: the first buttons on the page are **✦ Make it yo
 - **Planet of the day:** the Weather Station surveys 8 real, player-charted worlds from [Voyager's Haven](https://havenmap.online) every day. Pick one of today's and download it as a wallpaper, with its portal glyphs, hex and discoverer, plus a link to fly there on the Galactic Map.
 - **Your own picture:** **📷 Use your own picture** under the backgrounds puts your name, glyphs and the rest on any photo you pick (a screenshot of your base, your ship…). It's shrunk and kept on your device only; nothing is uploaded.
 - **Planet of the day with NMS Almanac:** each of today's 8 worlds now also shows the real planet from [NMS Almanac](https://nmsalmanac.com): its picture (beside the name on phone wallpapers, bottom right on desktop ones, and on each card), the planet's own portal address, weather and sentinels, with the Almanac credited on the wallpaper and under the buttons. Voyager's Haven still picks the worlds.
-- **Home planet from NMS Almanac:** on the portal wallpaper, if no traveller has named your home system on the Galactic Map or Voyager's Haven, the home planet name now comes from [NMS Almanac](https://nmsalmanac.com) (shown as “planet name from NMS Almanac”). The **Home portal widget** (widgets page) also uses the Almanac: the planet's type, weather, sentinels and picture, and the system's star, race, economy and conflict, with names a traveller gave still winning, and a “Data: NMS Almanac” link.
+- **Home planet from NMS Almanac:** on the portal wallpaper, if no traveller has named your home system on the Galactic Map or Voyager's Haven, the home planet name now comes from [NMS Almanac](https://nmsalmanac.com) (shown as “planet name from NMS Almanac”). The **Home Planet widget** (widgets page) also uses the Almanac: the planet's type, weather, sentinels and picture, and the system's star, race, economy and conflict, with names a traveller gave still winning, and a “Data: NMS Almanac” link.
+- **Widgets grid (v44):** six live tiles, each a short working version of its widget: NMS Clock (portal ring or digital Traveller HUD with a world clock), Exosuit Status (battery, comms link, battery history), Weather Scan, Home Planet, Expedition, and **Planet of the Day** (the biome follows your local weather using the Weather Station rules, the date picks the planet from Voyager's Haven, with a quote of the day and planet info from NMS Almanac). Location is only requested when you tap *Match my weather*. Shared `wmini.js` / `wmini.css`.
 - **Expedition countdown:** live time left in the current expedition (or until the next one), with a [home-screen widget page](https://theme.nomansskyhub.app/countdown.html) that installs like an app. Dates come from the No Man's Sky Wiki's List of Expeditions, redux runs included. Under the clock, the widget page also shows the live **Community Research** tier and progress (e.g. *Tier 2 of 2 · 41%*), read from Hello Games' official Galactic Atlas, the same number as its [Community Research](https://galacticatlas.nomanssky.com/poi/community-research) sidebar; tap it to open that page.
 
 **🔔 Tell me about new wallpapers & icons** (under Downloads) turns on a phone notification when something new is added. New things are listed in `updates.json` (`id`, `date`, `en` text); the Weather station's alert server sends the newest one once (`nms-push.js`).
@@ -114,6 +115,7 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 | `index.html` | The download site |
 | `polish.css`, `polish.js` | HUD-style card treatment and line icons (v2.2 polish) |
 | `studio.js`, `studio.css`, `assets/studio/` | "Make it yours": portal wallpaper, planet of the day and the countdown card |
+| `wmini.js`, `wmini.css`, `assets/potd-facts.json`, `assets/portal-centre.mp4` | The live widget tiles and widget pages (clock, status, weather scan, home planet, planet of the day) |
 | `expedition.js`, `countdown.html`, `countdown.webmanifest` | Expedition dates from the NMS Wiki and the installable countdown widget page |
 | `_redirects` | Same-origin proxy `/nms-api/*` to the Galactic Atlas API (Community Research on the countdown page) |
 | `preview.html` | Full phone preview |
@@ -129,7 +131,7 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 ## Credits
 
 - NMS Alphabet font by seontonppa (built with FontStruct), used with permission
-- Planet info and planet pictures (Planet of the day, Home portal widget, home planet name): [NMS Almanac](https://nmsalmanac.com) by Borjomi
+- Planet info and planet pictures (Planet of the day, Home Planet widget, home planet name): [NMS Almanac](https://nmsalmanac.com) by Borjomi
 - Player-charted worlds: [Voyager's Haven](https://havenmap.online)
 
 ## Using this code?

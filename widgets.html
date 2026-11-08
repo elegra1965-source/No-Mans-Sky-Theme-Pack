@@ -6,25 +6,28 @@
 <script src="/lang.js?v=2"></script>
 <script src="/nms-update.js?v=4" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="wmini.css?v=20261108">
+<script src="wmini.js?v=20261108"></script>
+<script src="expedition.js"></script>
 <title>NMS Widgets · No Man's Sky Theme Pack</title>
 <meta name="robots" content="max-image-preview:large">
-<meta name="description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, planet scan weather and your home portal address. Add any of them to your home screen. Free, fan-made.">
+<meta name="description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, weather scan, your home planet and a planet of the day. Add any of them to your home screen. Free, fan-made.">
 <meta name="theme-color" content="#070b11">
 <link rel="canonical" href="https://theme.nomansskyhub.app/widgets.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="No Man's Sky Theme Pack">
 <meta property="og:title" content="NMS Widgets · No Man's Sky Theme Pack">
-<meta property="og:description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, planet scan weather and your home portal address. Add any of them to your home screen. Free, fan-made.">
+<meta property="og:description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, weather scan, your home planet and a planet of the day. Add any of them to your home screen. Free, fan-made.">
 <meta property="og:url" content="https://theme.nomansskyhub.app/widgets.html">
 <meta property="og:image" content="https://theme.nomansskyhub.app/screenshots/og-card.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NMS Widgets · No Man's Sky Theme Pack">
-<meta name="twitter:description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, planet scan weather and your home portal address. Add any of them to your home screen. Free, fan-made.">
+<meta name="twitter:description" content="Ready-made No Man's Sky style widgets: clock, exosuit status, weather scan, your home planet and a planet of the day. Add any of them to your home screen. Free, fan-made.">
 <meta name="twitter:image" content="https://theme.nomansskyhub.app/screenshots/og-card.jpg">
 <script>
 /* Each widget gets its own install name/icon: pick the manifest before the browser reads it. */
 (function(){
-  var W = ['clock','status','weather','portal'];
+  var W = ['clock','status','weather','portal','planet'];
   var w = new URLSearchParams(location.search).get('w');
   if (W.indexOf(w) < 0) w = '';
   window.NMS_W = w;
@@ -125,7 +128,7 @@
 </head>
 <body>
 <div class="sky"></div>
-<main id="app"><div class="card"><div class="kick">Theme Pack · Widgets</div><h1>Ready-made NMS widgets</h1><p>No Man's Sky style widgets: clock, exosuit status, planet scan weather and your home portal address. Add any of them to your home screen. Free, fan-made.</p></div></main>
+<main id="app"><div class="card"><div class="kick">Theme Pack · Widgets</div><h1>Ready-made NMS widgets</h1><p>No Man's Sky style widgets: clock, exosuit status, weather scan, your home planet and a planet of the day. Add any of them to your home screen. Free, fan-made.</p></div></main>
 <script>
 (function(){
   var W = window.NMS_W, app = document.getElementById('app');
@@ -160,8 +163,9 @@
       '<p class="sub">Pick one, then add it to your home screen. Nothing to install, no extra apps.</p><div class="picker">' +
       [['clock','NMS Clock','Big clock, date and a line of NMS text that decodes'],
        ['status','Exosuit Status','Clock, date and battery as your life support'],
-       ['weather','Planet Scan','Your local weather as a planetary scan'],
-       ['portal','Home Portal','Your home glyphs, plus the system, planet, race and economy'],
+       ['weather','Weather Scan','Your local weather as a planetary scan, with hazard level'],
+       ['portal','Home Planet','Your home glyphs, plus the system, planet, race and economy'],
+       ['planet','Planet of the Day','A charted world matched to your weather, with a quote of the day'],
        ['countdown','Expedition','Time left in the current expedition']].map(function(p){
          var href = p[0]==='countdown' ? 'countdown.html' : 'widgets.html?w=' + p[0];
          return '<a class="pick" href="'+href+'"><b>'+p[1]+'</b><span>'+p[2]+'</span></a>';
@@ -172,14 +176,26 @@
 
   if (W === 'clock'){
     document.title = 'NMS Clock';
-    app.innerHTML = '<div class="card"><div class="kick">Local time</div><div class="big" id="t">--:--</div>' +
-      '<div class="sub" id="d"></div><div class="line" id="al"></div>' + foot() + '</div>';
-    var setAl = alienLine(document.getElementById('al'), 'Traveller');
-    var tick = function(){ var n = new Date();
-      document.getElementById('t').innerHTML = pad(n.getHours()) + ':' + pad(n.getMinutes()) + '<small>:' + pad(n.getSeconds()) + '</small>';
-      document.getElementById('d').textContent = (window.NMS_LANG && NMS_LANG() !== 'en') ? NMS_DATE(n, {weekday:'long'}) + ' · ' + NMS_DATE(n, {day:'numeric', month:'short', year:'numeric'}) : DAYS[n.getDay()] + ' · ' + n.getDate() + ' ' + MON[n.getMonth()] + ' ' + n.getFullYear();
-      setAl(DAYS[n.getDay()]); };
-    tick(); setInterval(tick, 1000);
+    app.innerHTML = '<div class="card wm"><div class="kick">NMS Clock</div><div class="mini pg" id="ck"><div class="mw"><div class="clk" id="ckc"></div></div></div>' +
+      '<details class="edit" id="cko"><summary class="muted">Options</summary><div class="opt"><label class="lb">Face</label><div class="seg" id="o-mode"><button type="button" data-v="analog">Portal ring</button><button type="button" data-v="digital">Digital HUD</button></div>' +
+      '<label class="lb">Hours</label><div class="seg" id="o-h"><button type="button" data-v="12">12h AM/PM</button><button type="button" data-v="24">24h</button></div>' +
+      '<div id="o-an"><label class="lb">Numbers</label><div class="seg" id="o-n"><button type="button" data-v="0">Off</button><button type="button" data-v="1">1 to 12</button></div></div>' +
+      '<div id="o-dg"><label class="lb">World clock</label><select id="o-tz"></select><button class="btn" id="o-new" type="button" style="margin-top:8px">New view</button></div></div></details>' + foot() + '</div>';
+    var st = document.createElement('style');
+    st.textContent = '.wm .mini.pg{margin:12px auto 8px;max-width:440px;aspect-ratio:1/1;width:100%}.wm .opt .seg{display:flex;gap:6px;margin:4px 0 10px}.wm .opt .seg button{flex:1;padding:9px 6px;border-radius:9px;border:1px solid rgba(0,229,255,.3);background:transparent;color:#cfe0f0;font:inherit;font-size:.8rem;cursor:pointer}.wm .opt .seg button.on{background:rgba(0,229,255,.18);border-color:#00e5ff;color:#fff}.wm .opt select{width:100%;padding:9px;border-radius:9px;background:#0b141c;color:#cfe0f0;border:1px solid rgba(0,229,255,.3)}';
+    document.head.appendChild(st);
+    NMSW.clock(document.getElementById('ckc'));
+    var tzs = document.getElementById('o-tz'); tzs.innerHTML = NMSW.PLACES.map(function(p){ return '<option value="'+p[1]+'">'+p[0]+'</option>'; }).join('');
+    var sync = function(){ var P = NMSW.clockPrefs();
+      [['o-mode', P.mode], ['o-h', P.h24 ? '24' : '12'], ['o-n', P.nums ? '1' : '0']].forEach(function(x){ [].forEach.call(document.querySelectorAll('#'+x[0]+' button'), function(b){ b.classList.toggle('on', b.dataset.v === x[1]); }); });
+      document.getElementById('o-an').style.display = P.mode === 'analog' ? '' : 'none'; document.getElementById('o-dg').style.display = P.mode === 'digital' ? '' : 'none'; tzs.value = P.tz; };
+    var upd = function(k, v){ var P = Object.assign({}, NMSW.clockPrefs()); P[k] = v; NMSW.saveClockPrefs(P); sync(); };
+    document.getElementById('o-mode').onclick = function(e){ if (e.target.dataset.v) upd('mode', e.target.dataset.v); };
+    document.getElementById('o-h').onclick = function(e){ if (e.target.dataset.v) upd('h24', e.target.dataset.v === '24'); };
+    document.getElementById('o-n').onclick = function(e){ if (e.target.dataset.v) upd('nums', e.target.dataset.v === '1'); };
+    tzs.onchange = function(){ upd('tz', tzs.value); };
+    document.getElementById('o-new').onclick = function(){ NMSW.newScene(); };
+    sync();
   }
 
   if (W === 'status'){
@@ -211,52 +227,52 @@
     }
   }
 
+  if (W === 'status'){
+    var lk = document.createElement('div'); lk.className = 'wm'; lk.style.marginTop = '14px';
+    lk.innerHTML = '<div class="cell" style="text-align:left"><i>COMMS LINK</i><div style="display:flex;align-items:flex-end;gap:12px;margin-top:6px"><span class="v-lbars" style="display:flex;gap:3px;align-items:flex-end;height:26px"></span><b class="v-llv"></b></div><div class="muted v-ltx" style="margin-top:4px"></div></div>' +
+      '<div class="cell" style="text-align:left;margin-top:8px"><i>BATTERY HISTORY (THIS VISIT)</i><svg class="v-spark" viewBox="0 0 100 36" preserveAspectRatio="none" style="width:100%;height:44px;display:block"></svg></div>';
+    var cardEl = document.querySelector('#app .card'), ft = cardEl.querySelector('.foot'); cardEl.insertBefore(lk, ft);
+    var sty = document.createElement('style'); sty.textContent = '.v-lbars i{display:block;width:6px;border-radius:2px;background:rgba(255,255,255,.15)}.v-lbars i.on{background:#00e5ff}';
+    document.head.appendChild(sty); NMSW.batEls.push(lk); NMSW.batInit(); NMSW.statusUpdate();
+  }
+
   if (W === 'weather'){
-    document.title = 'Planet Scan';
-    app.innerHTML = '<div class="card"><div class="kick">Planet scan</div><div class="big" id="tp" style="font-size:clamp(44px,15vw,80px)">--°</div>' +
-      '<div class="line" id="cond">Awaiting scan</div>' +
-      '<div class="grid2"><div class="cell"><i>WIND</i><b id="wd">--</b></div><div class="cell"><i>HAZARD</i><b id="hzd" class="hazard">--</b></div>' +
-      '<div class="cell"><i>FEELS LIKE</i><b id="fl">--</b></div><div class="cell"><i>HUMIDITY</i><b id="hu">--</b></div></div>' +
+    document.title = 'Weather Scan';
+    app.innerHTML = '<div class="card wm"><div class="kick">Weather scan</div><div class="mini pg" style="aspect-ratio:4/3"><div id="wsc"></div></div>' +
+      '<details class="edit" id="wdet"><summary class="muted">MORE DETAILS</summary><div class="grid2" id="wdg"></div></details>' +
       '<div class="muted" id="msg" style="margin-top:10px"></div><button class="btn" id="scan">Scan my location</button>' +
       '<a class="btn gold" href="https://weather.nomansskyhub.app" target="_blank" rel="noopener" style="margin-left:6px">Full Weather Station</a>' + foot() + '</div>';
-    var COND = function(c){
-      if (c === 0) return 'Clear skies'; if (c <= 2) return 'Light cloud'; if (c === 3) return 'Overcast';
-      if (c === 45 || c === 48) return 'Dense fog'; if (c <= 57) return 'Drizzle'; if (c <= 67) return 'Rainstorms';
-      if (c <= 77) return 'Snowfall'; if (c <= 82) return 'Heavy showers'; if (c <= 86) return 'Snowstorm'; return 'Electrical storm'; };
-    var load = function(lat, lon){
-      document.getElementById('msg').textContent = 'Scanning…';
-      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
-        '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto')
-        .then(function(r){ return r.json(); }).then(function(j){
-          var c = j.current; if (!c) throw 0;
-          document.getElementById('tp').textContent = Math.round(c.temperature_2m) + '°';
-          document.getElementById('fl').textContent = Math.round(c.apparent_temperature) + '°';
-          document.getElementById('hu').textContent = Math.round(c.relative_humidity_2m) + '%';
-          document.getElementById('wd').textContent = Math.round(c.wind_speed_10m) + ' km/h';
-          document.getElementById('cond').textContent = COND(c.weather_code);
-          var h = document.getElementById('hzd'), t = c.temperature_2m;
-          h.className = 'hazard' + (t >= 30 ? ' hot' : t <= 0 ? ' cold' : '');
-          h.textContent = t >= 30 ? 'Extreme heat' : t <= 0 ? 'Freezing' : 'Low';
-          document.getElementById('msg').textContent = 'Last scan ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-          document.getElementById('scan').textContent = 'Rescan';
-        }).catch(function(){ document.getElementById('msg').textContent = 'Scan failed. Check your connection and try again.'; });
-    };
-    var saved = LS('nms-w-loc');
-    var scan = function(){
-      if (!navigator.geolocation){ document.getElementById('msg').textContent = 'Location not available in this browser.'; return; }
-      navigator.geolocation.getCurrentPosition(function(p){
-        var la = p.coords.latitude.toFixed(2), lo = p.coords.longitude.toFixed(2);
-        LS('nms-w-loc', la + ',' + lo); load(la, lo);
-      }, function(){ document.getElementById('msg').textContent = 'Location permission needed for a scan.'; }, {timeout: 10000, maximumAge: 3600000});
-    };
-    document.getElementById('scan').onclick = scan;
-    if (saved){ var s = saved.split(','); load(s[0], s[1]); setInterval(function(){ load(s[0], s[1]); }, 30 * 60000); }
-    else if (EMBED){ [['tp','14°'],['fl','12°'],['hu','71%'],['wd','18 km/h'],['cond','Light cloud'],['hzd','Low'],['msg','Sample scan']].forEach(function(x){ document.getElementById(x[0]).textContent = x[1]; }); }
+    var st2 = document.createElement('style'); st2.textContent = '.wm .mini.pg{margin:12px auto 8px;max-width:440px;width:100%}'; document.head.appendChild(st2);
+    NMSW.scan(document.getElementById('wsc'));
+    var cellh = function(k, v){ return '<div class="cell"><i>' + k + '</i><b>' + v + '</b></div>'; };
+    var fill = function(w){ if (!w) return;
+      document.getElementById('wdg').innerHTML = cellh('FEELS LIKE', w.f + '°') + cellh('HUMIDITY', w.hu + '%') + cellh('WIND', w.wd + ' km/h') + cellh('GUSTS', w.gust + ' km/h') + cellh('PRESSURE', w.pr + ' hPa') +
+        cellh('DEW POINT', w.dew + '°') + cellh('UV', w.uv) + cellh('RAIN CHANCE', w.pp + '%') + cellh('AIR (EU AQI)', w.aqi) + cellh('HIGH / LOW', w.hi + '° / ' + w.lo + '°') + cellh('SUN', w.sr + ' → ' + w.ss);
+      document.getElementById('msg').textContent = 'Last scan ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); document.getElementById('scan').textContent = 'Rescan'; };
+    var go = function(force){ NMSW.weather(force).then(function(w){ if (w) { fill(w); NMSW.scanUpdate && NMSW.scanUpdate(w); } else document.getElementById('msg').textContent = 'Scan failed. Check your connection and try again.'; }); };
+    document.getElementById('scan').onclick = function(){ NMSW.locate().then(function(){ location.reload(); }).catch(function(){ document.getElementById('msg').textContent = 'Location permission needed for a scan.'; }); };
+    if (LS('nms-w-loc')) { go(false); setInterval(function(){ go(true); }, 30 * 60000); }
+    else if (EMBED) { fill(NMSW.SAMPLE_W); document.getElementById('msg').textContent = 'Sample scan'; }
     else document.getElementById('msg').textContent = 'Tap scan once; your rough location is kept on this device only.';
   }
 
+  if (W === 'planet'){
+    document.title = 'Planet of the Day';
+    app.innerHTML = '<div class="card wm"><div class="kick">Planet of the day</div><div class="mini pg" style="aspect-ratio:4/3"><div id="pp"></div></div>' +
+      '<div class="qwrap open" id="pq"><button class="qbar" id="pqb" type="button" aria-expanded="true"><span class="ql">QUOTE OF THE DAY</span><span class="qt" id="pqt"></span><i class="chev"></i></button></div>' +
+      '<div class="drawer open" id="pd" style="margin-top:8px"></div><div class="muted" id="msg" style="margin-top:10px"></div>' +
+      '<button class="btn" id="pm" type="button">Match my weather</button><button class="btn gold" id="pr" type="button" style="margin-left:6px">↻ Refresh scan</button>' + foot() + '</div>';
+    var st3 = document.createElement('style'); st3.textContent = '.wm .mini.pg{margin:12px auto 8px;max-width:440px;width:100%}'; document.head.appendChild(st3);
+    var S = NMSW.potd(document.getElementById('pp'), { onPlanet: function(p){ document.getElementById('pd').innerHTML = NMSW.infoHTML(p); } });
+    NMSW.potdRun(S, false);
+    NMSW.facts().then(function(f){ if (f && f.length) document.getElementById('pqt').textContent = f[Math.floor(Date.now()/86400000) % f.length]; });
+    document.getElementById('pm').onclick = function(){ NMSW.locate().then(function(){ NMSW.potdRun(S, true); document.getElementById('msg').textContent = 'Matched to your local weather.'; }).catch(function(){ document.getElementById('msg').textContent = 'Location was not shared, so sample weather stays.'; }); };
+    document.getElementById('pr').onclick = function(){ NMSW.potdRun(S, true); };
+    if (!LS('nms-w-loc')) document.getElementById('msg').textContent = 'Showing sample weather until you tap Match my weather.';
+  }
+
   if (W === 'portal'){
-    document.title = 'Home Portal';
+    document.title = 'Home Planet';
     /* System details come from the NMS Galactic Map: the real Voyager's Haven record when the system is
        charted there, otherwise the game's own generation code (nms-core) worked out from the address. */
     var MAP = 'https://map.nomansskyhub.app';
@@ -282,7 +298,7 @@
     };
     var getInfo = function(){ try{ return JSON.parse(LS('nms-w-info') || 'null'); }catch(e){ return null; } };
 
-    app.innerHTML = '<div class="card portal"><div class="kick">Home portal</div><div class="line" id="nm"></div>' +
+    app.innerHTML = '<div class="card portal"><div class="kick">Home planet</div><div class="line" id="nm"></div>' +
       '<div class="sys" id="sy"></div><div class="sub" id="rg"></div>' +
       '<div class="glyphs" id="gl"></div><div class="hex" id="hx">------------</div>' +
       '<div class="grid2" id="facts" hidden></div><div class="src" id="src"></div>' +
@@ -395,6 +411,7 @@
         return '<option' + (hp && p.name === hp.name ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('');
       var pName = hp ? hp.name : gen.planet;
       var pSub = hp ? [hp.biome, hp.weather].filter(Boolean).join(' · ') : (gen.planet ? 'Original name, may differ in game' : '');
+      try{ LS('nms-w-hp', JSON.stringify({hex: hex, name: pName || nm, biome: hp ? hp.biome : ''})); }catch(e){}
       var econ = pickF(as && (as.economyType || as.economy), mp && mp.econName, hv && hv.economy, gen.econ), tier = pickF(as && as.wealth, mp && mp.econDesc, hv && hv.economyTier, gen.wealth);
       var outlaw = mp ? !!mp.outlaw : (!hv && gen.outlaw);
       $('facts').innerHTML =
