@@ -18,6 +18,19 @@
    }
   },
   {
+   "tag": "improved",
+   "text": {
+    "en": "No more emoji: crystal icons and each tool's own app icon across the page, and a flat Make it yours button",
+    "es": "Adiós a los emojis: iconos de cristal y el icono propio de cada herramienta en toda la página, y un botón Hazlo tuyo plano",
+    "de": "Keine Emojis mehr: Kristall-Icons und das eigene App-Icon jedes Tools auf der ganzen Seite, dazu ein flacher Button „Mach es zu deinem“",
+    "nl": "Geen emoji meer: kristaliconen en het eigen app-icoon van elke tool op de hele pagina, en een vlakke knop Maak het van jou",
+    "pl": "Koniec z emoji: kryształowe ikony i własna ikona aplikacji każdego narzędzia na całej stronie oraz płaski przycisk Spersonalizuj",
+    "fr": "Fini les emojis : icônes de cristal et icône propre à chaque outil sur toute la page, et un bouton Personnalise-le plat",
+    "pt-BR": "Chega de emojis: ícones de cristal e o ícone próprio de cada ferramenta em toda a página, e um botão Deixe com a sua cara plano",
+    "it": "Via gli emoji: icone di cristallo e l'icona propria di ogni strumento in tutta la pagina, e un pulsante Rendilo tuo piatto"
+   }
+  },
+  {
    "tag": "new",
    "text": {
     "en": "S Pen Icons for Samsung phones: floating icons and pointers, with a 4 step set-up",
