@@ -13,6 +13,7 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 - [What's in the pack](#whats-in-the-pack)
 - [Make it yours (new)](#make-it-yours-new)
 - [S Pen Icons (new, Android only)](#s-pen-icons-new-android-only)
+- [Photo Mode Studio and Exosuit HUD Icons (new)](#photo-mode-studio-and-exosuit-hud-icons-new)
 - [New here? Take the tour](#new-here-take-the-tour)
 - [The site](#the-site)
 - [How it's built](#how-its-built)
@@ -34,6 +35,11 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 The site shows these as flat rows with crystal icons: widgets and S Pen icons, 79 NMS icons, wallpapers, charging screens, the NMS alphabet font and guides. The first three are open and **Show 3 more** reveals the rest. On the font row the icon is the word FONTS written in the NMS alphabet: tap it (or hover it on a computer) to see it decoded for a moment, or open the Alphabet Translator to decode it yourself.
 
 ![The feature rows on a phone, with crystal icons](screenshots/12-feature-rows-phone.jpg)
+
+The rest of the page follows the same rule: no emoji. Tabs are plain text, the downloads use the crystal icons, and the **More tools** list uses each tool's own app icon, a cyan frame with amber corners, the same ones used as the favicon and the installed-app icon on every site in the family. **Make it yours** is a flat cyan outline button with a crystal icon.
+
+<img src="screenshots/13-hero-phone.jpg" alt="The top of the page on a phone: the title, the Make it yours and Tour buttons, Install / Download and See it live" width="390">
+<img src="screenshots/14-more-tools-phone.jpg" alt="The More tools list on a phone: the Hub, ATLAS, Weather, Galactic Map and Alphabet Translator, each with its framed app icon" width="390">
 
 ## Make it yours (new)
 
@@ -79,6 +85,24 @@ Six No Man's Sky floating icons and pointers for the Samsung Galaxy S Pen, to us
 ![S Pen Icons on a phone: the picker, Pointer / Floating icon / Both, and the to-scale phone](screenshots/11-spen-icons-phone.jpg)
 
 ![S Pen Icons on desktop](screenshots/11-spen-icons-desktop.jpg)
+
+</details>
+
+## Photo Mode Studio and Exosuit HUD Icons (new)
+
+<details>
+<summary>▸ Tap to open</summary>
+
+One page, [photo-studio.html](photo-studio.html), with two tabs. Everything is drawn in your browser: nothing is uploaded, and your settings stay on the device.
+
+- **Photo Mode Studio:** pick one of your own screenshots (or the sample), drag and zoom it, add an NMS-style look (Natural, Vivid, Warm dusk, Cold, Noir, Neon) with an Intensity slider, fine-tune it, and save it as a wallpaper for your device, an Android phone, an iPhone, or a desktop at 1080p, 1440p or 4K.
+- **Traveller HUD:** an optional overlay with your Traveller name, portal glyphs and hex address (filled in from the details you already gave the site). Drag it where you want it, or use the **Game style** layout: just the glyph strip, the galaxy name and the hex, like the address shown in the game's own photo mode.
+- **Exosuit HUD Icons:** make an icon from an NMS picture or your own picture. Styles are Basic, Glass, Duotone, Gradient, Film grain and Glow, with Shine, colour, colour grade, nine shapes (circle, squircle, square, hexagon, diamond, octagon, shield, wide, tall) and **My styles**, saved on the device.
+- **Fabricate:** save the icon you are looking at, or **Fabricate all (ZIP)** to apply your style to all the icons at once. A note at the bottom links to the [S Pen Icons](#s-pen-icons-new-android-only).
+- Translated into the same languages as the rest of the site. Code is in `photo-studio.html`, with icons from `assets/icons/` and the glyph images in `assets/studio/`.
+
+<img src="screenshots/15-photo-studio-phone.jpg" alt="Photo Mode Studio on a phone: a screenshot with the Traveller HUD, the zoom slider and the filters" width="390">
+<img src="screenshots/16-exosuit-hud-icons-phone.jpg" alt="Exosuit HUD Icons on a phone: the icon picker, a live preview and the styles" width="390">
 
 </details>
 
@@ -140,6 +164,9 @@ A plain HTML/CSS/JavaScript site with no build step. Deployed on Netlify straigh
 | `index.html` | The download site |
 | `polish.css`, `polish.js` | HUD-style card treatment and line icons (v2.2 polish) |
 | `studio.js`, `studio.css`, `assets/studio/` | "Make it yours": portal wallpaper, planet of the day and the countdown card |
+| `photo-studio.html` | Photo Mode Studio and Exosuit HUD Icons |
+| `spen.js`, `spen.css`, `assets/spen/` | The S Pen Icons card and its downloads |
+| `assets/crystal/` | Crystal icons and the framed tool icons used on the page |
 | `wmini.js`, `wmini.css`, `assets/potd-facts.json`, `assets/portal-centre.mp4` | The live widget tiles and widget pages (clock, status, weather scan, home planet, planet of the day) |
 | `expedition.js`, `countdown.html`, `countdown.webmanifest` | Expedition dates from the NMS Wiki and the installable countdown widget page |
 | `_redirects` | Same-origin proxy `/nms-api/*` to the Galactic Atlas API (Community Research on the countdown page) |
