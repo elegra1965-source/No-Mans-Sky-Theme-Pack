@@ -31,6 +31,10 @@ Part of the [No Man's Sky Hub](https://nomansskyhub.app) family of fan tools.
 - **Widget Kit** for KWGT: two NMS-styled frames, both fonts and a step-by-step clock/date widget guide
 - **Setup guides** for Android launchers, iPhone, Windows and Mac
 
+The site shows these as flat rows with crystal icons: widgets and S Pen icons, 79 NMS icons, wallpapers, charging screens, the NMS alphabet font and guides. The first three are open and **Show 3 more** reveals the rest. On the font row the icon is the word FONTS written in the NMS alphabet: tap it (or hover it on a computer) to see it decoded for a moment, or open the Alphabet Translator to decode it yourself.
+
+![The feature rows on a phone, with crystal icons](screenshots/12-feature-rows-phone.jpg)
+
 ## Make it yours (new)
 
 <details>

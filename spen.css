@@ -70,3 +70,4 @@
 .sp-lbt button.on{color:var(--cyan);border-color:var(--cyan)}.sp-lbt .x{margin-left:auto;color:var(--white)}
 .sp-lbc img,.sp-lbc video{width:100%;max-height:62vh;object-fit:contain;border-radius:10px;display:block;background:#000}
 .sp-lbc .cap{font-size:.9rem;color:var(--text-dim);margin-top:8px;text-align:center}
+#spen .sp-see img,#spen .sp-adv>summary img{width:18px;height:18px;vertical-align:-4px;margin-right:6px}

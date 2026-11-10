@@ -7,6 +7,45 @@
   {
    "tag": "new",
    "text": {
+    "en": "A new features list with crystal icons. Tap the FONTS glyphs to decode them",
+    "es": "Nueva lista de funciones con iconos de cristal. Toca los glifos de FONTS para descifrarlos",
+    "de": "Neue Funktionsliste mit Kristall-Icons. Tippe auf die FONTS-Glyphen, um sie zu entschlüsseln",
+    "nl": "Nieuwe functielijst met kristaliconen. Tik op de FONTS-glyphs om ze te ontcijferen",
+    "pl": "Nowa lista funkcji z kryształowymi ikonami. Dotknij glifów FONTS, aby je odszyfrować",
+    "fr": "Nouvelle liste des fonctions avec des icônes de cristal. Touche les glyphes FONTS pour les déchiffrer",
+    "pt-BR": "Nova lista de recursos com ícones de cristal. Toque nos glifos de FONTS para decifrá-los",
+    "it": "Nuovo elenco delle funzioni con icone di cristallo. Tocca i glifi di FONTS per decifrarli"
+   }
+  },
+  {
+   "tag": "new",
+   "text": {
+    "en": "S Pen Icons for Samsung phones: floating icons and pointers, with a 4 step set-up",
+    "es": "Iconos S Pen para móviles Samsung: iconos flotantes y punteros, con una configuración en 4 pasos",
+    "de": "S-Pen-Icons für Samsung-Handys: schwebende Icons und Zeiger, mit einer Einrichtung in 4 Schritten",
+    "nl": "S Pen-iconen voor Samsung-telefoons: zwevende iconen en aanwijzers, met een installatie in 4 stappen",
+    "pl": "Ikony S Pen dla telefonów Samsung: pływające ikony i wskaźniki, z konfiguracją w 4 krokach",
+    "fr": "Icônes S Pen pour les téléphones Samsung : icônes flottantes et pointeurs, avec une installation en 4 étapes",
+    "pt-BR": "Ícones S Pen para celulares Samsung: ícones flutuantes e ponteiros, com configuração em 4 passos",
+    "it": "Icone S Pen per i telefoni Samsung: icone flottanti e puntatori, con una configurazione in 4 passaggi"
+   }
+  },
+  {
+   "tag": "new",
+   "text": {
+    "en": "Photo Mode Studio: Exosuit HUD Icons and a Game style HUD to dress your screenshots",
+    "es": "Estudio del Modo Foto: iconos HUD del exotraje y un HUD estilo juego para vestir tus capturas",
+    "de": "Fotomodus-Studio: Exosuit-HUD-Icons und ein HUD im Spielstil für deine Screenshots",
+    "nl": "Fotomodus-studio: Exosuit-HUD-iconen en een HUD in spelstijl om je screenshots op te maken",
+    "pl": "Studio trybu fotograficznego: ikony HUD egzokombinezonu i HUD w stylu gry dla twoich zrzutów ekranu",
+    "fr": "Studio du mode photo : icônes HUD de l'exosuit et HUD style jeu pour habiller tes captures",
+    "pt-BR": "Estúdio do Modo Foto: ícones de HUD do exotraje e um HUD no estilo do jogo para vestir suas capturas",
+    "it": "Studio della Modalità foto: icone HUD dell'Exosuit e un HUD in stile gioco per rivestire i tuoi screenshot"
+   }
+  },
+  {
+   "tag": "new",
+   "text": {
     "en": "Widgets are now live previews: Weather Scan, Home Planet and a new Planet of the Day (matched to your weather, with a quote of the day)",
     "es": "Los widgets ahora son vistas en vivo: Escaneo del clima, Planeta natal y un nuevo Planeta del día (según tu clima, con cita del día)",
     "de": "Widgets sind jetzt Live-Vorschauen: Wetter-Scan, Heimatplanet und neu: Planet des Tages (passend zu deinem Wetter, mit Zitat des Tages)",
@@ -69,19 +108,6 @@
     "nl": "Nieuwe FAQ-antwoorden: Samsung-telefoons, wazige pictogrammen, pictogrammen die na een herstart terugspringen, Windows-pictogramcache",
     "pl": "Nowe odpowiedzi w FAQ: telefony Samsung, rozmyte ikony, ikony wracające po restarcie, pamięć podręczna ikon Windows",
     "pt-BR": "Novas respostas no FAQ: celulares Samsung, ícones borrados, ícones que voltam ao normal após reiniciar, cache de ícones do Windows"
-   }
-  },
-  {
-   "tag": "new",
-   "text": {
-    "en": "Patch notes like these after each big update",
-    "es": "Notas como estas después de cada gran actualización",
-    "de": "Patch-Notes wie diese nach jedem großen Update",
-    "nl": "Patchnotes zoals deze na elke grote update",
-    "pl": "Takie informacje o zmianach po każdej dużej aktualizacji",
-    "fr": "Des notes comme celles-ci après chaque grosse mise à jour",
-    "pt-BR": "Notas como estas depois de cada grande atualização",
-    "it": "Note come queste dopo ogni grande aggiornamento"
    }
   }
  ]

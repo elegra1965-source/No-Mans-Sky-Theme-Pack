@@ -157,11 +157,8 @@
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;}
   @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:36px;text-align:center;}}
 
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'Orbitron',monospace;
-    font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);
-    border:1px solid var(--border);border-radius:100px;padding:6px 14px;margin-bottom:22px;
-    background:var(--panel-2);}
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:blink 2.2s ease-in-out infinite;}
+  .eyebrow{display:block;font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);margin-bottom:22px;}
+  .eyebrow .dot{display:none;}
   @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 
   h1{
@@ -247,6 +244,28 @@
   .feature .fi{font-size:1.7rem;margin-bottom:12px;display:block;}
   .feature h3{font-family:'Orbitron',monospace;font-size:.86rem;letter-spacing:1px;color:var(--white);margin-bottom:8px;}
   .feature p{font-size:.92rem;color:var(--text-dim);}
+
+
+  /* Feature rows (flat panels, corner brackets, crystal icons) */
+  .feat-list{display:grid;gap:10px;padding-top:16px;}
+  .feat-row{position:relative;display:flex;gap:14px;align-items:center;padding:14px 14px 14px 12px;background:var(--panel);border:1px solid var(--border-soft);border-radius:4px;text-align:left;}
+  .feat-row::before,.feat-row::after{content:"";position:absolute;width:10px;height:10px;border:2px solid var(--cyan);opacity:.7;}
+  .feat-row::before{top:-1px;left:-1px;border-right:0;border-bottom:0;}
+  .feat-row::after{bottom:-1px;right:-1px;border-left:0;border-top:0;}
+  .feat-ic{flex:none;width:72px;height:56px;display:grid;place-items:center;position:relative;}
+  .feat-ic img{max-width:100%;max-height:100%;object-fit:contain;}
+  .feat-row h3{font-family:'Orbitron',monospace;font-size:.8rem;letter-spacing:1.5px;color:var(--white);margin:0 0 4px;}
+  .feat-row p{font-size:.98rem;line-height:1.25;color:var(--text-dim);margin:0;padding:0;}
+  .feat-new{margin-left:8px;font-size:.55rem;letter-spacing:2px;color:#42e88a;border:1px solid #42e88a;padding:2px 6px;vertical-align:2px;text-transform:uppercase;}
+  .feat-more{display:none;}.feat-list.open .feat-more{display:flex;}
+  .feat-toggle{margin-top:10px;width:100%;font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);background:none;border:1px solid rgba(0,229,255,.3);padding:12px;cursor:pointer;}
+  .feat-hint{display:block;margin-top:6px;font-size:.85rem;color:var(--cyan);}
+  .feat-hint a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(240,165,0,.4);margin-left:6px;}
+  .feat-hint a:hover{color:var(--white);}
+  .feat-ic.dec-ic{cursor:pointer;}
+  .feat-ic .fi-en{position:absolute;inset:0;display:none;place-items:center;font-family:'Orbitron',monospace;font-size:.8rem;letter-spacing:.1em;color:var(--gold);}
+  .feat-ic.dec img{opacity:0;}.feat-ic.dec .fi-en{display:grid;animation:fglitch .3s steps(2) 2;}
+  @keyframes fglitch{0%{transform:translate(0);}25%{transform:translate(-2px,1px);text-shadow:2px 0 var(--cyan),-2px 0 var(--gold);}50%{transform:translate(2px,-1px);}75%{transform:translate(-1px,0);text-shadow:-2px 0 var(--cyan),2px 0 var(--gold);}100%{transform:translate(0);text-shadow:none;}}
 
   /* Live preview + controls */
   .preview-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-bottom:26px;}
@@ -478,7 +497,7 @@
   .acc-arrow { font-size:13px; color:var(--cyan); transition:transform .25s ease; display:inline-block; line-height:1; }
   .sec-accordion[open] .acc-arrow { transform:rotate(180deg); }
   .sec-summary:hover .sec-title { color:var(--cyan); }
-  .sec-accordion > .wrap, .sec-accordion .features,
+  .sec-accordion > .wrap, .sec-accordion .features,.sec-accordion .feat-list,
   .sec-accordion .preview-bar, .sec-accordion .icon-showcase,
   .sec-accordion .btn-grid, .sec-accordion .tabs,
   .sec-accordion .tab-panel { border-top:1px solid rgba(0,229,255,0.1); }
@@ -865,7 +884,7 @@
       <div class="sp-phonewrap"><div class="sp-phone"><div class="sp-screen" id="spSc"><span class="sp-notch"></span><div class="sp-ac" id="spAc"><img src="assets/spen/strip.webp" alt="" loading="lazy"></div><div class="sp-fl" id="spFl"><img id="spFlImg" alt=""></div></div>
         <div class="sp-clip"><div class="sp-tw" id="spTw"><div class="sp-pt" id="spPt"><img id="spPtImg" alt=""></div><div class="sp-pen"><i></i></div></div></div></div>
         <p class="sp-hint">Shown to scale. Double-tap the floating icon (top right) to open the side panel, like on a real Galaxy. Drag anywhere on the phone to move the pen.</p>
-        <p class="sp-seewrap"><button type="button" class="sp-see" id="spSee">▶ SEE IT ON A REAL GALAXY</button></p>
+        <p class="sp-seewrap"><button type="button" class="sp-see" id="spSee"><img src="assets/crystal/ci-play.webp" alt="" width="18" height="18"> SEE IT ON A REAL GALAXY</button></p>
         <a href="#" class="sp-wpl" id="spBgn">WALLPAPER 1</a></div>
       <div class="sp-rest">
         <div class="sp-real"><div><img id="spR1" width="52" height="52" alt=""><span>Floating icon<br>actual size</span></div><div><img id="spR2" width="28" height="28" alt=""><span>Pointer<br>actual size</span></div><div class="sp-sm">This is how small they really look on your phone, so we made them bold.</div></div>
@@ -874,7 +893,7 @@
         <p class="sp-note">Turn any picture into a round NMS icon with Exosuit HUD Icons (in Photo Mode Studio), then use it in Pentastic. Saved on your device only.</p>
       </div>
     </div>
-    <details class="sp-adv"><summary>HOW TO SET IT UP (4 STEPS)</summary>
+    <details class="sp-adv"><summary><img src="assets/crystal/ci-info.webp" alt="" width="18" height="18"> HOW TO SET IT UP (4 STEPS)</summary>
     <ol><li><b>Save</b> the icon to your phone (Gallery).</li>
     <li>Open <b>Good Lock → Pentastic</b> (get it from Galaxy Store). Good Lock isn't offered in every country.</li>
     <li><b>Floating Icon → Custom</b>: pick the picture and crop it to the circle. This is the button that shows when you pull the S Pen out.</li>
@@ -1002,14 +1021,15 @@
     </div>
     </summary>
       <p class="sec-desc">A complete sci-fi customization suite — not just icons. All free, no account, works offline once installed.</p>
-    <div class="features">
-      <div class="feature"><span class="fi">🛸</span><h3>79 Themed Icons</h3><p>Hand-built No Man's Sky icons, each exported in multiple sizes as transparent PNGs — ready for Android, iPhone, Windows, Mac &amp; Linux. A curated set inspired by NMS characters, ships and lore — not a full app replacement, but a distinctive themed highlight pack.</p></div>
-      <div class="feature"><span class="fi">🖼️</span><h3>Wallpaper Pack</h3><p>17 wallpapers across 6 resolutions for phone and desktop, tuned to the palette.</p></div>
-      <div class="feature"><span class="fi">⚡</span><h3>Charging Animations</h3><p>5 watermark-free MP4 charging screens for Android &amp; iOS.</p></div>
-      <div class="feature"><span class="fi">🔤</span><h3>Custom NMS Font</h3><p>The NMS-style alphabet as an installable TTF — type in the NMS alphabet anywhere.</p></div>
-      <div class="feature"><span class="fi">📖</span><h3>Setup Guides</h3><p>Step-by-step guides for Android, iPhone, Mac &amp; Windows, plus a launcher mapping file.</p></div>
-      <div class="feature"><span class="fi">📲</span><h3>Installable PWA</h3><p>Add the whole thing to your home screen as an app — fast, offline, no store needed.</p></div>
+    <div class="feat-list" id="featList">
+      <div class="feat-row"><span class="feat-ic"><img src="assets/crystal/ci-widgets-spen.webp" alt="" width="48" height="56" loading="lazy" decoding="async"></span><div><h3>Widgets + S Pen Icons<span class="feat-new">New</span></h3><p>Clock, weather, expedition and planet widgets, plus floating icons and pointers for Galaxy S Pen.</p></div></div>
+      <div class="feat-row"><span class="feat-ic"><img src="assets/crystal/ci-icons79.webp" alt="" width="56" height="54" loading="lazy" decoding="async"></span><div><h3>79 NMS Icons</h3><p>Hand-built icons in 7 sizes. Transparent PNGs for Android, iPhone and desktop.</p></div></div>
+      <div class="feat-row"><span class="feat-ic"><img src="assets/crystal/ci-wallpaper.webp" alt="" width="56" height="52" loading="lazy" decoding="async"></span><div><h3>Wallpaper Pack</h3><p>17 wallpapers in 6 sizes, tuned to the palette.</p></div></div>
+      <div class="feat-row feat-more"><span class="feat-ic"><img src="assets/crystal/ci-charging.webp" alt="" width="41" height="56" loading="lazy" decoding="async"></span><div><h3>Charging Screens</h3><p>5 MP4 charging animations for Android and iOS. No watermark.</p></div></div>
+      <div class="feat-row feat-more"><span class="feat-ic dec-ic" id="featFontIc" role="button" tabindex="0" aria-label="Decode the glyphs"><img src="assets/crystal/ci-font.webp" alt="FONTS in the NMS alphabet" width="72" height="23" loading="lazy" decoding="async"><span class="fi-en" aria-hidden="true" translate="no">FONTS</span></span><div><h3>NMS Alphabet Font</h3><p>Type in the NMS alphabet anywhere with the installable font, made with the Alphabet Translator.</p><span class="feat-hint">Tap the glyphs to decode them.<a href="https://nomansskyhub.app/translator" target="_blank" rel="noopener">Open the Alphabet Translator</a></span></div></div>
+      <div class="feat-row feat-more"><span class="feat-ic"><img src="assets/crystal/ci-play.webp" alt="" width="48" height="48" loading="lazy" decoding="async"></span><div><h3>Guides + App</h3><p>Step by step for Android, iPhone, Mac and Windows. Install the site as an app that works offline.</p></div></div>
     </div>
+    <button type="button" class="feat-toggle" id="featToggle">Show 3 more</button>
     </details>
   </div>
 </section>
@@ -1334,6 +1354,7 @@
     </details>
     </details>
     <div style="text-align:center;margin-top:18px"><button type="button" class="btn btn-ghost" id="newStuffAlertBtn">🔔 TELL ME ABOUT NEW WALLPAPERS &amp; ICONS</button></div>
+    <p style="text-align:center;margin:12px 0 0;font-size:.85rem"><a href="https://nomansskyhub.app/#atlasPoll" target="_blank" rel="noopener" style="color:var(--cyan)">Want a Players' wallpaper section here? Vote on the Hub</a></p>
   </div>
 </section>
 
@@ -1942,6 +1963,13 @@ if (window.NMS_PUSH) NMS_PUSH.wire(document.getElementById('newStuffAlertBtn'), 
 });
 </script>
 <script src="/nms-tour.js?v=3"></script>
+<script>
+(function(){var l=document.getElementById('featList'),b=document.getElementById('featToggle'),ic=document.getElementById('featFontIc'),t;
+if(l&&b)b.onclick=function(){var o=l.classList.toggle('open');b.textContent=o?'Show less':'Show 3 more';};
+if(ic){var dec=function(){ic.classList.add('dec');clearTimeout(t);t=setTimeout(function(){ic.classList.remove('dec');},2200);};
+ic.addEventListener('click',dec);ic.addEventListener('mouseenter',dec);
+ic.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();dec();}});}})();
+</script>
 <script>NMSTour.init({id:'theme',button:{after:'#heroMake',className:'btn btn-ghost',label:'▷ TOUR'},steps:[{"sel": "#heroMake", "title": "Make it yours", "body": "Make a wallpaper with your name, galaxy and portal glyphs, on our art or your own picture."}, {"sel": "#heroInstall", "title": "Get the pack", "body": "Icons, wallpapers and charging animations for your phone or computer, all free."}, {"sel": "#widgets .sec-title", "title": "Widgets", "body": "Ready-made NMS widgets: live clock, home portal and planet scan. Add one to your home screen."},{"sel": "#spen .sec-title", "title": "S Pen Icons", "body": "Android only: floating icons and pointers for your Samsung Galaxy S Pen, with a phone to try them on."}, {"sel": "#alphabet .sec-title", "title": "Write in NMS", "body": "Type anything to see it in the NMS font. The font itself comes with the pack."}, {"sel": "#preview .sec-title", "title": "Live preview", "body": "A live look at the real icons. Tap any icon to copy its filename."}, {"sel": "#apply .sec-title", "title": "How to apply", "body": "Step-by-step setup for Android, iPhone, Windows, Mac and Linux."}, {"sel": "#fbOpenBtn", "title": "Reviews & feedback", "body": "Tell us what you think, report a bug or ask for something new."}, {"sel": "[data-lang-btn]", "top": true, "title": "Your language", "body": "Pick your language once and every site in the family follows."}]});</script>
 <script src="/nms-feedback/nms-feedback.js?v=20261104" data-tool="theme" defer></script>
 </body>
