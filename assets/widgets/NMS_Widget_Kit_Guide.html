@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NMS Widget Kit — Guide</title>
+<title>NMS Widget Kit. Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -52,12 +52,12 @@
   <div class="sub">Setup Guide</div>
 
   <p>This kit gives you two transparent NMS-styled widget frames, the real Orbitron font file, and the
-  exact colors/formulas to build a real home-screen widget with them using <strong>KWGT</strong> — a
+  exact colors/formulas to build a real home-screen widget with them using <strong>KWGT</strong>, a
   free, hugely popular widget-maker app for Android.</p>
 
-  <a class="btn" href="https://play.google.com/store/apps/details?id=org.kustom.widget" target="_blank" rel="noopener">▶ Get KWGT — Google Play (free)</a>
+  <a class="btn" href="https://play.google.com/store/apps/details?id=org.kustom.widget" target="_blank" rel="noopener">▶ Get KWGT. Google Play (free)</a>
 
-  <div class="note"><strong>iOS note:</strong> KWGT is Android-only — Kustom Industries has never
+  <div class="note"><strong>iOS note:</strong> KWGT is Android-only. Kustom Industries has never
   released an iOS version, and there's no direct equivalent app that works the same way (place an
   image + freely-positioned text on top). iOS widget apps like Widgetsmith or Color Widgets can make
   custom widgets, but through Apple's own WidgetKit system, which works differently from this guide.
@@ -65,12 +65,12 @@
 
   <h2>What's in this kit</h2>
   <ul>
-    <li><code>nms_widget_frame_wide.png</code> — a 1080×540 frame, sized for a clock + date widget</li>
-    <li><code>nms_widget_frame_square.png</code> — a 540×540 frame, sized for something compact like battery, weather, or a single stat</li>
-    <li><code>Orbitron-Variable.ttf</code> — the real font file, since it doesn't reliably show up in KWGT's own font search</li>
+    <li><code>nms_widget_frame_wide.png</code>, a 1080×540 frame, sized for a clock + date widget</li>
+    <li><code>nms_widget_frame_square.png</code>, a 540×540 frame, sized for something compact like battery, weather, or a single stat</li>
+    <li><code>Orbitron-Variable.ttf</code>, the real font file, since it doesn't reliably show up in KWGT's own font search</li>
     <li>This guide</li>
   </ul>
-  <p>Both frames are transparent — your phone wallpaper shows through them, so they'll look right on any background.</p>
+  <p>Both frames are transparent, your phone wallpaper shows through them, so they'll look right on any background.</p>
 
   <h3>Colors used in this kit</h3>
   <table>
@@ -92,16 +92,16 @@
   <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Add a KWGT widget</strong><p>Long-press an empty spot on your home screen → <strong>Widgets</strong> → find <strong>KWGT</strong> → drag it onto your home screen. Its editor opens automatically.</p></div></div>
   <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Add the NMS frame as the background</strong><p>Tap <strong>+</strong> → <strong>Image</strong> → <strong>Gallery</strong> → browse to wherever you unzipped this kit → pick <code>nms_widget_frame_wide.png</code> (or the square one for something compact). Drag the corner handles to resize the widget on your home screen.</p></div></div>
   <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Add the clock text</strong><p>Tap <strong>+</strong> → <strong>Text</strong>. Tap the small <strong>fx</strong> formula icon and type <code>$df("HH:mm")$</code> for 24-hour time (or <code>$df("h:mm a")$</code> for 12-hour with AM/PM). Font: import Orbitron per the note above, color <code>#EAF6FF</code>. Center it in the upper-middle of the frame.</p></div></div>
-  <div class="step"><div class="step-num">5</div><div class="step-content"><strong>Add the date text</strong><p>Tap <strong>+</strong> → <strong>Text</strong> again. Formula: <code>$df("EEE MMM d")$</code> — add a galaxy name or any label you like after it, that's just plain text. Font: Orbitron, smaller size, color <code>#F0A500</code>. Place directly under the clock text.</p></div></div>
-  <div class="step"><div class="step-num">6</div><div class="step-content"><strong>Save</strong><p>Tap the checkmark / back arrow. Your widget is done — resize or move it like any other Android widget.</p></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-content"><strong>Add the date text</strong><p>Tap <strong>+</strong> → <strong>Text</strong> again. Formula: <code>$df("EEE MMM d")$</code>, add a galaxy name or any label you like after it, that's just plain text. Font: Orbitron, smaller size, color <code>#F0A500</code>. Place directly under the clock text.</p></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-content"><strong>Save</strong><p>Tap the checkmark / back arrow. Your widget is done, resize or move it like any other Android widget.</p></div></div>
 
   <h3>Using the square frame instead</h3>
   <p>Same steps, just start from <code>nms_widget_frame_square.png</code> in Step 3. It's a better fit
-  for a single stat, a short label, or a battery percentage — one bigger centered text box instead of
+  for a single stat, a short label, or a battery percentage, one bigger centered text box instead of
   a stacked clock+date pair.</p>
 
   <h2>🔁 Adding a simple on/off font toggle</h2>
-  <p>Want an on/off switch to flip between Orbitron and the NMS font — no auto-cycling, no tap
+  <p>Want an on/off switch to flip between Orbitron and the NMS font, no auto-cycling, no tap
   zone, just a real setting?</p>
   <ol>
     <li>Open the widget's <strong>Globals</strong> panel (top toolbar) → add a new Global → type
@@ -114,17 +114,17 @@
   gear icon).</p>
 
   <h2>📤 Exporting your finished widget</h2>
-  <p>Once it looks right, you can save it as a <code>.kwgt</code> file — either to reuse on another
+  <p>Once it looks right, you can save it as a <code>.kwgt</code> file, either to reuse on another
   device, or to share:</p>
   <ol>
     <li>Open the widget in KWGT's editor</li>
     <li>Tap the menu (⋮ or the Kustom icon, depending on your KWGT version) → <strong>Export</strong> (sometimes labelled <strong>Save as preset</strong> or <strong>Share</strong>)</li>
-    <li>Choose <strong>Export as .kwgt file</strong> — this saves a self-contained file with your layout, images and fonts all bundled in</li>
+    <li>Choose <strong>Export as .kwgt file</strong>, this saves a self-contained file with your layout, images and fonts all bundled in</li>
   </ol>
-  <p>That exported file is the real, KWGT-verified format — reliable to share or reinstall anywhere,
+  <p>That exported file is the real, KWGT-verified format, reliable to share or reinstall anywhere,
   unlike a hand-written one.</p>
 
-  <footer>No Man's Sky Theme Pack — fan-made, not affiliated with Hello Games</footer>
+  <footer>No Man's Sky Theme Pack, fan-made, not affiliated with Hello Games</footer>
 </div>
 </body>
 </html>
