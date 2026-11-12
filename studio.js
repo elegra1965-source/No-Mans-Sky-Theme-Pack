@@ -447,7 +447,7 @@
       });
     }
     pad.innerHTML = HEX.split('').map(function (c, k) { return '<button type="button" data-k="' + k + '" title="' + GN[k] + ' (' + c + ')"><img src="' + B + 'glyphs/g-' + c + '.png" alt="' + GN[k] + '"><i>' + c + '</i></button>'; }).join('') +
-      '<button type="button" data-k="back" title="Backspace">⌫</button>';
+      '<button type="button" data-k="back" title="Backspace"><img src="/assets/crystal/ci-backspace.webp?v=20261112" alt="Backspace" width="20" height="20" style="vertical-align:middle"></button>';
     function bgTile(b, dup) {
       var look = b[0] === 'stars' ? ' class="st-stars"' : b[0] === 'own' ? ' style="background-image:url(' + OWN + ')"' : ' style="background-image:url(' + B + 'bg-' + b[0] + '-thumb.jpg)"';
       return '<button type="button" data-b="' + b[0] + '" title="' + b[1] + '"' + (dup ? ' aria-hidden="true" tabindex="-1"' : '') + look + '><span>' + b[1] + '</span></button>';

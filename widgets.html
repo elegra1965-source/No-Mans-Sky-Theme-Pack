@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>/* the old *.netlify.app address is retired: one family domain so the Traveller ID cookie reaches every app */if(/\.netlify\.app$/.test(location.hostname))location.replace("https://theme.nomansskyhub.app"+location.pathname+location.search+location.hash);</script>
 <script src="/lang.js?v=2"></script>
-<script src="/nms-update.js?v=4" defer></script>
+<script src="/nms-update.js?v=20261112" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="wmini.css?v=20261108">
 <script src="wmini.js?v=20261108"></script>
@@ -261,7 +261,7 @@
     app.innerHTML = '<div class="card wm"><div class="kick">Planet of the day</div><div class="mini pg" style="aspect-ratio:4/3"><div id="pp"></div></div>' +
       '<div class="qwrap open" id="pq"><button class="qbar" id="pqb" type="button" aria-expanded="true"><span class="ql">QUOTE OF THE DAY</span><span class="qt" id="pqt"></span><i class="chev"></i></button></div>' +
       '<div class="drawer open" id="pd" style="margin-top:8px"></div><div class="muted" id="msg" style="margin-top:10px"></div>' +
-      '<button class="btn" id="pm" type="button">Match my weather</button><button class="btn gold" id="pr" type="button" style="margin-left:6px">↻ Refresh scan</button>' + foot() + '</div>';
+      '<button class="btn" id="pm" type="button">Match my weather</button><button class="btn gold" id="pr" type="button" style="margin-left:6px"><img src="/assets/crystal/ci-refresh.webp?v=20261112" alt="Refresh" width="18" height="18" style="vertical-align:middle"> Refresh scan</button>' + foot() + '</div>';
     var st3 = document.createElement('style'); st3.textContent = '.wm .mini.pg{margin:12px auto 8px;max-width:440px;width:100%}'; document.head.appendChild(st3);
     var S = NMSW.potd(document.getElementById('pp'), { onPlanet: function(p){ document.getElementById('pd').innerHTML = NMSW.infoHTML(p); } });
     NMSW.potdRun(S, false);
@@ -306,7 +306,7 @@
       '<details class="edit" id="ed"><summary class="muted">Edit</summary>' +
       '<label class="lb">Portal glyphs</label>' +
       '<div class="pad" id="pad">' + '0123456789ABCDEF'.split('').map(function(c){ return '<button type="button" data-c="' + c + '"><img src="assets/studio/glyphs/g-' + c + '.png" alt="' + c + '"><i>' + c + '</i></button>'; }).join('') +
-      '<button type="button" data-c="back" class="wide">⌫</button><button type="button" data-c="clear" class="wide">Clear</button></div>' +
+      '<button type="button" data-c="back" class="wide"><img src="/assets/crystal/ci-backspace.webp?v=20261112" alt="Backspace" width="20" height="20" style="vertical-align:middle"></button><button type="button" data-c="clear" class="wide">Clear</button></div>' +
       '<input id="in" maxlength="12" placeholder="12-digit portal address (hex)" autocomplete="off">' +
       '<label class="lb">Galaxy</label><select id="ig">' + GAL.map(function(g, i){ return '<option value="' + i + '">' + (i + 1) + ' · ' + esc(g) + '</option>'; }).join('') + '</select>' +
       '<label class="lb">Base name</label><input id="it" maxlength="24" placeholder="e.g. Home Base" style="text-transform:none;letter-spacing:.04em">' +
