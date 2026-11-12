@@ -41,6 +41,11 @@ The rest of the page follows the same rule: no emoji. Tabs are plain text, the d
 <img src="screenshots/13-hero-phone.jpg" alt="The top of the page on a phone: the title, the Make it yours and Tour buttons, Install / Download and See it live" width="390">
 <img src="screenshots/14-more-tools-phone.jpg" alt="The More tools list on a phone: the Hub, ATLAS, Weather, Galactic Map and Alphabet Translator, each with its framed app icon" width="390">
 
+- **New crystal icons.** Every icon on the Theme Pack has been redrawn in one faceted crystal style, so all six sites match, and every picture has a text description for screen readers. The icons are toned down a little so they don't shout over the content.
+
+  <img src="screenshots/icons-crystal.jpg" alt="The new crystal icons on the Theme Pack: buttons and menus drawn as faceted cyan crystals with amber accents" width="300">
+
+
 ## Make it yours (new)
 
 <details>
