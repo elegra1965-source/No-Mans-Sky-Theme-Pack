@@ -1,127 +1,140 @@
 {
- "version": "v44",
- "date": "2026-11-27",
- "site": "NMS THEME PACK",
- "lastToday": false,
- "items": [
-  {
-   "tag": "new",
-   "text": {
-    "en": "A new features list with crystal icons. Tap the FONTS glyphs to decode them",
-    "es": "Nueva lista de funciones con iconos de cristal. Toca los glifos de FONTS para descifrarlos",
-    "de": "Neue Funktionsliste mit Kristall-Icons. Tippe auf die FONTS-Glyphen, um sie zu entschlüsseln",
-    "nl": "Nieuwe functielijst met kristaliconen. Tik op de FONTS-glyphs om ze te ontcijferen",
-    "pl": "Nowa lista funkcji z kryształowymi ikonami. Dotknij glifów FONTS, aby je odszyfrować",
-    "fr": "Nouvelle liste des fonctions avec des icônes de cristal. Touche les glyphes FONTS pour les déchiffrer",
-    "pt-BR": "Nova lista de recursos com ícones de cristal. Toque nos glifos de FONTS para decifrá-los",
-    "it": "Nuovo elenco delle funzioni con icone di cristallo. Tocca i glifi di FONTS per decifrarli"
-   }
-  },
-  {
-   "tag": "improved",
-   "text": {
-    "en": "No more emoji: crystal icons and each tool's own app icon across the page, and a flat Make it yours button",
-    "es": "Adiós a los emojis: iconos de cristal y el icono propio de cada herramienta en toda la página, y un botón Hazlo tuyo plano",
-    "de": "Keine Emojis mehr: Kristall-Icons und das eigene App-Icon jedes Tools auf der ganzen Seite, dazu ein flacher Button „Mach es zu deinem“",
-    "nl": "Geen emoji meer: kristaliconen en het eigen app-icoon van elke tool op de hele pagina, en een vlakke knop Maak het van jou",
-    "pl": "Koniec z emoji: kryształowe ikony i własna ikona aplikacji każdego narzędzia na całej stronie oraz płaski przycisk Spersonalizuj",
-    "fr": "Fini les emojis : icônes de cristal et icône propre à chaque outil sur toute la page, et un bouton Personnalise-le plat",
-    "pt-BR": "Chega de emojis: ícones de cristal e o ícone próprio de cada ferramenta em toda a página, e um botão Deixe com a sua cara plano",
-    "it": "Via gli emoji: icone di cristallo e l'icona propria di ogni strumento in tutta la pagina, e un pulsante Rendilo tuo piatto"
-   }
-  },
-  {
-   "tag": "new",
-   "text": {
-    "en": "S Pen Icons for Samsung phones: floating icons and pointers, with a 4 step set-up",
-    "es": "Iconos S Pen para móviles Samsung: iconos flotantes y punteros, con una configuración en 4 pasos",
-    "de": "S-Pen-Icons für Samsung-Handys: schwebende Icons und Zeiger, mit einer Einrichtung in 4 Schritten",
-    "nl": "S Pen-iconen voor Samsung-telefoons: zwevende iconen en aanwijzers, met een installatie in 4 stappen",
-    "pl": "Ikony S Pen dla telefonów Samsung: pływające ikony i wskaźniki, z konfiguracją w 4 krokach",
-    "fr": "Icônes S Pen pour les téléphones Samsung : icônes flottantes et pointeurs, avec une installation en 4 étapes",
-    "pt-BR": "Ícones S Pen para celulares Samsung: ícones flutuantes e ponteiros, com configuração em 4 passos",
-    "it": "Icone S Pen per i telefoni Samsung: icone flottanti e puntatori, con una configurazione in 4 passaggi"
-   }
-  },
-  {
-   "tag": "new",
-   "text": {
-    "en": "Photo Mode Studio: Exosuit HUD Icons and a Game style HUD to dress your screenshots",
-    "es": "Estudio del Modo Foto: iconos HUD del exotraje y un HUD estilo juego para vestir tus capturas",
-    "de": "Fotomodus-Studio: Exosuit-HUD-Icons und ein HUD im Spielstil für deine Screenshots",
-    "nl": "Fotomodus-studio: Exosuit-HUD-iconen en een HUD in spelstijl om je screenshots op te maken",
-    "pl": "Studio trybu fotograficznego: ikony HUD egzokombinezonu i HUD w stylu gry dla twoich zrzutów ekranu",
-    "fr": "Studio du mode photo : icônes HUD de l'exosuit et HUD style jeu pour habiller tes captures",
-    "pt-BR": "Estúdio do Modo Foto: ícones de HUD do exotraje e um HUD no estilo do jogo para vestir suas capturas",
-    "it": "Studio della Modalità foto: icone HUD dell'Exosuit e un HUD in stile gioco per rivestire i tuoi screenshot"
-   }
-  },
-  {
-   "tag": "new",
-   "text": {
-    "en": "Widgets are now live previews: Weather Scan, Home Planet and a new Planet of the Day (matched to your weather, with a quote of the day)",
-    "es": "Los widgets ahora son vistas en vivo: Escaneo del clima, Planeta natal y un nuevo Planeta del día (según tu clima, con cita del día)",
-    "de": "Widgets sind jetzt Live-Vorschauen: Wetter-Scan, Heimatplanet und neu: Planet des Tages (passend zu deinem Wetter, mit Zitat des Tages)",
-    "nl": "Widgets zijn nu live voorbeelden: Weerscan, Thuisplaneet en nieuw: Planeet van de dag (past bij je weer, met citaat van de dag)",
-    "pl": "Widżety to teraz podglądy na żywo: Skan pogody, Planeta domowa i nowość: Planeta dnia (dopasowana do pogody, z cytatem dnia)",
-    "fr": "Les widgets sont désormais des aperçus en direct : Scan météo, Planète d'origine et nouveau : Planète du jour (selon ta météo, avec citation du jour)",
-    "pt-BR": "Os widgets agora são prévias ao vivo: Varredura do clima, Planeta natal e novo Planeta do dia (conforme seu clima, com citação do dia)",
-    "it": "I widget ora sono anteprime dal vivo: Scansione meteo, Pianeta natale e il nuovo Pianeta del giorno (in base al tuo meteo, con citazione del giorno)"
-   },
-   "url": "https://theme.nomansskyhub.app/widgets.html"
-  },
-  {
-   "tag": "new",
-   "text": {
-    "en": "NMS Clock: a portal-ring face that lights the glyphs for the hour and minute, or a digital Traveller HUD with a world clock",
-    "es": "Reloj NMS: una esfera de portal que ilumina los glifos de la hora y el minuto, o un HUD digital con hora mundial",
-    "de": "NMS-Uhr: ein Portalring, der die Glyphen für Stunde und Minute aufleuchten lässt, oder ein digitales Reisenden-HUD mit Weltzeit",
-    "nl": "NMS-klok: een portaalring die de glyphs voor uur en minuut oplicht, of een digitale reizigers-HUD met wereldklok",
-    "pl": "Zegar NMS: tarcza w kształcie portalu podświetlająca glify godziny i minuty lub cyfrowy HUD z czasem światowym",
-    "fr": "Horloge NMS : un cadran-portail qui allume les glyphes de l'heure et des minutes, ou un HUD numérique avec heure mondiale",
-    "pt-BR": "Relógio NMS: um mostrador em anel de portal que acende os glifos da hora e do minuto, ou um HUD digital com hora mundial",
-    "it": "Orologio NMS: un quadrante a portale che accende i glifi di ore e minuti, oppure un HUD digitale con ora mondiale"
-   }
-  },
-  {
-   "tag": "improved",
-   "text": {
-    "en": "Exosuit Status now shows your connection and a battery history for the visit",
-    "es": "Estado del exotraje ahora muestra tu conexión y el historial de batería de la visita",
-    "de": "Exoanzug-Status zeigt jetzt deine Verbindung und den Akkuverlauf des Besuchs",
-    "nl": "Exopak-status toont nu je verbinding en het accuverloop van het bezoek",
-    "pl": "Status egzoskafandra pokazuje teraz połączenie i historię baterii z wizyty",
-    "fr": "L'état de l'exo-combinaison affiche maintenant ta connexion et l'historique de la batterie",
-    "pt-BR": "O status do exotraje agora mostra sua conexão e o histórico da bateria da visita",
-    "it": "Lo stato dell'esotuta ora mostra la connessione e la cronologia della batteria della visita"
-   }
-  },
-  {
-   "tag": "new",
-   "text": {
-    "en": "Medals on the Galactic Map: chart new systems for daily, weekly and monthly streak medals",
-    "es": "Medallas en el Mapa Galáctico: cartografía sistemas nuevos y gana medallas de racha diarias, semanales y mensuales",
-    "de": "Medaillen auf der Galaktischen Karte: Kartiere neue Systeme für tägliche, wöchentliche und monatliche Serienmedaillen",
-    "nl": "Medailles op de Galactische Kaart: breng nieuwe systemen in kaart voor dag-, week- en maandreeksmedailles",
-    "pl": "Medale na Mapie Galaktycznej: oznaczaj nowe układy i zdobywaj medale za serie dzienne, tygodniowe i miesięczne",
-    "fr": "Des médailles sur la Carte galactique : cartographie de nouveaux systèmes pour des médailles de série quotidiennes, hebdomadaires et mensuelles",
-    "pt-BR": "Medalhas no Mapa Galáctico: mapeie sistemas novos e ganhe medalhas de sequência diárias, semanais e mensais",
-    "it": "Medaglie sulla Mappa galattica: mappa nuovi sistemi per medaglie di serie giornaliere, settimanali e mensili"
-   },
-   "url": "https://map.nomansskyhub.app/"
-  },
-  {
-   "tag": "improved",
-   "text": {
-    "en": "New FAQ answers: Samsung phones, blurry icons, icons resetting after a restart, Windows icon cache",
-    "es": "Nuevas respuestas en las preguntas frecuentes: móviles Samsung, iconos borrosos, iconos que vuelven a su estado tras reiniciar y la caché de iconos de Windows",
-    "de": "Neue FAQ-Antworten: Samsung-Handys, unscharfe Symbole, Symbole nach Neustart zurückgesetzt, Windows-Symbolcache",
-    "fr": "Nouvelles réponses dans la FAQ : téléphones Samsung, icônes floues, icônes réinitialisées après un redémarrage, cache d'icônes Windows",
-    "it": "Nuove risposte nelle FAQ: telefoni Samsung, icone sfocate, icone ripristinate dopo il riavvio, cache delle icone di Windows",
-    "nl": "Nieuwe FAQ-antwoorden: Samsung-telefoons, wazige pictogrammen, pictogrammen die na een herstart terugspringen, Windows-pictogramcache",
-    "pl": "Nowe odpowiedzi w FAQ: telefony Samsung, rozmyte ikony, ikony wracające po restarcie, pamięć podręczna ikon Windows",
-    "pt-BR": "Novas respostas no FAQ: celulares Samsung, ícones borrados, ícones que voltam ao normal após reiniciar, cache de ícones do Windows"
-   }
-  }
- ]
+  "version": "v44",
+  "date": "2026-11-27",
+  "site": "NMS THEME PACK",
+  "lastToday": false,
+  "items": [
+    {
+      "tag": "new",
+      "text": {
+        "en": "A new features list with crystal icons. Tap the FONTS glyphs to decode them",
+        "es": "Nueva lista de funciones con iconos de cristal. Toca los glifos de FONTS para descifrarlos",
+        "de": "Neue Funktionsliste mit Kristall-Icons. Tippe auf die FONTS-Glyphen, um sie zu entschlüsseln",
+        "nl": "Nieuwe functielijst met kristaliconen. Tik op de FONTS-glyphs om ze te ontcijferen",
+        "pl": "Nowa lista funkcji z kryształowymi ikonami. Dotknij glifów FONTS, aby je odszyfrować",
+        "fr": "Nouvelle liste des fonctions avec des icônes de cristal. Touche les glyphes FONTS pour les déchiffrer",
+        "pt-BR": "Nova lista de recursos com ícones de cristal. Toque nos glifos de FONTS para decifrá-los",
+        "it": "Nuovo elenco delle funzioni con icone di cristallo. Tocca i glifi di FONTS per decifrarli"
+      }
+    },
+    {
+      "tag": "improved",
+      "text": {
+        "en": "No more emoji: crystal icons and each tool's own app icon across the page, and a flat Make it yours button",
+        "es": "Adiós a los emojis: iconos de cristal y el icono propio de cada herramienta en toda la página, y un botón Hazlo tuyo plano",
+        "de": "Keine Emojis mehr: Kristall-Icons und das eigene App-Icon jedes Tools auf der ganzen Seite, dazu ein flacher Button „Mach es zu deinem“",
+        "nl": "Geen emoji meer: kristaliconen en het eigen app-icoon van elke tool op de hele pagina, en een vlakke knop Maak het van jou",
+        "pl": "Koniec z emoji: kryształowe ikony i własna ikona aplikacji każdego narzędzia na całej stronie oraz płaski przycisk Spersonalizuj",
+        "fr": "Fini les emojis : icônes de cristal et icône propre à chaque outil sur toute la page, et un bouton Personnalise-le plat",
+        "pt-BR": "Chega de emojis: ícones de cristal e o ícone próprio de cada ferramenta em toda a página, e um botão Deixe com a sua cara plano",
+        "it": "Via gli emoji: icone di cristallo e l'icona propria di ogni strumento in tutta la pagina, e un pulsante Rendilo tuo piatto"
+      }
+    },
+    {
+      "tag": "new",
+      "text": {
+        "en": "S Pen Icons for Samsung phones: floating icons and pointers, with a 4 step set-up",
+        "es": "Iconos S Pen para móviles Samsung: iconos flotantes y punteros, con una configuración en 4 pasos",
+        "de": "S-Pen-Icons für Samsung-Handys: schwebende Icons und Zeiger, mit einer Einrichtung in 4 Schritten",
+        "nl": "S Pen-iconen voor Samsung-telefoons: zwevende iconen en aanwijzers, met een installatie in 4 stappen",
+        "pl": "Ikony S Pen dla telefonów Samsung: pływające ikony i wskaźniki, z konfiguracją w 4 krokach",
+        "fr": "Icônes S Pen pour les téléphones Samsung : icônes flottantes et pointeurs, avec une installation en 4 étapes",
+        "pt-BR": "Ícones S Pen para celulares Samsung: ícones flutuantes e ponteiros, com configuração em 4 passos",
+        "it": "Icone S Pen per i telefoni Samsung: icone flottanti e puntatori, con una configurazione in 4 passaggi"
+      }
+    },
+    {
+      "tag": "new",
+      "text": {
+        "en": "Photo Mode Studio: Exosuit HUD Icons and a Game style HUD to dress your screenshots",
+        "es": "Estudio del Modo Foto: iconos HUD del exotraje y un HUD estilo juego para vestir tus capturas",
+        "de": "Fotomodus-Studio: Exosuit-HUD-Icons und ein HUD im Spielstil für deine Screenshots",
+        "nl": "Fotomodus-studio: Exosuit-HUD-iconen en een HUD in spelstijl om je screenshots op te maken",
+        "pl": "Studio trybu fotograficznego: ikony HUD egzokombinezonu i HUD w stylu gry dla twoich zrzutów ekranu",
+        "fr": "Studio du mode photo : icônes HUD de l'exosuit et HUD style jeu pour habiller tes captures",
+        "pt-BR": "Estúdio do Modo Foto: ícones de HUD do exotraje e um HUD no estilo do jogo para vestir suas capturas",
+        "it": "Studio della Modalità foto: icone HUD dell'Exosuit e un HUD in stile gioco per rivestire i tuoi screenshot"
+      }
+    },
+    {
+      "tag": "new",
+      "text": {
+        "en": "Widgets are now live previews: Weather Scan, Home Planet and a new Planet of the Day (matched to your weather, with a quote of the day)",
+        "es": "Los widgets ahora son vistas en vivo: Escaneo del clima, Planeta natal y un nuevo Planeta del día (según tu clima, con cita del día)",
+        "de": "Widgets sind jetzt Live-Vorschauen: Wetter-Scan, Heimatplanet und neu: Planet des Tages (passend zu deinem Wetter, mit Zitat des Tages)",
+        "nl": "Widgets zijn nu live voorbeelden: Weerscan, Thuisplaneet en nieuw: Planeet van de dag (past bij je weer, met citaat van de dag)",
+        "pl": "Widżety to teraz podglądy na żywo: Skan pogody, Planeta domowa i nowość: Planeta dnia (dopasowana do pogody, z cytatem dnia)",
+        "fr": "Les widgets sont désormais des aperçus en direct : Scan météo, Planète d'origine et nouveau : Planète du jour (selon ta météo, avec citation du jour)",
+        "pt-BR": "Os widgets agora são prévias ao vivo: Varredura do clima, Planeta natal e novo Planeta do dia (conforme seu clima, com citação do dia)",
+        "it": "I widget ora sono anteprime dal vivo: Scansione meteo, Pianeta natale e il nuovo Pianeta del giorno (in base al tuo meteo, con citazione del giorno)"
+      },
+      "url": "https://theme.nomansskyhub.app/widgets.html"
+    },
+    {
+      "tag": "new",
+      "text": {
+        "en": "NMS Clock: a portal-ring face that lights the glyphs for the hour and minute, or a digital Traveller HUD with a world clock",
+        "es": "Reloj NMS: una esfera de portal que ilumina los glifos de la hora y el minuto, o un HUD digital con hora mundial",
+        "de": "NMS-Uhr: ein Portalring, der die Glyphen für Stunde und Minute aufleuchten lässt, oder ein digitales Reisenden-HUD mit Weltzeit",
+        "nl": "NMS-klok: een portaalring die de glyphs voor uur en minuut oplicht, of een digitale reizigers-HUD met wereldklok",
+        "pl": "Zegar NMS: tarcza w kształcie portalu podświetlająca glify godziny i minuty lub cyfrowy HUD z czasem światowym",
+        "fr": "Horloge NMS : un cadran-portail qui allume les glyphes de l'heure et des minutes, ou un HUD numérique avec heure mondiale",
+        "pt-BR": "Relógio NMS: um mostrador em anel de portal que acende os glifos da hora e do minuto, ou um HUD digital com hora mundial",
+        "it": "Orologio NMS: un quadrante a portale che accende i glifi di ore e minuti, oppure un HUD digitale con ora mondiale"
+      }
+    },
+    {
+      "tag": "improved",
+      "text": {
+        "en": "Exosuit Status now shows your connection and a battery history for the visit",
+        "es": "Estado del exotraje ahora muestra tu conexión y el historial de batería de la visita",
+        "de": "Exoanzug-Status zeigt jetzt deine Verbindung und den Akkuverlauf des Besuchs",
+        "nl": "Exopak-status toont nu je verbinding en het accuverloop van het bezoek",
+        "pl": "Status egzoskafandra pokazuje teraz połączenie i historię baterii z wizyty",
+        "fr": "L'état de l'exo-combinaison affiche maintenant ta connexion et l'historique de la batterie",
+        "pt-BR": "O status do exotraje agora mostra sua conexão e o histórico da bateria da visita",
+        "it": "Lo stato dell'esotuta ora mostra la connessione e la cronologia della batteria della visita"
+      }
+    },
+    {
+      "tag": "new",
+      "text": {
+        "en": "Medals on the Galactic Map: chart new systems for daily, weekly and monthly streak medals",
+        "es": "Medallas en el Mapa Galáctico: cartografía sistemas nuevos y gana medallas de racha diarias, semanales y mensuales",
+        "de": "Medaillen auf der Galaktischen Karte: Kartiere neue Systeme für tägliche, wöchentliche und monatliche Serienmedaillen",
+        "nl": "Medailles op de Galactische Kaart: breng nieuwe systemen in kaart voor dag-, week- en maandreeksmedailles",
+        "pl": "Medale na Mapie Galaktycznej: oznaczaj nowe układy i zdobywaj medale za serie dzienne, tygodniowe i miesięczne",
+        "fr": "Des médailles sur la Carte galactique : cartographie de nouveaux systèmes pour des médailles de série quotidiennes, hebdomadaires et mensuelles",
+        "pt-BR": "Medalhas no Mapa Galáctico: mapeie sistemas novos e ganhe medalhas de sequência diárias, semanais e mensais",
+        "it": "Medaglie sulla Mappa galattica: mappa nuovi sistemi per medaglie di serie giornaliere, settimanali e mensili"
+      },
+      "url": "https://map.nomansskyhub.app/"
+    },
+    {
+      "tag": "improved",
+      "text": {
+        "en": "New FAQ answers: Samsung phones, blurry icons, icons resetting after a restart, Windows icon cache",
+        "es": "Nuevas respuestas en las preguntas frecuentes: móviles Samsung, iconos borrosos, iconos que vuelven a su estado tras reiniciar y la caché de iconos de Windows",
+        "de": "Neue FAQ-Antworten: Samsung-Handys, unscharfe Symbole, Symbole nach Neustart zurückgesetzt, Windows-Symbolcache",
+        "fr": "Nouvelles réponses dans la FAQ : téléphones Samsung, icônes floues, icônes réinitialisées après un redémarrage, cache d'icônes Windows",
+        "it": "Nuove risposte nelle FAQ: telefoni Samsung, icone sfocate, icone ripristinate dopo il riavvio, cache delle icone di Windows",
+        "nl": "Nieuwe FAQ-antwoorden: Samsung-telefoons, wazige pictogrammen, pictogrammen die na een herstart terugspringen, Windows-pictogramcache",
+        "pl": "Nowe odpowiedzi w FAQ: telefony Samsung, rozmyte ikony, ikony wracające po restarcie, pamięć podręczna ikon Windows",
+        "pt-BR": "Novas respostas no FAQ: celulares Samsung, ícones borrados, ícones que voltam ao normal após reiniciar, cache de ícones do Windows"
+      }
+    },
+    {
+      "tag": "improved",
+      "text": {
+        "en": "All icons redesigned: a new crystal style across buttons, menus and pop-ups, with a text description on every picture for screen readers",
+        "es": "Todos los iconos rediseñados: un nuevo estilo de cristal en botones, menús y ventanas, con una descripción de texto en cada imagen para lectores de pantalla",
+        "de": "Alle Icons neu gestaltet: ein neuer Kristallstil für Buttons, Menüs und Pop-ups, mit Textbeschreibung für jedes Bild für Screenreader",
+        "nl": "Alle iconen opnieuw ontworpen: een nieuwe kristalstijl voor knoppen, menu's en pop-ups, met een tekstbeschrijving bij elke afbeelding voor schermlezers",
+        "pl": "Wszystkie ikony przeprojektowane: nowy kryształowy styl przycisków, menu i okien, z opisem tekstowym przy każdym obrazku dla czytników ekranu",
+        "fr": "Toutes les icônes repensées : un nouveau style cristal pour les boutons, menus et fenêtres, avec une description textuelle sur chaque image pour les lecteurs d'écran",
+        "pt-BR": "Todos os ícones redesenhados: um novo estilo de cristal em botões, menus e janelas, com descrição em texto em cada imagem para leitores de tela",
+        "it": "Tutte le icone ridisegnate: un nuovo stile cristallo per pulsanti, menu e finestre, con una descrizione testuale su ogni immagine per gli screen reader"
+      }
+    }
+  ]
 }
