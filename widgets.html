@@ -415,7 +415,7 @@
       var econ = pickF(as && (as.economyType || as.economy), mp && mp.econName, hv && hv.economy, gen.econ), tier = pickF(as && as.wealth, mp && mp.econDesc, hv && hv.economyTier, gen.wealth);
       var outlaw = mp ? !!mp.outlaw : (!hv && gen.outlaw);
       $('facts').innerHTML =
-        (pName ? '<div class="cell wide' + (ab && ab.discS ? ' hasdisc' : '') + '"><i>PLANET</i><b>' + esc(pName) + '</b>' + (pSub ? '<span>' + esc(pSub) + '</span>' : '') + (ab && ab.discS ? '<img class="pdisc" src="' + esc(ab.discS) + '" alt="">' : '') + '</div>' : '') +
+        (pName ? '<div class="cell wide' + (ab && ab.discS ? ' hasdisc' : '') + '"><i>PLANET</i><b>' + esc(pName) + '</b>' + (pSub ? '<span>' + esc(pSub) + '</span>' : '') + (ab && ab.discS ? '<img class="pdisc" src="' + esc(ab.discS) + '" alt="Planet">' : '') + '</div>' : '') +
         cell('STAR', cap(star)) + cell('RACE', pickF(as && as.race, mp && mp.race, hv && hv.lifeform, gen.race)) +
         cell('ECONOMY', econ, tier) + cell('CONFLICT', pickF(as && as.conflict, mp && mp.conflict, hv && hv.conflict, gen.conflict), outlaw ? 'Outlaw system' : '') +
         (hp && hp.sentinels ? cell('SENTINELS', hp.sentinels) : '') + (hp && hp.resources ? cell('RESOURCES', hp.resources) : '');

@@ -17,7 +17,7 @@
     return DN[d.getDay()] + ' ' + d.getDate() + ' ' + MN[d.getMonth()];
   }
   function glyph(c) { return BASE + 'assets/studio/glyphs/g-' + String(c).toUpperCase() + '.png'; }
-  function glyphRow(h) { return String(h).split('').map(function (c) { return '<img src="' + glyph(c) + '" alt="" loading="lazy">'; }).join(''); }
+  function glyphRow(h) { return String(h).split('').map(function (c) { return '<img src="' + glyph(c) + '" alt="Portal glyph ' + c + '" loading="lazy">'; }).join(''); }
   function calm() { return document.body.classList.contains('calm') || (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches); }
   function all(root, s) { return [].slice.call((root || document).querySelectorAll(s)); }
 

@@ -554,7 +554,7 @@
         st.world = Math.floor(Date.now() / 86400000) % worlds.length;
         var cards = function () {
           $('stWorlds').innerHTML = worlds.map(function (w, i) {
-            return '<button type="button" data-i="' + i + '" style="background-image:url(' + WX + '/hd/card-' + w.key + '.jpg)">' + (w.discS ? '<img class="st-wdisc" src="' + esc(w.discS) + '" alt="">' : '') + '<b>' + esc(w.name) + '</b><span>' + esc(w.biome) + '</span></button>';
+            return '<button type="button" data-i="' + i + '" style="background-image:url(' + WX + '/hd/card-' + w.key + '.jpg)">' + (w.discS ? '<img class="st-wdisc" src="' + esc(w.discS) + '" alt="Planet">' : '') + '<b>' + esc(w.name) + '</b><span>' + esc(w.biome) + '</span></button>';
           }).join('');
           $('stWorlds').querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('on', i === st.world); });
         };
