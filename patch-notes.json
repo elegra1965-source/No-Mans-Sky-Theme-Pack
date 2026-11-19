@@ -18,6 +18,19 @@
       }
     },
     {
+      "tag": "new",
+      "text": {
+        "en": "S Pen sounds: a sound for pulling the pen out and one for putting it back, with a how-to picture",
+        "es": "Sonidos del S Pen: uno al sacar el lápiz y otro al guardarlo, con una imagen de cómo hacerlo",
+        "de": "S-Pen-Sounds: einer beim Herausziehen des Stifts und einer beim Zurückstecken, mit Anleitungsbild",
+        "nl": "S Pen-geluiden: een voor de pen eruit en een voor de pen erin, met een uitlegfoto",
+        "pl": "Dźwięki S Pen: jeden przy wyjmowaniu rysika i jeden przy wkładaniu, ze zdjęciem instrukcji",
+        "fr": "Sons du S Pen : un quand tu sors le stylet et un quand tu le ranges, avec une image explicative",
+        "pt-BR": "Sons da S Pen: um ao tirar a caneta e outro ao guardá-la, com uma imagem de como fazer",
+        "it": "Suoni della S Pen: uno quando estrai la penna e uno quando la rimetti, con un'immagine di guida"
+      }
+    },
+    {
       "tag": "improved",
       "text": {
         "en": "No more emoji: crystal icons and each tool's own app icon across the page, and a flat Make it yours button",

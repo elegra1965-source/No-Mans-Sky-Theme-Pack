@@ -48,5 +48,6 @@ function close(){lb.className='sp-lb';vid.pause();tab('p')}
 q('spTp').onclick=function(){tab('p')};q('spTv').onclick=function(){tab('v')};q('spX').onclick=close;
 lb.addEventListener('click',function(e){if(e.target===lb)close()});
 document.addEventListener('keydown',function(e){if(e.key=='Escape')close()});
+var au=null,cur=null;document.querySelectorAll('#spen .sp-sndp').forEach(function(b){b.addEventListener('click',function(){try{if(au)au.pause();if(cur===b){b.classList.remove('on');cur=null;return}if(cur)cur.classList.remove('on');au=new Audio(b.getAttribute('data-s'));cur=b;b.classList.add('on');au.onended=function(){b.classList.remove('on');cur=null};au.play()}catch(e){}})});
 setBg();paint();sel(0);
 })();
