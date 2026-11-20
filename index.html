@@ -395,13 +395,13 @@
     font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:2px;text-decoration:none;
     border:1px solid;transition:.22s;font-weight:700;}
   .share-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.4);}
-  .share-btn.reddit{color:#ff4500;border-color:rgba(255,69,0,.4);background:rgba(255,69,0,.08);}
-  .share-btn.reddit:hover{background:rgba(255,69,0,.18);border-color:#ff4500;}
-  .share-btn.twitter{color:#1d9bf0;border-color:rgba(29,155,240,.4);background:rgba(29,155,240,.08);}
-  .share-btn.twitter:hover{background:rgba(29,155,240,.18);border-color:#1d9bf0;}
+  .share-btn.reddit{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.08);}
+  .share-btn.reddit:hover{background:rgba(0,229,255,.18);border-color:var(--cyan);}
+  .share-btn.twitter{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.08);}
+  .share-btn.twitter:hover{background:rgba(0,229,255,.18);border-color:var(--cyan);}
   .share-btn.copy{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.08);}
-  .share-btn.discord{color:#8c9eff;border-color:rgba(88,101,242,.5);background:rgba(88,101,242,.1);}
-  .share-btn.discord:hover{background:rgba(88,101,242,.22);border-color:#5865f2;}
+  .share-btn.discord{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.08);}
+  .share-btn.discord:hover{background:rgba(0,229,255,.18);border-color:var(--cyan);}
   .share-btn.copy:hover{background:rgba(0,229,255,.18);border-color:var(--cyan);}
   .dl-count{text-align:center;margin-top:18px;font-size:.7rem;letter-spacing:2px;color:var(--text-dim);}
   .dl-count span{color:var(--gold);font-weight:700;}
@@ -1530,15 +1530,15 @@
     <p class="sec-desc" style="max-width:520px;margin:0 auto 24px;">If the pack works for you, sharing it on Reddit or social media is the best way to help other travellers find it.</p>
     <div class="share-grid">
       <a class="share-btn reddit" href="https://www.reddit.com/r/NoMansSkyTheGame/submit?type=link&url=https%3A%2F%2Ftheme.nomansskyhub.app&title=Free+No+Man%27s+Sky+Theme+Pack+%E2%80%94+79+icons%2C+wallpapers%2C+charging+animations+%26+NMS+font" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 5.522 4.477 10 10 10s10-4.478 10-10zm-2.647 0c0 .966-.784 1.75-1.75 1.75-.46 0-.878-.178-1.19-.469-1.19.858-2.826 1.414-4.644 1.472l.789-3.71 2.572.547c.036.52.467.932.998.932.556 0 1.006-.45 1.006-1.006 0-.556-.45-1.006-1.006-1.006-.39 0-.728.223-.898.549l-2.862-.61c-.066-.014-.135.022-.158.087L9.28 12.01c-1.876-.03-3.567-.587-4.78-1.465a1.746 1.746 0 0 0-1.193.469A1.754 1.754 0 0 0 1.557 10c0-.664.369-1.241.914-1.54-.022-.148-.033-.3-.033-.455 0-2.666 3.134-4.829 7-4.829 3.864 0 7 2.163 7 4.829 0 .155-.012.307-.033.455.544.299.908.876.908 1.54zm-9.75.506a1.006 1.006 0 1 0 2.012 0 1.006 1.006 0 0 0-2.012 0zm5.475 2.66c-.658.658-1.92.71-2.078.71-.158 0-1.42-.056-2.078-.71a.26.26 0 0 0-.369.369c.835.835 2.406.9 2.447.9.04 0 1.612-.065 2.447-.9a.26.26 0 0 0-.369-.369zm-.48-1.654a1.006 1.006 0 1 0 2.012 0 1.006 1.006 0 0 0-2.012 0z"/></svg>
+        <img class="ci" src="assets/crystal/ci-reddit.webp?v=20261120" alt="Reddit" width="20" height="20">
         Share on Reddit
       </a>
       <a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=Free+No+Man%27s+Sky+Theme+Pack+%E2%80%94+79+No+Man%27s+Sky+icons%2C+wallpapers%2C+charging+animations+%26+custom+NMS+font.+Works+on+Android%2C+iPhone%2C+Windows%2C+Mac+%26+Linux.&url=https%3A%2F%2Ftheme.nomansskyhub.app" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.243 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <img class="ci" src="assets/crystal/ci-x.webp?v=20261120" alt="X" width="20" height="20">
         Share on X
       </a>
       <button class="share-btn discord" id="discordShareBtn" type="button" onclick="shareDiscord()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.6 19.6 0 0 0 15.4 3l-.6 1.3a18.2 18.2 0 0 0-5.6 0L8.6 3a19.6 19.6 0 0 0-4.9 1.4C.6 9 -.3 13.5.1 18a19.8 19.8 0 0 0 6 3l1.3-2.1a12.8 12.8 0 0 1-2-1l.5-.4a14.1 14.1 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.7 19.7 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.6zM8.3 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4zm7.4 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4z"/></svg>
+        <img class="ci" src="assets/crystal/ci-discord.webp?v=20261120" alt="Discord" width="20" height="20">
         Discord
       </button>
     </div>
