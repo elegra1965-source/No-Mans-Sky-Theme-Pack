@@ -242,6 +242,7 @@
   .fxbtn{background:none;border:1px solid var(--border-soft);color:var(--text-dim);
     border-radius:6px;padding:7px 9px;font-size:.64rem;letter-spacing:1px;cursor:pointer;font-family:'Orbitron',monospace;}
   .langbtn{white-space:nowrap;padding-left:7px;padding-right:7px}
+  .fxbtn{display:inline-flex;align-items:center;gap:6px}.fxbtn .ci{width:20px;height:20px;flex:none;object-fit:contain}
   @media(max-width:680px){.nav-links a:not(.nav-cta){display:none;}}
 
   /* SISTER PROJECTS */
@@ -832,8 +833,8 @@
       <a href="#sisters">Other Nodes</a>
       <a href="#apply">How to apply</a>
       <a href="#faq" onclick="var d=document.querySelector('#faq details');if(d)d.open=true;">FAQ</a>
-      <button class="fxbtn langbtn" id="langBtn" type="button" data-lang-btn title="Language" aria-label="Language">&#127760; <span data-lang-code translate="no">EN</span></button>
-      <button class="fxbtn" id="fxToggle" title="Toggle visual effects" aria-label="Toggle visual effects">FX</button>
+      <button class="fxbtn langbtn" id="langBtn" type="button" data-lang-btn title="Language" aria-label="Language"><img class="ci" src="assets/crystal/ci-globe.webp?v=20261121" srcset="assets/crystal/ci-globe@2x.webp?v=20261121 2x" alt="Language" width="20" height="20"> <span data-lang-code translate="no">EN</span></button>
+      <button class="fxbtn" id="fxToggle" title="Toggle visual effects" aria-label="Toggle visual effects"><img class="ci" src="assets/crystal/ci-effects.webp?v=20261121" srcset="assets/crystal/ci-effects@2x.webp?v=20261121 2x" alt="Visual effects" width="20" height="20"> <span id="fxTxt">FX</span></button>
     </div>
   </div>
 </nav>
@@ -1475,7 +1476,7 @@
       <span class="acc-dot"></span>
       <span class="acc-kicker">elegra1965 network</span>
       <span class="acc-divider"></span>
-      <div class="acc-title-col"><h2 class="sec-title"><img class="ci" src="assets/crystal/ci-nodes.webp?v=20261121" srcset="assets/crystal/ci-nodes@2x.webp?v=20261121 2x" alt="Other nodes" width="22" height="22"> Other Nodes</h2></div>
+      <div class="acc-title-col"><h2 class="sec-title" style="text-align:center"><img class="ci" src="assets/crystal/ci-nodes.webp?v=20261121" srcset="assets/crystal/ci-nodes@2x.webp?v=20261121 2x" alt="Other nodes" width="28" height="28" style="display:block;margin:0 auto 4px"> Other Nodes</h2></div>
       <span class="acc-corner-tl"></span>
       <span class="acc-corner-br"></span>
       <div class="acc-arrow-box"><span class="acc-arrow">▾</span></div>
@@ -1734,7 +1735,7 @@
   var fxBtn=document.getElementById('fxToggle');
   fxBtn.addEventListener('click',function(){
     document.body.classList.toggle('no-fx');
-    fxBtn.textContent=document.body.classList.contains('no-fx')?'FX OFF':'FX';
+    document.getElementById('fxTxt').textContent=document.body.classList.contains('no-fx')?'FX OFF':'FX';
   });
 
   // ---- Title font switcher ----
