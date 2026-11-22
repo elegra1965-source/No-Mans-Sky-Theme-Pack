@@ -43,12 +43,12 @@ root.querySelector('details').addEventListener('toggle',paint);
 var lb=q('spLb'),vid=q('spVid');
 function tab(k){if(k=='v'){if(!vid.getAttribute('src'))vid.src='assets/spen/demo.mp4';try{vid.play()}catch(_){}}else{vid.pause()}
  q('spLp').style.display=k=='p'?'':'none';q('spLv').style.display=k=='v'?'':'none';q('spTp').className=k=='p'?'on':'';q('spTv').className=k=='v'?'on':''}
-q('spSee').onclick=function(){var im=q('spReal');if(!im.getAttribute('src'))im.src='assets/spen/real.webp';lb.className='sp-lb on'};
+q('spSee').onclick=function(){if(window.nmsEv)nmsEv('spen/see-on-galaxy');var im=q('spReal');if(!im.getAttribute('src'))im.src='assets/spen/real.webp';lb.className='sp-lb on'};
 function close(){lb.className='sp-lb';vid.pause();tab('p')}
 q('spTp').onclick=function(){tab('p')};q('spTv').onclick=function(){tab('v')};q('spX').onclick=close;
 lb.addEventListener('click',function(e){if(e.target===lb)close()});
 document.addEventListener('keydown',function(e){if(e.key=='Escape')close()});
-var au=null,cur=null,vol='';document.querySelectorAll('#spen .sp-sndp').forEach(function(b){b.addEventListener('click',function(){try{if(au)au.pause();if(cur===b){b.classList.remove('on');cur=null;return}if(cur)cur.classList.remove('on');au=new Audio(b.getAttribute('data-s').replace('.mp3',vol+'.mp3'));cur=b;b.classList.add('on');au.onended=function(){b.classList.remove('on');cur=null};au.play()}catch(e){}})});
+var au=null,cur=null,vol='';document.querySelectorAll('#spen .sp-sndp').forEach(function(b){b.addEventListener('click',function(){try{if(au)au.pause();if(cur===b){b.classList.remove('on');cur=null;return}if(cur)cur.classList.remove('on');au=new Audio(b.getAttribute('data-s').replace('.mp3',vol+'.mp3'));cur=b;b.classList.add('on');if(window.nmsEv)nmsEv('spen/sound-'+(b.getAttribute('data-s').indexOf('-out-')>-1?'out':'in')+(vol?'-quiet':'-normal'));au.onended=function(){b.classList.remove('on');cur=null};au.play()}catch(e){}})});
 [].forEach.call(document.querySelectorAll('#spen .sp-vol button'),function(b){b.addEventListener('click',function(){vol=b.getAttribute('data-v');try{if(au)au.pause()}catch(_){}if(cur)cur.classList.remove('on');cur=null;[].forEach.call(b.parentNode.children,function(x){x.className=x===b?'on':''});[].forEach.call(document.querySelectorAll('#spen .sp-snd a[data-b]'),function(a){a.href=a.getAttribute('data-b')+vol+'.mp3'})})});
 setBg();paint();sel(0);
 })();
