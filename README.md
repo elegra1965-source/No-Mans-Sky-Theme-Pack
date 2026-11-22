@@ -86,7 +86,7 @@ Six No Man's Sky floating icons and pointers for the Samsung Galaxy S Pen, to us
 - **To-scale phone preview:** drag the S Pen around the phone (it leans as it moves) and change the wallpaper. Double-tap the floating icon (or double-tap with the pen tip over it) to open Samsung's side panel, which grows up from the bottom.
 - **See it on a real Galaxy:** a short picture and video pop-up recorded on a real phone.
 - **Downloads:** 512 px PNG for the icon you are looking at, or all six in one zip. A folded four-step how-to covers Pentastic.
-- **Pen sounds:** two short No Man's Sky sounds, one for pulling the S Pen out (Confirm) and one for putting it back (Technology Installed). Play or download each, then set them in Pentastic under Custom sounds (Remove sound, Insert sound). The how-to has a picture of the Pentastic box. Fan-made, not official.
+- **Pen sounds:** two short No Man's Sky sounds, one for pulling the S Pen out (Confirm) and one for putting it back (Technology Installed). Play or download each, then set them in Pentastic under Custom sounds (Remove sound, Insert sound). The how-to has a picture of the Pentastic box. A NORMAL / QUIET switch gives a quieter copy of both sounds, because Pentastic ignores the phone's volume sliders. Fan-made, not official.
 - **Make your own:** a link to the Exosuit HUD Icons tab in [Photo Mode Studio](photo-studio.html#icon), which links back here.
 - Android only. Touch handling is on the phone mock only, so the page still scrolls normally. Translated into the same languages as the rest of the site. Code in `spen.js` and `spen.css`, images in `assets/spen/`.
 
