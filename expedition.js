@@ -41,7 +41,15 @@
   function cached() {
     try { var c = JSON.parse(localStorage.getItem(LS) || 'null'); return c && c.runs ? c : null; } catch (e) { return null; }
   }
+  /* the shared schedule (nms-expedition.js, built from Hello Games' own news) comes first; the wiki below is the backup */
   function load(force) {
+    if (!window.NMSExp) return loadWiki(force);
+    return NMSExp.get(force).then(function (v) {
+      if (v && v.runs && v.runs.length) return pick(v.runs);
+      return loadWiki(force);
+    }).catch(function () { return loadWiki(force); });
+  }
+  function loadWiki(force) {
     var c = cached();
     if (c && !force && Date.now() - c.at < TTL) return Promise.resolve(pick(c.runs));
     return fetch(URL_).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) {

@@ -104,6 +104,7 @@
   <p class="hint" id="hint">Add this page to your home screen and it opens like an app: on Android, Chrome menu → <b>Add to Home screen</b>; on iPhone, Share → <b>Add to Home Screen</b>.</p>
   <div class="foot"><a href="https://theme.nomansskyhub.app/">THEME PACK</a><a href="https://atlas.nomansskyhub.app/">ASK ATLAS</a><a href="https://nomansskyhub.app/">NMS HUB</a></div>
 </main>
+<script src="nms-expedition.js?v=20261125"></script>
 <script src="expedition.js"></script>
 <script>
 (function () {
@@ -167,7 +168,11 @@
      Shows what the official Atlas sidebar shows: TIER currentTier - tierPercentage%. Hidden if it doesn't answer. */
   function research() {
     var ac = ('AbortController' in window) ? new AbortController() : null, tm = setTimeout(function () { if (ac) ac.abort(); }, 6000);
-    fetch('/nms-api/mission/116?platform=merged', ac ? { signal: ac.signal } : undefined)
+    /* which mission is being played comes from the shared expedition source; the strip stays hidden when none is moving */
+    (window.NMSExp ? NMSExp.get() : Promise.resolve(null)).then(function (v) {
+      var id = v && v.research && v.research.mission;
+      if (!id) { clearTimeout(tm); $('res').hidden = true; return null; }
+      return fetch('/nms-api/mission/' + id + '?platform=merged', ac ? { signal: ac.signal } : undefined)
       .then(function (r) { if (!r.ok) throw 0; return r.json(); })
       .then(function (j) {
         clearTimeout(tm);
@@ -176,7 +181,8 @@
         p = Math.max(0, Math.min(100, p));
         $('resT').textContent = 'TIER ' + t + (of > 0 ? ' OF ' + of : '');
         $('resP').textContent = p.toFixed(1) + '%'; $('resBar').style.width = p + '%'; $('res').hidden = false;
-      }).catch(function () { clearTimeout(tm); });
+      });
+    }).catch(function () { clearTimeout(tm); });
   }
   research(); setInterval(research, 10 * 60000);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) research(); });
