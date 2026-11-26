@@ -216,6 +216,10 @@
     if (!exp.started) {
       exp.started = true;
       if (window.NMSExpedition) NMSExpedition.load().then(function (r) { expS = r; expDraw(); }).catch(function () {});
+      /* a widget left open still learns about a new expedition: re-read the shared schedule every 30 minutes and whenever the page comes back into view */
+      var expReload = function () { if (window.NMSExpedition) NMSExpedition.load(true).then(function (r) { expS = r; expDraw(); }).catch(function () {}); };
+      setInterval(function () { if (!document.hidden) expReload(); }, 30 * 60000);
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) expReload(); });
       setInterval(function () { if (!document.hidden && expS) { var n = Date.now(); if ((expS.live && n >= expS.live.end) || (!expS.live && expS.next && n >= expS.next.start)) expS = NMSExpedition.pick(expS.rows, n); expDraw(); } }, 1000);
     }
   }

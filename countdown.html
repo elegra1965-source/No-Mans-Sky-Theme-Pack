@@ -188,7 +188,7 @@
   document.addEventListener('visibilitychange', function () { if (!document.hidden) research(); });
   boot();
   clearInterval(timer); timer = setInterval(tick, 1000);
-  setInterval(function () { boot(true); }, 3 * 3600000);
+  setInterval(function () { boot(true); }, 30 * 60000);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) { boot(); tick(); } });
   try { if (navigator.standalone) $('hint').hidden = true; } catch (e) {}
 
